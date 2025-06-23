@@ -20,6 +20,8 @@ export const useSession = () => {
   if (!context) {
     throw new Error("useSession must be used within a SessionProvider");
   }
+
+  console.log(context);
   return context;
 };
 

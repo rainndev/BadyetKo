@@ -1,8 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Providers from "../Providers";
-import LoginPage from "../pages/LoginPage";
 import AuthProtectedRoute from "./AuthProtectedRoute";
-import SignupPage from "../pages/SignupPage";
+import AuthPage from "../pages/AuthPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,13 +19,8 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/login",
-        element: <LoginPage />,
-      },
-
-      {
-        path: "/signup",
-        element: <SignupPage />,
+        path: "/auth",
+        element: <AuthPage />,
       },
 
       {
@@ -35,11 +29,8 @@ export const router = createBrowserRouter([
           {
             path: "/protected",
             element: (
-              <div
-                className="w-full bg-[#212121] text-amber-300 h-screen flex justify-between items-center 
-            "
-              >
-                Protected
+              <div className="w-full bg-[#212121] text-amber-300 h-screen flex justify-between items-center">
+                <p>Protected</p>
               </div>
             ),
           },
