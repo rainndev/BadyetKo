@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import supabase from "../supabase/supabase-client";
 import type { BankTypes } from "../types/bank.types";
+import { Link } from "react-router-dom";
 
 const DashboardPage = () => {
   const [BankName, setBankName] = useState("");
   const [bankList, setBankList] = useState<BankTypes[]>([]);
-
-  const handleSignout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-  };
 
   const fetchTodo = async () => {
     const { data, error } = await supabase.from("banks").select("*");
@@ -50,14 +46,15 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
-      <h1>DashboardPage</h1>
-      <button
-        onClick={() => handleSignout()}
-        className="p-2 px-5 text-[#212121] bg-amber-300 rounded-sm mt-5"
-      >
-        Signout
-      </button>
+    <div className="w-full h-screen flex flex-col p-10 ">
+      <h1 className="text-3xl text-white">DashboardPage</h1>
+      <ul className="flex flex-col mt-10 gap-2">
+        {bankList.map((bankItemData) => (
+          <Link to={`/bank/${bankItemData.id}`}>
+            <li>{bankItemData.name}</li>
+          </Link>
+        ))}
+      </ul>
     </div>
   );
 };

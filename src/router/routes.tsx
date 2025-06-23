@@ -3,6 +3,7 @@ import Providers from "../Providers";
 import AuthProtectedRoute from "./AuthProtectedRoute";
 import AuthPage from "../pages/AuthPage";
 import DashboardPage from "../pages/DashboardPage";
+import TransactionsPage from "../pages/TransactionsPage";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard",
             element: <DashboardPage />,
+          },
+
+          {
+            path: "/bank/:bank_id",
+            element: <TransactionsPage />,
           },
         ],
       },
