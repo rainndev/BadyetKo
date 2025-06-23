@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import supabase from "../supabase/supabase-client";
 import { useSession } from "../context/SessionContext";
 import { useNavigate } from "react-router-dom";
@@ -12,9 +12,11 @@ const AuthPage = () => {
 
   const { session } = useSession();
 
-  if (session) {
-    navigate("/dashboard");
-  }
+  useEffect(() => {
+    if (session) {
+      navigate("/dashboard");
+    }
+  }, [session, navigate]);
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

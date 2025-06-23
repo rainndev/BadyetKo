@@ -27,7 +27,7 @@ const NavigationBar = () => {
     <div className="w-full flex items-center justify-center p-4">
       <ul className="max-w-7xl flex justify-between w-full">
         {navData
-          .filter((navItem) => session !== null || navItem.protected)
+          .filter((navItem) => session !== null || !navItem.protected)
           .map((navItem) => (
             <Link
               key={navItem.name}
