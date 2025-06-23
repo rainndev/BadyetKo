@@ -6,3 +6,14 @@ export const getBankList = async () => {
   if (error) throw error;
   return data;
 };
+
+export const createBank = async (bankName: string) => {
+  const { data, error } = await supabase
+    .from("banks")
+    .insert([{ name: bankName }])
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
