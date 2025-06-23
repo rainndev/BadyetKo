@@ -17,3 +17,15 @@ export const createBank = async (bankName: string) => {
   if (error) throw error;
   return data;
 };
+
+export const removeBank = async (bankID: string) => {
+  const { data, error } = await supabase
+    .from("banks")
+    .delete()
+    .eq("id", bankID)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};

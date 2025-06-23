@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import type { BankTypes } from "../types/bank.types";
 import { Link } from "react-router-dom";
 import { useBankList } from "../queries/useBankList";
 import { useCreateBank } from "../queries/useCreateBank";
 import { useSession } from "../context/SessionContext";
+import { useDeleteBank } from "../queries/useDeleteBank";
 
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
   const { session } = useSession();
+
+  //GET FETCH BANKS
   const {
     data: bankList,
     isLoading,
@@ -15,27 +18,19 @@ const DashboardPage = () => {
     error,
   } = useBankList(session?.user.id ?? "");
 
-  const { mutate: addBank, isPending } = useCreateBank(session?.user.id ?? "");
+  //POST NEW BANK
+  const { mutate: addBank, isPending: isAddPending } = useCreateBank(
+    session?.user.id ?? ""
+  );
+  const { mutate: removeBank, isPending: isRemovePending } = useDeleteBank(
+    session?.user.id ?? ""
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addBank(bankName);
     setBankName("");
   };
-
-  //   console.log("query", bankList);
-  //   const deleteBank = async (id: string) => {
-  //     const { data, error } = await supabase
-  //       .from("banks")
-  //       .delete()
-  //       .eq("id", id)
-  //       .select()
-  //       .single();
-
-  //     if (error) throw error;
-  //     setBankList(bankList.filter((bankName) => bankName.id !== data.id));
-  //     setBankName("");
-  //   };
 
   if (isError)
     return <div className="w-full h-screen p-10">{error.message}</div>;
@@ -51,18 +46,28 @@ const DashboardPage = () => {
           className="ring ring-amber-300 p-3 rounded-lg w-full"
         />
         <button
-          disabled={isPending}
+          disabled={isAddPending}
           className="bg-amber-300 p-3 px-6 text-[#212121] mt-5 rounded-lg"
         >
-          {isPending ? "Loading..." : "Add Bank"}
+          {isAddPending ? "Loading..." : "Add Bank"}
         </button>
       </form>
       <ul className="flex flex-col mt-10 gap-2">
         {!isLoading &&
           bankList?.map((bankItemData: BankTypes) => (
-            <Link key={bankItemData.id} to={`/bank/${bankItemData.id}`}>
-              <li>{bankItemData.name}</li>
-            </Link>
+            <Fragment key={bankItemData.id}>
+              <Link to={`/bank/${bankItemData.id}`}>
+                <li>{bankItemData.name}</li>
+              </Link>
+
+              <button
+                disabled={isRemovePending}
+                className="cursor-pointer px-4 p-2 bg-amber-300 text-[#212121] w-fit rounded-lg"
+                onClick={() => removeBank(bankItemData.id)}
+              >
+                X
+              </button>
+            </Fragment>
           ))}
       </ul>
     </div>
