@@ -13,7 +13,7 @@ const AuthPage = () => {
   const { session } = useSession();
 
   if (session) {
-    navigate("/");
+    navigate("/dashboard");
   }
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
