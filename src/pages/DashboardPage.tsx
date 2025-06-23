@@ -3,12 +3,19 @@ import type { BankTypes } from "../types/bank.types";
 import { Link } from "react-router-dom";
 import { useBankList } from "../queries/useBankList";
 import { useCreateBank } from "../queries/useCreateBank";
+import { useSession } from "../context/SessionContext";
 
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
+  const { session } = useSession();
+  const {
+    data: bankList,
+    isLoading,
+    isError,
+    error,
+  } = useBankList(session?.user.id ?? "");
 
-  const { data: bankList, isLoading, isError, error } = useBankList();
-  const { mutate: addBank, isPending } = useCreateBank();
+  const { mutate: addBank, isPending } = useCreateBank(session?.user.id ?? "");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

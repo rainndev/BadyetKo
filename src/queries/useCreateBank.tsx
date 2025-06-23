@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBank } from "../api/bank";
 
-export const useCreateBank = () => {
+export const useCreateBank = (user_id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: createBank,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["banks"] });
+      queryClient.invalidateQueries({ queryKey: [`banks-${user_id}`] });
     },
   });
 };
