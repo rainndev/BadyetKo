@@ -7,7 +7,7 @@ export const useDeleteBank = (user_id: string) => {
     mutationFn: removeBank,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [`banks-${user_id}`],
+        queryKey: ["banks", user_id],
       });
     },
   });

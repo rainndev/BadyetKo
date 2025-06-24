@@ -7,7 +7,7 @@ export const useCreateBank = (user_id: string) => {
   return useMutation({
     mutationFn: createBank,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [`banks-${user_id}`] });
+      queryClient.invalidateQueries({ queryKey: ["banks", user_id] });
     },
   });
 };
