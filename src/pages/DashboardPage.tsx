@@ -1,4 +1,4 @@
-import { useState, Fragment, useRef } from "react";
+import { useState, useRef } from "react";
 import { type BankListTypes } from "../types/bank.types";
 import { Link } from "react-router-dom";
 import { useBankList } from "../queries/useBankList";
@@ -6,7 +6,9 @@ import { useCreateBank } from "../queries/useCreateBank";
 import { useSession } from "../context/SessionContext";
 import { useDeleteBank } from "../queries/useDeleteBank";
 import { useCreateAvatar } from "../queries/useCreateAvatar";
-
+import BankImage from "../components/BankImage";
+import { FaPiggyBank } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -32,6 +34,8 @@ const DashboardPage = () => {
 
   //ADD NEW CUSTOM AVATAR
   const { mutate: addAvatar } = useCreateAvatar(image);
+
+  //GET THE IMAGE
 
   //SELECTING FILE AVATAR
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,22 +91,29 @@ const DashboardPage = () => {
           {isAddPending ? "Loading..." : "Add Bank"}
         </button>
       </form>
-      <ul className="flex flex-col mt-10 gap-2">
+      <ul className="flex mt-10 gap-10">
         {!isLoading &&
           bankList?.map((bankItemData: BankListTypes) => (
-            <Fragment key={bankItemData.id}>
+            <div
+              className="bg-amber-300/10 flex items-center relative  justify-center p-10 rounded-lg"
+              key={bankItemData.id}
+            >
               <Link to={`/bank/${bankItemData.id}`}>
-                <li>{bankItemData.name}</li>
-              </Link>
+                <div className="space-y-2">
+                  <li>{bankItemData.name}</li>
 
-              <button
-                disabled={isRemovePending}
-                className="cursor-pointer px-4 p-2 bg-amber-300 text-[#212121] w-fit rounded-lg"
+                  {bankItemData.custom_bank_avatar ? (
+                    <BankImage path={bankItemData.custom_bank_avatar} />
+                  ) : (
+                    <FaPiggyBank className="text-5xl text-white" />
+                  )}
+                </div>
+              </Link>
+              <IoMdClose
+                className="cursor-pointer  text-white absolute right-2 top-2 text-2xl w-fit rounded-lg"
                 onClick={() => removeBank(bankItemData.id)}
-              >
-                X
-              </button>
-            </Fragment>
+              />
+            </div>
           ))}
       </ul>
     </div>
