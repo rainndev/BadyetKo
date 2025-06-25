@@ -28,9 +28,7 @@ const DashboardPage = () => {
     session?.user.id ?? ""
   );
   //REMOVE BANK
-  const { mutate: removeBank, isPending: isRemovePending } = useDeleteBank(
-    session?.user.id ?? ""
-  );
+  const { mutate: removeBank } = useDeleteBank(session?.user.id ?? "");
 
   //ADD NEW CUSTOM AVATAR
   const { mutate: addAvatar } = useCreateAvatar(image);

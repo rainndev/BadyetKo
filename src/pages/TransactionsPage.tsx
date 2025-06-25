@@ -26,10 +26,13 @@ const TransactionsPage = () => {
 
   return (
     <div className="w-full h-screen p-10">
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-5">
         {isLoading && <li>Loading...</li>}
         {data?.map((dataItem) => (
-          <li key={dataItem.id}>{dataItem.name}</li>
+          <div key={dataItem.id}>
+            <li>Name: {dataItem.name}</li>
+            <li>Amount: {dataItem.amount}</li>
+          </div>
         ))}
       </ul>
 
