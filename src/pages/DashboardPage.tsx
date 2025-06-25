@@ -1,14 +1,17 @@
-import { useState, Fragment } from "react";
-import type { BankTypes } from "../types/bank.types";
+import { useState, Fragment, useRef } from "react";
+import { type BankListTypes } from "../types/bank.types";
 import { Link } from "react-router-dom";
 import { useBankList } from "../queries/useBankList";
 import { useCreateBank } from "../queries/useCreateBank";
 import { useSession } from "../context/SessionContext";
 import { useDeleteBank } from "../queries/useDeleteBank";
+import { useCreateAvatar } from "../queries/useCreateAvatar";
 
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
+  const [image, setImage] = useState<File | null>(null);
   const { session } = useSession();
+  const imageRef = useRef<HTMLInputElement>(null);
 
   //GET FETCH BANKS
   const {
@@ -18,18 +21,44 @@ const DashboardPage = () => {
     error,
   } = useBankList(session?.user.id ?? "");
 
-  //POST NEW BANK
+  //ADD NEW BANK
   const { mutate: addBank, isPending: isAddPending } = useCreateBank(
     session?.user.id ?? ""
   );
+  //REMOVE BANK
   const { mutate: removeBank, isPending: isRemovePending } = useDeleteBank(
     session?.user.id ?? ""
   );
 
+  //ADD NEW CUSTOM AVATAR
+  const { mutate: addAvatar } = useCreateAvatar(image);
+
+  //SELECTING FILE AVATAR
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+    } else {
+      setImage(null);
+    }
+  };
+
+  //Add data to supabase
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addBank(bankName);
+    let filePath = "";
+
+    if (image) {
+      filePath = `${session?.user.id}/${Date.now()}-${image.name}`;
+      addAvatar({ filePath, image });
+    }
+    addBank({ bankName, custom_bank_avatar: filePath });
     setBankName("");
+    setImage(null);
+
+    //reset the image input
+    if (imageRef.current) {
+      imageRef.current.value = "";
+    }
   };
 
   if (isError)
@@ -41,9 +70,15 @@ const DashboardPage = () => {
         <input
           type="text"
           value={bankName}
-          onChange={(e) => setBankName(e.target.value)}
-          placeholder="Input your email"
           className="ring ring-amber-300 p-3 rounded-lg w-full"
+          onChange={(e) => setBankName(e.target.value)}
+        />
+        <input
+          ref={imageRef}
+          onChange={handleFileChange}
+          type="file"
+          id="avatar"
+          name="filename"
         />
         <button
           disabled={isAddPending}
@@ -54,7 +89,7 @@ const DashboardPage = () => {
       </form>
       <ul className="flex flex-col mt-10 gap-2">
         {!isLoading &&
-          bankList?.map((bankItemData: BankTypes) => (
+          bankList?.map((bankItemData: BankListTypes) => (
             <Fragment key={bankItemData.id}>
               <Link to={`/bank/${bankItemData.id}`}>
                 <li>{bankItemData.name}</li>

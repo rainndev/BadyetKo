@@ -12,18 +12,21 @@ export type Database = {
       banks: {
         Row: {
           created_at: string
+          custom_bank_avatar: string | null
           id: string
           name: string
           user_id: string
         }
         Insert: {
           created_at?: string
+          custom_bank_avatar?: string | null
           id?: string
           name: string
           user_id?: string
         }
         Update: {
           created_at?: string
+          custom_bank_avatar?: string | null
           id?: string
           name?: string
           user_id?: string

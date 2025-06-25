@@ -1,5 +1,5 @@
 import supabase from "../supabase/supabase-client";
-import { type BankInsertTypes, type BankListTypes } from "../types/bank.types";
+import { type BankListTypes } from "../types/bank.types";
 
 export const getBankList = async (): Promise<BankListTypes[]> => {
   const { data, error } = await supabase.from(`banks`).select("*");
@@ -7,12 +7,16 @@ export const getBankList = async (): Promise<BankListTypes[]> => {
   return data;
 };
 
-export const createBank = async (
-  bankName: BankInsertTypes
-): Promise<BankListTypes[]> => {
+export const createBank = async ({
+  bankName,
+  custom_bank_avatar,
+}: {
+  bankName: string;
+  custom_bank_avatar?: string;
+}): Promise<BankListTypes[]> => {
   const { data, error } = await supabase
     .from("banks")
-    .insert([{ name: bankName }])
+    .insert([{ name: bankName, custom_bank_avatar }])
     .select()
     .single();
 
@@ -20,9 +24,7 @@ export const createBank = async (
   return data;
 };
 
-export const removeBank = async (
-  bankID: BankInsertTypes
-): Promise<BankListTypes[]> => {
+export const removeBank = async (bankID: string): Promise<BankListTypes[]> => {
   const { data, error } = await supabase
     .from("banks")
     .delete()
