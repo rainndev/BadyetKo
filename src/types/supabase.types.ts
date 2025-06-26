@@ -11,23 +11,29 @@ export type Database = {
     Tables: {
       banks: {
         Row: {
+          balance: number | null
           created_at: string
           custom_bank_avatar: string | null
           id: string
+          last_interest_applied_at: string | null
           name: string
           user_id: string
         }
         Insert: {
+          balance?: number | null
           created_at?: string
           custom_bank_avatar?: string | null
           id?: string
+          last_interest_applied_at?: string | null
           name: string
           user_id?: string
         }
         Update: {
+          balance?: number | null
           created_at?: string
           custom_bank_avatar?: string | null
           id?: string
+          last_interest_applied_at?: string | null
           name?: string
           user_id?: string
         }
@@ -56,7 +62,7 @@ export type Database = {
           id: number
           name: string
           note: string | null
-          type: string
+          type: Database["public"]["Enums"]["transaction_type"]
         }
         Insert: {
           amount: number
@@ -65,7 +71,7 @@ export type Database = {
           id?: number
           name: string
           note?: string | null
-          type: string
+          type: Database["public"]["Enums"]["transaction_type"]
         }
         Update: {
           amount?: number
@@ -74,7 +80,7 @@ export type Database = {
           id?: number
           name?: string
           note?: string | null
-          type?: string
+          type?: Database["public"]["Enums"]["transaction_type"]
         }
         Relationships: [
           {
@@ -94,7 +100,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      transaction_type: "deposit" | "withdraw" | "interest" | "transfer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -209,6 +215,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      transaction_type: ["deposit", "withdraw", "interest", "transfer"],
+    },
   },
 } as const

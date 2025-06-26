@@ -12,7 +12,11 @@ export const getTransactionList = async (
     .select("*")
     .eq("bank_id", bankID);
 
-  if (error) throw error;
+  if (error) {
+    console.error("error", error);
+    throw error;
+  }
+
   return data;
 };
 
@@ -25,7 +29,11 @@ export const createTransaction = async (
     .select()
     .single();
 
-  console.log([{ ...input }]);
-  if (error) throw error;
+  if (error) {
+    console.error("error", error);
+    throw error;
+  }
+
+  console.log("Successful:", data);
   return data;
 };

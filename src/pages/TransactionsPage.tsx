@@ -20,7 +20,7 @@ const TransactionsPage = () => {
 
   //submitdata
   const onSubmitData: SubmitHandler<TransactionInsertTypes> = (data) => {
-    addTransaction({ ...data, amount: +data.amount, bank_id });
+    addTransaction({ ...data, amount: +data.amount, bank_id, type: "deposit" });
     console.log("Inputs data", data);
   };
 
@@ -48,13 +48,6 @@ const TransactionsPage = () => {
           type="number"
           {...register("amount")}
           placeholder="Amount of transaction"
-          className="ring ring-amber-300 p-3 rounded-lg w-full"
-        />
-
-        <input
-          type="text"
-          {...register("type")}
-          placeholder="Type of transaction"
           className="ring ring-amber-300 p-3 rounded-lg w-full"
         />
 

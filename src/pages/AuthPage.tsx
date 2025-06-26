@@ -32,14 +32,29 @@ const AuthPage = () => {
         return null;
       }
     } else {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
+
       if (error) {
         setError(error.message);
         return null;
       }
+
+      console.log(`
+        ID: ${data.user?.id},
+        NAME: ${data.user?.user_metadata.full_name ?? ""},
+        EMAIL: ${data.user?.email}
+        `);
+
+      await supabase.from("users").insert([
+        {
+          id: data.user?.id,
+          name: data.user?.user_metadata.full_name ?? "",
+          email: data.user?.email,
+        },
+      ]);
     }
   };
 
