@@ -32,7 +32,7 @@ export const description = "An interactive area chart";
 
 const chartConfig = {
   transaction: {
-    label: "transaction",
+    label: "Amount",
     color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
@@ -157,7 +157,7 @@ function AreaChartData() {
 
             <Area
               dataKey="transaction"
-              type="natural"
+              type="monotone"
               fill="url(#fillTransaction)"
               stroke="var(--color-amber-300)"
               stackId="a"
