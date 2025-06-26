@@ -9,6 +9,7 @@ import { useCreateAvatar } from "../queries/useCreateAvatar";
 import BankImage from "../components/BankImage";
 import { FaPiggyBank } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
+import AreaChartData from "../components/AreaChartData";
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -64,10 +65,11 @@ const DashboardPage = () => {
   };
 
   if (isError)
-    return <div className="w-full h-screen p-10">{error.message}</div>;
+    return <div className="w-full min-h-screen p-10">{error.message}</div>;
   return (
-    <div className="w-full h-screen flex flex-col p-10 ">
+    <div className="w-full h-full flex flex-col p-10 ">
       <h1 className="text-3xl text-white">DashboardPage</h1>
+      {/* Form for inputing data */}
       <form className="mt-10" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -89,6 +91,11 @@ const DashboardPage = () => {
           {isAddPending ? "Loading..." : "Add Bank"}
         </button>
       </form>
+
+      {/* Charts  */}
+      <AreaChartData />
+
+      {/* list data to render */}
       <ul className="flex mt-10 gap-10">
         {!isLoading &&
           bankList?.map((bankItemData: BankListTypes) => (
