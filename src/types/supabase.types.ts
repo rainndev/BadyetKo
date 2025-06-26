@@ -39,21 +39,6 @@ export type Database = {
         }
         Relationships: []
       }
-      instruments: {
-        Row: {
-          id: number
-          name: string
-        }
-        Insert: {
-          id?: never
-          name: string
-        }
-        Update: {
-          id?: never
-          name?: string
-        }
-        Relationships: []
-      }
       transactions: {
         Row: {
           amount: number
@@ -91,6 +76,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      users: {
+        Row: {
+          email: string | null
+          id: string
+          name: string | null
+          net_balance: number | null
+        }
+        Insert: {
+          email?: string | null
+          id: string
+          name?: string | null
+          net_balance?: number | null
+        }
+        Update: {
+          email?: string | null
+          id?: string
+          name?: string | null
+          net_balance?: number | null
+        }
+        Relationships: []
       }
     }
     Views: {

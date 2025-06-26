@@ -10,6 +10,7 @@ import BankImage from "../components/BankImage";
 import { FaPiggyBank } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import AreaChartData from "../components/AreaChartData";
+import { useNetBalance } from "@/queries/useNetBalance";
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -28,6 +29,10 @@ const DashboardPage = () => {
   const { mutate: addBank, isPending: isAddPending } = useCreateBank(
     session?.user.id ?? ""
   );
+
+  //GET NET BALANCE
+  const { data: userBalance } = useNetBalance(session?.user.id ?? "");
+
   //REMOVE BANK
   const { mutate: removeBank } = useDeleteBank(session?.user.id ?? "");
 
@@ -66,9 +71,11 @@ const DashboardPage = () => {
 
   if (isError)
     return <div className="w-full min-h-screen p-10">{error.message}</div>;
+
   return (
     <div className="w-full h-full flex flex-col p-10 ">
       <h1 className="text-3xl text-white">DashboardPage</h1>
+      <h1>Net Balance: {userBalance?.[0].net_balance}</h1>
       {/* Form for inputing data */}
       <form className="mt-10" onSubmit={handleSubmit}>
         <input
