@@ -1,10 +1,7 @@
 import { useState, useRef } from "react";
 import { type BankListTypes } from "../types/bank.types";
 import { Link } from "react-router-dom";
-import { useBankList } from "../queries/useBankList";
-import { useCreateBank } from "../queries/useCreateBank";
 import { useSession } from "../context/SessionContext";
-import { useDeleteBank } from "../queries/useDeleteBank";
 import { useCreateAvatar } from "../queries/useCreateAvatar";
 import BankImage from "../components/BankImage";
 import { FaPiggyBank } from "react-icons/fa6";
