@@ -42,12 +42,6 @@ const AuthPage = () => {
         return null;
       }
 
-      console.log(`
-        ID: ${data.user?.id},
-        NAME: ${data.user?.user_metadata.full_name ?? ""},
-        EMAIL: ${data.user?.email}
-        `);
-
       await supabase.from("users").insert([
         {
           id: data.user?.id,

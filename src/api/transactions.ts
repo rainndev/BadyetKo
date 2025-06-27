@@ -37,3 +37,17 @@ export const createTransaction = async (
   console.log("Successful:", data);
   return data;
 };
+
+export const removeTransaction = async (
+  id: number
+): Promise<TransactionListTypes[]> => {
+  const { data, error } = await supabase
+    .from("transactions")
+    .delete()
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
