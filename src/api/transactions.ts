@@ -38,16 +38,12 @@ export const createTransaction = async (
   return data;
 };
 
-export const removeTransaction = async (
-  id: number
-): Promise<TransactionListTypes[]> => {
-  const { data, error } = await supabase
-    .from("transactions")
-    .delete()
-    .eq("id", id)
-    .select()
-    .single();
-
+export const removeTransaction = async (id: number) => {
+  const { error } = await supabase.rpc(
+    "delete_transaction_with_balance_adjustment",
+    {
+      t_id: id,
+    }
+  );
   if (error) throw error;
-  return data;
 };
