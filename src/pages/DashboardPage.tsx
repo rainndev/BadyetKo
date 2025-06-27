@@ -11,35 +11,30 @@ import { FaPiggyBank } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import AreaChartData from "../components/AreaChartData";
 import { useNetBalance } from "@/queries/useNetBalance";
+import { useBank } from "@/hooks/useBank";
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const { session } = useSession();
   const imageRef = useRef<HTMLInputElement>(null);
 
-  //GET FETCH BANKS
-  const {
-    data: bankList,
-    isLoading,
-    isError,
-    error,
-  } = useBankList(session?.user.id ?? "");
-
-  //ADD NEW BANK
-  const { mutate: addBank, isPending: isAddPending } = useCreateBank(
-    session?.user.id ?? ""
-  );
+  const user_id = session?.user.id ?? "";
 
   //GET NET BALANCE
-  const { data: userBalance } = useNetBalance(session?.user.id ?? "");
+  const { data: userBalance } = useNetBalance(user_id);
 
-  //REMOVE BANK
-  const { mutate: removeBank } = useDeleteBank(session?.user.id ?? "");
+  const {
+    addBank,
+    removeBank,
+    bankList,
+    isBankListError,
+    isAddBankPending,
+    bankListError,
+    isBankListLoading,
+  } = useBank(user_id);
 
   //ADD NEW CUSTOM AVATAR
   const { mutate: addAvatar } = useCreateAvatar(image);
-
-  //GET THE IMAGE
 
   //SELECTING FILE AVATAR
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,8 +64,10 @@ const DashboardPage = () => {
     }
   };
 
-  if (isError)
-    return <div className="w-full min-h-screen p-10">{error.message}</div>;
+  if (isBankListError)
+    return (
+      <div className="w-full min-h-screen p-10">{bankListError?.message}</div>
+    );
 
   return (
     <div className="w-full h-full flex flex-col p-10 ">
@@ -92,10 +89,10 @@ const DashboardPage = () => {
           name="filename"
         />
         <button
-          disabled={isAddPending}
+          disabled={isAddBankPending}
           className="bg-amber-300 p-3 px-6 text-[#212121] mt-5 rounded-lg"
         >
-          {isAddPending ? "Loading..." : "Add Bank"}
+          {isAddBankPending ? "Loading..." : "Add Bank"}
         </button>
       </form>
 
@@ -104,7 +101,7 @@ const DashboardPage = () => {
 
       {/* list data to render */}
       <ul className="flex mt-10 gap-10">
-        {!isLoading &&
+        {!isBankListLoading &&
           bankList?.map((bankItemData: BankListTypes) => (
             <div
               className="bg-amber-300/10 flex items-center relative  justify-center p-10 rounded-lg"

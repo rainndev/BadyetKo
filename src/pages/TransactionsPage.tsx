@@ -1,11 +1,8 @@
 import { useParams } from "react-router-dom";
 import { isValidUUIDv4 } from "../utils/helper";
-import { useTransactionList } from "../queries/useTransactionList";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type TransactionInsertTypes } from "../types/transaction.types";
-import { useCreateTransaction } from "../queries/useCreateTransaction";
-import { useDeleteTransaction } from "@/queries/useDeleteTransaction";
-import { useCallback } from "react";
+import { useBankTransactions } from "@/hooks/useBankTransactions";
 
 const TransactionsPage = () => {
   const { register, handleSubmit } = useForm<TransactionInsertTypes>();
@@ -13,16 +10,13 @@ const TransactionsPage = () => {
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="w-full h-screen p-10">Invalid ID</div>;
 
-  //hook for getting list of transactions
-  const { data, isLoading } = useTransactionList(bank_id);
-
-  //hook for adding transaction
-  const { mutate: addTransaction, isPending: isAddPending } =
-    useCreateTransaction(bank_id);
-
-  //hook for deleting transaction
-  const { mutate: deleteTransaction, isPending: isDeletePending } =
-    useDeleteTransaction(bank_id);
+  const {
+    addTransaction,
+    transactionList,
+    isTransactionListLoading,
+    deleteTransaction,
+    isAddPending,
+  } = useBankTransactions(bank_id);
 
   //submitdata
   const onSubmitData: SubmitHandler<TransactionInsertTypes> = (data) => {
@@ -34,8 +28,8 @@ const TransactionsPage = () => {
   return (
     <div className="w-full h-screen p-10">
       <ul className="flex flex-col gap-5">
-        {isLoading && <li>Loading...</li>}
-        {data?.map((dataItem) => (
+        {isTransactionListLoading && <li>Loading...</li>}
+        {transactionList?.map((dataItem) => (
           <div key={dataItem.id}>
             <button
               onClick={() => deleteTransaction(dataItem.id)}
