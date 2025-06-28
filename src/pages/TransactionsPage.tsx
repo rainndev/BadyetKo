@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { isValidUUIDv4 } from "../utils/helper";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type TransactionInsertTypes } from "../types/transaction.types";
@@ -7,6 +7,9 @@ import { useBankTransactions } from "@/hooks/useBankTransactions";
 const TransactionsPage = () => {
   const { register, handleSubmit } = useForm<TransactionInsertTypes>();
   const { bank_id } = useParams();
+  const [searchParams] = useSearchParams();
+  const bankBalance = searchParams.get("balance");
+
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="w-full h-screen p-10">Invalid ID</div>;
 
@@ -24,9 +27,9 @@ const TransactionsPage = () => {
     console.log("Inputs data", data);
   };
 
-  console.log("transaction rendered");
   return (
-    <div className="w-full h-screen p-10">
+    <div className="w-full min-h-screen p-10">
+      <h1 className="mb-20">Balance: {bankBalance}</h1>
       <ul className="flex flex-col gap-5">
         {isTransactionListLoading && <li>Loading...</li>}
         {transactionList?.map((dataItem) => (

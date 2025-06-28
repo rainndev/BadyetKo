@@ -66,6 +66,7 @@ const DashboardPage = () => {
       <div className="w-full min-h-screen p-10">{bankListError?.message}</div>
     );
 
+  console.log("banks", bankList);
   return (
     <div className="w-full h-full flex flex-col p-10 ">
       <h1 className="text-3xl text-white">DashboardPage</h1>
@@ -104,8 +105,11 @@ const DashboardPage = () => {
               className="bg-amber-300/10 flex items-center relative  justify-center p-10 rounded-lg"
               key={bankItemData.id}
             >
-              <Link to={`/bank/${bankItemData.id}`}>
+              <Link
+                to={`/bank/${bankItemData.id}?balance=${bankItemData.balance}`}
+              >
                 <div className="space-y-2">
+                  <li>Balance: {bankItemData.balance}</li>
                   <li>{bankItemData.name}</li>
 
                   {bankItemData.custom_bank_avatar ? (
