@@ -19,6 +19,7 @@ const DashboardPage = () => {
 
   //GET NET BALANCE
   const { data: userBalance } = useNetBalance(user_id);
+  const totalBalance = userBalance?.[0].net_balance ?? 0;
 
   const {
     addBank,
@@ -70,7 +71,7 @@ const DashboardPage = () => {
   return (
     <div className="w-full h-full flex flex-col p-10 ">
       <h1 className="text-3xl text-white">DashboardPage</h1>
-      <h1>Net Balance: {userBalance?.[0].net_balance}</h1>
+      <h1>Net Balance: {totalBalance}</h1>
       {/* Form for inputing data */}
       <form className="mt-10" onSubmit={handleSubmit}>
         <input

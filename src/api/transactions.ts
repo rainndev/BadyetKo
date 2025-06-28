@@ -41,9 +41,8 @@ export const createTransaction = async (
 export const removeTransaction = async (id: number) => {
   const { error } = await supabase.rpc(
     "delete_transaction_with_balance_adjustment",
-    {
-      t_id: id,
-    }
+    { t_id: id }
   );
+  console.log("error", error);
   if (error) throw error;
 };
