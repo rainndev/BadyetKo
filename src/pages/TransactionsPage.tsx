@@ -1,11 +1,21 @@
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { isValidUUIDv4 } from "../utils/helper";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { type TransactionInsertTypes } from "../types/transaction.types";
 import { useBankTransactions } from "@/hooks/useBankTransactions";
+import {
+  transactionSchema,
+  type TransactionSchemaType,
+} from "@/schemas/transaction.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const TransactionsPage = () => {
-  const { register, handleSubmit } = useForm<TransactionInsertTypes>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(transactionSchema),
+  });
   const { bank_id } = useParams();
   const [searchParams] = useSearchParams();
   const bankBalance = searchParams.get("balance");
@@ -22,7 +32,7 @@ const TransactionsPage = () => {
   } = useBankTransactions(bank_id);
 
   //submitdata
-  const onSubmitData: SubmitHandler<TransactionInsertTypes> = (data) => {
+  const onSubmitData: SubmitHandler<TransactionSchemaType> = (data) => {
     addTransaction({
       ...data,
       amount: +data.amount,
@@ -32,6 +42,7 @@ const TransactionsPage = () => {
     console.log("Inputs data", { ...data, type: data.type.toLowerCase() });
   };
 
+  console.log(errors);
   return (
     <div className="w-full min-h-screen p-10">
       <h1 className="mb-20">Balance: {bankBalance}</h1>
@@ -58,6 +69,9 @@ const TransactionsPage = () => {
           placeholder="Input name of transaction"
           className="ring ring-amber-300 p-3 rounded-lg w-full"
         />
+        {errors.name && (
+          <p className="mt-2 text-red-300">{errors.name.message}</p>
+        )}
 
         <input
           type="number"
@@ -65,6 +79,9 @@ const TransactionsPage = () => {
           placeholder="Amount of transaction"
           className="ring ring-amber-300 p-3 rounded-lg w-full"
         />
+        {errors.amount && (
+          <p className="mt-2 text-red-300">{errors.amount.message}</p>
+        )}
 
         <input
           type="text"
@@ -72,6 +89,9 @@ const TransactionsPage = () => {
           placeholder="Optional Note transaction"
           className="ring ring-amber-300 p-3 rounded-lg w-full"
         />
+        {errors.note && (
+          <p className="mt-2 text-red-300">{errors.note.message}</p>
+        )}
 
         <input
           type="text"
@@ -79,6 +99,9 @@ const TransactionsPage = () => {
           placeholder="Type of transaction deposit, withdraw )"
           className="ring ring-amber-300 p-3 rounded-lg w-full"
         />
+        {errors.type && (
+          <p className="mt-2 text-red-300">{errors.type.message}</p>
+        )}
 
         <button
           disabled={isAddPending}

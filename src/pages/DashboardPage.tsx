@@ -9,13 +9,14 @@ import { IoMdClose } from "react-icons/io";
 import AreaChartData from "../components/AreaChartData";
 import { useNetBalance } from "@/queries/useNetBalance";
 import { useBank } from "@/hooks/useBank";
+import { addBankSchema } from "@/schemas/banks.schema";
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const { session } = useSession();
   const imageRef = useRef<HTMLInputElement>(null);
-
   const user_id = session?.user.id ?? "";
+  const [errorMessage, setErrorMessage] = useState("");
 
   //GET NET BALANCE
   const { data: userBalance } = useNetBalance(user_id);
@@ -46,6 +47,23 @@ const DashboardPage = () => {
   //Add data to supabase
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const result = addBankSchema.safeParse({
+      bankName,
+      file: imageRef.current?.files?.[0],
+    });
+
+    if (!result.success) {
+      const errors = result.error.flatten().fieldErrors;
+      for (const [_, messages] of Object.entries(errors)) {
+        if (messages && messages.length > 0) {
+          setErrorMessage(messages[0]);
+          break;
+        }
+      }
+      return;
+    }
+
     let filePath = "";
 
     if (image) {
@@ -56,10 +74,11 @@ const DashboardPage = () => {
     setBankName("");
     setImage(null);
 
-    //reset the image input
+    //reset the image input and error message
     if (imageRef.current) {
       imageRef.current.value = "";
     }
+    setErrorMessage("");
   };
 
   if (isBankListError)
@@ -73,6 +92,7 @@ const DashboardPage = () => {
       <h1>Net Balance: {totalBalance}</h1>
       {/* Form for inputing data */}
       <form className="mt-10" onSubmit={handleSubmit}>
+        <p className="text-red-300 mb-2">{errorMessage}</p>
         <input
           type="text"
           value={bankName}
@@ -86,6 +106,7 @@ const DashboardPage = () => {
           id="avatar"
           name="filename"
         />
+
         <button
           disabled={isAddBankPending}
           className="bg-amber-300 p-3 px-6 text-[#212121] mt-5 rounded-lg"
