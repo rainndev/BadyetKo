@@ -23,8 +23,13 @@ const TransactionsPage = () => {
 
   //submitdata
   const onSubmitData: SubmitHandler<TransactionInsertTypes> = (data) => {
-    addTransaction({ ...data, amount: +data.amount, bank_id, type: "deposit" });
-    console.log("Inputs data", data);
+    addTransaction({
+      ...data,
+      amount: +data.amount,
+      bank_id,
+      type: data.type.toLowerCase() as "withdraw" | "deposit",
+    });
+    console.log("Inputs data", { ...data, type: data.type.toLowerCase() });
   };
 
   return (
@@ -65,6 +70,13 @@ const TransactionsPage = () => {
           type="text"
           {...register("note")}
           placeholder="Optional Note transaction"
+          className="ring ring-amber-300 p-3 rounded-lg w-full"
+        />
+
+        <input
+          type="text"
+          {...register("type")}
+          placeholder="Type of transaction deposit, withdraw )"
           className="ring ring-amber-300 p-3 rounded-lg w-full"
         />
 

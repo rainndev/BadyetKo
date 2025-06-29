@@ -67,7 +67,6 @@ const DashboardPage = () => {
       <div className="w-full min-h-screen p-10">{bankListError?.message}</div>
     );
 
-  console.log("banks", bankList);
   return (
     <div className="w-full h-full flex flex-col p-10 ">
       <h1 className="text-3xl text-white">DashboardPage</h1>

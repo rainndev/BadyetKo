@@ -3,7 +3,8 @@ import supabase from "../supabase/supabase-client";
 // Type for each chart data item
 export type ChartDataItem = {
   date: string; // YYYY-MM-DD
-  transaction: number;
+  withdraw: number;
+  deposit: number;
 };
 
 export const getChartData = async (): Promise<ChartDataItem[]> => {
@@ -12,7 +13,7 @@ export const getChartData = async (): Promise<ChartDataItem[]> => {
 
   const { data, error } = await supabase
     .from("transactions")
-    .select("amount, created_at")
+    .select("amount, created_at, type")
     .gte("created_at", fromDate.toISOString());
 
   if (error || !data) {
@@ -21,18 +22,28 @@ export const getChartData = async (): Promise<ChartDataItem[]> => {
 
   const grouped: Record<string, ChartDataItem> = {};
 
-  data.forEach((tx: { amount: number | string; created_at: string }) => {
-    const date = new Date(tx.created_at).toISOString().split("T")[0]; // e.g. '2025-06-25'
+  data.forEach(
+    (tx: { amount: number | string; created_at: string; type: string }) => {
+      const date = new Date(tx.created_at).toISOString().split("T")[0]; // e.g. '2025-06-25'
+      const amount = Number(tx.amount);
 
-    if (!grouped[date]) {
-      grouped[date] = {
-        date,
-        transaction: 0,
-      };
+      if (!grouped[date]) {
+        grouped[date] = {
+          date,
+          withdraw: 0,
+          deposit: 0,
+        };
+      }
+
+      if (tx.type === "withdraw") {
+        grouped[date].withdraw += amount;
+      } else if (tx.type === "deposit") {
+        grouped[date].deposit += amount;
+      }
     }
+  );
 
-    grouped[date].transaction += Number(tx.amount);
-  });
+  console.log("filtered data", data);
 
   return Object.values(grouped).sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()

@@ -31,9 +31,13 @@ import { getChartData, type ChartDataItem } from "@/utils/getChartData";
 export const description = "An interactive area chart";
 
 const chartConfig = {
-  transaction: {
-    label: "Amount",
+  deposit: {
+    label: "Deposit",
     color: "var(--chart-1)",
+  },
+  withdraw: {
+    label: "Withdraw",
+    color: "black",
   },
 } satisfies ChartConfig;
 
@@ -112,7 +116,19 @@ function AreaChartData() {
         >
           <AreaChart data={filteredData}>
             <defs>
-              <linearGradient id="fillTransaction" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="fillDeposit" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor="var(--color-amber-300)"
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="95%"
+                  stopColor="var(--color-amber-300)"
+                  stopOpacity={0.1}
+                />
+              </linearGradient>
+              <linearGradient id="fillWithdraw" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor="var(--color-amber-300)"
@@ -125,6 +141,7 @@ function AreaChartData() {
                 />
               </linearGradient>
             </defs>
+
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="date"
@@ -156,10 +173,18 @@ function AreaChartData() {
             />
 
             <Area
-              dataKey="transaction"
+              dataKey="deposit"
               type="monotone"
-              fill="url(#fillTransaction)"
+              fill="url(#fillDeposit)"
               stroke="var(--color-amber-300)"
+              stackId="a"
+            />
+
+            <Area
+              dataKey="withdraw"
+              type="monotone"
+              fill="url(#fillWithdraw)"
+              stroke="var(--color-red-300)"
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />
