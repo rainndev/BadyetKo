@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { isValidUUIDv4 } from "../utils/helper";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useBankTransactions } from "@/hooks/useBankTransactions";
@@ -17,15 +17,13 @@ const TransactionsPage = () => {
     resolver: zodResolver(transactionSchema),
   });
   const { bank_id } = useParams();
-  const [searchParams] = useSearchParams();
-  const bankBalance = searchParams.get("balance");
 
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="w-full h-screen p-10">Invalid ID</div>;
 
   const {
     addTransaction,
-    transactionList,
+    transactionData,
     isTransactionListLoading,
     deleteTransaction,
     isAddPending,
@@ -42,13 +40,12 @@ const TransactionsPage = () => {
     console.log("Inputs data", { ...data, type: data.type.toLowerCase() });
   };
 
-  console.log(errors);
   return (
     <div className="w-full min-h-screen p-10">
-      <h1 className="mb-20">Balance: {bankBalance}</h1>
+      <h1 className="mb-20">Balance: {transactionData?.balance ?? 0}</h1>
       <ul className="flex flex-col gap-5">
         {isTransactionListLoading && <li>Loading...</li>}
-        {transactionList?.map((dataItem) => (
+        {transactionData?.transactions.map((dataItem) => (
           <div key={dataItem.id}>
             <button
               onClick={() => deleteTransaction(dataItem.id)}

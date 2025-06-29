@@ -4,7 +4,7 @@ import { useTransactionList } from "@/queries/useTransactionList";
 
 export const useBankTransactions = (bank_id: string) => {
   //hook for getting list of transactions
-  const { data: transactionList, isLoading: isTransactionListLoading } =
+  const { data: transactionData, isLoading: isTransactionListLoading } =
     useTransactionList(bank_id);
 
   //hook for adding transaction
@@ -16,7 +16,7 @@ export const useBankTransactions = (bank_id: string) => {
     useDeleteTransaction(bank_id);
 
   return {
-    transactionList,
+    transactionData,
     isTransactionListLoading,
     addTransaction,
     isAddPending,

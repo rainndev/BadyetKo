@@ -6,18 +6,27 @@ import {
 
 export const getTransactionList = async (
   bankID: string
-): Promise<TransactionListTypes[]> => {
-  const { data, error } = await supabase
+): Promise<{ transactions: TransactionListTypes[]; balance: number }> => {
+  const { data: transactions, error: txError } = await supabase
     .from(`transactions`)
     .select("*")
     .eq("bank_id", bankID);
 
-  if (error) {
-    console.error("error", error);
-    throw error;
+  const { data: bankData, error: bankError } = await supabase
+    .from("banks")
+    .select("balance")
+    .eq("id", bankID)
+    .single();
+
+  if (txError || bankError) {
+    console.error("Error:", txError || bankError);
+    throw txError || bankError;
   }
 
-  return data;
+  return {
+    transactions,
+    balance: bankData?.balance ?? 0,
+  };
 };
 
 export const createTransaction = async (

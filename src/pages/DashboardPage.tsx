@@ -126,9 +126,7 @@ const DashboardPage = () => {
               className="bg-amber-300/10 flex items-center relative  justify-center p-10 rounded-lg"
               key={bankItemData.id}
             >
-              <Link
-                to={`/bank/${bankItemData.id}?balance=${bankItemData.balance}`}
-              >
+              <Link to={`/bank/${bankItemData.id}`}>
                 <div className="space-y-2">
                   <li>Balance: {bankItemData.balance}</li>
                   <li>{bankItemData.name}</li>
