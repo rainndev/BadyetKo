@@ -9,6 +9,10 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const TransactionsPage = () => {
+  const { bank_id } = useParams();
+  if (!bank_id || !isValidUUIDv4(bank_id))
+    return <div className="w-full h-screen p-10">Invalid ID</div>;
+
   const {
     register,
     handleSubmit,
@@ -16,18 +20,17 @@ const TransactionsPage = () => {
   } = useForm({
     resolver: zodResolver(transactionSchema),
   });
-  const { bank_id } = useParams();
-
-  if (!bank_id || !isValidUUIDv4(bank_id))
-    return <div className="w-full h-screen p-10">Invalid ID</div>;
 
   const {
     addTransaction,
+    isAddError,
+    AddError,
     transactionData,
     isTransactionListLoading,
     deleteTransaction,
     isAddPending,
   } = useBankTransactions(bank_id);
+  const bankBalance = transactionData?.balance ?? 0;
 
   //submitdata
   const onSubmitData: SubmitHandler<TransactionSchemaType> = (data) => {
@@ -37,12 +40,13 @@ const TransactionsPage = () => {
       bank_id,
       type: data.type.toLowerCase() as "withdraw" | "deposit",
     });
+
     console.log("Inputs data", { ...data, type: data.type.toLowerCase() });
   };
 
   return (
     <div className="w-full min-h-screen p-10">
-      <h1 className="mb-20">Balance: {transactionData?.balance ?? 0}</h1>
+      <h1 className="mb-20">Balance: {bankBalance}</h1>
       <ul className="flex flex-col gap-5">
         {isTransactionListLoading && <li>Loading...</li>}
         {transactionData?.transactions.map((dataItem) => (
@@ -79,6 +83,7 @@ const TransactionsPage = () => {
         {errors.amount && (
           <p className="mt-2 text-red-300">{errors.amount.message}</p>
         )}
+        {isAddError && <p className="mt-2 text-red-300">{AddError?.message}</p>}
 
         <input
           type="text"

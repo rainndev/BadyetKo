@@ -8,14 +8,20 @@ export const useBankTransactions = (bank_id: string) => {
     useTransactionList(bank_id);
 
   //hook for adding transaction
-  const { mutate: addTransaction, isPending: isAddPending } =
-    useCreateTransaction(bank_id);
+  const {
+    mutate: addTransaction,
+    isPending: isAddPending,
+    isError: isAddError,
+    error: AddError,
+  } = useCreateTransaction(bank_id);
 
   //hook for deleting transaction
   const { mutate: deleteTransaction, isPending: isDeletePending } =
     useDeleteTransaction(bank_id);
 
   return {
+    isAddError,
+    AddError,
     transactionData,
     isTransactionListLoading,
     addTransaction,
