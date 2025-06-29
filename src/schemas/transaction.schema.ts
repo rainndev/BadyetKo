@@ -11,7 +11,11 @@ export const transactionSchema = z.object({
     .transform((val) => Number(val))
     .refine((val) => val > 0, {
       message: "Amount must be greater than 0",
+    })
+    .refine((val) => val <= 10_000_000_000, {
+      message: "Amount must not exceed ₱10 billion",
     }),
+
   type: z.enum(["deposit", "withdraw"]),
   note: z.string().optional(),
 });
