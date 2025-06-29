@@ -4,11 +4,15 @@ export const transactionSchema = z.object({
   name: z.string().min(1, "Name is required"),
   amount: z
     .string()
+    .trim()
     .min(1, "Amount is required")
-    .refine((val) => !isNaN(Number(val)), {
-      message: "Amount must be a number",
+    .refine((val) => /^[0-9,.]+$/.test(val), {
+      message: "Amount must only contain digits, commas, or periods",
     })
-    .transform((val) => Number(val))
+    .refine((val) => !isNaN(Number(val.replace(/,/g, ""))), {
+      message: "Amount must be a valid number",
+    })
+    .transform((val) => Number(val.replace(/,/g, "")))
     .refine((val) => val > 0, {
       message: "Amount must be greater than 0",
     })
@@ -17,7 +21,11 @@ export const transactionSchema = z.object({
     }),
 
   type: z.enum(["deposit", "withdraw"]),
-  note: z.string().optional(),
+  note: z
+    .string()
+    .max(255, "Note must not exceed 255 characters")
+    .optional()
+    .or(z.literal("")),
 });
 
 export type TransactionSchemaType = z.infer<typeof transactionSchema>;
