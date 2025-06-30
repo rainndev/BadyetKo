@@ -32,7 +32,6 @@ const DashboardPage = () => {
       <div className="min-h-screen w-full p-10">{bankListError?.message}</div>
     );
 
-  console.log(isShowModal);
   return (
     <>
       <BankAddModal
