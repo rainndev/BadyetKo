@@ -1,7 +1,12 @@
 import { z } from "zod/v4";
 
 export const addBankSchema = z.object({
-  bankName: z.string().min(1, "Bank name is required"),
+  bankName: z
+    .string()
+    .min(2, "Bank name must be at least 2 characters")
+    .max(50, "Bank name must be at most 50 characters")
+    .regex(/^[A-Za-z\s]+$/, "Bank name must contain only letters and spaces"),
+
   file: z
     .instanceof(File)
     .optional()
