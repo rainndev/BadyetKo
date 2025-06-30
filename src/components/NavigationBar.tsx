@@ -55,7 +55,7 @@ const NavigationBar = () => {
       <div className="flex min-h-screen flex-col items-center p-4">
         <HiBanknotes className="my-15 text-2xl" />
 
-        <ul className="text-dark-txt/80 flex h-full flex-col items-center gap-10 text-xl">
+        <ul className="text-dark-txt/50 flex h-full flex-col items-center gap-10 text-xl">
           {navData.map((navItem) => (
             <Link
               key={navItem.name}
