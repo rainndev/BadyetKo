@@ -42,18 +42,20 @@ const DashboardPage = () => {
       />
 
       <div className="w-full h-full flex flex-col p-10 m-5 rounded-3xl  bg-light-background">
-        <h1 className="text-3xl text-dark-txt">Dashboard</h1>
+        <h1 className="text-3xl text-dark-txt my-5">Dashboard</h1>
         <DashboardStatisticCard
           svg={<CiWallet />}
           amount={totalBalance}
           name="Net balance"
         />
-
+        <br />
         {/* Charts  */}
         <AreaChartData />
 
+        <h1 className="text-3xl text-dark-txt mb-5 mt-10">Bank wallets</h1>
+
         {/* list data to render */}
-        <ul className="mt-10 gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <ul className="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {!isBankListLoading &&
             bankList?.map((bankItemData, idx: number) => (
               <Fragment key={bankItemData.id}>

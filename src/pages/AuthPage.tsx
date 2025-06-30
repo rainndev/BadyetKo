@@ -53,8 +53,8 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col  items-center justify-center bg-[#212121] text-amber-300">
-      <h1 className="text-2xl font-black text-white mb-5">
+    <div className="w-full h-screen flex flex-col  items-center justify-center bg-medium-light-background text-dark-txt">
+      <h1 className="text-2xl font-black text-dark-txt mb-5">
         {isLogin ? "Log in " : "Sign up"}
       </h1>
       <form
@@ -66,7 +66,7 @@ const AuthPage = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Input your email"
-          className="ring ring-amber-300 p-3 rounded-lg w-full"
+          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
         />
 
         <input
@@ -74,16 +74,16 @@ const AuthPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Input your password"
-          className="ring ring-amber-300 p-3 rounded-lg w-full"
+          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
         />
 
-        <button className="w-full rounded-lg bg-amber-300 p-3 text-[#212121]">
+        <button className="w-full rounded-lg bg-dark-background p-3 text-medium-light-background">
           {isLogin ? "Log in " : "Sign up"}
         </button>
-        <p className="text-red-300">{error}</p>
+        <p className="text-red-400">{error}</p>
         <p
           onClick={() => setLogin(!isLogin)}
-          className="text-white/70 cursor-pointer"
+          className="text-dark-txt/70 cursor-pointer"
         >
           {isLogin
             ? "New here? Create an account."
