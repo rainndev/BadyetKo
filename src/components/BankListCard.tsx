@@ -10,15 +10,17 @@ type BankListCardProps = {
 };
 
 const BankListCard = ({ bankItemData, removeBank }: BankListCardProps) => {
+  const { id, name, balance, custom_bank_avatar } = bankItemData;
+
   return (
     <li className="bg-amber-300/10 flex items-center relative  justify-center p-10 rounded-lg">
-      <Link to={`/bank/${bankItemData.id}`}>
+      <Link to={`/bank/${id}`}>
         <div className="space-y-2">
-          <li>Balance: {bankItemData.balance}</li>
-          <li>{bankItemData.name}</li>
+          <p>Balance: {balance}</p>
+          <p>{name}</p>
 
-          {bankItemData.custom_bank_avatar ? (
-            <BankImage path={bankItemData.custom_bank_avatar} />
+          {custom_bank_avatar ? (
+            <BankImage path={custom_bank_avatar} />
           ) : (
             <FaPiggyBank className="text-5xl text-white" />
           )}

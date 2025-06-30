@@ -1,11 +1,6 @@
-import { useState, useRef } from "react";
-import { type BankListTypes } from "../types/bank.types";
-import { Link } from "react-router-dom";
+import { useState, useRef, Fragment } from "react";
 import { useSession } from "../context/SessionContext";
 import { useCreateAvatar } from "../queries/useCreateAvatar";
-import BankImage from "../components/BankImage";
-import { FaPiggyBank } from "react-icons/fa6";
-import { IoMdClose } from "react-icons/io";
 import AreaChartData from "../components/AreaChartData";
 import { useNetBalance } from "@/queries/useNetBalance";
 import { useBank } from "@/hooks/useBank";
@@ -131,7 +126,7 @@ const DashboardPage = () => {
       <ul className="flex mt-10 gap-10">
         {!isBankListLoading &&
           bankList?.map((bankItemData, idx: number) => (
-            <>
+            <Fragment key={bankItemData.id}>
               <BankListCard
                 bankItemData={bankItemData}
                 removeBank={removeBank}
@@ -142,7 +137,7 @@ const DashboardPage = () => {
                   Add more banks ++
                 </div>
               )}
-            </>
+            </Fragment>
           ))}
       </ul>
     </div>
