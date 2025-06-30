@@ -4,6 +4,8 @@ import AuthProtectedRoute from "./AuthProtectedRoute";
 import AuthPage from "../pages/AuthPage";
 import DashboardPage from "../pages/DashboardPage";
 import TransactionsPage from "../pages/TransactionsPage";
+import SettingsPage from "@/pages/SettingsPage";
+import ProfilePage from "@/pages/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,16 @@ export const router = createBrowserRouter([
           {
             path: "/bank/:bank_id",
             element: <TransactionsPage />,
+          },
+
+          {
+            path: "/settings",
+            element: <SettingsPage />,
+          },
+
+          {
+            path: "/profile",
+            element: <ProfilePage />,
           },
         ],
       },

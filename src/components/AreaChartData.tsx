@@ -37,7 +37,7 @@ const chartConfig = {
   },
   withdraw: {
     label: "Withdraw",
-    color: "black",
+    color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
 
@@ -131,12 +131,12 @@ function AreaChartData() {
               <linearGradient id="fillWithdraw" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="var(--color-amber-300)"
+                  stopColor="var(--color-red-300)"
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="var(--color-amber-300)"
+                  stopColor="var(--color-red-300)"
                   stopOpacity={0.1}
                 />
               </linearGradient>
