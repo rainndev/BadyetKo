@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-dark-background: #212121;
+  --color-light-background: #fffefe;
+  --color-medium-light-background: #f7f7f7f7;
+  --color-dark-txt: #0f0e0e;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

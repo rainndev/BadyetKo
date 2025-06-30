@@ -41,8 +41,8 @@ const DashboardPage = () => {
         user_id={user_id}
       />
 
-      <div className="w-full h-full flex flex-col p-10 m-5 rounded-3xl  bg-amber-300/10">
-        <h1 className="text-3xl text-white">Dashboard</h1>
+      <div className="w-full h-full flex flex-col p-10 m-5 rounded-3xl  bg-light-background">
+        <h1 className="text-3xl text-dark-txt">Dashboard</h1>
         <DashboardStatisticCard
           svg={<CiWallet />}
           amount={totalBalance}
@@ -65,7 +65,7 @@ const DashboardPage = () => {
                 {idx === bankList.length - 1 && (
                   <div
                     onClick={() => setShowModal(!isShowModal)}
-                    className="bg-amber-300/10 text-white  flex flex-col items-center relative  justify-center p-10 rounded-lg"
+                    className="border border-dark-background/10 bg-dark-background/3 text-dark-txt  flex flex-col items-center relative  justify-center p-10 rounded-lg"
                   >
                     <IoAdd className="text-xl" />
                     <p>Add more banks</p>

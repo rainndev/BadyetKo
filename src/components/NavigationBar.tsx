@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import supabase from "../supabase/supabase-client";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { HiBanknotes } from "react-icons/hi2";
-import { IoSettingsOutline } from "react-icons/io5";
+import { TbSettings2 } from "react-icons/tb";
 import { MdOutlineAccountCircle } from "react-icons/md";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const navData = [
   {
@@ -23,7 +24,7 @@ const navData = [
   {
     path: "/settings",
     name: "Settings",
-    icon: <IoSettingsOutline />,
+    icon: <TbSettings2 />,
     protected: true,
   },
 
@@ -54,8 +55,7 @@ const NavigationBar = () => {
       <div className="min-h-screen p-4 flex flex-col items-center">
         <HiBanknotes className="text-2xl my-15" />
 
-        <ul className="flex flex-col gap-10 h-full items-center">
-          <li>menu</li>
+        <ul className="flex flex-col gap-10 h-full items-center text-dark-txt/80 text-xl">
           {navData.map((navItem) => (
             <Link
               key={navItem.name}
@@ -68,9 +68,9 @@ const NavigationBar = () => {
 
           <li
             onClick={() => handleSignout()}
-            className="p-2 px-5 text-[#212121] bg-amber-300 rounded-sm "
+            className="p-3 text-light-background bg-dark-background rounded-sm"
           >
-            Signout
+            <RiLogoutCircleLine />
           </li>
         </ul>
       </div>

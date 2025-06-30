@@ -53,7 +53,7 @@ const TransactionsPage = () => {
           <div key={dataItem.id}>
             <button
               onClick={() => deleteTransaction(dataItem.id)}
-              className="p-2 bg-amber-300 rounded-lg text-[#212121] px-5"
+              className="p-2 bg-dark-background  rounded-lg text-light-background px-5"
             >
               Delete
             </button>
@@ -68,46 +68,48 @@ const TransactionsPage = () => {
           type="text"
           {...register("name")}
           placeholder="Input name of transaction"
-          className="ring ring-amber-300 p-3 rounded-lg w-full"
+          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
         />
         {errors.name && (
-          <p className="mt-2 text-red-300">{errors.name.message}</p>
+          <p className="text-red-400 text-sm">{errors.name.message}</p>
         )}
 
         <input
           type="number"
           {...register("amount")}
           placeholder="Amount of transaction"
-          className="ring ring-amber-300 p-3 rounded-lg w-full"
+          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
         />
         {errors.amount && (
-          <p className="mt-2 text-red-300">{errors.amount.message}</p>
+          <p className="text-sm text-red-400 ">{errors.amount.message}</p>
         )}
-        {isAddError && <p className="mt-2 text-red-300">{AddError?.message}</p>}
+        {isAddError && (
+          <p className="text-sm text-red-400">{AddError?.message}</p>
+        )}
 
         <input
           type="text"
           {...register("note")}
           placeholder="Optional Note transaction"
-          className="ring ring-amber-300 p-3 rounded-lg w-full"
+          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
         />
         {errors.note && (
-          <p className="mt-2 text-red-300">{errors.note.message}</p>
+          <p className="text-sm text-red-400">{errors.note.message}</p>
         )}
 
         <input
           type="text"
           {...register("type")}
           placeholder="Type of transaction deposit, withdraw )"
-          className="ring ring-amber-300 p-3 rounded-lg w-full"
+          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
         />
         {errors.type && (
-          <p className="mt-2 text-red-300">{errors.type.message}</p>
+          <p className="text-sm text-red-400">{errors.type.message}</p>
         )}
 
         <button
           disabled={isAddPending}
-          className="bg-amber-300 p-3 px-6 text-[#212121] mt-5 rounded-lg"
+          className="bg-dark-background text-light-background p-3 px-6  mt-5 rounded-lg"
         >
           {isAddPending ? "Loading..." : "Add transaction"}
         </button>

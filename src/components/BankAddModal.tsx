@@ -75,8 +75,8 @@ const BankAddModal = ({
   };
 
   return (
-    <div className="fixed w-screen h-screen bg-[#212121]/85 backdrop-blur-xs flex items-center justify-center z-9999">
-      <div className=" relative bg-amber-300/10 max-w-3xl rounded-3xl w-full h-[80%] text-white flex items-center justify-center">
+    <div className="fixed w-screen h-screen bg-dark-background/90 backdrop-blur-xs flex items-center justify-center z-9999">
+      <div className=" relative bg-light-background max-w-3xl rounded-3xl w-full h-[80%] text-dark-txt flex items-center justify-center">
         <button
           className="absolute right-5 top-5"
           disabled={isAddBankPending}
@@ -86,13 +86,14 @@ const BankAddModal = ({
         </button>
 
         <form className="mt-10" onSubmit={handleSubmit}>
-          <p className="text-red-300 mb-2">{errorMessage}</p>
+          <p className="mb-2">Bank Name</p>
           <input
             type="text"
             value={bankName}
-            className="ring ring-amber-300 p-3 rounded-lg w-full"
+            className="ring ring-dark-background/10 p-3 rounded-lg w-full"
             onChange={(e) => setBankName(e.target.value)}
           />
+          <p className="text-red-400 mb-2 text-sm">{errorMessage}</p>
           <input
             ref={imageRef}
             onChange={handleFileChange}
@@ -103,7 +104,7 @@ const BankAddModal = ({
 
           <button
             disabled={isAddBankPending}
-            className="bg-amber-300 p-3 px-6 text-[#212121] mt-5 rounded-lg"
+            className="bg-dark-background p-3 px-6 text-light-background mt-5 rounded-lg"
           >
             {isAddBankPending ? "Loading..." : "Add Bank"}
           </button>

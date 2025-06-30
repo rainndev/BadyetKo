@@ -5,7 +5,7 @@ import NavigationBar from "./components/NavigationBar";
 const Providers = () => {
   return (
     <SessionProvider>
-      <div className="bg-[#212121] min-h-dvh w-full flex  text-amber-300 ">
+      <div className="bg-medium-light-background min-h-dvh w-full flex text-dark-txt">
         <NavigationBar />
         <Outlet />
       </div>
