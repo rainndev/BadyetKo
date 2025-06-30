@@ -52,7 +52,7 @@ const DashboardPage = () => {
         {/* Charts  */}
         <AreaChartData />
 
-        <h1 className="text-dark-txt mt-10 mb-5 text-3xl">Bank wallets</h1>
+        <h1 className="text-dark-txt mt-10 mb-5 text-xl">Bank wallets</h1>
 
         {/* list data to render */}
         <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
