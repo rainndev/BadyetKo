@@ -10,6 +10,10 @@ import AreaChartData from "../components/AreaChartData";
 import { useNetBalance } from "@/queries/useNetBalance";
 import { useBank } from "@/hooks/useBank";
 import { addBankSchema } from "@/schemas/banks.schema";
+import DashboardStatisticCard from "@/components/DashboardStatisticCard";
+import { CiWallet } from "react-icons/ci";
+import BankListCard from "@/components/BankListCard";
+
 const DashboardPage = () => {
   const [bankName, setBankName] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -87,9 +91,14 @@ const DashboardPage = () => {
     );
 
   return (
-    <div className="w-full h-full flex flex-col p-10 ">
-      <h1 className="text-3xl text-white">DashboardPage</h1>
-      <h1>Net Balance: {totalBalance}</h1>
+    <div className="w-full h-full flex flex-col p-10 m-5 rounded-3xl  bg-amber-300/10">
+      <h1 className="text-3xl text-white">Dashboard</h1>
+      <DashboardStatisticCard
+        svg={<CiWallet />}
+        amount={totalBalance}
+        name="Net balance"
+      />
+
       {/* Form for inputing data */}
       <form className="mt-10" onSubmit={handleSubmit}>
         <p className="text-red-300 mb-2">{errorMessage}</p>
@@ -121,28 +130,19 @@ const DashboardPage = () => {
       {/* list data to render */}
       <ul className="flex mt-10 gap-10">
         {!isBankListLoading &&
-          bankList?.map((bankItemData: BankListTypes) => (
-            <div
-              className="bg-amber-300/10 flex items-center relative  justify-center p-10 rounded-lg"
-              key={bankItemData.id}
-            >
-              <Link to={`/bank/${bankItemData.id}`}>
-                <div className="space-y-2">
-                  <li>Balance: {bankItemData.balance}</li>
-                  <li>{bankItemData.name}</li>
-
-                  {bankItemData.custom_bank_avatar ? (
-                    <BankImage path={bankItemData.custom_bank_avatar} />
-                  ) : (
-                    <FaPiggyBank className="text-5xl text-white" />
-                  )}
-                </div>
-              </Link>
-              <IoMdClose
-                className="cursor-pointer  text-white absolute right-2 top-2 text-2xl w-fit rounded-lg"
-                onClick={() => removeBank(bankItemData.id)}
+          bankList?.map((bankItemData, idx: number) => (
+            <>
+              <BankListCard
+                bankItemData={bankItemData}
+                removeBank={removeBank}
               />
-            </div>
+
+              {idx === bankList.length - 1 && (
+                <div className="bg-amber-300/10 flex items-center relative  justify-center p-10 rounded-lg">
+                  Add more banks ++
+                </div>
+              )}
+            </>
           ))}
       </ul>
     </div>
