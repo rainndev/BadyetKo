@@ -53,20 +53,20 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col  items-center justify-center bg-medium-light-background text-dark-txt">
-      <h1 className="text-2xl font-black text-dark-txt mb-5">
+    <div className="bg-medium-light-background text-dark-txt flex h-screen w-full flex-col items-center justify-center">
+      <h1 className="text-dark-txt mb-5 text-2xl font-black">
         {isLogin ? "Log in " : "Sign up"}
       </h1>
       <form
         onSubmit={handleAuth}
-        className="w-full max-w-sm flex flex-col gap-3"
+        className="flex w-full max-w-sm flex-col gap-3"
       >
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Input your email"
-          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
+          className="ring-dark-background/10 w-full rounded-lg p-3 ring"
         />
 
         <input
@@ -74,10 +74,10 @@ const AuthPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Input your password"
-          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
+          className="ring-dark-background/10 w-full rounded-lg p-3 ring"
         />
 
-        <button className="w-full rounded-lg bg-dark-background p-3 text-medium-light-background">
+        <button className="bg-dark-background text-medium-light-background w-full rounded-lg p-3">
           {isLogin ? "Log in " : "Sign up"}
         </button>
         <p className="text-red-400">{error}</p>

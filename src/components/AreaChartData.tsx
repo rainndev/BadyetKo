@@ -44,7 +44,7 @@ const chartConfig = {
 function AreaChartData() {
   const [timeRange, setTimeRange] = React.useState("90d");
   const [data, setData] = React.useState<ChartDataItem[] | undefined>(
-    undefined
+    undefined,
   );
 
   // Fetch chart data once
@@ -81,7 +81,7 @@ function AreaChartData() {
   });
 
   return (
-    <Card className="pt-0 border border-dark-background/15">
+    <Card className="border-dark-background/15 border pt-0">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Transaction Overview</CardTitle>

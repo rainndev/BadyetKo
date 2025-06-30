@@ -52,10 +52,10 @@ const NavigationBar = () => {
 
   return (
     session !== null && (
-      <div className="min-h-screen p-4 flex flex-col items-center">
-        <HiBanknotes className="text-2xl my-15" />
+      <div className="flex min-h-screen flex-col items-center p-4">
+        <HiBanknotes className="my-15 text-2xl" />
 
-        <ul className="flex flex-col gap-10 h-full items-center text-dark-txt/80 text-xl">
+        <ul className="text-dark-txt/80 flex h-full flex-col items-center gap-10 text-xl">
           {navData.map((navItem) => (
             <Link
               key={navItem.name}
@@ -68,7 +68,7 @@ const NavigationBar = () => {
 
           <li
             onClick={() => handleSignout()}
-            className="p-3 text-light-background bg-dark-background rounded-sm"
+            className="text-light-background bg-dark-background rounded-sm p-3"
           >
             <RiLogoutCircleLine />
           </li>

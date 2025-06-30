@@ -34,7 +34,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
       async (_, session) => {
         setSession(session);
         setIsLoading(false);
-      }
+      },
     );
 
     return () => {
@@ -45,7 +45,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
   return (
     <SessionContext value={{ session }}>
       {isLoading ? (
-        <div className="w-full h-screen flex items-center justify-center text-amber-300 bg-[#212121]">
+        <div className="bg-medium-light-background text-dark-txt flex h-screen w-full items-center justify-center">
           Loading...
         </div>
       ) : (

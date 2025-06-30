@@ -13,7 +13,7 @@ const BankListCard = ({ bankItemData, removeBank }: BankListCardProps) => {
   const { id, name, balance, custom_bank_avatar } = bankItemData;
 
   return (
-    <li className="border border-dark-background/15 flex items-center relative  justify-center p-10 rounded-2xl">
+    <li className="border-dark-background/15 relative flex items-center justify-center rounded-2xl border p-10">
       <Link to={`/bank/${id}`}>
         <div className="space-y-2">
           <p>Balance: {balance}</p>
@@ -22,12 +22,12 @@ const BankListCard = ({ bankItemData, removeBank }: BankListCardProps) => {
           {custom_bank_avatar ? (
             <BankImage path={custom_bank_avatar} />
           ) : (
-            <FaPiggyBank className="text-5xl text-dark-background" />
+            <FaPiggyBank className="text-dark-background text-5xl" />
           )}
         </div>
       </Link>
       <IoMdClose
-        className="cursor-pointer  text-white absolute right-2 top-2 text-2xl w-fit rounded-lg"
+        className="absolute top-2 right-2 w-fit cursor-pointer rounded-lg text-2xl text-white"
         onClick={() => removeBank(bankItemData.id)}
       />
     </li>

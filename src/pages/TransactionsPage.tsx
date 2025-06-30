@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const TransactionsPage = () => {
   const { bank_id } = useParams();
   if (!bank_id || !isValidUUIDv4(bank_id))
-    return <div className="w-full h-screen p-10">Invalid ID</div>;
+    return <div className="h-screen w-full p-10">Invalid ID</div>;
 
   const {
     register,
@@ -45,7 +45,7 @@ const TransactionsPage = () => {
   };
 
   return (
-    <div className="w-full min-h-screen p-10">
+    <div className="min-h-screen w-full p-10">
       <h1 className="mb-20">Balance: {bankBalance}</h1>
       <ul className="flex flex-col gap-5">
         {isTransactionListLoading && <li>Loading...</li>}
@@ -53,7 +53,7 @@ const TransactionsPage = () => {
           <div key={dataItem.id}>
             <button
               onClick={() => deleteTransaction(dataItem.id)}
-              className="p-2 bg-dark-background  rounded-lg text-light-background px-5"
+              className="bg-dark-background text-light-background rounded-lg p-2 px-5"
             >
               Delete
             </button>
@@ -68,20 +68,20 @@ const TransactionsPage = () => {
           type="text"
           {...register("name")}
           placeholder="Input name of transaction"
-          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
+          className="ring-dark-background/10 w-full rounded-lg p-3 ring"
         />
         {errors.name && (
-          <p className="text-red-400 text-sm">{errors.name.message}</p>
+          <p className="text-sm text-red-400">{errors.name.message}</p>
         )}
 
         <input
           type="number"
           {...register("amount")}
           placeholder="Amount of transaction"
-          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
+          className="ring-dark-background/10 w-full rounded-lg p-3 ring"
         />
         {errors.amount && (
-          <p className="text-sm text-red-400 ">{errors.amount.message}</p>
+          <p className="text-sm text-red-400">{errors.amount.message}</p>
         )}
         {isAddError && (
           <p className="text-sm text-red-400">{AddError?.message}</p>
@@ -91,7 +91,7 @@ const TransactionsPage = () => {
           type="text"
           {...register("note")}
           placeholder="Optional Note transaction"
-          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
+          className="ring-dark-background/10 w-full rounded-lg p-3 ring"
         />
         {errors.note && (
           <p className="text-sm text-red-400">{errors.note.message}</p>
@@ -101,7 +101,7 @@ const TransactionsPage = () => {
           type="text"
           {...register("type")}
           placeholder="Type of transaction deposit, withdraw )"
-          className="ring ring-dark-background/10 p-3 rounded-lg w-full"
+          className="ring-dark-background/10 w-full rounded-lg p-3 ring"
         />
         {errors.type && (
           <p className="text-sm text-red-400">{errors.type.message}</p>
@@ -109,7 +109,7 @@ const TransactionsPage = () => {
 
         <button
           disabled={isAddPending}
-          className="bg-dark-background text-light-background p-3 px-6  mt-5 rounded-lg"
+          className="bg-dark-background text-light-background mt-5 rounded-lg p-3 px-6"
         >
           {isAddPending ? "Loading..." : "Add transaction"}
         </button>

@@ -9,7 +9,7 @@ const BankImage = ({ path }: { path: string }) => {
     <img
       src={signedUrl || "/fallback.png"}
       alt="Bank Avatar"
-      className="size-10 object-cover bg-dark-background/3 rounded-lg"
+      className="bg-dark-background/3 size-10 rounded-lg object-cover"
     />
   );
 };

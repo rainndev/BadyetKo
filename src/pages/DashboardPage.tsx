@@ -29,7 +29,7 @@ const DashboardPage = () => {
 
   if (isBankListError)
     return (
-      <div className="w-full min-h-screen p-10">{bankListError?.message}</div>
+      <div className="min-h-screen w-full p-10">{bankListError?.message}</div>
     );
 
   console.log(isShowModal);
@@ -41,8 +41,8 @@ const DashboardPage = () => {
         user_id={user_id}
       />
 
-      <div className="w-full h-full flex flex-col p-10 m-5 rounded-3xl  bg-light-background">
-        <h1 className="text-3xl text-dark-txt my-5">Dashboard</h1>
+      <div className="bg-light-background m-5 flex h-full w-full flex-col rounded-3xl p-10">
+        <h1 className="text-dark-txt my-5 text-3xl">Dashboard</h1>
         <DashboardStatisticCard
           svg={<CiWallet />}
           amount={totalBalance}
@@ -52,10 +52,10 @@ const DashboardPage = () => {
         {/* Charts  */}
         <AreaChartData />
 
-        <h1 className="text-3xl text-dark-txt mb-5 mt-10">Bank wallets</h1>
+        <h1 className="text-dark-txt mt-10 mb-5 text-3xl">Bank wallets</h1>
 
         {/* list data to render */}
-        <ul className="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {!isBankListLoading &&
             bankList?.map((bankItemData, idx: number) => (
               <Fragment key={bankItemData.id}>
@@ -67,7 +67,7 @@ const DashboardPage = () => {
                 {idx === bankList.length - 1 && (
                   <div
                     onClick={() => setShowModal(!isShowModal)}
-                    className="border border-dark-background/10 bg-dark-background/3 text-dark-txt  flex flex-col items-center relative  justify-center p-10 rounded-lg"
+                    className="border-dark-background/10 bg-dark-background/3 text-dark-txt relative flex flex-col items-center justify-center rounded-lg border p-10"
                   >
                     <IoAdd className="text-xl" />
                     <p>Add more banks</p>

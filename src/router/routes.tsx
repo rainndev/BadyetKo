@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: (
-          <div className="w-full h-dvh flex items-center justify-center bg-[#212121] text-amber-300">
+          <div className="flex h-dvh w-full items-center justify-center bg-[#212121] text-amber-300">
             Home page
           </div>
         ),
@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: (
-      <p className="w-full h-screen flex items-center justify-center bg-[#212121] text-amber-300">
+      <p className="bg-light-background text-dark-txt flex h-screen w-full items-center justify-center">
         404 not found
       </p>
     ),
