@@ -1,5 +1,5 @@
 import { useSession } from "../context/SessionContext";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import supabase from "../supabase/supabase-client";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { HiBanknotes } from "react-icons/hi2";

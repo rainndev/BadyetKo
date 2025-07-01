@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import { useSession } from "../context/SessionContext";
 import AreaChartData from "../components/AreaChartData";
 import { useUserStatistic } from "@/queries/useUserStatistic";
@@ -6,9 +6,8 @@ import { useBank } from "@/hooks/useBank";
 import DashboardStatisticCard from "@/components/DashboardStatisticCard";
 import { CiWallet } from "react-icons/ci";
 import { PiHandWithdrawLight, PiHandDepositLight } from "react-icons/pi";
-import { IoAdd } from "react-icons/io5";
-import BankListCard from "@/components/BankListCard";
 import BankAddModal from "@/components/BankAddModal";
+import BankRowData from "@/components/BankRowData";
 
 const DashboardPage = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -68,27 +67,37 @@ const DashboardPage = () => {
         {/* Charts  */}
         <AreaChartData />
 
-        <h1 className="text-dark-txt mt-10 mb-5 text-xl">Bank wallets</h1>
         {/* list data to render */}
-        <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {!isBankListLoading &&
-            bankList?.map((bankItemData) => (
-              <Fragment key={bankItemData.id}>
-                <BankListCard
-                  bankItemData={bankItemData}
-                  removeBank={removeBank}
-                />
-              </Fragment>
-            ))}
+        <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="border-dark-background/20 rounded-2xl border p-5">
+            <div className="mb-5 flex items-center justify-between p-2">
+              <h1 className="text-dark-txt text-lg">Bank wallets</h1>
+              <button
+                onClick={() => setShowModal(!isShowModal)}
+                className="text-light-background bg-dark-background rounded-sm p-2 px-4 text-sm"
+              >
+                Add More Banks
+              </button>
+            </div>
 
-          <div
-            onClick={() => setShowModal(!isShowModal)}
-            className="border-dark-background/10 bg-dark-background/3 text-dark-txt relative flex flex-col items-center justify-center rounded-2xl border p-10"
-          >
-            <IoAdd className="text-xl" />
-            <p>Add more banks</p>
+            <table className="min-w-full divide-y divide-gray-200">
+              <tbody>
+                {!isBankListLoading &&
+                  bankList?.map((bankItemData) => (
+                    <BankRowData
+                      key={bankItemData.id}
+                      bankItemData={bankItemData}
+                      removeBank={removeBank}
+                    />
+                  ))}
+              </tbody>
+            </table>
           </div>
-        </ul>
+
+          <div className="border-dark-background/20 w-full rounded-2xl border p-2">
+            test
+          </div>
+        </div>
       </div>
     </>
   );
