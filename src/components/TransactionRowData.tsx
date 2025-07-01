@@ -1,0 +1,65 @@
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import type { TransactionListTypes } from "@/types/transaction.types";
+import { getReadableDate } from "@/utils/helper";
+import { BsThreeDots } from "react-icons/bs";
+import { CiEdit } from "react-icons/ci";
+import { PiTrashSimple } from "react-icons/pi";
+
+type TransactionRowDataProps = {
+  dataItem: TransactionListTypes;
+  deleteTransaction: (id: number) => void;
+};
+
+const TransactionRowData = ({
+  dataItem,
+  deleteTransaction,
+}: TransactionRowDataProps) => {
+  return (
+    <tr>
+      <td className="p-4 pl-10 text-sm text-gray-600">
+        {getReadableDate(dataItem.created_at)}
+      </td>
+      <td className="p-4 py-2 text-sm text-gray-600">
+        {"\u20B1"}
+        {dataItem.amount}
+      </td>
+      <td className="p-4 py-2 text-sm text-gray-600">{dataItem.name}</td>
+      <td className="p-4 py-2 text-xs">
+        <p
+          className={`w-fit rounded-full px-3 py-1 font-medium ${dataItem.type === "deposit" ? "bg-[#bbefcf] text-[#477d59]" : "bg-[#fbe4e5] text-[#ad383a]"}`}
+        >
+          {dataItem.type}
+        </p>
+      </td>
+      <td className="p-4 py-2 text-sm text-gray-600">{dataItem.note}</td>
+      <td className="p-4 py-2 text-sm text-gray-600">
+        <Popover>
+          <PopoverTrigger>
+            <BsThreeDots />
+          </PopoverTrigger>
+          <PopoverContent className="w-30 overflow-hidden rounded-2xl p-0 text-xs text-gray-600">
+            <ul>
+              <li
+                onClick={() => deleteTransaction(dataItem.id)}
+                className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200"
+              >
+                <p>Delete</p>
+                <PiTrashSimple className="text-sm" />
+              </li>
+              <li className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200">
+                <p>Edit</p>
+                <CiEdit className="text-sm" />
+              </li>
+            </ul>
+          </PopoverContent>
+        </Popover>
+      </td>
+    </tr>
+  );
+};
+
+export default TransactionRowData;
