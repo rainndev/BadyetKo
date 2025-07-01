@@ -22,7 +22,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
         {custom_bank_avatar ? (
           <BankImage path={custom_bank_avatar} />
         ) : (
-          <FaPiggyBank className="text-dark-background text-5xl" />
+          <FaPiggyBank className="text-dark-background text-4xl" />
         )}
       </td>
 
