@@ -4,7 +4,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import type { TransactionListTypes } from "@/types/transaction.types";
-import { getReadableDate } from "@/utils/helper";
+import { formatMoney, getReadableDate } from "@/utils/helper";
 import { BsThreeDots } from "react-icons/bs";
 import { CiEdit } from "react-icons/ci";
 import { PiTrashSimple } from "react-icons/pi";
@@ -24,8 +24,7 @@ const TransactionRowData = ({
         {getReadableDate(dataItem.created_at)}
       </td>
       <td className="p-4 py-2 text-sm text-gray-600">
-        {"\u20B1"}
-        {dataItem.amount}
+        {formatMoney(dataItem.amount, "en-PH", "currency", "PHP")}
       </td>
       <td className="p-4 py-2 text-sm text-gray-600">{dataItem.name}</td>
       <td className="p-4 py-2 text-xs">

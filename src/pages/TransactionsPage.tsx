@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { isValidUUIDv4 } from "../utils/helper";
+import { formatMoney, isValidUUIDv4 } from "../utils/helper";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useBankTransactions } from "@/hooks/useBankTransactions";
 import {
@@ -48,7 +48,9 @@ const TransactionsPage = () => {
   console.log("transation data", transactionData);
   return (
     <div className="min-h-screen w-full p-10">
-      <h1 className="mb-20">Balance: {bankBalance}</h1>
+      <h1 className="mb-20">
+        Balance: {formatMoney(bankBalance, "en-PH", "currency", "PHP")}
+      </h1>
 
       <div className="border-dark-background/20 overflow-hidden rounded-2xl border">
         <table className="min-w-full divide-y divide-gray-200">

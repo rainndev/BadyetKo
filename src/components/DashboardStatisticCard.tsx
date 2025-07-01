@@ -1,3 +1,4 @@
+import { formatMoney } from "@/utils/helper";
 import { type ReactElement, cloneElement } from "react";
 
 type DashboardStatisticCardProps = {
@@ -15,8 +16,7 @@ const DashboardStatisticCard = ({
       {cloneElement(svg, { className: "text-3xl" })}
 
       <h1 className="text-2xl font-semibold">
-        {"\u20B1"}
-        {amount}
+        {formatMoney(amount, "en-PH", "currency", "PHP")}
       </h1>
       <p className="text-dark-txt/60 text-sm">{name}</p>
     </div>

@@ -3,6 +3,7 @@ import BankImage from "./BankImage";
 import { FaPiggyBank } from "react-icons/fa6";
 import { PiTrashSimple } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import { formatMoney } from "@/utils/helper";
 
 type BankRowDataProps = {
   bankItemData: BankListTypes;
@@ -27,10 +28,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
       </td>
 
       <td className="p-4 pl-10 text-gray-600">
-        <p>
-          {"\u20B1"}
-          {balance}
-        </p>
+        <p>{formatMoney(balance ?? 0, "en-PH", "currency", "PHP")}</p>
       </td>
 
       <td className="p-4 pl-10 text-gray-600">
