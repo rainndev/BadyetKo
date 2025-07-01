@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import { isValidUUIDv4 } from "../utils/helper";
+import { getReadableDate, isValidUUIDv4 } from "../utils/helper";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { BsThreeDots } from "react-icons/bs";
 import { useBankTransactions } from "@/hooks/useBankTransactions";
 import {
   transactionSchema,
@@ -41,27 +42,78 @@ const TransactionsPage = () => {
       type: data.type.toLowerCase() as "withdraw" | "deposit",
     });
 
-    console.log("Inputs data", { ...data, type: data.type.toLowerCase() });
+    // console.log("Inputs data", { ...data, type: data.type.toLowerCase() });
   };
-
+  console.log("transation data", transactionData);
   return (
     <div className="min-h-screen w-full p-10">
       <h1 className="mb-20">Balance: {bankBalance}</h1>
-      <ul className="flex flex-col gap-5">
-        {isTransactionListLoading && <li>Loading...</li>}
-        {transactionData?.transactions.map((dataItem) => (
-          <div key={dataItem.id}>
-            <button
-              onClick={() => deleteTransaction(dataItem.id)}
-              className="bg-dark-background text-light-background rounded-lg p-2 px-5"
-            >
-              Delete
-            </button>
-            <li>Name: {dataItem.name}</li>
-            <li>Amount: {dataItem.amount}</li>
-          </div>
-        ))}
-      </ul>
+
+      {isTransactionListLoading && <p>Loading...</p>}
+
+      <div className="border-dark-background/15 overflow-hidden rounded-2xl border">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="p-5 pl-10 text-left text-sm font-semibold text-gray-700">
+                Date of Transaction
+              </th>
+              <th className="p-5 text-left text-sm font-semibold text-gray-700">
+                Amount
+              </th>
+              <th className="p-5 text-left text-sm font-semibold text-gray-700">
+                Name
+              </th>
+              <th className="p-5 text-left text-sm font-semibold text-gray-700">
+                Type
+              </th>
+              <th className="p-5 text-left text-sm font-semibold text-gray-700">
+                Note
+              </th>
+
+              <th className="text-left text-sm font-semibold text-gray-700">
+                &nbsp;
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {transactionData?.transactions.map((dataItem) => (
+              <tr key={dataItem.id}>
+                {/* <button
+                onClick={() => deleteTransaction(dataItem.id)}
+                className="bg-dark-background text-light-background rounded-lg p-2 px-5"
+              >
+                Delete
+              </button> */}
+
+                <td className="p-4 pl-10 text-sm text-gray-600">
+                  {getReadableDate(dataItem.created_at)}
+                </td>
+                <td className="p-4 py-2 text-sm text-gray-600">
+                  {"\u20B1"}
+                  {dataItem.amount}
+                </td>
+                <td className="p-4 py-2 text-sm text-gray-600">
+                  {dataItem.name}
+                </td>
+                <td className="p-4 py-2 text-xs">
+                  <p
+                    className={`w-fit rounded-full px-3 py-1 font-medium ${dataItem.type === "deposit" ? "bg-[#bbefcf] text-[#477d59]" : "bg-[#fbe4e5] text-[#ad383a]"}`}
+                  >
+                    {dataItem.type}
+                  </p>
+                </td>
+                <td className="p-4 py-2 text-sm text-gray-600">
+                  {dataItem.note}
+                </td>
+                <td className="p-4 py-2 text-sm text-gray-600">
+                  <BsThreeDots />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <form className="mt-10" onSubmit={handleSubmit(onSubmitData)}>
         <input

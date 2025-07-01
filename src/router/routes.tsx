@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: (
-          <div className="flex h-dvh w-full items-center justify-center bg-[#212121] text-amber-300">
+          <div className="bg-light-background text-dark-txt flex h-dvh w-full items-center justify-center">
             Home page
           </div>
         ),

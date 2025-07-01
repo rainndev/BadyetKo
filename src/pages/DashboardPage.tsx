@@ -47,6 +47,9 @@ const DashboardPage = () => {
 
       <div className="bg-light-background m-5 flex h-full w-full flex-col rounded-3xl p-10">
         <h1 className="text-dark-txt my-5 text-3xl">Dashboard</h1>
+        {/* Charts  */}
+        <AreaChartData />
+        <br />
         <div className="flex gap-2">
           <DashboardStatisticCard
             svg={<CiWallet />}
@@ -64,13 +67,7 @@ const DashboardPage = () => {
             name="Total Withdraw"
           />
         </div>
-
-        <br />
-        {/* Charts  */}
-        <AreaChartData />
-
         <h1 className="text-dark-txt mt-10 mb-5 text-xl">Bank wallets</h1>
-
         {/* list data to render */}
         <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {!isBankListLoading &&
