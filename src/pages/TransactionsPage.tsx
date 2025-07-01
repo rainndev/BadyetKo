@@ -56,8 +56,6 @@ const TransactionsPage = () => {
     <div className="min-h-screen w-full p-10">
       <h1 className="mb-20">Balance: {bankBalance}</h1>
 
-      {isTransactionListLoading && <p>Loading...</p>}
-
       <div className="border-dark-background/20 overflow-hidden rounded-2xl border">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
@@ -84,6 +82,43 @@ const TransactionsPage = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
+            {/* dummy data loading */}
+            {isTransactionListLoading && (
+              <tr>
+                <td className="p-4 pl-10">
+                  <p className="bg-dark-background/50 w-20 animate-pulse rounded-sm">
+                    &nbsp;
+                  </p>
+                </td>
+                <td className="p-4">
+                  <p className="bg-dark-background/50 w-15 animate-pulse rounded-sm">
+                    &nbsp;
+                  </p>
+                </td>
+                <td className="p-4">
+                  <p className="bg-dark-background/50 w-15 animate-pulse rounded-sm">
+                    &nbsp;
+                  </p>
+                </td>
+                <td className="p-4">
+                  <p className="bg-dark-background/50 w-15 animate-pulse rounded-sm">
+                    &nbsp;
+                  </p>
+                </td>
+                <td className="p-4">
+                  <p className="bg-dark-background/50 w-15 animate-pulse rounded-sm">
+                    &nbsp;
+                  </p>
+                </td>
+
+                <td className="p-4">
+                  <p className="bg-dark-background/50 w-15 animate-pulse rounded-sm">
+                    &nbsp;
+                  </p>
+                </td>
+              </tr>
+            )}
+
             {transactionData?.transactions.map((dataItem) => (
               <tr key={dataItem.id}>
                 <td className="p-4 pl-10 text-sm text-gray-600">
