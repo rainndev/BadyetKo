@@ -2,7 +2,14 @@ import { useParams } from "react-router-dom";
 import { getReadableDate, isValidUUIDv4 } from "../utils/helper";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { BsThreeDots } from "react-icons/bs";
+import { PiTrashSimple } from "react-icons/pi";
+import { CiEdit } from "react-icons/ci";
 import { useBankTransactions } from "@/hooks/useBankTransactions";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   transactionSchema,
   type TransactionSchemaType,
@@ -79,13 +86,6 @@ const TransactionsPage = () => {
           <tbody className="divide-y divide-gray-200">
             {transactionData?.transactions.map((dataItem) => (
               <tr key={dataItem.id}>
-                {/* <button
-                onClick={() => deleteTransaction(dataItem.id)}
-                className="bg-dark-background text-light-background rounded-lg p-2 px-5"
-              >
-                Delete
-              </button> */}
-
                 <td className="p-4 pl-10 text-sm text-gray-600">
                   {getReadableDate(dataItem.created_at)}
                 </td>
@@ -107,7 +107,26 @@ const TransactionsPage = () => {
                   {dataItem.note}
                 </td>
                 <td className="p-4 py-2 text-sm text-gray-600">
-                  <BsThreeDots />
+                  <Popover>
+                    <PopoverTrigger>
+                      <BsThreeDots />
+                    </PopoverTrigger>
+                    <PopoverContent className="w-30 overflow-hidden rounded-2xl p-0 text-xs text-gray-600">
+                      <ul>
+                        <li
+                          onClick={() => deleteTransaction(dataItem.id)}
+                          className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200"
+                        >
+                          <p>Delete</p>
+                          <PiTrashSimple className="text-sm" />
+                        </li>
+                        <li className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200">
+                          <p>Edit</p>
+                          <CiEdit className="text-sm" />
+                        </li>
+                      </ul>
+                    </PopoverContent>
+                  </Popover>
                 </td>
               </tr>
             ))}
