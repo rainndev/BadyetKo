@@ -1,5 +1,5 @@
 import { useSession } from "../context/SessionContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import supabase from "../supabase/supabase-client";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { HiBanknotes } from "react-icons/hi2";
@@ -52,18 +52,18 @@ const NavigationBar = () => {
 
   return (
     session !== null && (
-      <div className="flex min-h-screen flex-col items-center p-4">
+      <div className="flex min-h-screen flex-col items-center p-10">
         <HiBanknotes className="my-15 text-2xl" />
 
         <ul className="text-dark-txt/50 flex h-full flex-col items-center gap-10 text-xl">
           {navData.map((navItem) => (
-            <Link
+            <NavLink
               key={navItem.name}
               className="cursor-pointer"
               to={navItem.path}
             >
               <li>{navItem.icon}</li>
-            </Link>
+            </NavLink>
           ))}
 
           <li

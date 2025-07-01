@@ -13,7 +13,7 @@ const BankListCard = ({ bankItemData, removeBank }: BankListCardProps) => {
   const { id, name, balance, custom_bank_avatar } = bankItemData;
 
   return (
-    <li className="border-dark-background/15 relative flex items-center justify-center rounded-2xl border p-10">
+    <li className="border-dark-background/20 relative flex items-center justify-center rounded-2xl border p-10">
       <Link to={`/bank/${id}`}>
         <div className="space-y-2">
           <p>Balance: {balance}</p>

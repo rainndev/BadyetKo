@@ -58,7 +58,7 @@ const TransactionsPage = () => {
 
       {isTransactionListLoading && <p>Loading...</p>}
 
-      <div className="border-dark-background/15 overflow-hidden rounded-2xl border">
+      <div className="border-dark-background/20 overflow-hidden rounded-2xl border">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
