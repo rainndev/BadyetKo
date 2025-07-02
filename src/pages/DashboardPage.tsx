@@ -45,7 +45,7 @@ const DashboardPage = () => {
         user_id={user_id}
       />
 
-      <div className="bg-light-background m-5 ml-0 flex h-full w-full flex-col rounded-3xl p-10">
+      <div className="bg-light-background m-0 flex h-full w-full flex-col rounded-3xl p-10 md:m-5 md:ml-0">
         <h1 className="text-dark-txt my-5 text-3xl">Dashboard</h1>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           <DashboardStatisticCard
