@@ -23,12 +23,12 @@ const TransactionsPage = () => {
         isShowModal={isShowModal}
         setShowModal={setShowModal}
       />
-      <div className="min-h-screen w-full p-10">
+      <div className="min-h-screen w-full p-5 md:p-10">
         <h1 className="mb-20">
           Balance: {formatMoney(bankBalance, "en-PH", "currency", "PHP")}
         </h1>
 
-        <div className="border-dark-background/20 overflow-hidden rounded-2xl border">
+        <div className="border-dark-background/20 overflow-x-auto rounded-2xl border">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-100">
               <tr>
@@ -70,10 +70,11 @@ const TransactionsPage = () => {
 
         <button
           onClick={() => setShowModal(true)}
-          className="bg-dark-background text-light-background mt-5 rounded-lg p-3 px-6"
+          className="bg-dark-background text-light-background mt-5 rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)]"
         >
           Add New Transaction
         </button>
+        <div className="h-20" />
       </div>
     </>
   );

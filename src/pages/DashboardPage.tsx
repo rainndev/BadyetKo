@@ -111,6 +111,7 @@ const DashboardPage = () => {
           <div className="border-dark-background/20 w-full rounded-2xl border p-2">
             test
           </div>
+          <div className="h-20" />
         </div>
       </div>
     </>
