@@ -47,7 +47,7 @@ const DashboardPage = () => {
 
       <div className="bg-light-background m-5 ml-0 flex h-full w-full flex-col rounded-3xl p-10">
         <h1 className="text-dark-txt my-5 text-3xl">Dashboard</h1>
-        <div className="flex gap-5">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           <DashboardStatisticCard
             svg={<CiWallet />}
             amount={total_balance}
@@ -73,18 +73,21 @@ const DashboardPage = () => {
 
         {/* list data to render */}
         <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <div className="border-dark-background/20 rounded-2xl border p-5">
+          <div className="border-dark-background/20 overflow-x-auto rounded-2xl border p-5">
+            {/* add bank wallet */}
             <div className="mb-5 flex items-center justify-between p-2">
-              <h1 className="text-dark-txt text-lg">Bank wallets</h1>
+              <h1 className="text-dark-txt text-[clamp(1rem, 2vw+1rem, 1.25rem)]">
+                Bank wallets
+              </h1>
               <button
                 onClick={() => setShowModal(!isShowModal)}
-                className="text-light-background bg-dark-background rounded-sm p-2 px-4 text-sm"
+                className="text-light-background bg-dark-background text-[clamp(1rem, 2vw+1rem, 1.25rem)] rounded-sm p-2 px-4 text-sm"
               >
                 Add More Banks
               </button>
             </div>
 
-            <table className="min-w-full divide-y divide-gray-200">
+            <table className="min-w-full border-collapse divide-y divide-gray-200">
               <tbody>
                 {!isBankListLoading &&
                   bankList?.map((bankItemData) => (
