@@ -20,7 +20,6 @@ export const transactionSchema = z.object({
       message: "Amount must not exceed ₱10 billion",
     }),
 
-  type: z.enum(["deposit", "withdraw"]),
   note: z
     .string()
     .max(255, "Note must not exceed 255 characters")
