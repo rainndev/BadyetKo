@@ -36,8 +36,6 @@ const DashboardPage = () => {
       <div className="min-h-screen w-full p-10">{bankListError?.message}</div>
     );
 
-  console.log("bankList length", bankList?.length === 0);
-
   return (
     <>
       <BankAddModal
@@ -50,7 +48,7 @@ const DashboardPage = () => {
         <h1 className="text-dark-txt my-5 text-[clamp(.7rem,2vw+.7rem,1.5rem)] font-medium">
           Dashboard
         </h1>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
           <DashboardStatisticCard
             svg={<CiWallet />}
             amount={total_balance}
