@@ -5,6 +5,7 @@ import { useUserStatistic } from "@/queries/useUserStatistic";
 import { useBank } from "@/hooks/useBank";
 import DashboardStatisticCard from "@/components/DashboardStatisticCard";
 import { CiWallet } from "react-icons/ci";
+import { FaPlus } from "react-icons/fa6";
 import { PiHandWithdrawLight, PiHandDepositLight } from "react-icons/pi";
 import BankAddModal from "@/components/BankAddModal";
 import BankRowData from "@/components/BankRowData";
@@ -45,8 +46,10 @@ const DashboardPage = () => {
         user_id={user_id}
       />
 
-      <div className="bg-light-background m-0 flex h-full w-full flex-col rounded-3xl p-10 md:m-5 md:ml-0">
-        <h1 className="text-dark-txt my-5 text-3xl">Dashboard</h1>
+      <div className="bg-light-background m-0 flex h-full w-full flex-col rounded-3xl p-5 md:m-5 md:ml-0 md:p-10">
+        <h1 className="text-dark-txt my-5 text-[clamp(.7rem,2vw+.7rem,1.5rem)] font-medium">
+          Dashboard
+        </h1>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           <DashboardStatisticCard
             svg={<CiWallet />}
@@ -73,32 +76,36 @@ const DashboardPage = () => {
 
         {/* list data to render */}
         <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <div className="border-dark-background/20 overflow-x-auto rounded-2xl border p-5">
+          <div className="border-dark-background/20 rounded-2xl border p-5">
             {/* add bank wallet */}
-            <div className="mb-5 flex items-center justify-between p-2">
-              <h1 className="text-dark-txt text-[clamp(1rem, 2vw+1rem, 1.25rem)]">
+            <div className="mb-5 flex items-center justify-between">
+              <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
                 Bank wallets
               </h1>
               <button
                 onClick={() => setShowModal(!isShowModal)}
-                className="text-light-background bg-dark-background text-[clamp(1rem, 2vw+1rem, 1.25rem)] rounded-sm p-2 px-4 text-sm"
+                className="text-light-background bg-dark-background hidden rounded-sm p-2 px-4 text-sm text-[clamp(.8rem,2vw+.8rem,.9rem)] lg:flex lg:items-center lg:justify-center lg:space-x-2"
               >
-                Add More Banks
+                <span>Add More Banks</span>
+              </button>
+              <button className="text-light-background bg-dark-background rounded-xl p-3 text-xs lg:hidden">
+                <FaPlus onClick={() => setShowModal(!isShowModal)} />
               </button>
             </div>
-
-            <table className="min-w-full border-collapse divide-y divide-gray-200">
-              <tbody>
-                {!isBankListLoading &&
-                  bankList?.map((bankItemData) => (
-                    <BankRowData
-                      key={bankItemData.id}
-                      bankItemData={bankItemData}
-                      removeBank={removeBank}
-                    />
-                  ))}
-              </tbody>
-            </table>
+            <div className="w-full overflow-x-auto">
+              <table className="min-w-full border-collapse divide-y divide-gray-200">
+                <tbody>
+                  {!isBankListLoading &&
+                    bankList?.map((bankItemData) => (
+                      <BankRowData
+                        key={bankItemData.id}
+                        bankItemData={bankItemData}
+                        removeBank={removeBank}
+                      />
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div className="border-dark-background/20 w-full rounded-2xl border p-2">

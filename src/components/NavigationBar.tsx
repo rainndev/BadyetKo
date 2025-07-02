@@ -55,7 +55,7 @@ const NavigationBar = () => {
       <div className="bg-light-background md:bg-medium-light-background fixed right-0 bottom-0 left-0 z-9999 flex flex-col items-center justify-center border-2 border-t p-5 md:static md:min-h-screen md:border-none md:p-10">
         <HiBanknotes className="my-15 hidden text-2xl md:block" />
 
-        <ul className="text-dark-txt/50 flex h-full w-full items-center justify-between gap-10 px-5 text-2xl md:flex-col md:justify-normal md:px-0">
+        <ul className="text-dark-txt/50 flex h-full w-full items-center justify-between gap-10 px-5 text-xl md:flex-col md:justify-normal md:px-0">
           {navData.map((navItem) => (
             <NavLink
               key={navItem.name}
