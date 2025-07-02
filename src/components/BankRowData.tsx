@@ -27,11 +27,11 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
         )}
       </td>
 
-      <td className="p-4 px-5 text-[clamp(.5rem,2vw+.5rem,1rem)] text-gray-600">
+      <td className="p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600">
         <p>{formatMoney(balance ?? 0, "en-PH", "currency", "PHP")}</p>
       </td>
 
-      <td className="truncate p-4 px-5 text-[clamp(.5rem,2vw+.5rem,1rem)] text-gray-600">
+      <td className="truncate p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600">
         <p>{name}</p>
       </td>
 
