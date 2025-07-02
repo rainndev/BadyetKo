@@ -18,7 +18,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
     <tr>
       <td
         onClick={() => navigate(`/bank/${id}`)}
-        className="size-16 cursor-pointer whitespace-nowrap text-gray-600"
+        className="size-16 cursor-pointer px-5 whitespace-nowrap text-gray-600"
       >
         {custom_bank_avatar ? (
           <BankImage path={custom_bank_avatar} />
@@ -27,15 +27,15 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
         )}
       </td>
 
-      <td className="p-4 text-[clamp(.5rem,2vw+.5rem,1rem)] text-gray-600">
+      <td className="p-4 px-5 text-[clamp(.5rem,2vw+.5rem,1rem)] text-gray-600">
         <p>{formatMoney(balance ?? 0, "en-PH", "currency", "PHP")}</p>
       </td>
 
-      <td className="truncate p-4 text-[clamp(.5rem,2vw+.5rem,1rem)] text-gray-600">
+      <td className="truncate p-4 px-5 text-[clamp(.5rem,2vw+.5rem,1rem)] text-gray-600">
         <p>{name}</p>
       </td>
 
-      <td className="cursor-pointer p-4 text-gray-600">
+      <td className="cursor-pointer p-4 px-5 text-gray-600">
         <PiTrashSimple
           onClick={() => removeBank(bankItemData.id)}
           className="text-lg"

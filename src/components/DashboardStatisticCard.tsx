@@ -14,7 +14,7 @@ const DashboardStatisticCard = ({
   name,
 }: DashboardStatisticCardProps) => {
   return (
-    <div className="border-dark-background/20 flex w-full flex-col items-center justify-center gap-1.5 rounded-3xl border px-15 py-5 md:py-10">
+    <div className="border-dark-background/20 flex w-full flex-col items-center justify-center gap-1.5 rounded-3xl border px-15 py-7 md:py-10">
       {cloneElement(svg, { className: "text-3xl" })}
 
       {isLoading ? (
@@ -22,7 +22,7 @@ const DashboardStatisticCard = ({
           &nbsp;
         </div>
       ) : (
-        <h1 className="text-2xl font-semibold">
+        <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold">
           {formatMoney(amount, "en-PH", "currency", "PHP")}
         </h1>
       )}
