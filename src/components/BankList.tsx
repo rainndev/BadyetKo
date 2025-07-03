@@ -1,0 +1,64 @@
+import { useBank } from "@/hooks/useBank";
+import { useState } from "react";
+import { FaPlus } from "react-icons/fa6";
+import BankRowData from "./BankRowData";
+import LoadingPulse from "./LoadingPulse";
+
+type BankListProps = {
+  user_id: string;
+};
+
+const BankList = ({ user_id }: BankListProps) => {
+  const [isShowModal, setShowModal] = useState(false);
+
+  const {
+    removeBank,
+    bankList,
+    isBankListError,
+    bankListError,
+    isBankListLoading,
+  } = useBank(user_id);
+
+  if (isBankListError)
+    return (
+      <div className="min-h-screen w-full p-10">{bankListError?.message}</div>
+    );
+
+  if (isBankListLoading) return <LoadingPulse />;
+
+  return (
+    <div className="border-dark-background/20 rounded-3xl border p-5">
+      {/* add bank wallet */}
+      <div className="mb-5 flex items-center justify-between">
+        <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
+          Bank wallets
+        </h1>
+        <button
+          onClick={() => setShowModal(!isShowModal)}
+          className="text-light-background bg-dark-background hidden rounded-sm p-2 px-4 text-sm text-[clamp(.8rem,2vw+.8rem,.9rem)] lg:flex lg:items-center lg:justify-center lg:space-x-2"
+        >
+          <span>Add More Banks</span>
+        </button>
+        <button className="text-light-background bg-dark-background rounded-xl p-3 text-xs lg:hidden">
+          <FaPlus onClick={() => setShowModal(!isShowModal)} />
+        </button>
+      </div>
+      <div className="hide-scrollbar w-full overflow-x-auto">
+        <table className="min-w-full border-collapse divide-y divide-gray-200">
+          <tbody>
+            {!isBankListLoading &&
+              bankList?.map((bankItemData) => (
+                <BankRowData
+                  key={bankItemData.id}
+                  bankItemData={bankItemData}
+                  removeBank={removeBank}
+                />
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default BankList;

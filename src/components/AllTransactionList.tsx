@@ -1,11 +1,15 @@
 import { useTransactionList } from "@/queries/useTransactionList";
 import { formatMoney, getReadableDate } from "@/utils/helper";
+import LoadingPulse from "./LoadingPulse";
 
 const AllTransactionList = () => {
-  const { data: allTransactionlist } = useTransactionList();
-  console.log("all transaction list", allTransactionlist);
+  const { data, isLoading } = useTransactionList();
+  console.log("all transaction list", data?.transactions);
+
+  if (isLoading) return <LoadingPulse />;
+
   return (
-    <div className="p-5">
+    <div className="border-dark-background/20 w-full rounded-3xl border p-5">
       <h1 className="text-dark-txt mb-5 text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
         Recent Transactions
       </h1>
@@ -13,7 +17,7 @@ const AllTransactionList = () => {
       <div className="hide-scrollbar overflow-x-auto">
         <table className="w-full">
           <tbody>
-            {allTransactionlist?.transactions.map((data) => (
+            {data?.transactions.map((data) => (
               <tr className="w-full">
                 <td className="p-4 pl-0 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
                   {getReadableDate(data.created_at)}
