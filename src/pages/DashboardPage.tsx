@@ -50,19 +50,23 @@ const DashboardPage = () => {
         </h1>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
           <DashboardStatisticCard
-            svg={<CiWallet />}
+            svg={<CiWallet className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />}
             amount={total_balance}
             isLoading={isLoadingUserStatistic}
             name="Net balance"
           />
           <DashboardStatisticCard
-            svg={<PiHandDepositLight />}
+            svg={
+              <PiHandDepositLight className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
+            }
             amount={total_deposit}
             isLoading={isLoadingUserStatistic}
             name="Total Deposit"
           />
           <DashboardStatisticCard
-            svg={<PiHandWithdrawLight />}
+            svg={
+              <PiHandWithdrawLight className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
+            }
             amount={total_withdraw}
             isLoading={isLoadingUserStatistic}
             name="Total Withdraw"
@@ -74,7 +78,7 @@ const DashboardPage = () => {
 
         {/* list data to render */}
         <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <div className="border-dark-background/20 rounded-2xl border p-5">
+          <div className="border-dark-background/20 rounded-3xl border p-5">
             {/* add bank wallet */}
             <div className="mb-5 flex items-center justify-between">
               <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
@@ -106,7 +110,7 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="border-dark-background/20 w-full rounded-2xl border p-2">
+          <div className="border-dark-background/20 w-full rounded-3xl border p-2">
             test
           </div>
           <div className="h-20" />

@@ -15,7 +15,7 @@ const DashboardStatisticCard = ({
 }: DashboardStatisticCardProps) => {
   return (
     <div className="border-dark-background/20 flex w-full flex-col items-center justify-center gap-1.5 rounded-3xl border px-15 py-7 md:py-10">
-      {cloneElement(svg, { className: "text-3xl" })}
+      {cloneElement(svg)}
 
       {isLoading ? (
         <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
