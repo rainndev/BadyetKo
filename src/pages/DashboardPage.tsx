@@ -64,7 +64,11 @@ const DashboardPage = () => {
         {/* list data to render */}
         <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
           {/* Bank list  */}
-          <BankList user_id={user_id} />
+          <BankList
+            isShowModal={isShowModal}
+            setShowModal={setShowModal}
+            user_id={user_id}
+          />
 
           {/* All transaction list */}
           <AllTransactionList />

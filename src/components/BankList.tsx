@@ -1,16 +1,15 @@
 import { useBank } from "@/hooks/useBank";
-import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import BankRowData from "./BankRowData";
 import LoadingPulse from "./LoadingPulse";
 
 type BankListProps = {
   user_id: string;
+  isShowModal: boolean;
+  setShowModal: (isShowModal: boolean) => void;
 };
 
-const BankList = ({ user_id }: BankListProps) => {
-  const [isShowModal, setShowModal] = useState(false);
-
+const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
   const {
     removeBank,
     bankList,
