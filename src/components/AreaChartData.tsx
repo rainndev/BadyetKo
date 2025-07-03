@@ -53,7 +53,6 @@ function AreaChartData() {
       try {
         const chartData = await getChartData();
         setData(chartData);
-        console.log("shaped data return", chartData);
       } catch (error) {
         console.error("Error occurred fetching chart data", error);
       }

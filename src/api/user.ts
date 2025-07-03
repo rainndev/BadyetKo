@@ -13,7 +13,6 @@ export const getUserStatistic = async (): Promise<
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
 
-  console.log("net_balance execute");
   if (error) throw error;
   return data;
 };

@@ -9,7 +9,5 @@ export const getSignedImageUrl = async (path: string) => {
     throw new Error("Failed to get signed URL");
   }
 
-  console.log("fetching image path", path);
-
   return data.signedUrl;
 };

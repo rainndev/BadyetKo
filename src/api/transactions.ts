@@ -9,7 +9,6 @@ export const getTransactionList = async (
 ): Promise<{ transactions: TransactionListTypes[]; balance?: number }> => {
   if (bankID === undefined) {
     //execute this when theres no bank_id
-    console.log("getting transaction list without bank_id");
     const { data: transactions, error: txError } = await supabase
       .from("transactions")
       .select("*")

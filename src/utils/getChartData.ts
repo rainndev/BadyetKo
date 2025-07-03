@@ -40,12 +40,10 @@ export const getChartData = async (): Promise<ChartDataItem[]> => {
       } else if (tx.type === "deposit") {
         grouped[date].deposit += amount;
       }
-    }
+    },
   );
 
-  console.log("filtered data", data);
-
   return Object.values(grouped).sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
 };
