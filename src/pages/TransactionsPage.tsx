@@ -28,7 +28,7 @@ const TransactionsPage = () => {
           Balance: {formatMoney(bankBalance, "en-PH", "currency", "PHP")}
         </h1>
 
-        <div className="border-dark-background/20 overflow-x-auto rounded-2xl border">
+        <div className="border-dark-background/20 hide-scrollbar overflow-x-auto rounded-2xl border">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-100">
               <tr>

@@ -94,7 +94,7 @@ const DashboardPage = () => {
                 <FaPlus onClick={() => setShowModal(!isShowModal)} />
               </button>
             </div>
-            <div className="w-full overflow-x-auto">
+            <div className="hide-scrollbar w-full overflow-x-auto">
               <table className="min-w-full border-collapse divide-y divide-gray-200">
                 <tbody>
                   {!isBankListLoading &&

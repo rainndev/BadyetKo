@@ -126,3 +126,15 @@
 .active {
   @apply text-dark-txt;
 }
+
+/* Works for Chrome, Edge, Safari */
+.hide-scrollbar {
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+
+  /* For WebKit browsers */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
