@@ -23,8 +23,6 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
       <div className="min-h-screen w-full p-10">{bankListError?.message}</div>
     );
 
-  if (isBankListLoading) return <LoadingPulse />;
-
   return (
     <div className="border-dark-background/20 rounded-3xl border p-5">
       {/* add bank wallet */}
@@ -42,20 +40,24 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
           <FaPlus onClick={() => setShowModal(!isShowModal)} />
         </button>
       </div>
-      <div className="hide-scrollbar w-full overflow-x-auto">
-        <table className="min-w-full border-collapse divide-y divide-gray-200">
-          <tbody>
-            {!isBankListLoading &&
-              bankList?.map((bankItemData) => (
-                <BankRowData
-                  key={bankItemData.id}
-                  bankItemData={bankItemData}
-                  removeBank={removeBank}
-                />
-              ))}
-          </tbody>
-        </table>
-      </div>
+      {isBankListLoading ? (
+        <LoadingPulse />
+      ) : (
+        <div className="hide-scrollbar w-full overflow-x-auto">
+          <table className="min-w-full border-collapse divide-y divide-gray-200">
+            <tbody>
+              {!isBankListLoading &&
+                bankList?.map((bankItemData) => (
+                  <BankRowData
+                    key={bankItemData.id}
+                    bankItemData={bankItemData}
+                    removeBank={removeBank}
+                  />
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
