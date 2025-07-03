@@ -3,7 +3,7 @@ import BankImage from "./BankImage";
 import { FaPiggyBank } from "react-icons/fa6";
 import { PiTrashSimple } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import { formatMoney } from "@/utils/helper";
+import { useCurrencyStore } from "@/store/CurrencyStore";
 
 type BankRowDataProps = {
   bankItemData: BankListTypes;
@@ -12,6 +12,9 @@ type BankRowDataProps = {
 
 const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
   const navigate = useNavigate();
+  const getformattedAmount = useCurrencyStore(
+    (state) => state.getformattedAmount,
+  );
   const { id, name, balance, custom_bank_avatar } = bankItemData;
 
   return (
@@ -28,7 +31,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
       </td>
 
       <td className="p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600">
-        <p>{formatMoney(balance ?? 0, "en-PH", "currency", "PHP")}</p>
+        <p>{getformattedAmount(balance ?? 0)}</p>
       </td>
 
       <td className="truncate p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600">

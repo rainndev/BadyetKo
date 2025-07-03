@@ -3,8 +3,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
-import { formatMoney, getReadableDate } from "@/utils/helper";
+import { getReadableDate } from "@/utils/helper";
 import { BsThreeDots } from "react-icons/bs";
 import { CiEdit } from "react-icons/ci";
 import { PiTrashSimple } from "react-icons/pi";
@@ -18,13 +19,17 @@ const TransactionRowData = ({
   dataItem,
   deleteTransaction,
 }: TransactionRowDataProps) => {
+  const getformattedAmount = useCurrencyStore(
+    (state) => state.getformattedAmount,
+  );
+
   return (
     <tr>
       <td className="p-4 pl-10 text-sm text-gray-600">
         {getReadableDate(dataItem.created_at)}
       </td>
       <td className="p-4 py-2 text-sm text-gray-600">
-        {formatMoney(dataItem.amount, "en-PH", "currency", "PHP")}
+        {getformattedAmount(dataItem.amount)}
       </td>
       <td className="p-4 py-2 text-sm text-gray-600">{dataItem.name}</td>
       <td className="p-4 py-2 text-xs">

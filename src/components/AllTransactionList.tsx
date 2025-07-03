@@ -1,10 +1,13 @@
 import { useTransactionList } from "@/queries/useTransactionList";
-import { formatMoney, getReadableDate } from "@/utils/helper";
+import { getReadableDate } from "@/utils/helper";
 import LoadingPulse from "./LoadingPulse";
+import { useCurrencyStore } from "@/store/CurrencyStore";
 
 const AllTransactionList = () => {
   const { data, isLoading } = useTransactionList();
-  console.log("all transaction list", data?.transactions);
+  const getformattedAmount = useCurrencyStore(
+    (state) => state.getformattedAmount,
+  );
 
   return (
     <div className="border-dark-background/20 w-full rounded-3xl border p-5">
@@ -31,7 +34,7 @@ const AllTransactionList = () => {
                   >
                     <p className="text-nowrap">
                       {(data.type === "deposit" ? "+" : "-") +
-                        formatMoney(data.amount, "en-PH", "currency", "PHP")}
+                        getformattedAmount(data.amount)}
                     </p>
                   </td>
                   <td className="p-4 pr-0 text-[clamp(.4rem,1vw+.4rem,0.875rem)] text-gray-600">

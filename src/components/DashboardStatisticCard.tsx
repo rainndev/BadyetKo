@@ -1,4 +1,4 @@
-import { formatMoney } from "@/utils/helper";
+import { useCurrencyStore } from "@/store/CurrencyStore";
 import { type ReactElement, cloneElement } from "react";
 
 type DashboardStatisticCardProps = {
@@ -13,6 +13,10 @@ const DashboardStatisticCard = ({
   amount,
   name,
 }: DashboardStatisticCardProps) => {
+  const getformattedAmount = useCurrencyStore(
+    (state) => state.getformattedAmount,
+  );
+
   return (
     <div className="border-dark-background/20 flex w-full flex-col items-center justify-center gap-1.5 rounded-3xl border px-15 py-7 md:py-10">
       {cloneElement(svg)}
@@ -23,7 +27,7 @@ const DashboardStatisticCard = ({
         </div>
       ) : (
         <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold">
-          {formatMoney(amount, "en-PH", "currency", "PHP")}
+          {getformattedAmount(amount)}
         </h1>
       )}
 

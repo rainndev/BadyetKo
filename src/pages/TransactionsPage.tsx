@@ -1,20 +1,25 @@
 import { useParams } from "react-router-dom";
-import { formatMoney, isValidUUIDv4 } from "../utils/helper";
+import { isValidUUIDv4 } from "../utils/helper";
 import { useBankTransactions } from "@/hooks/useBankTransactions";
 import TransactionRowData from "@/components/TransactionRowData";
 import TransactionAddModal from "@/components/TransactionAddModal";
 import { useState } from "react";
 import LoadingPulse from "@/components/LoadingPulse";
+import { useCurrencyStore } from "@/store/CurrencyStore";
 
 const TransactionsPage = () => {
   const { bank_id } = useParams();
   const [isShowModal, setShowModal] = useState(false);
+  const getformattedAmount = useCurrencyStore(
+    (state) => state.getformattedAmount,
+  );
 
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;
 
   const { transactionData, isTransactionListLoading, deleteTransaction } =
     useBankTransactions(bank_id);
+
   const bankBalance = transactionData?.balance ?? 0;
 
   return (
@@ -24,9 +29,7 @@ const TransactionsPage = () => {
         setShowModal={setShowModal}
       />
       <div className="min-h-screen w-full p-5 md:p-10">
-        <h1 className="mb-20">
-          Balance: {formatMoney(bankBalance, "en-PH", "currency", "PHP")}
-        </h1>
+        <h1 className="mb-20">Balance: {getformattedAmount(bankBalance)}</h1>
 
         {isTransactionListLoading ? (
           <LoadingPulse />
