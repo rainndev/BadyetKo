@@ -22,7 +22,7 @@ const AllTransactionList = () => {
           <table className="w-full">
             <tbody>
               {data?.transactions.map((data) => (
-                <tr className="w-full">
+                <tr key={data.id} className="w-full">
                   <td className="p-4 pl-0 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
                     {getReadableDate(data.created_at)}
                   </td>
