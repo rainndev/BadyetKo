@@ -9,6 +9,7 @@ import { FaPlus } from "react-icons/fa6";
 import { PiHandWithdrawLight, PiHandDepositLight } from "react-icons/pi";
 import BankAddModal from "@/components/BankAddModal";
 import BankRowData from "@/components/BankRowData";
+import AllTransactionList from "@/components/AllTransactionList";
 
 const DashboardPage = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -110,8 +111,9 @@ const DashboardPage = () => {
             </div>
           </div>
 
+          {/* All transaction list */}
           <div className="border-dark-background/20 w-full rounded-3xl border p-2">
-            test
+            <AllTransactionList />
           </div>
           <div className="h-20" />
         </div>
