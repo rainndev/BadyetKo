@@ -2,15 +2,15 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { formatMoney } from "@/utils/helper";
 
-type optionsType = {
+type currencyOptionsType = {
   country: string;
   style: "decimal" | "currency" | "percent";
   currency: string;
 };
 
 type useCurrencyStoreType = {
-  currencyOptions: optionsType;
-  setCurrencyOptions: (newOptions: optionsType) => void;
+  currencyOptions: currencyOptionsType;
+  setCurrencyOptions: (newOptions: currencyOptionsType) => void;
   getformattedAmount: (amount: number) => string;
 };
 
