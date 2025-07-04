@@ -26,7 +26,7 @@ const AllTransactionList = () => {
                   <td className="p-4 pl-0 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
                     {getReadableDate(data.created_at)}
                   </td>
-                  <td className="truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
+                  <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
                     {data.name}
                   </td>
                   <td

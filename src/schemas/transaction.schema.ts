@@ -1,7 +1,10 @@
 import { z } from "zod/v4";
 
 export const transactionSchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must not exceed 100 characters"),
   amount: z
     .string()
     .trim()
@@ -22,7 +25,7 @@ export const transactionSchema = z.object({
 
   note: z
     .string()
-    .max(255, "Note must not exceed 255 characters")
+    .max(100, "Note must not exceed 100 characters")
     .optional()
     .or(z.literal("")),
 });
