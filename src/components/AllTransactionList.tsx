@@ -22,8 +22,11 @@ const AllTransactionList = () => {
           <table className="w-full">
             <tbody>
               {data?.transactions.map((data) => (
-                <tr key={data.id} className="w-full">
-                  <td className="p-4 pl-0 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
+                <tr
+                  key={data.id}
+                  className="hover:bg-dark-background/8 w-full rounded-xl transition-colors ease-in-out"
+                >
+                  <td className="rounded-l-xl p-4 pl-2 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
                     {getReadableDate(data.created_at)}
                   </td>
                   <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
@@ -37,12 +40,14 @@ const AllTransactionList = () => {
                         getformattedAmount(data.amount)}
                     </p>
                   </td>
-                  <td className="p-4 pr-0 text-[clamp(.4rem,1vw+.4rem,0.875rem)] text-gray-600">
-                    <p
-                      className={`w-fit rounded-full px-3 py-1 font-medium ${data.type === "deposit" ? "bg-[#bbefcf] text-[#477d59]" : "bg-[#fbe4e5] text-[#ad383a]"}`}
-                    >
-                      {data.type}
-                    </p>
+                  <td className="rounded-r-xl">
+                    <div className="flex justify-center p-4 pr-2 text-[clamp(.4rem,1vw+.4rem,0.875rem)] text-gray-600">
+                      <p
+                        className={`w-fit rounded-full px-3 py-1 font-medium ${data.type === "deposit" ? "bg-[#bbefcf] text-[#477d59]" : "bg-[#fbe4e5] text-[#ad383a]"}`}
+                      >
+                        {data.type}
+                      </p>
+                    </div>
                   </td>
                 </tr>
               ))}

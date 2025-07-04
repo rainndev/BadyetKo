@@ -48,7 +48,7 @@ const TransactionRowData = ({
       </td>
       <td className="p-4 py-2 text-sm text-gray-600">
         <Popover>
-          <PopoverTrigger>
+          <PopoverTrigger className="cursor-pointer">
             <BsThreeDots />
           </PopoverTrigger>
           <PopoverContent className="w-30 overflow-hidden rounded-2xl p-0 text-xs text-gray-600">
