@@ -8,7 +8,7 @@ const Providers = () => {
     <>
       <SessionProvider>
         <CurrencyLoader />
-        <div className="bg-medium-light-background text-dark-txt relative flex min-h-dvh w-screen">
+        <div className="bg-medium-light-background text-dark-txt font-figtree relative flex min-h-dvh w-screen font-medium">
           <NavigationBar />
           <Outlet />
         </div>
