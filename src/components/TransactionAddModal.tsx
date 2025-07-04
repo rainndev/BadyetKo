@@ -158,7 +158,7 @@ const TransactionAddModal = ({
             <button
               type="submit"
               disabled={isAddPending}
-              className="bg-dark-background text-light-background mt-5 rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)]"
+              className="bg-dark-background hover:bg-dark-background/90 text-light-background mt-5 cursor-pointer rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)] transition-colors ease-in-out"
             >
               {isAddPending ? "Loading..." : "Add transaction"}
             </button>

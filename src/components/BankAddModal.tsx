@@ -71,7 +71,9 @@ const BankAddModal = ({
       imageRef.current.value = "";
     }
     setErrorMessage("");
-    setShowModal(false);
+    if (!isAddBankPending) {
+      setShowModal(false);
+    }
   };
 
   return (
@@ -113,12 +115,12 @@ const BankAddModal = ({
                 type="file"
                 id="avatar"
                 name="filename"
-                className="border-dark-txt/20 rounded-lg border border-dashed p-3 text-[clamp(.4rem,2vw+.4rem,1rem)]"
+                className="border-dark-txt/20 hover:border-dark-background cursor-pointer rounded-lg border border-dashed p-3 text-[clamp(.4rem,2vw+.4rem,1rem)] transition-colors ease-in-out"
               />
 
               <button
                 disabled={isAddBankPending}
-                className="bg-dark-background text-light-background rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)]"
+                className="bg-dark-background text-light-background hover:bg-dark-background/90 cursor-pointer rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)] transition-colors ease-in-out"
               >
                 {isAddBankPending ? "Loading..." : "Add Bank"}
               </button>
