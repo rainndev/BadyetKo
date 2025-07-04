@@ -29,7 +29,7 @@ const TransactionRowData = ({
         {getReadableDate(dataItem.created_at)}
       </td>
       <td
-        className={`p-4 py-2 text-sm font-medium ${dataItem.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"} `}
+        className={`p-4 py-2 text-sm font-semibold ${dataItem.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"} `}
       >
         {getformattedAmount(dataItem.amount)}
       </td>

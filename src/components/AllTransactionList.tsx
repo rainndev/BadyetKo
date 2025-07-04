@@ -30,7 +30,7 @@ const AllTransactionList = () => {
                     {data.name}
                   </td>
                   <td
-                    className={`p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-medium ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
+                    className={`p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-semibold ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
                   >
                     <p className="text-nowrap">
                       {(data.type === "deposit" ? "+" : "-") +
