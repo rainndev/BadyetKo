@@ -63,7 +63,7 @@ const TransactionAddModal = ({
   };
 
   return (
-    <div className="bg-dark-background/90 fixed left-0 z-10 flex h-full w-full items-center justify-center backdrop-blur-lg">
+    <div className="bg-dark-background/90 fixed left-0 z-10 flex h-dvh w-full items-center justify-center backdrop-blur-lg">
       <div className="bg-light-background text-dark-txt mx-3 w-full max-w-xl rounded-2xl p-3 shadow-2xl">
         <div className="border-dark-txt/10 flex justify-between border-b-2 p-5 md:p-10">
           <h1 className="text-[clamp(.8rem,2vw+.8rem,1.5rem)]">

@@ -77,7 +77,7 @@ const BankAddModal = ({
   };
 
   return (
-    <div className="bg-dark-background/90 fixed z-20 flex h-screen w-screen items-center justify-center backdrop-blur-xs">
+    <div className="bg-dark-background/90 fixed z-20 flex h-dvh w-screen items-center justify-center backdrop-blur-xs">
       <div className="bg-light-background text-dark-txt mx-3 flex w-full max-w-xl flex-col items-center justify-center rounded-2xl p-3">
         <div className="border-dark-txt/10 flex w-full justify-between border-b-2 p-5 md:p-10">
           <h1 className="text-[clamp(.8rem,2vw+.8rem,1.5rem)]">Add New Bank</h1>
