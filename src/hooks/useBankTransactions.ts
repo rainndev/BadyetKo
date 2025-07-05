@@ -20,8 +20,11 @@ export const useBankTransactions = (bank_id: string) => {
   const { mutate: deleteTransaction, isPending: isDeletePending } =
     useDeleteTransaction(bank_id);
 
-  const { mutate: editTransaction, isPending: isEditPending } =
-    useEditTransaction(bank_id);
+  const {
+    mutate: editTransaction,
+    isPending: isEditPending,
+    isSuccess: isEditSuccess,
+  } = useEditTransaction(bank_id);
   return {
     isAddError,
     AddError,
@@ -33,5 +36,6 @@ export const useBankTransactions = (bank_id: string) => {
     isDeletePending,
     editTransaction,
     isEditPending,
+    isEditSuccess,
   };
 };

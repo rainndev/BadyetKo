@@ -83,6 +83,7 @@ type editTransactionProps = Pick<
 
 export const editTransaction = async (input: editTransactionProps) => {
   //update ===>>>  name, note
+
   const { data, error } = await supabase
     .from("transactions")
     .update({
@@ -96,6 +97,5 @@ export const editTransaction = async (input: editTransactionProps) => {
     throw error;
   }
 
-  console.log("Updated Successful:", data);
   return data;
 };
