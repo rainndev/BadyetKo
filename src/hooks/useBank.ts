@@ -12,8 +12,11 @@ export const useBank = (user_id: string) => {
   } = useBankList(user_id);
 
   //ADD NEW BANK
-  const { mutate: addBank, isPending: isAddBankPending } =
-    useCreateBank(user_id);
+  const {
+    mutate: addBank,
+    isPending: isAddBankPending,
+    isSuccess: isAddBankSuccess,
+  } = useCreateBank(user_id);
 
   //REMOVE BANK
   const { mutate: removeBank } = useDeleteBank(user_id);
@@ -25,6 +28,7 @@ export const useBank = (user_id: string) => {
     bankListError,
     addBank,
     isAddBankPending,
+    isAddBankSuccess,
     removeBank,
   };
 };
