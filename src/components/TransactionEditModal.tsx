@@ -1,8 +1,4 @@
 import { useBankTransactions } from "@/hooks/useBankTransactions";
-import {
-  transactionSchema,
-  type TransactionSchemaType,
-} from "@/schemas/transaction.schema";
 import { IoClose } from "react-icons/io5";
 import { isValidUUIDv4 } from "@/utils/helper";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,16 +7,16 @@ import { useParams } from "react-router-dom";
 import { createPortal } from "react-dom";
 import type { TransactionListTypes } from "@/types/transaction.types";
 import { useEffect } from "react";
+import {
+  EditTransactionSchema,
+  type EditTransactionSchemaType,
+} from "@/schemas/transactionEdit.schema";
 
 type TransactionEditModalProps = {
   isShowEditModal: boolean;
   setShowEditModal: (show: boolean) => void;
   dataItem: TransactionListTypes;
 };
-
-type EditTransactionSchemaType = Omit<TransactionSchemaType, "amount">;
-
-const EditTransactionSchema = transactionSchema.omit({ amount: true });
 
 const TransactionEditModal = ({
   isShowEditModal,
@@ -46,7 +42,11 @@ const TransactionEditModal = ({
     return <div className="h-screen w-full p-10">Invalid ID</div>;
 
   const onSubmitData: SubmitHandler<EditTransactionSchemaType> = (data) => {
-    editTransaction({ ...data, id: dataItem.id });
+    editTransaction({
+      name: data.name || dataItem.name,
+      note: data.note || dataItem.note,
+      id: dataItem.id,
+    });
   };
 
   useEffect(() => {
