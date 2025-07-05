@@ -36,6 +36,7 @@ const TransactionAddModal = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(transactionSchema),
@@ -58,6 +59,7 @@ const TransactionAddModal = ({
     });
 
     setShowModal(false);
+    reset();
   };
 
   return (

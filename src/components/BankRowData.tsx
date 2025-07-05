@@ -41,7 +41,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
       <td className="cursor-pointer p-4 px-5 text-gray-600">
         <PiTrashSimple
           onClick={() => removeBank(bankItemData.id)}
-          className="text-lg"
+          className="hover:text-dark-background text-lg"
         />
       </td>
     </tr>
