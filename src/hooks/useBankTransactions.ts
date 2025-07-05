@@ -1,5 +1,6 @@
 import { useCreateTransaction } from "@/queries/useCreateTransaction";
 import { useDeleteTransaction } from "@/queries/useDeleteTransaction";
+import { useEditTransaction } from "@/queries/useEditTransaction";
 import { useTransactionList } from "@/queries/useTransactionList";
 
 export const useBankTransactions = (bank_id: string) => {
@@ -19,6 +20,8 @@ export const useBankTransactions = (bank_id: string) => {
   const { mutate: deleteTransaction, isPending: isDeletePending } =
     useDeleteTransaction(bank_id);
 
+  const { mutate: editTransaction, isPending: isEditPending } =
+    useEditTransaction(bank_id);
   return {
     isAddError,
     AddError,
@@ -28,5 +31,7 @@ export const useBankTransactions = (bank_id: string) => {
     isAddPending,
     deleteTransaction,
     isDeletePending,
+    editTransaction,
+    isEditPending,
   };
 };

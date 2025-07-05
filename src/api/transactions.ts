@@ -75,3 +75,27 @@ export const removeTransaction = async (id: number) => {
   console.log("error", error);
   if (error) throw error;
 };
+
+type editTransactionProps = Pick<
+  TransactionInsertTypes,
+  "name" | "note" | "id"
+>;
+
+export const editTransaction = async (input: editTransactionProps) => {
+  //update ===>>>  name, note
+  const { data, error } = await supabase
+    .from("transactions")
+    .update({
+      name: input.name,
+      note: input.note,
+    })
+    .eq("id", input.id);
+
+  if (error) {
+    console.error("Update error", error);
+    throw error;
+  }
+
+  console.log("Updated Successful:", data);
+  return data;
+};
