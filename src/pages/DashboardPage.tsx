@@ -15,11 +15,12 @@ const DashboardPage = () => {
   const user_id = session?.user.id ?? "";
 
   //GET NET BALANCE
-  const { data: userStatistic, isLoading: isLoadingUserStatistic } =
-    useUserStatistic(user_id);
-  const total_balance = userStatistic?.[0].net_balance ?? 0;
-  const total_deposit = userStatistic?.[0].total_deposit ?? 0;
-  const total_withdraw = userStatistic?.[0].total_withdraw ?? 0;
+  const {
+    total_balance,
+    total_deposit,
+    total_withdraw,
+    isLoadingUserStatistic,
+  } = useUserStatistic(user_id);
 
   const chartData = [
     {

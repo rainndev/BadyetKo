@@ -10,7 +10,7 @@ const AllTransactionList = () => {
   );
 
   return (
-    <div className="border-dark-background/20 w-full rounded-3xl border p-5">
+    <div className="border-dark-background/20 min-h-60 w-full rounded-3xl border p-5">
       <h1 className="text-dark-txt mb-5 text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
         Recent Transactions
       </h1>

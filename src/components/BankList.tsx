@@ -24,7 +24,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
     );
 
   return (
-    <div className="border-dark-background/20 rounded-3xl border p-5">
+    <div className="border-dark-background/20 min-h-60 rounded-3xl border p-5">
       {/* add bank wallet */}
       <div className="mb-5 flex items-center justify-between">
         <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
