@@ -4,10 +4,10 @@ import AreaChartData from "../components/AreaChartData";
 import { useUserStatistic } from "@/queries/useUserStatistic";
 import DashboardStatisticCard from "@/components/DashboardStatisticCard";
 import { CiWallet } from "react-icons/ci";
-import { PiHandWithdrawLight, PiHandDepositLight } from "react-icons/pi";
 import BankAddModal from "@/components/BankAddModal";
 import AllTransactionList from "@/components/AllTransactionList";
 import BankList from "@/components/BankList";
+import ChartPieDonut from "@/components/ChartPieDonut";
 
 const DashboardPage = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -21,6 +21,19 @@ const DashboardPage = () => {
   const total_deposit = userStatistic?.[0].total_deposit ?? 0;
   const total_withdraw = userStatistic?.[0].total_withdraw ?? 0;
 
+  const chartData = [
+    {
+      type: "deposit",
+      amount: total_deposit,
+      fill: "var(--color-chart-deposit)",
+    },
+    {
+      type: "withdraw",
+      amount: total_withdraw,
+      fill: "var(--color-chart-withdraw)",
+    },
+  ];
+
   return (
     <>
       <BankAddModal
@@ -33,29 +46,14 @@ const DashboardPage = () => {
         <h1 className="text-dark-txt my-5 text-[clamp(.7rem,2vw+.7rem,1.5rem)] font-medium">
           Dashboard
         </h1>
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <DashboardStatisticCard
             svg={<CiWallet className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />}
             amount={total_balance}
             isLoading={isLoadingUserStatistic}
             name="Net balance"
           />
-          <DashboardStatisticCard
-            svg={
-              <PiHandDepositLight className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
-            }
-            amount={total_deposit}
-            isLoading={isLoadingUserStatistic}
-            name="Total Deposit"
-          />
-          <DashboardStatisticCard
-            svg={
-              <PiHandWithdrawLight className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
-            }
-            amount={total_withdraw}
-            isLoading={isLoadingUserStatistic}
-            name="Total Withdraw"
-          />
+          <ChartPieDonut chartData={chartData} />
         </div>
         <br />
         {/* Charts  */}

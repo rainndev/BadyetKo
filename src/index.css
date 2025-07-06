@@ -10,6 +10,8 @@
   --color-light-background: #fffefe;
   --color-medium-light-background: #f7f7f7f7;
   --color-dark-txt: #0f0e0e;
+  --color-chart-deposit: #212121;
+  --color-chart-withdraw: #474747;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

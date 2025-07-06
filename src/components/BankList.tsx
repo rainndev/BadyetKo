@@ -32,7 +32,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
         </h1>
         <button
           onClick={() => setShowModal(!isShowModal)}
-          className="text-light-background bg-dark-background hover:bg-dark-background/90 hidden rounded-sm p-2 px-4 text-sm text-[clamp(.8rem,2vw+.8rem,.9rem)] transition-colors ease-in-out lg:flex lg:items-center lg:justify-center lg:space-x-2"
+          className="text-light-background bg-dark-background hover:bg-dark-background/90 hidden rounded-full p-2 px-4 text-sm text-[clamp(.8rem,2vw+.8rem,.9rem)] transition-colors ease-in-out lg:flex lg:items-center lg:justify-center lg:space-x-2"
         >
           <span className="cursor-pointer">Add More Banks</span>
         </button>
