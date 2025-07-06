@@ -16,6 +16,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
     isBankListError,
     bankListError,
     isBankListLoading,
+    isBanklistEmpty,
   } = useBank(user_id);
 
   if (isBankListError)
@@ -24,7 +25,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
     );
 
   return (
-    <div className="border-dark-background/20 min-h-60 rounded-3xl border p-5">
+    <div className="border-dark-background/20 min-h-100 rounded-3xl border p-5 md:p-10">
       {/* add bank wallet */}
       <div className="mb-5 flex items-center justify-between">
         <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
@@ -42,6 +43,10 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
       </div>
       {isBankListLoading ? (
         <LoadingPulse />
+      ) : isBanklistEmpty ? (
+        <p className="text-dark-txt/70 text-[clamp(.5rem,2vw+.5rem,.9rem)]">
+          You haven't added any banks yet.
+        </p>
       ) : (
         <div className="hide-scrollbar w-full overflow-x-auto">
           <table className="min-w-full border-collapse divide-y divide-gray-200">

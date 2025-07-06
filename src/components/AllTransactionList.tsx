@@ -9,15 +9,23 @@ const AllTransactionList = () => {
     (state) => state.getformattedAmount,
   );
 
+  const isTXlistEmpty = !(
+    Array.isArray(data?.transactions) && data.transactions.length > 0
+  );
+
   return (
-    <div className="border-dark-background/20 min-h-60 w-full rounded-3xl border p-5">
+    <div className="border-dark-background/20 min-h-100 w-full rounded-3xl border p-5 md:p-10">
       <h1 className="text-dark-txt mb-5 text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
         Recent Transactions
       </h1>
 
-      <div className="hide-scrollbar overflow-x-auto">
+      <div className="hide-scrollbar h-full overflow-x-auto">
         {isLoading ? (
           <LoadingPulse />
+        ) : isTXlistEmpty ? (
+          <p className="text-dark-txt/70 text-[clamp(.5rem,2vw+.5rem,.9rem)]">
+            You currently have no transactions.
+          </p>
         ) : (
           <table className="w-full">
             <tbody>

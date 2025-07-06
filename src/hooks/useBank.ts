@@ -11,6 +11,8 @@ export const useBank = (user_id: string) => {
     error: bankListError,
   } = useBankList(user_id);
 
+  const isBanklistEmpty = !(Array.isArray(bankList) && bankList.length > 0);
+
   //ADD NEW BANK
   const {
     mutate: addBank,
@@ -29,6 +31,7 @@ export const useBank = (user_id: string) => {
     addBank,
     isAddBankPending,
     isAddBankSuccess,
+    isBanklistEmpty,
     removeBank,
   };
 };
