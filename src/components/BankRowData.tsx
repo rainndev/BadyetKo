@@ -21,7 +21,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
     <tr>
       <td
         onClick={() => navigate(`/bank/${id}`)}
-        className="cursor-pointer px-5 whitespace-nowrap text-gray-600"
+        className="size-8 cursor-pointer px-5 whitespace-nowrap text-gray-600 md:size-12"
       >
         {custom_bank_avatar ? (
           <BankImage path={custom_bank_avatar} />

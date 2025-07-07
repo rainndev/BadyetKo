@@ -1,7 +1,11 @@
 import { useBank } from "@/hooks/useBank";
 import { FaPlus } from "react-icons/fa6";
+import { CiGrid2H } from "react-icons/ci";
+import { CiGrid41 } from "react-icons/ci";
 import BankRowData from "./BankRowData";
 import LoadingPulse from "./LoadingPulse";
+import { useState } from "react";
+import BankGridData from "./BankGridData";
 
 type BankListProps = {
   user_id: string;
@@ -10,6 +14,7 @@ type BankListProps = {
 };
 
 const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
+  const [isGridView, setIsGridView] = useState(false);
   const {
     removeBank,
     bankList,
@@ -25,21 +30,34 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
     );
 
   return (
-    <div className="border-dark-background/20 min-h-100 rounded-3xl border p-5 md:p-10">
+    <div className="border-dark-background/20 @container min-h-100 rounded-3xl border p-5 md:p-10">
       {/* add bank wallet */}
-      <div className="mb-5 flex items-center justify-between">
-        <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
-          Bank wallets
-        </h1>
-        <button
-          onClick={() => setShowModal(!isShowModal)}
-          className="text-light-background bg-dark-background hover:bg-dark-background/90 hidden rounded-full p-2 px-4 text-sm text-[clamp(.8rem,2vw+.8rem,.9rem)] transition-colors ease-in-out lg:flex lg:items-center lg:justify-center lg:space-x-2"
-        >
-          <span className="cursor-pointer">Add More Banks</span>
-        </button>
-        <button className="text-light-background bg-dark-background rounded-xl p-3 text-xs lg:hidden">
-          <FaPlus onClick={() => setShowModal(!isShowModal)} />
-        </button>
+      <div className="mb-5 flex flex-col gap-2">
+        {/* -----header with add bank btn */}
+        <div className="flex w-full items-center justify-between">
+          <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
+            Bank wallets
+          </h1>
+
+          <div className="flex gap-1 md:gap-2">
+            <button
+              className="text-dark-txt cursor-pointer rounded-full p-1 text-[clamp(.9rem,2vw+.9rem,1.8rem)]"
+              onClick={() => setIsGridView(!isGridView)}
+            >
+              {isGridView ? <CiGrid2H /> : <CiGrid41 />}
+            </button>
+            <button
+              onClick={() => setShowModal(!isShowModal)}
+              className="text-light-background bg-dark-background hover:bg-dark-background/90 hidden rounded-full p-2 px-4 text-sm text-[clamp(.8rem,2vw+.8rem,.9rem)] transition-colors ease-in-out @sm:flex @sm:items-center @sm:justify-center @sm:space-x-2"
+            >
+              <span className="cursor-pointer">Add More Banks</span>
+            </button>
+
+            <button className="text-light-background bg-dark-background rounded-xl p-3 text-xs @sm:hidden">
+              <FaPlus onClick={() => setShowModal(!isShowModal)} />
+            </button>
+          </div>
+        </div>
       </div>
       {isBankListLoading ? (
         <LoadingPulse />
@@ -48,19 +66,33 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
           You haven't added any banks yet.
         </p>
       ) : (
-        <div className="hide-scrollbar w-full overflow-x-auto">
-          <table className="min-w-full border-collapse divide-y divide-gray-200">
-            <tbody>
+        <div
+          className={`hide-scrollbar w-full ${!isGridView && "overflow-x-auto"}`}
+        >
+          {isGridView ? (
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(110px,1fr))] gap-2">
               {!isBankListLoading &&
                 bankList?.map((bankItemData) => (
-                  <BankRowData
+                  <BankGridData
                     key={bankItemData.id}
                     bankItemData={bankItemData}
-                    removeBank={removeBank}
                   />
                 ))}
-            </tbody>
-          </table>
+            </div>
+          ) : (
+            <table className="min-w-full border-collapse divide-y divide-gray-200">
+              <tbody>
+                {!isBankListLoading &&
+                  bankList?.map((bankItemData) => (
+                    <BankRowData
+                      key={bankItemData.id}
+                      bankItemData={bankItemData}
+                      removeBank={removeBank}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          )}
         </div>
       )}
     </div>
