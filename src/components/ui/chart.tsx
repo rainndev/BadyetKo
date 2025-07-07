@@ -250,7 +250,7 @@ function ChartTooltipContent({
                       </span>
                     </div>
                     {item.value != null && (
-                      <span className="text-foreground font-mono font-medium tabular-nums">
+                      <span className="text-foreground font-medium">
                         {getformattedAmount(Number(item.value))}
                       </span>
                     )}
