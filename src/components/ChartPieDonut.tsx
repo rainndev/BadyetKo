@@ -98,7 +98,7 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      <CardFooter className="flex-col gap-2 text-sm tabular-nums">
         <div className="flex w-full items-center justify-between gap-2 leading-none font-medium">
           <div className="flex gap-2">
             <span className="size-3 rounded-xs bg-amber-300" />

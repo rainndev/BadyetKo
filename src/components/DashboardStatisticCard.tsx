@@ -26,7 +26,7 @@ const DashboardStatisticCard = ({
           &nbsp;
         </div>
       ) : (
-        <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold">
+        <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
           {getformattedAmount(amount)}
         </h1>
       )}

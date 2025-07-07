@@ -46,7 +46,9 @@ const TransactionsPage = () => {
       )}
 
       <div className="min-h-screen w-full p-5 md:p-10">
-        <h1 className="mb-20">Balance: {getformattedAmount(bankBalance)}</h1>
+        <h1 className="mb-20 tabular-nums">
+          Balance: {getformattedAmount(bankBalance)}
+        </h1>
 
         {isTransactionListLoading ? (
           <LoadingPulse />

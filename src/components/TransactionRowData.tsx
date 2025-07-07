@@ -38,7 +38,7 @@ const TransactionRowData = ({
         {getReadableDate(dataItem.created_at)}
       </td>
       <td
-        className={`p-4 py-2 text-sm font-semibold ${
+        className={`p-4 py-2 text-sm font-semibold tabular-nums ${
           dataItem.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"
         }`}
       >

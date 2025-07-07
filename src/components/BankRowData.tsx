@@ -30,7 +30,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
         )}
       </td>
 
-      <td className="p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600">
+      <td className="p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600 tabular-nums">
         <p>{getformattedAmount(balance ?? 0)}</p>
       </td>
 

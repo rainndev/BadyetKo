@@ -43,7 +43,7 @@ const AllTransactionList = () => {
                   <td
                     className={`p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-semibold ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
                   >
-                    <p className="text-nowrap">
+                    <p className="text-nowrap tabular-nums">
                       {(data.type === "deposit" ? "+" : "-") +
                         getformattedAmount(data.amount)}
                     </p>
