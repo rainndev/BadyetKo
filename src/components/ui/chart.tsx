@@ -5,6 +5,8 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 "use client";
 
+import { useCurrencyStore } from "@/store/CurrencyStore";
+
 import type {
   NameType,
   ValueType,
@@ -140,7 +142,9 @@ function ChartTooltipContent({
     "accessibilityLayer"
   >) {
   const { config } = useChart();
-
+  const getformattedAmount = useCurrencyStore(
+    (state) => state.getformattedAmount,
+  );
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !payload?.length) {
       return null;
@@ -235,7 +239,7 @@ function ChartTooltipContent({
                   )}
                   <div
                     className={cn(
-                      "flex flex-1 justify-between leading-none",
+                      "flex flex-1 justify-between gap-3 leading-none",
                       nestLabel ? "items-end" : "items-center",
                     )}
                   >
@@ -247,9 +251,7 @@ function ChartTooltipContent({
                     </div>
                     {item.value != null && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
-                        {typeof item.value === "number"
-                          ? item.value.toLocaleString()
-                          : String(item.value)}
+                        {getformattedAmount(Number(item.value))}
                       </span>
                     )}
                   </div>
