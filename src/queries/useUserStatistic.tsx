@@ -23,8 +23,6 @@ export const useUserStatistic = (user_id: string) => {
   const total_balance = userStat?.net_balance ?? 0;
   const total_deposit = userStat?.total_deposit ?? 0;
   const total_withdraw = userStat?.total_withdraw ?? 0;
-  const lowest_tx_made = TXStat ? TXStat[1] : null;
-  const highest_tx_made = TXStat ? TXStat[0] : null;
 
   return {
     userStatistic,
@@ -32,7 +30,6 @@ export const useUserStatistic = (user_id: string) => {
     total_balance,
     total_deposit,
     total_withdraw,
-    lowest_tx_made,
-    highest_tx_made,
+    TXStat,
   };
 };

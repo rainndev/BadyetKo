@@ -1,37 +1,72 @@
 import { useCurrencyStore } from "@/store/CurrencyStore";
-import { type ReactElement, cloneElement } from "react";
+import { CiWallet } from "react-icons/ci";
+
+type transactionData = {
+  amount: number;
+  type: string;
+  label: "MAX" | "MIN";
+};
 
 type DashboardStatisticCardProps = {
-  svg: ReactElement<any>;
-  amount: number;
-  name: string;
+  data: {
+    total_balance: number;
+    TXStat?: transactionData[];
+  };
   isLoading: boolean;
 };
 const DashboardStatisticCard = ({
-  svg,
   isLoading,
-  amount,
-  name,
+  data,
 }: DashboardStatisticCardProps) => {
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
 
+  const { total_balance, TXStat } = data;
+
   return (
     <div className="border-dark-background/20 flex w-full flex-col items-center justify-center gap-1.5 rounded-3xl border px-15 py-7 md:py-10">
-      {cloneElement(svg)}
+      <div>
+        <CiWallet className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
 
-      {isLoading ? (
-        <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
-          &nbsp;
-        </div>
-      ) : (
+        {isLoading ? (
+          <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
+            &nbsp;
+          </div>
+        ) : (
+          <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
+            {getformattedAmount(total_balance)}
+          </h1>
+        )}
+
+        <p className="text-dark-txt/60 text-sm">Net balance</p>
+      </div>
+      <div>
         <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
-          {getformattedAmount(amount)}
+          {isLoading ? (
+            <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
+              &nbsp;
+            </div>
+          ) : (
+            <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
+              {TXStat && TXStat[0] ? getformattedAmount(TXStat[0].amount) : "0"}
+            </h1>
+          )}
         </h1>
-      )}
-
-      <p className="text-dark-txt/60 text-sm">{name}</p>
+        <p className="text-dark-txt/60 text-sm">Highest Transaction</p>
+        <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
+          {isLoading ? (
+            <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
+              &nbsp;
+            </div>
+          ) : (
+            <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
+              {TXStat && TXStat[1] ? getformattedAmount(TXStat[1].amount) : "0"}
+            </h1>
+          )}
+        </h1>
+        <p className="text-dark-txt/60 text-sm">Lowest Transaction</p>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { useSession } from "../context/SessionContext";
 import AreaChartData from "../components/AreaChartData";
 import { useUserStatistic } from "@/queries/useUserStatistic";
 import DashboardStatisticCard from "@/components/DashboardStatisticCard";
-import { CiWallet } from "react-icons/ci";
 import BankAddModal from "@/components/BankAddModal";
 import AllTransactionList from "@/components/AllTransactionList";
 import BankList from "@/components/BankList";
@@ -20,8 +19,7 @@ const DashboardPage = () => {
     total_deposit,
     total_withdraw,
     isLoadingUserStatistic,
-    highest_tx_made,
-    lowest_tx_made,
+    TXStat,
   } = useUserStatistic(user_id);
 
   const chartData = [
@@ -37,9 +35,6 @@ const DashboardPage = () => {
     },
   ];
 
-  console.log("lowest", lowest_tx_made);
-  console.log("higest", highest_tx_made);
-
   return (
     <>
       <BankAddModal
@@ -54,10 +49,8 @@ const DashboardPage = () => {
         </h1>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <DashboardStatisticCard
-            svg={<CiWallet className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />}
-            amount={total_balance}
+            data={{ total_balance, TXStat: TXStat ?? undefined }}
             isLoading={isLoadingUserStatistic}
-            name="Net balance"
           />
           <ChartPieDonut chartData={chartData} />
         </div>
