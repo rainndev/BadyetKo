@@ -1,7 +1,6 @@
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { BankListTypes } from "@/types/bank.types";
 import { useNavigate } from "react-router-dom";
-import { FaPiggyBank } from "react-icons/fa6";
 import BankImage from "./ui/bankimage";
 
 type BankGridDataProps = {

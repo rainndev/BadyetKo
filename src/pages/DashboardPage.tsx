@@ -20,6 +20,8 @@ const DashboardPage = () => {
     total_deposit,
     total_withdraw,
     isLoadingUserStatistic,
+    highest_tx_made,
+    lowest_tx_made,
   } = useUserStatistic(user_id);
 
   const chartData = [
@@ -34,6 +36,9 @@ const DashboardPage = () => {
       fill: "var(--color-chart-withdraw)",
     },
   ];
+
+  console.log("lowest", lowest_tx_made);
+  console.log("higest", highest_tx_made);
 
   return (
     <>

@@ -6,15 +6,31 @@ type updateCurrencyType = {
   newCurrency: string;
 };
 
-export const getUserStatistic = async (): Promise<
-  Pick<UserTypes, "net_balance" | "total_deposit" | "total_withdraw">[]
-> => {
-  const { data, error } = await supabase
+export const getUserStatistics = async (): Promise<{
+  userData: Pick<
+    UserTypes,
+    "net_balance" | "total_deposit" | "total_withdraw"
+  >[];
+  transactionData: {
+    amount: number;
+    type: string;
+    label: "MAX" | "MIN";
+  }[];
+}> => {
+  const { data: userData, error: userDataError } = await supabase
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
 
-  if (error) throw error;
-  return data;
+  const { data: transactionData, error: transactionDataError } =
+    await supabase.rpc("get_min_max_transactions");
+
+  if (userDataError || transactionDataError)
+    throw userDataError ?? transactionDataError;
+
+  return {
+    userData,
+    transactionData,
+  };
 };
 
 export async function getUserCurrency(userId: string): Promise<string | null> {
