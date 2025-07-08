@@ -1,9 +1,8 @@
 import type { BankListTypes } from "@/types/bank.types";
-import BankImage from "./BankImage";
-import { FaPiggyBank } from "react-icons/fa6";
 import { PiTrashSimple } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { useCurrencyStore } from "@/store/CurrencyStore";
+import BankImage from "./ui/bankimage";
 
 type BankRowDataProps = {
   bankItemData: BankListTypes;
@@ -23,11 +22,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
         onClick={() => navigate(`/bank/${id}`)}
         className="size-8 cursor-pointer px-5 whitespace-nowrap text-gray-600 md:size-12"
       >
-        {custom_bank_avatar ? (
-          <BankImage path={custom_bank_avatar} />
-        ) : (
-          <FaPiggyBank className="text-dark-background text-4xl" />
-        )}
+        <BankImage custom_bank_avatar={custom_bank_avatar ?? ""} />
       </td>
 
       <td className="p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600 tabular-nums">

@@ -1,6 +1,6 @@
 import { useSignedImageUrl } from "../queries/useSignedImageUrl";
 
-const BankImage = ({ path }: { path: string }) => {
+const BankImageRender = ({ path }: { path: string }) => {
   const { data: signedUrl, isError, isLoading } = useSignedImageUrl(path);
 
   if (isError) return <div>Failed to load image</div>;
@@ -16,4 +16,4 @@ const BankImage = ({ path }: { path: string }) => {
   );
 };
 
-export default BankImage;
+export default BankImageRender;
