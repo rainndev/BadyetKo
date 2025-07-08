@@ -2,7 +2,7 @@ import type { BankListTypes } from "@/types/bank.types";
 import { PiTrashSimple } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { useCurrencyStore } from "@/store/CurrencyStore";
-import BankImage from "./ui/bankimage";
+import BankImage from "./ui/BankImage";
 
 type BankRowDataProps = {
   bankItemData: BankListTypes;

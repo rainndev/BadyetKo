@@ -1,7 +1,7 @@
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { BankListTypes } from "@/types/bank.types";
 import { useNavigate } from "react-router-dom";
-import BankImage from "./ui/bankimage";
+import BankImage from "./ui/BankImage";
 
 type BankGridDataProps = {
   bankItemData: BankListTypes;
