@@ -106,7 +106,7 @@ const BankAddModal = ({
                 type="text"
                 value={bankName}
                 placeholder="e.g. Example Bank"
-                className="ring-dark-background/20 text-dark-txt/80 w-full rounded-lg p-3 text-[clamp(.6rem,1vw+.6rem,1rem)] ring"
+                className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
                 onChange={(e) => setBankName(e.target.value)}
               />
               <p className="mb-2 text-sm text-red-400">{errorMessage}</p>

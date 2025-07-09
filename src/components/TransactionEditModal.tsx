@@ -89,7 +89,7 @@ const TransactionEditModal = ({
                   id="name"
                   {...register("name")}
                   placeholder={dataItem.name}
-                  className="ring-dark-background/10 text-dark-txt/80 w-full rounded-lg p-3 text-[clamp(.6rem,1vw+.6rem,1rem)] ring"
+                  className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
                 />
                 {errors.name && (
                   <p className="text-sm text-red-400">{errors.name.message}</p>
@@ -106,7 +106,7 @@ const TransactionEditModal = ({
                   type="text"
                   {...register("note")}
                   placeholder={dataItem.note || "e.g. Monthly electricity bill"}
-                  className="ring-dark-background/10 text-dark-txt/80 w-full rounded-lg p-3 text-[clamp(.6rem,1vw+.6rem,1rem)] ring"
+                  className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
                 />
                 {errors.note && (
                   <p className="text-sm text-red-400">{errors.note.message}</p>
