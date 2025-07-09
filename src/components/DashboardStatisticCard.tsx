@@ -26,7 +26,6 @@ const DashboardStatisticCard = ({
 
   const { total_balance, TXStat } = data;
 
-  console.log("tx statistic", TXStat);
   return (
     <div className="border-dark-background/20 @container flex w-full flex-col items-start justify-center gap-10 rounded-3xl border p-5 py-7 md:px-15 md:py-10">
       <div>
@@ -52,7 +51,7 @@ const DashboardStatisticCard = ({
       ) : (
         <div className="grid w-full grid-cols-1 justify-between gap-5 @sm:grid-cols-2">
           {TXStat?.map((txItemData) => (
-            <div>
+            <div key={txItemData.label}>
               <h1 className="text-[clamp(.6rem,2vw+.6rem,1.3rem)] font-medium tabular-nums">
                 {txItemData.amount
                   ? getformattedAmount(txItemData.amount)
