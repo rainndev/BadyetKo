@@ -14,6 +14,7 @@ export const getUserStatistics = async (): Promise<{
   transactionData: {
     amount: number;
     type: string;
+    name: string;
     label: "MAX" | "MIN";
   }[];
 }> => {

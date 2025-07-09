@@ -1,10 +1,11 @@
 import { useCurrencyStore } from "@/store/CurrencyStore";
-import { CiSaveDown2 } from "react-icons/ci";
 import { CiWallet } from "react-icons/ci";
+import LoadingPulse from "./LoadingPulse";
 
 type transactionData = {
   amount: number;
   type: string;
+  name: string;
   label: "MAX" | "MIN";
 };
 
@@ -25,50 +26,43 @@ const DashboardStatisticCard = ({
 
   const { total_balance, TXStat } = data;
 
+  console.log("tx statistic", TXStat);
   return (
-    <div className="border-dark-background/20 flex w-full flex-col items-start justify-center gap-5 rounded-3xl border p-5 py-7 md:px-15 md:py-10">
+    <div className="border-dark-background/20 @container flex w-full flex-col items-start justify-center gap-10 rounded-3xl border p-5 py-7 md:px-15 md:py-10">
       <div>
-        <CiWallet className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
-
         {isLoading ? (
-          <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
+          <div className="bg-dark-background/50 animate-pulse rounded-sm md:rounded-lg">
             &nbsp;
           </div>
         ) : (
-          <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
-            {getformattedAmount(total_balance)}
-          </h1>
+          <span className="flex items-center gap-3">
+            <h1 className="text-[clamp(1.1rem,2vw+1.1rem,2rem)] font-semibold tabular-nums">
+              {getformattedAmount(total_balance)}
+            </h1>
+
+            <CiWallet className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
+          </span>
         )}
 
         <p className="text-dark-txt/60 text-sm">Net balance</p>
       </div>
-      <div>
-        <CiSaveDown2 className="rotate-180 text-[clamp(1rem,2vw+1rem,1.875rem)]" />
-        {isLoading ? (
-          <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
-            &nbsp;
-          </div>
-        ) : (
-          <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
-            {TXStat && TXStat[0] ? getformattedAmount(TXStat[0].amount) : "0"}
-          </h1>
-        )}
-        <p className="text-dark-txt/60 text-sm">Highest Transaction</p>
-      </div>
 
-      <div>
-        <CiSaveDown2 className="text-[clamp(1rem,2vw+1rem,1.875rem)]" />
-        {isLoading ? (
-          <div className="bg-dark-background/30 w-30 animate-pulse rounded-sm text-2xl">
-            &nbsp;
-          </div>
-        ) : (
-          <h1 className="text-[clamp(.6rem,2vw+.6rem,1.5rem)] font-semibold tabular-nums">
-            {TXStat && TXStat[1] ? getformattedAmount(TXStat[1].amount) : "0"}
-          </h1>
-        )}
-        <p className="text-dark-txt/60 text-sm">Lowest Transaction</p>
-      </div>
+      {isLoading ? (
+        <LoadingPulse />
+      ) : (
+        <div className="grid w-full grid-cols-1 justify-between gap-5 @sm:grid-cols-2">
+          {TXStat?.map((txItemData) => (
+            <div>
+              <h1 className="text-[clamp(.6rem,2vw+.6rem,1.3rem)] font-medium tabular-nums">
+                {txItemData.amount
+                  ? getformattedAmount(txItemData.amount)
+                  : "0"}
+              </h1>
+              <p className="text-dark-txt/60 text-sm">{txItemData.label}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
