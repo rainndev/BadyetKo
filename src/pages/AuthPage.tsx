@@ -63,8 +63,12 @@ const AuthPage = () => {
     <div className="bg-medium-light-background text-dark-txt flex h-screen w-full flex-col items-center justify-center p-5">
       <div className="w-full max-w-sm">
         <div>
-          <img src={TransparentLogo} alt="tranparent logo with text" />
-          <hr className="my-10" />
+          <img
+            src={TransparentLogo}
+            alt="tranparent logo with text"
+            className="mb-10"
+          />
+          <hr className="mb-15" />
           <h1 className="text-dark-txt mb-2 text-[clamp(1rem,1vw+1rem,1.3rem)] font-bold">
             {isLogin ? "Welcome Back" : "Get Started "}
           </h1>
