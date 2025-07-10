@@ -38,11 +38,12 @@ const TransactionRowData = ({
         {getReadableDate(dataItem.created_at)}
       </td>
       <td
-        className={`p-4 py-2 text-sm font-semibold tabular-nums ${
+        className={`p-4 py-2 text-sm font-semibold text-nowrap tabular-nums ${
           dataItem.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"
         }`}
       >
-        {getformattedAmount(dataItem.amount)}
+        {(dataItem.type === "deposit" ? "+" : "-") +
+          getformattedAmount(dataItem.amount)}
       </td>
       <td className="max-w-xs truncate p-4 py-2 text-sm text-gray-600">
         {dataItem.name}
