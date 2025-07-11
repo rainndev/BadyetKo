@@ -14,7 +14,7 @@ interface DateTimeConfig {
 
 interface UseDateTimeStore {
   config: DateTimeConfig;
-  getformattedDate: (rawDate: string) => string;
+  getformattedDate: (rawDate: string, country: string) => string;
   isSecondEnabled: boolean;
   isHour12Enabled: boolean;
   isTimezoneEnabled: boolean;
@@ -38,7 +38,7 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
       isHour12Enabled: false,
       isTimezoneEnabled: false,
 
-      getformattedDate: (rawDate) => {
+      getformattedDate: (rawDate, country) => {
         const { isHour12Enabled, isSecondEnabled, isTimezoneEnabled, config } =
           get();
         const date = new Date(rawDate);
@@ -52,7 +52,7 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
           hour12: isHour12Enabled,
         };
 
-        return date.toLocaleString("en-US", filteredConfig);
+        return date.toLocaleString(country, filteredConfig);
       },
 
       setSecondEnabled: (isSecondEnabled) => set({ isSecondEnabled }),

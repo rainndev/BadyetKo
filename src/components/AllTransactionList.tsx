@@ -8,6 +8,7 @@ const AllTransactionList = () => {
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
+  const country = useCurrencyStore((state) => state.currencyOptions.country);
   const getformattedDate = useDateTimeStore((state) => state.getformattedDate);
 
   const isTXlistEmpty = !(
@@ -36,7 +37,7 @@ const AllTransactionList = () => {
                   className="hover:bg-dark-background/8 w-full rounded-xl transition-colors ease-in-out"
                 >
                   <td className="rounded-l-xl p-4 pl-2 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
-                    {getformattedDate(data.created_at)}
+                    {getformattedDate(data.created_at, country)}
                   </td>
                   <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
                     {data.name}

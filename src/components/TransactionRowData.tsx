@@ -26,6 +26,7 @@ const TransactionRowData = ({
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
+  const country = useCurrencyStore((state) => state.currencyOptions.country);
   const getformattedDate = useDateTimeStore((state) => state.getformattedDate);
 
   const handleEdit = () => {
@@ -36,7 +37,7 @@ const TransactionRowData = ({
   return (
     <tr>
       <td className="p-4 pl-10 text-sm text-gray-600">
-        {getformattedDate(dataItem.created_at)}
+        {getformattedDate(dataItem.created_at, country)}
       </td>
       <td
         className={`p-4 py-2 text-sm font-semibold text-nowrap tabular-nums ${
