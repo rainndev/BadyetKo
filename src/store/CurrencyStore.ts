@@ -11,9 +11,11 @@ type currencyOptionsType = {
 type useCurrencyStoreType = {
   currencyOptions: currencyOptionsType;
   isMasked: boolean;
+  isISOSymbol: boolean;
   setCurrencyOptions: (newOptions: currencyOptionsType) => void;
-  getformattedAmount: (amount: number) => string;
   setMasked: (option: boolean) => void;
+  setISOSymbol: (option: boolean) => void;
+  getformattedAmount: (amount: number) => string;
 };
 
 export const useCurrencyStore = create<useCurrencyStoreType>()(
@@ -24,7 +26,7 @@ export const useCurrencyStore = create<useCurrencyStoreType>()(
         style: "currency",
         currency: "PHP",
       },
-
+      isISOSymbol: false,
       isMasked: false,
 
       setCurrencyOptions: (newOptions) =>
@@ -36,16 +38,24 @@ export const useCurrencyStore = create<useCurrencyStoreType>()(
         })),
 
       setMasked: (option) => set(() => ({ isMasked: option })),
+      setISOSymbol: (option) => set(() => ({ isISOSymbol: option })),
 
       getformattedAmount: (amount) => {
-        const formatted = formatMoney(
-          amount,
-          get().currencyOptions.country,
-          get().currencyOptions.style,
-          get().currencyOptions.currency,
-        );
+        const { country, currency, style } = get().currencyOptions;
+        const { isMasked, isISOSymbol } = get();
 
-        return get().isMasked ? maskNumber(formatted) : formatted;
+        let formatted: string;
+
+        if (isISOSymbol) {
+          formatted = `${currency} ${amount.toLocaleString(country, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`;
+        } else {
+          formatted = formatMoney(amount, country, style, currency);
+        }
+
+        return isMasked ? maskNumber(formatted) : formatted;
       },
     }),
     {

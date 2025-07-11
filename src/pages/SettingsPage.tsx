@@ -9,6 +9,7 @@ import {
 import { currencies } from "@/data/currencyLocaleMap";
 import { useSession } from "@/context/SessionContext";
 import { useUpdateUserCurrency } from "@/queries/useUpdateUserCurrency";
+import { SymbolSwitcher } from "@/components/SymbolSwitcher";
 
 const SettingsPage = () => {
   const currencyOptions = useCurrencyStore((state) => state.currencyOptions);
@@ -46,6 +47,7 @@ const SettingsPage = () => {
         <h1 className="text-dark-txt mb-2 text-[clamp(.7rem,2vw+.7rem,1.5rem)] font-medium">
           Currency
         </h1>
+
         <Select onValueChange={(value) => hanldeValueChange(+value)}>
           <SelectTrigger className="ring-dark-background/10 text-dark-txt/80 w-fit rounded-lg !p-6 !pl-3 !text-[clamp(.6rem,1vw+.6rem,1rem)] ring">
             <SelectValue placeholder={currencyOptions.currency} />
@@ -62,6 +64,7 @@ const SettingsPage = () => {
             ))}
           </SelectContent>
         </Select>
+        <SymbolSwitcher />
       </div>
 
       {/* hide transaction */}

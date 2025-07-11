@@ -25,7 +25,7 @@ const BankRowData = ({ bankItemData, removeBank }: BankRowDataProps) => {
         <BankImage custom_bank_avatar={custom_bank_avatar ?? ""} />
       </td>
 
-      <td className="p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-gray-600 tabular-nums">
+      <td className="p-4 px-5 text-[clamp(.4rem,2vw+.4rem,1rem)] text-nowrap text-gray-600 tabular-nums">
         <p>{getformattedAmount(balance ?? 0)}</p>
       </td>
 
