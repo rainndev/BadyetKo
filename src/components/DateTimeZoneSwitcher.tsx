@@ -19,12 +19,15 @@ const DateTimeZoneSwitcher = () => {
       </p>
       <div className="flex items-center gap-2">
         <Switch
-          className="!text-[clamp(.9rem,2vw+.9rem,1rem)]"
+          className="cursor-pointer !text-[clamp(.9rem,2vw+.9rem,1rem)]"
           onCheckedChange={() => setTimezoneEnabled(!isTimezoneEnabled)}
           checked={isTimezoneEnabled}
-          id="date-hour12-switcher"
+          id="date-timezone-switcher"
         />
-        <label className="text-nowrap" htmlFor="date-hour12-switcher">
+        <label
+          className="cursor-pointer text-nowrap"
+          htmlFor="date-timezone-switcher"
+        >
           {isTimezoneEnabled ? "Enabled" : "Disabled"}
         </label>
       </div>

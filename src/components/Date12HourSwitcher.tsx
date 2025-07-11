@@ -15,12 +15,15 @@ const Date12HourSwitcher = () => {
       </p>
       <div className="flex items-center gap-2">
         <Switch
-          className="!text-[clamp(.9rem,2vw+.9rem,1rem)]"
+          className="cursor-pointer !text-[clamp(.9rem,2vw+.9rem,1rem)]"
           onCheckedChange={() => setHour12Enabled(!isHour12Enabled)}
           checked={isHour12Enabled}
           id="date-hour12-switcher"
         />
-        <label className="text-nowrap" htmlFor="date-hour12-switcher">
+        <label
+          className="cursor-pointer text-nowrap"
+          htmlFor="date-hour12-switcher"
+        >
           {isHour12Enabled ? "Enabled" : "Disabled"}
         </label>
       </div>

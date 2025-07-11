@@ -15,12 +15,15 @@ const DateSecondsSwitcher = () => {
       </p>
       <div className="flex items-center gap-2">
         <Switch
-          className="!text-[clamp(.9rem,2vw+.9rem,1rem)]"
+          className="cursor-pointer !text-[clamp(.9rem,2vw+.9rem,1rem)]"
           onCheckedChange={() => setSecondEnabled(!isSecondEnabled)}
           checked={isSecondEnabled}
-          id="date-hour12-switcher"
+          id="date-seconds-switcher"
         />
-        <label className="text-nowrap" htmlFor="date-hour12-switcher">
+        <label
+          className="cursor-pointer text-nowrap"
+          htmlFor="date-seconds-switcher"
+        >
           {isSecondEnabled ? "Enabled" : "Disabled"}
         </label>
       </div>

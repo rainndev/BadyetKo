@@ -18,12 +18,15 @@ export function SymbolSwitcher() {
       </div>
       <div className="flex shrink-0 items-center gap-2">
         <Switch
-          className="!text-[clamp(.9rem,2vw+.9rem,1rem)]"
+          className="cursor-pointer !text-[clamp(.9rem,2vw+.9rem,1rem)]"
           onCheckedChange={() => setISOSymbol(!isISOSymbol)}
           checked={isISOSymbol}
           id="currency-symbol-switcher"
         />
-        <label className="text-nowrap" htmlFor="currency-symbol-switcher">
+        <label
+          className="cursor-pointer text-nowrap"
+          htmlFor="currency-symbol-switcher"
+        >
           {isISOSymbol ? "Enabled" : "Disabled"}
         </label>
       </div>
