@@ -7,7 +7,7 @@ const Date12HourSwitcher = () => {
 
   return (
     <div className="bg-dark-background/5 flex w-full shrink-0 flex-col gap-3 rounded-2xl p-5">
-      <h1 className="text-[clamp(.9rem,2vw+.9rem,1rem)] font-medium">
+      <h1 className="text-[clamp(.9rem,2vw+.9rem,1rem)] font-semibold">
         12-Hour Time Format
       </h1>
       <p className="text-muted-foreground text-[clamp(.5rem,2vw+.5rem,0.875rem)]">
