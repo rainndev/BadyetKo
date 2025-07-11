@@ -1,0 +1,31 @@
+import { useDateTimeStore } from "@/store/DateTimeStore";
+import { Switch } from "@/components/ui/switch";
+
+const DateSecondsSwitcher = () => {
+  const isSecondEnabled = useDateTimeStore((state) => state.isSecondEnabled);
+  const setSecondEnabled = useDateTimeStore((state) => state.setSecondEnabled);
+
+  return (
+    <div className="bg-dark-background/5 flex w-full shrink-0 flex-col gap-3 rounded-2xl p-5">
+      <h1 className="text-[clamp(.9rem,2vw+.9rem,1rem)] font-medium">
+        Show Seconds
+      </h1>
+      <p className="text-muted-foreground text-[clamp(.5rem,2vw+.5rem,0.875rem)]">
+        Toggle whether seconds are shown in the time display.
+      </p>
+      <div className="flex items-center gap-2">
+        <Switch
+          className="!text-[clamp(.9rem,2vw+.9rem,1rem)]"
+          onCheckedChange={() => setSecondEnabled(!isSecondEnabled)}
+          checked={isSecondEnabled}
+          id="date-hour12-switcher"
+        />
+        <label className="text-nowrap" htmlFor="date-hour12-switcher">
+          {isSecondEnabled ? "Enabled" : "Disabled"}
+        </label>
+      </div>
+    </div>
+  );
+};
+
+export default DateSecondsSwitcher;

@@ -59,7 +59,7 @@ export const useCurrencyStore = create<useCurrencyStoreType>()(
       },
     }),
     {
-      name: "currency-options",
+      name: "currency-store",
     },
   ),
 );

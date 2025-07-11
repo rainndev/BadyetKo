@@ -4,23 +4,6 @@ export const isValidUUIDv4 = (id?: string) => {
   return id && id !== null && uuidv4Regex.test(id);
 };
 
-export const getReadableDate = (rawDate: string): string => {
-  const date = new Date(rawDate);
-
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long", // e.g. June
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-    // timeZoneName: "short", // e.g. GMT+8
-  };
-
-  return date.toLocaleString("en-US", options);
-};
-
 export const maskNumber = (value: number | string): string => {
   return value.toString().replace(/\d/g, "*");
 };

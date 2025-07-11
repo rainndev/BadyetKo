@@ -4,8 +4,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useCurrencyStore } from "@/store/CurrencyStore";
+import { useDateTimeStore } from "@/store/DateTimeStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
-import { getReadableDate } from "@/utils/helper";
 import { BsThreeDots } from "react-icons/bs";
 import { CiEdit } from "react-icons/ci";
 import { PiTrashSimple } from "react-icons/pi";
@@ -26,6 +26,7 @@ const TransactionRowData = ({
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
+  const getformattedDate = useDateTimeStore((state) => state.getformattedDate);
 
   const handleEdit = () => {
     setSelectedItem(dataItem);
@@ -35,7 +36,7 @@ const TransactionRowData = ({
   return (
     <tr>
       <td className="p-4 pl-10 text-sm text-gray-600">
-        {getReadableDate(dataItem.created_at)}
+        {getformattedDate(dataItem.created_at)}
       </td>
       <td
         className={`p-4 py-2 text-sm font-semibold text-nowrap tabular-nums ${

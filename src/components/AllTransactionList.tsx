@@ -1,13 +1,14 @@
 import { useTransactionList } from "@/queries/useTransactionList";
-import { getReadableDate } from "@/utils/helper";
 import LoadingPulse from "./LoadingPulse";
 import { useCurrencyStore } from "@/store/CurrencyStore";
+import { useDateTimeStore } from "@/store/DateTimeStore";
 
 const AllTransactionList = () => {
   const { data, isLoading } = useTransactionList();
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
+  const getformattedDate = useDateTimeStore((state) => state.getformattedDate);
 
   const isTXlistEmpty = !(
     Array.isArray(data?.transactions) && data.transactions.length > 0
@@ -35,7 +36,7 @@ const AllTransactionList = () => {
                   className="hover:bg-dark-background/8 w-full rounded-xl transition-colors ease-in-out"
                 >
                   <td className="rounded-l-xl p-4 pl-2 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
-                    {getReadableDate(data.created_at)}
+                    {getformattedDate(data.created_at)}
                   </td>
                   <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
                     {data.name}
