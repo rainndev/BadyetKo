@@ -6,7 +6,7 @@ export function SymbolSwitcher() {
   const setISOSymbol = useCurrencyStore((state) => state.setISOSymbol);
 
   return (
-    <div className="bg-dark-background/5 mt-5 flex flex-wrap items-center justify-between gap-5 rounded-2xl p-6">
+    <div className="bg-dark-background/5 flex flex-wrap items-center justify-between gap-5 rounded-2xl p-6">
       <div className="min-w-40 flex-1">
         <h1 className="text-[clamp(.9rem,2vw+.9rem,1rem)] font-semibold">
           Currency Format Toggle

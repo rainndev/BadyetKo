@@ -10,8 +10,10 @@ import supabase from "../supabase/supabase-client";
 
 const SessionContext = createContext<{
   session: Session | null;
+  userID: string;
 }>({
   session: null,
+  userID: "",
 });
 
 //useSession hook
@@ -26,12 +28,14 @@ export const useSession = () => {
 
 export const SessionProvider = ({ children }: PropsWithChildren) => {
   const [session, setSession] = useState<Session | null>(null);
+  const [userID, setUserID] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const authStateListener = supabase.auth.onAuthStateChange(
       async (_, session) => {
         setSession(session);
+        setUserID(session?.user.id ?? "");
         setIsLoading(false);
       },
     );
@@ -42,7 +46,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
   }, [supabase]);
 
   return (
-    <SessionContext value={{ session }}>
+    <SessionContext value={{ session, userID }}>
       {isLoading ? (
         <div className="bg-medium-light-background text-dark-txt flex h-screen w-full items-center justify-center">
           Loading...
