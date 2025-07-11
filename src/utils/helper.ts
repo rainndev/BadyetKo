@@ -21,6 +21,10 @@ export const getReadableDate = (rawDate: string): string => {
   return date.toLocaleString("en-US", options);
 };
 
+export const maskNumber = (value: number | string): string => {
+  return value.toString().replace(/\d/g, "*");
+};
+
 export const formatMoney = (
   amount: number,
   country: string,

@@ -17,11 +17,6 @@ const CurrencyLoader = () => {
   useEffect(() => {
     if (!data) return;
 
-    console.log(
-      "use effect executed..",
-      useCurrencyStore.getState().currencyOptions.currency,
-    );
-
     const country = currencies[data] || "en-PH";
     const currency = data;
 

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { formatMoney } from "@/utils/helper";
+import { formatMoney, maskNumber } from "@/utils/helper";
 
 type currencyOptionsType = {
   country: string;
@@ -10,8 +10,10 @@ type currencyOptionsType = {
 
 type useCurrencyStoreType = {
   currencyOptions: currencyOptionsType;
+  isMasked: boolean;
   setCurrencyOptions: (newOptions: currencyOptionsType) => void;
   getformattedAmount: (amount: number) => string;
+  setMasked: (option: boolean) => void;
 };
 
 export const useCurrencyStore = create<useCurrencyStoreType>()(
@@ -23,6 +25,8 @@ export const useCurrencyStore = create<useCurrencyStoreType>()(
         currency: "PHP",
       },
 
+      isMasked: false,
+
       setCurrencyOptions: (newOptions) =>
         set((state) => ({
           currencyOptions: {
@@ -31,13 +35,18 @@ export const useCurrencyStore = create<useCurrencyStoreType>()(
           },
         })),
 
-      getformattedAmount: (amount) =>
-        formatMoney(
+      setMasked: (option) => set(() => ({ isMasked: option })),
+
+      getformattedAmount: (amount) => {
+        const formatted = formatMoney(
           amount,
           get().currencyOptions.country,
           get().currencyOptions.style,
           get().currencyOptions.currency,
-        ),
+        );
+
+        return get().isMasked ? maskNumber(formatted) : formatted;
+      },
     }),
     {
       name: "currency-options",
