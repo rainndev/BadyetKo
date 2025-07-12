@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Providers from "../Providers";
 import AuthProtectedRoute from "./AuthProtectedRoute";
-import AuthPage from "../pages/AuthPage";
 import DashboardPage from "../pages/DashboardPage";
 import TransactionsPage from "../pages/TransactionsPage";
 import SettingsPage from "@/pages/SettingsPage";
 import ProfilePage from "@/pages/ProfilePage";
+import AuthPageContainer from "../pages/Auth/AuthPageContainer";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
 
       {
         path: "/auth",
-        element: <AuthPage />,
+        element: <AuthPageContainer />,
       },
 
       {
