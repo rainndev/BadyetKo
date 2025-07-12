@@ -22,6 +22,7 @@ const AuthPage = () => {
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
 
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({
@@ -29,33 +30,43 @@ const AuthPage = () => {
         password,
       });
 
+      //check if error contains "email not confirmed"
       if (error) {
-        setError(error.message);
-        return null;
+        if (error.message.toLowerCase().includes("email not confirmed")) {
+          setError(
+            "Please check your inbox and confirm your email before logging in.",
+          );
+        } else {
+          setError(error.message);
+        }
+        return;
       }
     } else {
+      //check if input pass is not equal to confirm pass
       if (password.trim() !== confirmPass.trim()) {
         setError("Passwords do not match. Please double-check and try again.");
-        return null;
+        return;
       }
 
-      const { data, error } = await supabase.auth.signUp({
+      //signup the user
+      const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            full_name: "", // Optional: you can pull this from a name input field
+          },
+        },
       });
 
       if (error) {
         setError(error.message);
-        return null;
+        return;
       }
 
-      await supabase.from("users").insert([
-        {
-          id: data.user?.id,
-          name: data.user?.user_metadata.full_name ?? "",
-          email: data.user?.email,
-        },
-      ]);
+      setError(
+        "Signup successful! Please check your email to confirm your account.",
+      );
     }
   };
 
@@ -86,6 +97,7 @@ const AuthPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Input your email"
             className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+            required
           />
 
           <input
@@ -94,6 +106,7 @@ const AuthPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Input your password"
             className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+            required
           />
 
           {!isLogin && (
@@ -103,17 +116,23 @@ const AuthPage = () => {
               onChange={(e) => setConfirmPass(e.target.value)}
               placeholder="Confirm your password"
               className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+              required
             />
           )}
 
           <button className="bg-dark-background hover:bg-dark-background/90 text-medium-light-background w-full cursor-pointer rounded-lg p-3 transition-colors ease-in-out">
             {isLogin ? "Log in " : "Sign up"}
           </button>
+
           <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-red-400">
             {error}
           </p>
+
           <div
-            onClick={() => setLogin(!isLogin)}
+            onClick={() => {
+              setLogin(!isLogin);
+              setError(""); // clear error when switching mode
+            }}
             className="text-dark-txt/70 cursor-pointer text-[clamp(.6rem,1.5vw+.6rem,1rem)]"
           >
             {isLogin ? (
