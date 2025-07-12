@@ -16,18 +16,13 @@ import {
 } from "@/components/ui/chart";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 
-export const description = "A donut chart with text";
-
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
   deposit: {
-    label: "Deposit",
+    label: "Total Deposited",
     color: "var(--color-amber-300)",
   },
   withdraw: {
-    label: "Withdraw",
+    label: "Total Withdrawn",
     color: "var(--color-red-300)",
   },
 } satisfies ChartConfig;
@@ -102,7 +97,7 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
         <div className="flex w-full items-center justify-between gap-2 leading-none font-medium">
           <div className="flex gap-2">
             <span className="size-3 rounded-xs bg-amber-300" />
-            <span>Deposit</span>
+            <span>Total Deposited</span>
           </div>
           <p>{getformattedAmount(chartData[0].amount)}</p>
         </div>
@@ -110,7 +105,7 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
         <div className="flex w-full items-center justify-between gap-2 leading-none font-medium">
           <div className="flex gap-2">
             <span className="size-3 rounded-xs bg-red-300" />
-            <span>Withdraw</span>
+            <span>Total Withdrawn</span>
           </div>
           <p>{getformattedAmount(chartData[1].amount)}</p>
         </div>

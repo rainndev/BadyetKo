@@ -28,8 +28,6 @@ import {
 } from "@/components/ui/select";
 import { getChartData, type ChartDataItem } from "@/utils/getChartData";
 
-export const description = "An interactive area chart";
-
 const chartConfig = {
   deposit: {
     label: "Deposit",
