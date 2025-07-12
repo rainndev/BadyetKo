@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { formattDate, timeAgo } from "@/utils/DateTimeHelper";
 
-interface DateTimeConfig {
+export interface DateTimeConfig {
   year: "numeric" | "2-digit";
   month: "numeric" | "2-digit" | "long" | "short" | "narrow";
   day: "numeric" | "2-digit";
@@ -18,6 +19,8 @@ interface UseDateTimeStore {
   isSecondEnabled: boolean;
   isHour12Enabled: boolean;
   isTimezoneEnabled: boolean;
+  isTimeAgoEnabled: boolean;
+  setTimeAgoEnabled: (isTimeAgoEnabled: boolean) => void;
   setSecondEnabled: (isSecondEnabled: boolean) => void;
   setHour12Enabled: (isHour12Enabled: boolean) => void;
   setTimezoneEnabled: (isTimezoneEnabled: boolean) => void;
@@ -37,11 +40,16 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
       isSecondEnabled: false,
       isHour12Enabled: false,
       isTimezoneEnabled: false,
+      isTimeAgoEnabled: false,
 
       getformattedDate: (rawDate, country) => {
-        const { isHour12Enabled, isSecondEnabled, isTimezoneEnabled, config } =
-          get();
-        const date = new Date(rawDate);
+        const {
+          isHour12Enabled,
+          isSecondEnabled,
+          isTimezoneEnabled,
+          config,
+          isTimeAgoEnabled,
+        } = get();
 
         let filteredConfig: DateTimeConfig;
 
@@ -52,12 +60,15 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
           hour12: isHour12Enabled,
         };
 
-        return date.toLocaleString(country, filteredConfig);
+        return isTimeAgoEnabled
+          ? timeAgo(rawDate)
+          : formattDate(rawDate, country, filteredConfig);
       },
 
       setSecondEnabled: (isSecondEnabled) => set({ isSecondEnabled }),
       setHour12Enabled: (isHour12Enabled) => set({ isHour12Enabled }),
       setTimezoneEnabled: (isTimezoneEnabled) => set({ isTimezoneEnabled }),
+      setTimeAgoEnabled: (isTimeAgoEnabled) => set({ isTimeAgoEnabled }),
     }),
     {
       name: "date-store",

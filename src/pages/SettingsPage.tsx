@@ -4,6 +4,7 @@ import CurrencyMaskAmounts from "@/components/CurrencyMaskAmounts";
 import Date12HourSwitcher from "@/components/Date12HourSwitcher";
 import DateSecondsSwitcher from "@/components/DateSecondsSwitcher";
 import DateTimeZoneSwitcher from "@/components/DateTimeZoneSwitcher";
+import DateTimeAgoSwitcher from "@/components/DateTimeAgoSwitcher";
 
 const SettingsPage = () => {
   return (
@@ -29,6 +30,7 @@ const SettingsPage = () => {
           <Date12HourSwitcher />
           <DateSecondsSwitcher />
           <DateTimeZoneSwitcher />
+          <DateTimeAgoSwitcher />
         </div>
       </div>
       <div className="h-20" />
