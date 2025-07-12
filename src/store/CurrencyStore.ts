@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { formatMoney, maskNumber } from "@/utils/helper";
+import { formatMoney, maskNumber } from "@/utils/CurrencyHelper";
 
 type currencyOptionsType = {
   country: string;
