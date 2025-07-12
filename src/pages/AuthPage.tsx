@@ -11,6 +11,7 @@ const AuthPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const { session } = useSession();
 
@@ -23,6 +24,7 @@ const AuthPage = () => {
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({
@@ -30,7 +32,6 @@ const AuthPage = () => {
         password,
       });
 
-      //check if error contains "email not confirmed"
       if (error) {
         if (error.message.toLowerCase().includes("email not confirmed")) {
           setError(
@@ -41,33 +42,35 @@ const AuthPage = () => {
         }
         return;
       }
-    } else {
-      //check if input pass is not equal to confirm pass
-      if (password.trim() !== confirmPass.trim()) {
-        setError("Passwords do not match. Please double-check and try again.");
-        return;
-      }
 
-      //signup the user
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: "", // Optional: you can pull this from a name input field
-          },
-        },
-      });
-
-      if (error) {
-        setError(error.message);
-        return;
-      }
-
-      setError(
-        "Signup successful! Please check your email to confirm your account.",
-      );
+      return;
     }
+
+    // SIGNUP FLOW
+    if (password.trim() !== confirmPass.trim()) {
+      setError("Passwords do not match. Please double-check and try again.");
+      return;
+    }
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: "", // Optional: replace with actual field if needed
+        },
+      },
+    });
+
+    if (error) {
+      setError(error.message);
+      return;
+    }
+
+    // Neutral, non-enumerable success message
+    setSuccess(
+      "If this email isn't already registered, we’ve sent a confirmation link. Otherwise, please try logging in.",
+    );
   };
 
   return (
@@ -76,12 +79,12 @@ const AuthPage = () => {
         <div>
           <img
             src={TransparentLogo}
-            alt="tranparent logo with text"
+            alt="transparent logo with text"
             className="mb-10"
           />
           <hr className="mb-15" />
           <h1 className="text-dark-txt mb-2 text-[clamp(1rem,1vw+1rem,1.3rem)] font-bold">
-            {isLogin ? "Welcome Back" : "Get Started "}
+            {isLogin ? "Welcome Back" : "Get Started"}
           </h1>
           <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-gray-600">
             {isLogin
@@ -121,17 +124,26 @@ const AuthPage = () => {
           )}
 
           <button className="bg-dark-background hover:bg-dark-background/90 text-medium-light-background w-full cursor-pointer rounded-lg p-3 transition-colors ease-in-out">
-            {isLogin ? "Log in " : "Sign up"}
+            {isLogin ? "Log in" : "Sign up"}
           </button>
 
-          <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-red-400">
-            {error}
-          </p>
+          {error && (
+            <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-red-400">
+              {error}
+            </p>
+          )}
+
+          {success && (
+            <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-green-600">
+              {success}
+            </p>
+          )}
 
           <div
             onClick={() => {
               setLogin(!isLogin);
-              setError(""); // clear error when switching mode
+              setError("");
+              setSuccess("");
             }}
             className="text-dark-txt/70 cursor-pointer text-[clamp(.6rem,1.5vw+.6rem,1rem)]"
           >
