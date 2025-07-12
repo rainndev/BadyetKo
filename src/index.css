@@ -128,7 +128,7 @@
 }
 
 .active {
-  @apply text-dark-txt;
+  @apply text-dark-txt font-semibold;
 }
 
 /* Works for Chrome, Edge, Safari */

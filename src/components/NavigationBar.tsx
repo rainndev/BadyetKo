@@ -56,7 +56,7 @@ const NavigationBar = () => {
           {navData.map((navItem) => (
             <NavLink
               key={navItem.name}
-              className="hover:bg-dark-background/10 flex w-full cursor-pointer items-center justify-start gap-2 rounded-sm px-5 py-2"
+              className="hover:bg-dark-background/10 flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg px-5 py-3 transition-colors ease-in-out"
               to={navItem.path}
             >
               <li>{navItem.icon}</li>

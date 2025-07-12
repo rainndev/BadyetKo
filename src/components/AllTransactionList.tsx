@@ -30,13 +30,31 @@ const AllTransactionList = () => {
           </p>
         ) : (
           <table className="w-full">
+            <thead>
+              <tr className="bg-dark-background/5">
+                <td className="rounded-l-xl p-4 pl-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
+                  Date
+                </td>
+                <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
+                  Name
+                </td>
+                <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
+                  Amount
+                </td>
+                <td className="rounded-r-xl">
+                  <p className="flex justify-center p-4 pr-2 text-[clamp(.4rem,1vw+.4rem,0.875rem)] text-gray-600">
+                    Type
+                  </p>
+                </td>
+              </tr>
+            </thead>
             <tbody>
               {data?.transactions.map((data) => (
                 <tr
                   key={data.id}
                   className="hover:bg-dark-background/8 w-full rounded-xl transition-colors ease-in-out"
                 >
-                  <td className="rounded-l-xl p-4 pl-2 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
+                  <td className="rounded-l-xl p-4 pl-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
                     {getformattedDate(data.created_at, country)}
                   </td>
                   <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
