@@ -70,7 +70,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
           className={`hide-scrollbar w-full ${!isGridView && "overflow-x-auto"}`}
         >
           {isGridView ? (
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(110px,1fr))] gap-2 sm:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-2">
               {!isBankListLoading &&
                 bankList?.map((bankItemData) => (
                   <BankGridData

@@ -45,18 +45,18 @@ const NavigationBar = () => {
 
   return (
     session !== null && (
-      <div className="bg-light-background md:bg-medium-light-background fixed right-0 bottom-0 left-0 z-1 flex flex-col items-center justify-center border-2 border-t p-3 md:static md:z-0 md:min-h-screen md:border-none md:p-8">
+      <div className="bg-medium-light-background/20 lg:bg-medium-light-background fixed right-0 bottom-0 left-0 z-1 flex flex-col items-center justify-center border-t-2 p-3 backdrop-blur-lg md:p-8 lg:static lg:z-0 lg:min-h-screen lg:border-none">
         <img
           src={TransparentLogo}
-          className="my-10 hidden max-w-35 md:block lg:max-w-40"
+          className="my-10 hidden max-w-35 lg:block lg:max-w-40"
           alt="Transaparent logo with text"
         />
 
-        <ul className="text-dark-txt/50 flex h-full w-full items-start justify-between gap-5 px-5 text-xl md:flex-col md:justify-normal md:px-0">
+        <ul className="text-dark-txt/50 flex h-full w-full items-start justify-between gap-5 px-5 text-xl lg:flex-col lg:justify-normal lg:px-0">
           {navData.map((navItem) => (
             <NavLink
               key={navItem.name}
-              className="hover:bg-dark-background/10 flex w-full cursor-pointer items-center justify-start gap-2 rounded-lg px-5 py-3 transition-colors ease-in-out"
+              className="hover:bg-dark-background/10 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-5 py-3 transition-colors ease-in-out lg:justify-start"
               to={navItem.path}
             >
               <li>{navItem.icon}</li>
