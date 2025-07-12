@@ -15,11 +15,11 @@ export interface DateTimeConfig {
 
 interface UseDateTimeStore {
   config: DateTimeConfig;
-  getformattedDate: (rawDate: string, country: string) => string;
   isSecondEnabled: boolean;
   isHour12Enabled: boolean;
   isTimezoneEnabled: boolean;
   isTimeAgoEnabled: boolean;
+  getformattedDate: (rawDate: string, country: string) => string;
   setTimeAgoEnabled: (isTimeAgoEnabled: boolean) => void;
   setSecondEnabled: (isSecondEnabled: boolean) => void;
   setHour12Enabled: (isHour12Enabled: boolean) => void;

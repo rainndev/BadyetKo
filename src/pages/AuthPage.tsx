@@ -3,6 +3,7 @@ import supabase from "../supabase/supabase-client";
 import { useSession } from "../context/SessionContext";
 import { useNavigate } from "react-router-dom";
 import TransparentLogo from "@/assets/logos/transaprent-logo-w-text.png";
+import { loadSettingsFromSupabase } from "@/utils/SettingsHelper";
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const AuthPage = () => {
     setSuccess("");
 
     if (isLogin) {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -41,6 +42,11 @@ const AuthPage = () => {
           setError(error.message);
         }
         return;
+      }
+
+      const userId = data.user?.id;
+      if (userId) {
+        await loadSettingsFromSupabase(userId);
       }
 
       return;
