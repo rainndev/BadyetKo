@@ -78,7 +78,7 @@ export const removeTransaction = async (id: number) => {
 
 type editTransactionProps = Pick<
   TransactionInsertTypes,
-  "name" | "note" | "id"
+  "name" | "note" | "id" | "category"
 >;
 
 export const editTransaction = async (input: editTransactionProps) => {
@@ -89,6 +89,7 @@ export const editTransaction = async (input: editTransactionProps) => {
     .update({
       name: input.name,
       note: input.note,
+      category: input.category,
     })
     .eq("id", input.id);
 

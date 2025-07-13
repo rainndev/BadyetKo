@@ -125,6 +125,25 @@ const TransactionAddModal = ({
                 )}
               </div>
 
+              {/* Category of Transaction */}
+              <div>
+                <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
+                  Category
+                </p>
+                <input
+                  type="text"
+                  {...register("category")}
+                  placeholder="e.g. Food"
+                  className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+                />
+                {errors.category && (
+                  <p className="text-sm text-red-400">
+                    {errors.category.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Note of transaction */}
               <div>
                 <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
                   Note{" "}
@@ -140,6 +159,8 @@ const TransactionAddModal = ({
                   <p className="text-sm text-red-400">{errors.note.message}</p>
                 )}
               </div>
+
+              {/* type of transaction */}
               <div className="w-full">
                 <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
                   Type

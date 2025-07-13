@@ -41,10 +41,8 @@ const AllTransactionList = () => {
                 <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
                   Amount
                 </td>
-                <td className="rounded-r-xl">
-                  <p className="flex justify-center p-4 pr-2 text-[clamp(.4rem,1vw+.4rem,0.875rem)] text-gray-600">
-                    Type
-                  </p>
+                <td className="max-w-xs truncate overflow-hidden rounded-r-xl p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
+                  <p>Type</p>
                 </td>
               </tr>
             </thead>

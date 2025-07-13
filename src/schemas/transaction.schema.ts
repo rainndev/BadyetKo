@@ -23,11 +23,18 @@ export const transactionSchema = z.object({
       message: "Amount must not exceed ₱10 billion",
     }),
 
-  note: z
+   category: z
+    .string()
+    .min(1, "Category is required")
+    .max(50, "Category must not exceed 50 characters"),
+    
+
+    note: z
     .string()
     .max(100, "Note must not exceed 100 characters")
     .optional()
     .or(z.literal("")),
+    
 });
 
 export type TransactionSchemaType = z.infer<typeof transactionSchema>;

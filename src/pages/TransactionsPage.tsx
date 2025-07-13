@@ -57,14 +57,17 @@ const TransactionsPage = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-100">
                 <tr>
-                  <th className="p-5 pl-10 text-left text-sm font-semibold text-gray-700">
-                    Date of Transaction
+                  <th className="p-5 pl-10 text-left text-sm font-semibold text-nowrap text-gray-700">
+                    Date
                   </th>
                   <th className="p-5 text-left text-sm font-semibold text-gray-700">
                     Amount
                   </th>
                   <th className="p-5 text-left text-sm font-semibold text-gray-700">
                     Name
+                  </th>
+                  <th className="p-5 text-left text-sm font-semibold text-gray-700">
+                    Category
                   </th>
                   <th className="p-5 text-left text-sm font-semibold text-gray-700">
                     Type

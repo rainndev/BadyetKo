@@ -36,7 +36,7 @@ const TransactionRowData = ({
 
   return (
     <tr>
-      <td className="p-4 pl-10 text-sm text-gray-600">
+      <td className="p-4 pl-10 text-sm text-nowrap text-gray-600">
         {getformattedDate(dataItem.created_at, country)}
       </td>
       <td
@@ -49,6 +49,9 @@ const TransactionRowData = ({
       </td>
       <td className="max-w-xs truncate p-4 py-2 text-sm text-gray-600">
         {dataItem.name}
+      </td>
+      <td className="max-w-xs truncate p-4 py-2 text-sm text-gray-600">
+        {dataItem.category}
       </td>
       <td className="p-4 py-2 text-xs">
         <p
