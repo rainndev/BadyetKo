@@ -6,8 +6,11 @@ import { useDeleteCategory } from "@/queries/useDeleteCategory";
 export const useTransactionCategory = () => {
     const user_id = useSession().userID
 
-    //hook for getting list of categories
+  //hook for getting list of categories
   const { data: categoryList, error: categoryListError, isError: isCategoryList, isLoading: isCategoryListLoading  } = useCategoryList(user_id)
+
+  const isCategoryEmpty =
+    isCategoryListLoading || !categoryList || categoryList.length === 0;
 
   //hook for adding categories
   const {
@@ -39,6 +42,7 @@ export const useTransactionCategory = () => {
    isDeleteCategoryPending,
    isDeleteCategoryError,
    isDeleteCategorySuccess,
-   deleteCategoryError
+   deleteCategoryError,
+   isCategoryEmpty
   };
 };

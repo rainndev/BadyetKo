@@ -55,7 +55,7 @@ const TransactionAddModal = ({
     addTransaction({
       ...data,
       amount: +data.amount,
-      category: formCategory,
+      category: formCategory || null,
       bank_id,
       type: formTransactionType,
     });

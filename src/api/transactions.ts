@@ -28,7 +28,12 @@ export const getTransactionList = async (
   //execute this when bank_id exist
   const { data: transactions, error: txError } = await supabase
     .from("transactions")
-    .select("*")
+    .select(`
+      *,
+      categories (
+        name
+      )
+    `)
     .eq("bank_id", bankID);
 
   const { data: bankData, error: bankError } = await supabase
@@ -42,7 +47,7 @@ export const getTransactionList = async (
     throw txError || bankError;
   }
 
-  console.log("getting transaction list with bank_id");
+  console.log("getting transaction list with bank_id", transactions);
   return {
     transactions,
     balance: bankData?.balance ?? 0,

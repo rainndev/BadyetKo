@@ -12,11 +12,15 @@ type SelectCategoryFormProps = {
 };
 
 const SelectCategoryForm = ({ setFormCategory }: SelectCategoryFormProps) => {
-  const { categoryList, isCategoryListLoading } = useTransactionCategory();
+  const { categoryList, isCategoryListLoading, isCategoryEmpty } =
+    useTransactionCategory();
 
   return (
     !isCategoryListLoading && (
-      <Select onValueChange={(value) => setFormCategory(value)}>
+      <Select
+        disabled={isCategoryEmpty}
+        onValueChange={(value) => setFormCategory(value)}
+      >
         <SelectTrigger className="ring-dark-background/10 text-dark-txt/80 w-full rounded-lg !p-6 !pl-3 !text-[clamp(.6rem,1vw+.6rem,1rem)] ring">
           <SelectValue placeholder="Select Category" />
         </SelectTrigger>

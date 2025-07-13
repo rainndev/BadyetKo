@@ -51,7 +51,7 @@ const TransactionRowData = ({
         {dataItem.name}
       </td>
       <td className="max-w-xs truncate p-4 py-2 text-sm text-gray-600">
-        {dataItem.category}
+        {dataItem.categories?.name}
       </td>
       <td className="p-4 py-2 text-xs">
         <p
