@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { TransactionListTypes } from "@/types/transaction.types";
+import SelectCategoryForm from "./SelectCategoryForm";
 
 type TransactionAddModalProps = {
   isShowModal: boolean;
@@ -32,6 +33,7 @@ const TransactionAddModal = ({
   const { bank_id } = useParams();
   const [formTransactionType, setFormTransactionType] =
     useState<formTransactionType>("deposit");
+  const [formCategory, setFormCategory] = useState("");
 
   const {
     register,
@@ -53,6 +55,7 @@ const TransactionAddModal = ({
     addTransaction({
       ...data,
       amount: +data.amount,
+      category: formCategory,
       bank_id,
       type: formTransactionType,
     });
@@ -130,17 +133,7 @@ const TransactionAddModal = ({
                 <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
                   Category
                 </p>
-                <input
-                  type="text"
-                  {...register("category")}
-                  placeholder="e.g. Food"
-                  className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
-                />
-                {errors.category && (
-                  <p className="text-sm text-red-400">
-                    {errors.category.message}
-                  </p>
-                )}
+                <SelectCategoryForm setFormCategory={setFormCategory} />
               </div>
 
               {/* Note of transaction */}

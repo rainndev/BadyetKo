@@ -6,11 +6,12 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { createPortal } from "react-dom";
 import type { TransactionListTypes } from "@/types/transaction.types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   EditTransactionSchema,
   type EditTransactionSchemaType,
 } from "@/schemas/transactionEdit.schema";
+import SelectCategoryForm from "./SelectCategoryForm";
 
 type TransactionEditModalProps = {
   isShowEditModal: boolean;
@@ -24,6 +25,7 @@ const TransactionEditModal = ({
   dataItem,
 }: TransactionEditModalProps) => {
   const { bank_id } = useParams();
+  const [formCategory, setFormCategory] = useState("");
 
   const {
     register,
@@ -45,7 +47,7 @@ const TransactionEditModal = ({
     editTransaction({
       name: data.name || dataItem.name,
       note: data.note || dataItem.note,
-      category: data.category || dataItem.category,
+      category: formCategory || dataItem.category,
       id: dataItem.id,
     });
   };
@@ -103,17 +105,7 @@ const TransactionEditModal = ({
                 <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
                   Category
                 </p>
-                <input
-                  type="text"
-                  {...register("category")}
-                  placeholder="e.g. Food"
-                  className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
-                />
-                {errors.category && (
-                  <p className="text-sm text-red-400">
-                    {errors.category.message}
-                  </p>
-                )}
+                <SelectCategoryForm setFormCategory={setFormCategory} />
               </div>
 
               {/* Update Note of tx */}

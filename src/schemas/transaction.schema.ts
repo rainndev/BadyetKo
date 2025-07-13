@@ -23,11 +23,6 @@ export const transactionSchema = z.object({
       message: "Amount must not exceed ₱10 billion",
     }),
 
-   category: z
-    .string()
-    .min(1, "Category is required")
-    .max(50, "Category must not exceed 50 characters"),
-    
 
     note: z
     .string()
