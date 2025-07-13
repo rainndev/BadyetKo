@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { TbSettings2 } from "react-icons/tb";
 import { MdOutlineAccountCircle } from "react-icons/md";
+import { BiCategoryAlt } from "react-icons/bi";
 
 const navData = [
   {
@@ -26,6 +27,12 @@ const navData = [
     protected: true,
   },
 
+  {
+    path: "/category",
+    name: "Category",
+    icon: <BiCategoryAlt />,
+    protected: true,
+  },
   {
     path: "/profile",
     name: "Profile",
@@ -52,11 +59,11 @@ const NavigationBar = () => {
           alt="Transaparent logo with text"
         />
 
-        <ul className="text-dark-txt/50 flex h-full w-full items-start justify-between gap-5 px-5 text-xl lg:flex-col lg:justify-normal lg:px-0">
+        <ul className="text-dark-txt/50 flex h-full w-full items-start justify-between gap-2 text-xl lg:flex-col lg:justify-normal lg:px-0">
           {navData.map((navItem) => (
             <NavLink
               key={navItem.name}
-              className="hover:bg-dark-background/10 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-5 py-3 transition-colors ease-in-out lg:justify-start"
+              className="hover:bg-dark-background/10 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-3 py-3 transition-colors ease-in-out md:px-5 lg:justify-start"
               to={navItem.path}
             >
               <li>{navItem.icon}</li>

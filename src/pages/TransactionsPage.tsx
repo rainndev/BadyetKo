@@ -8,7 +8,6 @@ import { useState } from "react";
 import LoadingPulse from "@/components/LoadingPulse";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
-import CategoryList from "@/components/CategoryList";
 
 const TransactionsPage = () => {
   const { bank_id } = useParams();
@@ -50,8 +49,6 @@ const TransactionsPage = () => {
         <h1 className="mb-20 tabular-nums">
           Balance: {getformattedAmount(bankBalance)}
         </h1>
-
-        <CategoryList />
 
         {isTransactionListLoading ? (
           <LoadingPulse />

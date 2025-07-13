@@ -6,6 +6,7 @@ import TransactionsPage from "../pages/TransactionsPage";
 import SettingsPage from "@/pages/SettingsPage";
 import ProfilePage from "@/pages/ProfilePage";
 import AuthPageContainer from "../pages/Auth/AuthPageContainer";
+import CategoryPage from "@/pages/CategoryPage";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,11 @@ export const router = createBrowserRouter([
           {
             path: "/profile",
             element: <ProfilePage />,
+          },
+
+          {
+            path: "/category",
+            element: <CategoryPage />,
           },
         ],
       },
