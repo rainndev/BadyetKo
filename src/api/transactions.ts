@@ -11,7 +11,12 @@ export const getTransactionList = async (
     //execute this when theres no bank_id
     const { data: transactions, error: txError } = await supabase
       .from("transactions")
-      .select("*")
+      .select(`
+      *,
+      categories (
+        name
+      )
+    `)
       .order("created_at", { ascending: false })
       .limit(10);
 

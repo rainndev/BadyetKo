@@ -29,45 +29,35 @@ const AllTransactionList = () => {
             You currently have no transactions.
           </p>
         ) : (
-          <table className="w-full">
-            <thead>
-              <tr className="bg-dark-background/5">
-                <td className="rounded-l-xl p-4 pl-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
-                  Date
-                </td>
-                <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
-                  Name
-                </td>
-                <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
-                  Amount
-                </td>
-                <td className="max-w-xs truncate overflow-hidden rounded-r-xl p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
-                  <p>Type</p>
-                </td>
-              </tr>
-            </thead>
+          <table className="w-full border-separate border-spacing-y-2">
             <tbody>
               {data?.transactions.map((data) => (
                 <tr
                   key={data.id}
-                  className="hover:bg-dark-background/8 w-full rounded-xl transition-colors ease-in-out"
+                  className="hover:bg-dark-background/10 bg-dark-background/3 w-full transition-colors ease-in-out"
                 >
-                  <td className="rounded-l-xl p-4 pl-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-nowrap text-gray-600">
+                  <td className="text-dark-txt/70 rounded-l-2xl p-5 pl-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-semibold text-nowrap">
                     {getformattedDate(data.created_at, country)}
+                    <p className="text-dark-txt/50 text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
+                      Date
+                    </p>
                   </td>
-                  <td className="max-w-xs truncate p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
+                  <td className="max-w-xs truncate p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
                     {data.name}
+                    <p className="text-dark-txt/50 w-fit rounded-lg text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
+                      name
+                    </p>
                   </td>
                   <td
-                    className={`p-4 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-semibold ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
+                    className={`p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-semibold ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
                   >
                     <p className="text-nowrap tabular-nums">
                       {(data.type === "deposit" ? "+" : "-") +
                         getformattedAmount(data.amount)}
                     </p>
                   </td>
-                  <td className="rounded-r-xl">
-                    <div className="flex justify-center p-4 pr-2 text-[clamp(.4rem,1vw+.4rem,0.875rem)] text-gray-600">
+                  <td className="rounded-r-2xl">
+                    <div className="flex justify-start p-5 pr-2 text-[clamp(.4rem,1vw+.4rem,0.75rem)] text-gray-600">
                       <p
                         className={`w-fit rounded-full px-3 py-1 font-medium ${data.type === "deposit" ? "bg-[#bbefcf] text-[#477d59]" : "bg-[#fbe4e5] text-[#ad383a]"}`}
                       >
