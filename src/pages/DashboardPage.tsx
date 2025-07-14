@@ -23,38 +23,7 @@ const DashboardPage = () => {
     CategoryNetStat,
   } = useUserStatistic(user_id);
 
-  console.log(CategoryNetStat);
-
-  const colors = [
-    "#FF6384", // red
-    "#36A2EB", // blue
-    "#FFCE56", // yellow
-    "#4BC0C0", // teal
-    "#9966FF", // purple
-    "#FF9F40", // orange
-    "#B5E853", // lime
-    "#F06292", // pink
-  ];
-
-  const chartData =
-    CategoryNetStat?.map((data, i) => ({
-      ...data,
-      fill: colors[i % colors.length],
-    })) ?? [];
-
-  console.log(chartData);
-  // const chartData = [
-  //   {
-  //     type: "deposit",
-  //     amount: total_deposit,
-  //     fill: "var(--color-chart-deposit)",
-  //   },
-  //   {
-  //     type: "withdraw",
-  //     amount: total_withdraw,
-  //     fill: "var(--color-chart-withdraw)",
-  //   },
-  // ];
+  console.log("raw", CategoryNetStat);
 
   return (
     <>
@@ -78,7 +47,7 @@ const DashboardPage = () => {
             }}
             isLoading={isLoadingUserStatistic}
           />
-          <ChartPieDonut chartData={chartData} />
+          <ChartPieDonut chartData={CategoryNetStat ?? []} />
         </div>
         <br />
         {/* Charts  */}

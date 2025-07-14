@@ -1,4 +1,4 @@
-import { Pie, PieChart } from "recharts";
+import { Cell, Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -16,21 +16,10 @@ import {
 } from "@/components/ui/chart";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 
-const chartConfig = {
-  deposit: {
-    label: "Total Deposited",
-    color: "var(--color-amber-300)",
-  },
-  withdraw: {
-    label: "Total Withdrawn",
-    color: "var(--color-red-300)",
-  },
-} satisfies ChartConfig;
-
 type ChartPieDonutData = {
   category_name: string;
   net_balance: number;
-  fill: string;
+  color: string;
 };
 type ChartPieDonutProps = { chartData: ChartPieDonutData[] };
 
@@ -38,6 +27,16 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
+
+  const chartConfig = Object.fromEntries(
+    chartData.map((item) => [
+      item.category_name.toLowerCase().replace(/\s+/g, "_"), // key
+      {
+        label: item.category_name,
+        color: item.color || "var(--color-gray-400)", // fallback if null
+      },
+    ]),
+  ) satisfies ChartConfig;
 
   return (
     <Card className="border-dark-background/20 flex flex-col p-5 md:p-10">
@@ -63,14 +62,18 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
               nameKey="category_name"
               innerRadius={60}
               strokeWidth={5}
-            ></Pie>
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color || "#f26f6f"} />
+              ))}
+            </Pie>
           </PieChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex flex-wrap gap-2 text-sm tabular-nums">
-        {chartData.map(({ category_name, net_balance, fill }) => (
+        {chartData.map(({ category_name, net_balance, color }) => (
           <div
-            style={{ backgroundColor: fill }}
+            style={{ backgroundColor: color || "#f26f6f" }}
             className="flex w-fit items-center gap-2 rounded-full p-2 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
           >
             <span className="text-nowrap">{category_name}</span>

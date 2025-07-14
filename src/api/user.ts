@@ -20,6 +20,7 @@ export const getUserStatistics = async (): Promise<{
   categoryNetData: {
     category_name: string,
     net_balance:number
+    color: string
   }[]
 }> => {
   const { data: userData, error: userDataError } = await supabase
