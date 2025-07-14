@@ -30,12 +30,12 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
     );
 
   return (
-    <div className="border-dark-background/20 @container min-h-100 rounded-3xl border p-5 md:p-10">
+    <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 md:border md:p-10">
       {/* add bank wallet */}
       <div className="mb-5 flex flex-col gap-2">
         {/* -----header with add bank btn */}
         <div className="flex w-full items-center justify-between">
-          <h1 className="text-dark-txt text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
+          <h1 className="text-dark-txt text-[clamp(.9rem,2vw+.9rem,1.25rem)] font-medium">
             Bank wallets
           </h1>
 
@@ -69,18 +69,17 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
         <div
           className={`hide-scrollbar w-full ${!isGridView && "overflow-x-auto"}`}
         >
-          {isGridView ? (
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-2">
-              {!isBankListLoading &&
-                bankList?.map((bankItemData) => (
-                  <BankGridData
-                    key={bankItemData.id}
-                    bankItemData={bankItemData}
-                  />
-                ))}
-            </div>
-          ) : (
-            <table className="min-w-full border-collapse divide-y divide-gray-200">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-2">
+            {!isBankListLoading &&
+              bankList?.map((bankItemData) => (
+                <BankGridData
+                  key={bankItemData.id}
+                  bankItemData={bankItemData}
+                />
+              ))}
+          </div>
+
+          {/* <table className="min-w-full border-collapse divide-y divide-gray-200">
               <tbody>
                 {!isBankListLoading &&
                   bankList?.map((bankItemData) => (
@@ -91,8 +90,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
                     />
                   ))}
               </tbody>
-            </table>
-          )}
+            </table> */}
         </div>
       )}
     </div>

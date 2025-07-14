@@ -100,7 +100,7 @@ const TransactionRowData = ({
         {/* tx amount */}
         <div className={`flex flex-col items-end font-semibold`}>
           <p
-            className={`text-center text-[clamp(.6rem,1vw+.6rem,1.125rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
+            className={`text-center text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
           >
             {(isDeposit ? "+" : "-") + getformattedAmount(amount)}
           </p>

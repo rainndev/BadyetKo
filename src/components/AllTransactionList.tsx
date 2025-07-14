@@ -16,8 +16,8 @@ const AllTransactionList = () => {
   );
 
   return (
-    <div className="border-dark-background/20 min-h-100 w-full rounded-3xl border p-5 md:p-10">
-      <h1 className="text-dark-txt mb-5 text-[clamp(.6rem,2vw+.6rem,1.25rem)] font-medium">
+    <div className="border-dark-background/20 min-h-100 w-full rounded-3xl p-2 md:border md:p-10">
+      <h1 className="text-dark-txt mb-5 text-[clamp(.9rem,2vw+.9rem,1.25rem)] font-medium">
         Recent Transactions
       </h1>
 
@@ -68,7 +68,7 @@ const AllTransactionList = () => {
                       {/* tx amount */}
                       <div className={`flex flex-col items-end font-semibold`}>
                         <p
-                          className={`text-center text-[clamp(.6rem,1vw+.6rem,1.125rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
+                          className={`text-center text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
                         >
                           {(isDeposit ? "+" : "-") + getformattedAmount(amount)}
                         </p>

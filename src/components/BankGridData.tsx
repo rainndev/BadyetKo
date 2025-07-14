@@ -17,25 +17,21 @@ const BankGridData = ({ bankItemData }: BankGridDataProps) => {
   return (
     <div
       onClick={() => navigate(`/bank/${id}`)}
-      className="bg-dark-background/5 hover:bg-dark-background/10 flex w-full cursor-pointer flex-col items-start justify-center truncate rounded-2xl p-5 md:rounded-3xl md:p-7"
+      className="bg-dark-background/3 hover:bg-dark-background/10 flex w-full cursor-pointer flex-col items-start justify-center truncate rounded-2xl border p-5 md:rounded-3xl md:p-7"
     >
-      <div className="flex w-full items-center justify-between gap-5">
+      <div className="flex w-full items-center justify-center gap-5">
         <div className="flex size-8 items-center justify-center">
           <BankImage custom_bank_avatar={custom_bank_avatar ?? ""} />
         </div>
 
-        <div className="w-full">
-          <p className="text-dark-txt max-w-fit truncate text-[clamp(.6rem,1vw+.5rem,.9rem)] tabular-nums">
+        {/* <div>
+          <p className="text-dark-txt w-full max-w-[100px] truncate text-[clamp(.6rem,1vw+.5rem,.9rem)]">
             {name}
           </p>
           <p className="max-w-fit truncate text-[clamp(.5rem,1vw+.5rem,.8rem)] text-gray-600 tabular-nums">
             {timeAgo(created_at)}
           </p>
-        </div>
-
-        <p>
-          <IoIosArrowForward className="text-dark-txt/40" />
-        </p>
+        </div> */}
       </div>
 
       <p className="text-dark-txt/80 mt-5 max-w-fit truncate text-[clamp(.5rem,1vw+.5rem,.8rem)] tabular-nums">
