@@ -29,6 +29,8 @@ const TransactionRowData = ({
 
   const country = useCurrencyStore((state) => state.currencyOptions.country);
   const getformattedDate = useDateTimeStore((state) => state.getformattedDate);
+
+  const { amount, name, note, type, created_at, id } = dataItem;
   const isDeposit = dataItem.type === "deposit";
 
   const handleEdit = () => {
@@ -43,16 +45,17 @@ const TransactionRowData = ({
           {/* tx name */}
           <div className="flex items-center justify-start gap-2">
             <h1 className="max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,1rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
-              {dataItem.name}
+              {name}
             </h1>
           </div>
 
           {/* tx note */}
           <p className="text-dark-txt/50 w-fit max-w-[10rem] truncate rounded-lg text-[clamp(.6rem,1vw+.6rem,0.85rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
-            {dataItem.note || "n/a"}
+            {note || "n/a"}
           </p>
         </div>
 
+        {/* edit/delete modal */}
         <div className="text-dark-txt/50 text-[clamp(.9rem,2vw+.9rem,1rem)]">
           <Popover>
             <PopoverTrigger className="cursor-pointer">
@@ -61,7 +64,7 @@ const TransactionRowData = ({
             <PopoverContent className="w-30 overflow-hidden rounded-2xl p-0 text-xs text-gray-600">
               <ul>
                 <li
-                  onClick={() => deleteTransaction(dataItem.id)}
+                  onClick={() => deleteTransaction(id)}
                   className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200"
                 >
                   <p>Delete</p>
@@ -80,25 +83,16 @@ const TransactionRowData = ({
         </div>
       </div>
 
-      <div className="mt-1 flex h-full w-full items-center justify-between gap-3">
+      <div className="mt-1 flex h-full w-full items-center justify-between gap-3 md:mt-0">
         {/* tx type */}
         <div className="flex items-center gap-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)]">
           <div
             className={`flex border ${isDeposit ? "border-green-200 bg-green-100" : "border-red-200 bg-red-100"} items-center justify-center rounded-2xl px-2`}
           >
-            <span className="relative flex size-3 items-center justify-center">
-              <span
-                className={`${isDeposit ? "bg-green-300" : "bg-red-300"} absolute inline-flex h-full w-full animate-ping rounded-full opacity-75`}
-              />
-              <span
-                className={`${isDeposit ? "bg-green-600" : "bg-red-500"} relative inline-flex size-2 rounded-full`}
-              />
-            </span>
-
             <p
               className={`w-fit rounded-full px-1 py-0.5 font-medium first-letter:capitalize md:px-2 ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} text-center`}
             >
-              {dataItem.type}
+              {type}
             </p>
           </div>
         </div>
@@ -108,10 +102,10 @@ const TransactionRowData = ({
           <p
             className={`text-center text-[clamp(.6rem,1vw+.6rem,1.125rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
           >
-            {(isDeposit ? "+" : "-") + getformattedAmount(dataItem.amount)}
+            {(isDeposit ? "+" : "-") + getformattedAmount(amount)}
           </p>
           <p className="text-dark-txt/50 text-[clamp(.5rem,1vw+.5rem,0.80rem)] font-medium">
-            {getformattedDate(dataItem.created_at, country)}
+            {getformattedDate(created_at, country)}
           </p>
         </div>
       </div>
