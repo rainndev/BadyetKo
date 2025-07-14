@@ -14,7 +14,8 @@ export const getTransactionList = async (
       .select(`
       *,
       categories (
-        name
+        name,
+        color
       )
     `)
       .order("created_at", { ascending: false })
@@ -36,7 +37,8 @@ export const getTransactionList = async (
     .select(`
       *,
       categories (
-        name
+        name,
+        color
       )
     `)
     .eq("bank_id", bankID);

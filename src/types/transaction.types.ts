@@ -4,6 +4,7 @@ export type TransactionListTypes =
   Database["public"]["Tables"]["transactions"]["Row"] & {
      categories?: {
     name: string;
+    color: string
   } | null;
   };
 

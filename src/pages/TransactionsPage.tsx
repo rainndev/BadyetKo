@@ -54,19 +54,17 @@ const TransactionsPage = () => {
           <LoadingPulse />
         ) : (
           <div className="hide-scrollbar h-fit overflow-x-auto">
-            <table className="w-full border-separate border-spacing-y-2">
-              <tbody className="divide-y divide-gray-200">
-                {transactionData?.transactions.map((dataItem) => (
-                  <TransactionRowData
-                    key={dataItem.id}
-                    dataItem={dataItem}
-                    deleteTransaction={deleteTransaction}
-                    setEditOpen={setEditOpen}
-                    setSelectedItem={setSelectedItem}
-                  />
-                ))}
-              </tbody>
-            </table>
+            <div className="flex flex-col divide-y divide-gray-200">
+              {transactionData?.transactions.map((dataItem) => (
+                <TransactionRowData
+                  key={dataItem.id}
+                  dataItem={dataItem}
+                  deleteTransaction={deleteTransaction}
+                  setEditOpen={setEditOpen}
+                  setSelectedItem={setSelectedItem}
+                />
+              ))}
+            </div>
           </div>
         )}
 
