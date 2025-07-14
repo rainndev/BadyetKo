@@ -2,22 +2,28 @@ import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { BankListTypes } from "@/types/bank.types";
 import { useNavigate } from "react-router-dom";
 import BankImage from "./ui/BankImage";
-import { IoIosArrowForward } from "react-icons/io";
-import { timeAgo } from "@/utils/DateTimeHelper";
+import { IoClose } from "react-icons/io5";
+
 type BankGridDataProps = {
   bankItemData: BankListTypes;
+  removeBank: (id: string) => void;
+  isTrashEnabled: boolean;
 };
 
-const BankGridData = ({ bankItemData }: BankGridDataProps) => {
+const BankGridData = ({
+  bankItemData,
+  removeBank,
+  isTrashEnabled,
+}: BankGridDataProps) => {
   const navigate = useNavigate();
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
-  const { id, name, balance, custom_bank_avatar, created_at } = bankItemData;
+  const { id, balance, custom_bank_avatar } = bankItemData;
   return (
     <div
-      onClick={() => navigate(`/bank/${id}`)}
-      className="bg-dark-background/3 hover:bg-dark-background/10 flex w-full cursor-pointer flex-col items-start justify-center truncate rounded-2xl border p-5 md:rounded-3xl md:p-7"
+      onClick={() => !isTrashEnabled && navigate(`/bank/${id}`)}
+      className={`bg-dark-background/4 hover:bg-dark-background/10 relative flex w-full cursor-pointer flex-col items-start justify-center rounded-2xl p-5 md:rounded-3xl md:p-7`}
     >
       <div className="flex w-full items-center justify-center gap-5">
         <div className="flex size-8 items-center justify-center">
@@ -33,7 +39,14 @@ const BankGridData = ({ bankItemData }: BankGridDataProps) => {
           </p>
         </div> */}
       </div>
-
+      {isTrashEnabled && (
+        <div
+          onClick={() => removeBank(id)}
+          className={`bg-light-background text-dark-background/40 absolute -top-3 -right-3 rounded-full p-2`}
+        >
+          <IoClose />
+        </div>
+      )}
       <p className="text-dark-txt/80 mt-5 max-w-fit truncate text-[clamp(.5rem,1vw+.5rem,.8rem)] tabular-nums">
         {getformattedAmount(balance ?? 0)}
       </p>

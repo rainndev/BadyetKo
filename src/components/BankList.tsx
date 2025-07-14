@@ -1,8 +1,6 @@
 import { useBank } from "@/hooks/useBank";
 import { FaPlus } from "react-icons/fa6";
-import { CiGrid2H } from "react-icons/ci";
-import { CiGrid41 } from "react-icons/ci";
-import BankRowData from "./BankRowData";
+import { PiTrashSimpleLight } from "react-icons/pi";
 import LoadingPulse from "./LoadingPulse";
 import { useState } from "react";
 import BankGridData from "./BankGridData";
@@ -14,7 +12,8 @@ type BankListProps = {
 };
 
 const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
-  const [isGridView, setIsGridView] = useState(false);
+  const [isTrashEnabled, setTrashEnabled] = useState(false);
+
   const {
     removeBank,
     bankList,
@@ -41,10 +40,10 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
 
           <div className="flex gap-1 md:gap-2">
             <button
-              className="text-dark-txt cursor-pointer rounded-full p-1 text-[clamp(.9rem,2vw+.9rem,1.8rem)]"
-              onClick={() => setIsGridView(!isGridView)}
+              className="text-dark-background cursor-pointer rounded-full p-1 text-[clamp(.9rem,2vw+.9rem,1.5rem)]"
+              onClick={() => setTrashEnabled(!isTrashEnabled)}
             >
-              {isGridView ? <CiGrid2H /> : <CiGrid41 />}
+              <PiTrashSimpleLight />
             </button>
             <button
               onClick={() => setShowModal(!isShowModal)}
@@ -66,31 +65,18 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
           You haven't added any banks yet.
         </p>
       ) : (
-        <div
-          className={`hide-scrollbar w-full ${!isGridView && "overflow-x-auto"}`}
-        >
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-2">
+        <div className={`hide-scrollbar w-full`}>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-3">
             {!isBankListLoading &&
               bankList?.map((bankItemData) => (
                 <BankGridData
                   key={bankItemData.id}
                   bankItemData={bankItemData}
+                  isTrashEnabled={isTrashEnabled}
+                  removeBank={removeBank}
                 />
               ))}
           </div>
-
-          {/* <table className="min-w-full border-collapse divide-y divide-gray-200">
-              <tbody>
-                {!isBankListLoading &&
-                  bankList?.map((bankItemData) => (
-                    <BankRowData
-                      key={bankItemData.id}
-                      bankItemData={bankItemData}
-                      removeBank={removeBank}
-                    />
-                  ))}
-              </tbody>
-            </table> */}
         </div>
       )}
     </div>

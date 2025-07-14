@@ -39,7 +39,7 @@ const AllTransactionList = () => {
                       <div>
                         {/* tx name */}
                         <div className="flex items-center justify-start gap-2">
-                          <h1 className="max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,1rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+                          <h1 className="max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
                             {name}
                           </h1>
                         </div>
