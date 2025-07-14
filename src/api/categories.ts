@@ -13,12 +13,14 @@ export const getCategories = async (): Promise<CategoriesListTypes[]> => {
 
 export const createCategory = async ({
   categoryName,
+  categoryColor,
 }: {
   categoryName: string;
+  categoryColor: string
 }): Promise<CategoriesListTypes[]> => {
   const { data, error } = await supabase
     .from("categories")
-    .insert([{ name: categoryName }])
+    .insert([{ name: categoryName, color: categoryColor }])
     .select()
     .single();
 

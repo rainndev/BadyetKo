@@ -8,8 +8,6 @@ const CategoryPage = () => {
 
   return (
     <div className="flex min-h-screen w-full flex-col items-start p-5 md:p-10">
-      <h1></h1>
-
       <CategoryAddForm />
       {/* render category */}
 
@@ -21,7 +19,10 @@ const CategoryPage = () => {
             className="border-dark-background/10 flex w-full flex-col items-center gap-3 rounded-2xl border p-5 md:p-10"
             key={category.id}
           >
-            <div className="w-fit min-w-10 rounded-full bg-amber-100 p-5 text-[clamp(.5rem,2vw+.5rem,1.5rem)] md:p-10">
+            <div
+              style={{ backgroundColor: category.color || "#FFFFFF" }}
+              className="w-fit min-w-10 rounded-full p-5 text-[clamp(.5rem,2vw+.5rem,1.5rem)] md:p-10"
+            >
               <TfiAnnouncement />
             </div>
 

@@ -46,18 +46,21 @@ export type Database = {
       }
       categories: {
         Row: {
+          color: string | null
           created_at: string
           id: string
           name: string | null
           user_id: string | null
         }
         Insert: {
+          color?: string | null
           created_at?: string
           id?: string
           name?: string | null
           user_id?: string | null
         }
         Update: {
+          color?: string | null
           created_at?: string
           id?: string
           name?: string | null
@@ -111,6 +114,13 @@ export type Database = {
             referencedRelation: "banks"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "transactions_category_fkey"
+            columns: ["category"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
         ]
       }
       users: {
@@ -158,6 +168,14 @@ export type Database = {
       delete_transaction_with_balance_adjustment: {
         Args: { t_id: number }
         Returns: undefined
+      }
+      get_category_net_balances: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          category_name: string
+          net_balance: number
+          color: string
+        }[]
       }
       get_min_max_transactions: {
         Args: Record<PropertyKey, never>

@@ -6,8 +6,11 @@ import {
 } from "@/schemas/category.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { lightColors } from "@/data/categoryColors";
+import { useState } from "react";
 
 const CategoryAddForm = () => {
+  const [selectedColor, setSelectedColor] = useState("#FDE68A");
   const {
     register,
     handleSubmit,
@@ -20,13 +23,13 @@ const CategoryAddForm = () => {
   const { isAddCategoryPending, addCategory } = useTransactionCategory();
 
   const onSubmit: SubmitHandler<categorySchemaType> = (data) => {
-    addCategory({ categoryName: data.name });
-    console.log("category name", data.name);
+    addCategory({ categoryName: data.name, categoryColor: selectedColor });
     reset();
   };
 
+  console.log("category color", selectedColor);
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col">
       {/* form for adding category */}
       <form
         className="flex items-center justify-center gap-2"
@@ -64,6 +67,17 @@ const CategoryAddForm = () => {
       </form>
 
       {/* colors */}
+      <h1 className="mt-5 mb-2">Colors</h1>
+      <div className="flex h-full w-full flex-wrap gap-2">
+        {lightColors.map((color) => (
+          <div
+            key={color}
+            onClick={() => setSelectedColor(color)}
+            style={{ backgroundColor: color }}
+            className={`${selectedColor === color && "border-dark-background/30 border-3"} size-7 rounded-md transition-colors duration-300 ease-in-out md:size-12 md:rounded-lg`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
