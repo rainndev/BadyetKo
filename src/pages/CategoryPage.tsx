@@ -1,6 +1,7 @@
 import CategoryAddForm from "@/components/CategoryAddForm";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { useTransactionCategory } from "@/hooks/useTransactionCategory";
+import { hexToRgba } from "@/utils/helper";
 
 const CategoryPage = () => {
   const { categoryList, isCategoryListLoading, deleteCategory } =
@@ -20,7 +21,9 @@ const CategoryPage = () => {
             key={category.id}
           >
             <div
-              style={{ backgroundColor: category.color || "#FFFFFF" }}
+              style={{
+                backgroundColor: hexToRgba(category.color || "#FFFFFF", 60),
+              }}
               className="w-fit min-w-10 rounded-full p-5 text-[clamp(.5rem,2vw+.5rem,1.5rem)] md:p-10"
             >
               <TfiAnnouncement />

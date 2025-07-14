@@ -68,12 +68,14 @@ const CategoryAddForm = () => {
 
       {/* colors */}
       <h1 className="mt-5 mb-2">Colors</h1>
-      <div className="flex h-full w-full flex-wrap gap-2">
+      <div className="flex h-full w-full flex-wrap gap-1 md:gap-2">
         {lightColors.map((color) => (
           <div
             key={color}
             onClick={() => setSelectedColor(color)}
-            style={{ backgroundColor: color }}
+            style={{
+              backgroundColor: color,
+            }}
             className={`${selectedColor === color && "border-dark-background/30 border-3"} size-7 rounded-md transition-colors duration-300 ease-in-out md:size-12 md:rounded-lg`}
           />
         ))}

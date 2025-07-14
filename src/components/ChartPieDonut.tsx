@@ -1,4 +1,5 @@
 import { Cell, Pie, PieChart } from "recharts";
+import { hexToRgba } from "@/utils/helper";
 
 import {
   Card,
@@ -70,11 +71,15 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex flex-wrap gap-2 text-sm tabular-nums">
+      <CardFooter className="flex flex-wrap justify-center gap-2 text-sm tabular-nums">
         {chartData.map(({ category_name, net_balance, color }) => (
           <div
-            style={{ backgroundColor: color || "#f26f6f" }}
-            className="flex w-fit items-center gap-2 rounded-full p-2 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
+            style={{
+              backgroundColor: hexToRgba(color || "#f26f6f", 30),
+              border: "1px solid",
+              borderColor: color || "#f26f6f",
+            }}
+            className="flex w-fit items-center gap-2 rounded-full p-2 px-4 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
           >
             <span className="text-nowrap">{category_name}</span>
             <p>{getformattedAmount(net_balance)}</p>
