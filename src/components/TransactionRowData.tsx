@@ -47,8 +47,8 @@ const TransactionRowData = ({
 
       {/* tx amount */}
 
-      <td className="max-w-xs truncate p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
-        {dataItem.name}
+      <td className="max-w-xs truncate p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)]">
+        <p className="text-dark-txt/70">{dataItem.name}</p>
         <p className="text-dark-txt/50 w-fit rounded-lg text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
           Name
         </p>
@@ -65,16 +65,16 @@ const TransactionRowData = ({
       </td>
 
       {/* tx category */}
-      <td className="max-w-xs truncate p-4 py-2 text-sm text-gray-600">
-        {dataItem.categories?.name || "--"}
+      <td className="max-w-xs truncate p-4 py-2 text-sm">
+        <p className="text-dark-txt/70">{dataItem.categories?.name || "--"}</p>
         <p className="text-dark-txt/50 w-fit rounded-lg text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
           Category
         </p>
       </td>
 
       {/* tx note */}
-      <td className="max-w-xs truncate p-4 py-2 text-sm text-gray-600">
-        {dataItem.note || "--"}
+      <td className="max-w-xs truncate p-4 py-2 text-sm">
+        <p className="text-dark-txt/70">{dataItem.note || "--"}</p>
         <p className="text-dark-txt/50 flex w-fit items-center gap-1 rounded-lg text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
           <span>Note</span>
           <CiStickyNote />
