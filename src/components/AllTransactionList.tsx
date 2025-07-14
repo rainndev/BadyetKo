@@ -57,9 +57,18 @@ const AllTransactionList = () => {
                     </p>
                   </td>
                   <td className="rounded-r-2xl">
-                    <div className="flex justify-start p-5 pr-2 text-[clamp(.4rem,1vw+.4rem,0.75rem)] text-gray-600">
+                    <div className="flex items-center justify-start p-5 pr-2 text-[clamp(.4rem,1vw+.4rem,0.75rem)] text-gray-600">
+                      <span className="relative flex size-3 items-center justify-center">
+                        <span
+                          className={`${data.type === "deposit" ? "bg-green-300" : "bg-red-300"} absolute inline-flex h-full w-full animate-ping rounded-full opacity-75`}
+                        />
+                        <span
+                          className={`${data.type === "deposit" ? "bg-green-600" : "bg-red-500"} relative inline-flex size-2 rounded-full`}
+                        ></span>
+                      </span>
+
                       <p
-                        className={`w-fit rounded-full px-3 py-1 font-medium ${data.type === "deposit" ? "bg-[#bbefcf] text-[#477d59]" : "bg-[#fbe4e5] text-[#ad383a]"}`}
+                        className={`w-fit rounded-full px-3 py-1 font-medium ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
                       >
                         {data.type}
                       </p>
