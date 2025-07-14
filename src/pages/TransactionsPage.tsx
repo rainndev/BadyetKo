@@ -53,7 +53,7 @@ const TransactionsPage = () => {
         {isTransactionListLoading ? (
           <LoadingPulse />
         ) : (
-          <div className="hide-scrollbar h-full overflow-x-auto">
+          <div className="hide-scrollbar h-fit overflow-x-auto">
             <table className="w-full border-separate border-spacing-y-2">
               <tbody className="divide-y divide-gray-200">
                 {transactionData?.transactions.map((dataItem) => (

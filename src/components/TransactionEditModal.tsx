@@ -12,6 +12,7 @@ import {
   type EditTransactionSchemaType,
 } from "@/schemas/transactionEdit.schema";
 import SelectCategoryForm from "./SelectCategoryForm";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 type TransactionEditModalProps = {
   isShowEditModal: boolean;
@@ -39,6 +40,9 @@ const TransactionEditModal = ({
   const { editTransaction, isEditPending, isEditSuccess } = useBankTransactions(
     bank_id ?? "",
   );
+
+  //Lock the body when showing modal
+  useBodyScrollLock(isShowEditModal);
 
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;

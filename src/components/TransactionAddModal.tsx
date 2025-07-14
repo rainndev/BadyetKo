@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import type { TransactionListTypes } from "@/types/transaction.types";
 import SelectCategoryForm from "./SelectCategoryForm";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 type TransactionAddModalProps = {
   isShowModal: boolean;
@@ -46,6 +47,9 @@ const TransactionAddModal = ({
 
   const { addTransaction, isAddError, AddError, isAddPending, isAddSuccess } =
     useBankTransactions(bank_id ?? "");
+
+  //Lock the body when showing modal
+  useBodyScrollLock(isShowModal);
 
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;

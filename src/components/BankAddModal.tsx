@@ -3,6 +3,7 @@ import { useCreateAvatar } from "@/queries/useCreateAvatar";
 import { addBankSchema } from "@/schemas/banks.schema";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 interface BankAddModalProps {
   isShowModal: boolean;
@@ -21,6 +22,9 @@ const BankAddModal = ({
   const imageRef = useRef<HTMLInputElement>(null);
 
   const { addBank, isAddBankPending, isAddBankSuccess } = useBank(user_id);
+
+  //Lock the body when showing modal
+  useBodyScrollLock(isShowModal);
 
   //ADD NEW CUSTOM AVATAR
   const { mutate: addAvatar } = useCreateAvatar(image);
