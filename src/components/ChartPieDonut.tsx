@@ -72,7 +72,7 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex flex-wrap justify-center gap-2 text-sm tabular-nums">
-        {chartData.map(({ category_name, net_balance, color }) => (
+        {chartData.map(({ category_name, color }) => (
           <div
             style={{
               backgroundColor: hexToRgba(color || "#f26f6f", 30),
@@ -82,7 +82,7 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
             className="flex w-fit items-center gap-2 rounded-full p-2 px-4 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
           >
             <span className="text-nowrap">{category_name}</span>
-            <p>{getformattedAmount(net_balance)}</p>
+            {/* <p>{getformattedAmount(net_balance)}</p> */}
           </div>
         ))}
       </CardFooter>
