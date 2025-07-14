@@ -1,30 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { formattDate, timeAgo } from "@/utils/DateTimeHelper";
-
-export interface DateTimeConfig {
-  year: "numeric" | "2-digit";
-  month: "numeric" | "2-digit" | "long" | "short" | "narrow";
-  day: "numeric" | "2-digit";
-  hour: "numeric" | "2-digit";
-  minute: "numeric" | "2-digit";
-  second?: "numeric" | "2-digit";
-  hour12?: boolean;
-  timeZoneName?: "short" | "long";
-}
-
-interface UseDateTimeStore {
-  config: DateTimeConfig;
-  isSecondEnabled: boolean;
-  isHour12Enabled: boolean;
-  isTimezoneEnabled: boolean;
-  isTimeAgoEnabled: boolean;
-  getformattedDate: (rawDate: string, country: string) => string;
-  setTimeAgoEnabled: (isTimeAgoEnabled: boolean) => void;
-  setSecondEnabled: (isSecondEnabled: boolean) => void;
-  setHour12Enabled: (isHour12Enabled: boolean) => void;
-  setTimezoneEnabled: (isTimezoneEnabled: boolean) => void;
-}
+import { formattDate, timeAgo, formatDateToDDMMYYYY } from "@/utils/DateTimeHelper";
+import type { DateTimeConfig, UseDateTimeStore } from "@/types/dateTime.types";
 
 export const useDateTimeStore = create<UseDateTimeStore>()(
   persist(
@@ -41,12 +18,14 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
       isHour12Enabled: false,
       isTimezoneEnabled: false,
       isTimeAgoEnabled: false,
+      isDateToDDMMYYYY: false,
 
       getformattedDate: (rawDate, country) => {
         const {
           isHour12Enabled,
           isSecondEnabled,
           isTimezoneEnabled,
+          isDateToDDMMYYYY,
           config,
           isTimeAgoEnabled,
         } = get();
@@ -60,15 +39,17 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
           hour12: isHour12Enabled,
         };
 
-        return isTimeAgoEnabled
-          ? timeAgo(rawDate)
-          : formattDate(rawDate, country, filteredConfig);
+        if (isTimeAgoEnabled) return timeAgo(rawDate)
+        if (isDateToDDMMYYYY) return formatDateToDDMMYYYY(rawDate, country)  
+
+        return formattDate(rawDate, country, filteredConfig);
       },
 
       setSecondEnabled: (isSecondEnabled) => set({ isSecondEnabled }),
       setHour12Enabled: (isHour12Enabled) => set({ isHour12Enabled }),
       setTimezoneEnabled: (isTimezoneEnabled) => set({ isTimezoneEnabled }),
       setTimeAgoEnabled: (isTimeAgoEnabled) => set({ isTimeAgoEnabled }),
+      setDateToDDMMYYYY: (isDateToDDMMYYYY) => set({ isDateToDDMMYYYY }),
     }),
     {
       name: "date-store",

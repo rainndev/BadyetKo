@@ -34,6 +34,7 @@ export const loadSettingsFromSupabase = async (userId: string) => {
       isSecondEnabled: settings.dateTime.isSecondEnabled,
       isTimezoneEnabled: settings.dateTime.isTimezoneEnabled,
       isTimeAgoEnabled: settings.dateTime.isTimeAgoEnabled,
+      isDateToDDMMYYYY: settings.dateTime.isDateToDDMMYYYY,
     });
   }
 };

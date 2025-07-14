@@ -2,6 +2,7 @@ import { useDateTimeStore } from "@/store/DateTimeStore";
 import { Switch } from "@/components/ui/switch";
 
 const DateTimeZoneSwitcher = () => {
+  const isDateToDDMMYYYY = useDateTimeStore((state) => state.isDateToDDMMYYYY);
   const isTimezoneEnabled = useDateTimeStore(
     (state) => state.isTimezoneEnabled,
   );
@@ -9,10 +10,11 @@ const DateTimeZoneSwitcher = () => {
     (state) => state.setTimezoneEnabled,
   );
   const isTimeAgoEnabled = useDateTimeStore((state) => state.isTimeAgoEnabled);
+  const isDisabled = isTimeAgoEnabled || isDateToDDMMYYYY;
 
   return (
     <div
-      className={` ${isTimeAgoEnabled ? "bg-dark-background/3 text-dark-txt/50" : "bg-dark-background/5"} flex w-full shrink-0 flex-col gap-3 rounded-2xl p-5 transition-colors duration-300 ease-in-out`}
+      className={` ${isDisabled ? "bg-dark-background/3 text-dark-txt/50" : "bg-dark-background/5"} flex w-full shrink-0 flex-col gap-3 rounded-2xl p-5 transition-colors duration-300 ease-in-out`}
     >
       <h1 className="text-[clamp(.9rem,2vw+.9rem,1rem)] font-semibold">
         Show Time Zone
@@ -22,7 +24,7 @@ const DateTimeZoneSwitcher = () => {
       </p>
       <div className="flex items-center gap-2">
         <Switch
-          disabled={isTimeAgoEnabled}
+          disabled={isDisabled}
           className="cursor-pointer !text-[clamp(.9rem,2vw+.9rem,1rem)]"
           onCheckedChange={() => setTimezoneEnabled(!isTimezoneEnabled)}
           checked={isTimezoneEnabled}

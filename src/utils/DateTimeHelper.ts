@@ -1,4 +1,4 @@
-import { type DateTimeConfig } from "@/store/DateTimeStore";
+import { type DateTimeConfig } from "@/types/dateTime.types"; 
 
 export const formattDate = (
   rawDate: string,
@@ -6,7 +6,7 @@ export const formattDate = (
   config: DateTimeConfig,
 ) => new Date(rawDate).toLocaleString(country, config);
 
-export function timeAgo(input: string | Date): string {
+export const timeAgo = (input: string | Date): string => {
   const now = new Date();
   const date = typeof input === "string" ? new Date(input) : input;
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
@@ -29,4 +29,9 @@ export function timeAgo(input: string | Date): string {
   }
 
   return "just now";
+}
+
+export const formatDateToDDMMYYYY = (input: string | Date, country: string)=> {
+    const date = typeof input === "string" ? new Date(input) : input;
+    return new Intl.DateTimeFormat(country).format(date);
 }

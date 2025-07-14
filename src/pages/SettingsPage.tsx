@@ -9,6 +9,7 @@ import { useCurrencyStore } from "@/store/CurrencyStore";
 import { useDateTimeStore } from "@/store/DateTimeStore";
 import supabase from "@/supabase/supabase-client";
 import { useSession } from "@/context/SessionContext";
+import DateDDMMYYYYSwitcher from "@/components/DateDDMMYYYYSwitcher";
 
 const SettingsPage = () => {
   const { userID } = useSession();
@@ -25,6 +26,7 @@ const SettingsPage = () => {
         isHour12Enabled: useDateTimeStore.getState().isHour12Enabled,
         isTimezoneEnabled: useDateTimeStore.getState().isTimezoneEnabled,
         isTimeAgoEnabled: useDateTimeStore.getState().isTimeAgoEnabled,
+        isDateToDDMMYYYY: useDateTimeStore.getState().isDateToDDMMYYYY,
       },
     };
 
@@ -57,6 +59,7 @@ const SettingsPage = () => {
           <DateSecondsSwitcher />
           <DateTimeZoneSwitcher />
           <DateTimeAgoSwitcher />
+          <DateDDMMYYYYSwitcher />
         </div>
       </div>
 
