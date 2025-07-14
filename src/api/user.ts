@@ -17,20 +17,26 @@ export const getUserStatistics = async (): Promise<{
     name: string;
     label: "MAX" | "MIN";
   }[];
+  categoryNetData: {
+    category_name: string,
+    net_balance:number
+  }[]
 }> => {
   const { data: userData, error: userDataError } = await supabase
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
 
+  const { data: categoryNetData, error: categoryNetError } = await supabase.rpc("get_category_net_balances");
   const { data: transactionData, error: transactionDataError } =
     await supabase.rpc("get_min_max_transactions");
 
-  if (userDataError || transactionDataError)
+  if (userDataError || transactionDataError || categoryNetError)
     throw userDataError ?? transactionDataError;
 
   return {
     userData,
     transactionData,
+    categoryNetData
   };
 };
 

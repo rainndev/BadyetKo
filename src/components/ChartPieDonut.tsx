@@ -1,4 +1,4 @@
-import { Label, Pie, PieChart } from "recharts";
+import { Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -27,7 +27,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type ChartPieDonutData = { type: string; amount: number; fill: string };
+type ChartPieDonutData = {
+  category_name: string;
+  net_balance: number;
+  fill: string;
+};
 type ChartPieDonutProps = { chartData: ChartPieDonutData[] };
 
 const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
@@ -38,9 +42,9 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
   return (
     <Card className="border-dark-background/20 flex flex-col p-5 md:p-10">
       <CardHeader className="items-center pb-0">
-        <CardTitle>All-Time Transaction Breakdown</CardTitle>
+        <CardTitle>Category-wise Net Balances</CardTitle>
         <CardDescription>
-          Total deposits and withdrawals since account creation
+          Summary of deposits and withdrawals grouped by category
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
@@ -55,60 +59,24 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
             />
             <Pie
               data={chartData}
-              dataKey="amount"
-              nameKey="type"
+              dataKey="net_balance"
+              nameKey="category_name"
               innerRadius={60}
               strokeWidth={5}
-            >
-              <Label
-                content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                    return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                      >
-                        <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="text-3xl font-bold text-red-400"
-                        >
-                          test
-                        </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="text-black"
-                        >
-                          Visitors
-                        </tspan>
-                      </text>
-                    );
-                  }
-                }}
-              />
-            </Pie>
+            ></Pie>
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm tabular-nums">
-        <div className="flex w-full items-center justify-between gap-2 leading-none font-medium">
-          <div className="flex gap-2">
-            <span className="size-3 rounded-xs bg-amber-300" />
-            <span>Total Deposited</span>
+      <CardFooter className="flex flex-wrap gap-2 text-sm tabular-nums">
+        {chartData.map(({ category_name, net_balance, fill }) => (
+          <div
+            style={{ backgroundColor: fill }}
+            className="flex w-fit items-center gap-2 rounded-full p-2 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
+          >
+            <span className="text-nowrap">{category_name}</span>
+            <p>{getformattedAmount(net_balance)}</p>
           </div>
-          <p>{getformattedAmount(chartData[0].amount)}</p>
-        </div>
-
-        <div className="flex w-full items-center justify-between gap-2 leading-none font-medium">
-          <div className="flex gap-2">
-            <span className="size-3 rounded-xs bg-red-300" />
-            <span>Total Withdrawn</span>
-          </div>
-          <p>{getformattedAmount(chartData[1].amount)}</p>
-        </div>
+        ))}
       </CardFooter>
     </Card>
   );

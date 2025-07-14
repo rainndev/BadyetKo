@@ -12,6 +12,8 @@ type transactionData = {
 type DashboardStatisticCardProps = {
   data: {
     total_balance: number;
+    total_deposit: number;
+    total_withdraw: number;
     TXStat?: transactionData[];
   };
   isLoading: boolean;
@@ -24,7 +26,7 @@ const DashboardStatisticCard = ({
     (state) => state.getformattedAmount,
   );
 
-  const { total_balance, TXStat } = data;
+  const { total_balance, total_deposit, total_withdraw, TXStat } = data;
 
   return (
     <div className="border-dark-background/20 @container flex w-full flex-col items-start justify-center gap-10 rounded-3xl border p-5 py-7 md:px-15 md:py-10">
@@ -60,6 +62,20 @@ const DashboardStatisticCard = ({
               <p className="text-dark-txt/60 text-sm">{txItemData.label}</p>
             </div>
           ))}
+
+          <div key="total_deposit">
+            <h1 className="text-[clamp(.6rem,2vw+.6rem,1.3rem)] font-medium tabular-nums">
+              {total_deposit ? getformattedAmount(total_deposit) : "0"}
+            </h1>
+            <p className="text-dark-txt/60 text-sm">Total Deposit</p>
+          </div>
+
+          <div key="total_withdraw">
+            <h1 className="text-[clamp(.6rem,2vw+.6rem,1.3rem)] font-medium tabular-nums">
+              {total_withdraw ? getformattedAmount(total_withdraw) : "0"}
+            </h1>
+            <p className="text-dark-txt/60 text-sm">Total Withdraw</p>
+          </div>
         </div>
       )}
     </div>
