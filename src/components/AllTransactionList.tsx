@@ -45,7 +45,7 @@ const AllTransactionList = () => {
                   </td>
 
                   {/* tx name */}
-                  <td className="max-w-xs truncate p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
+                  <td className="max-w-[10rem] truncate p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
                     {data.name}
                     <p className="text-dark-txt/50 w-fit rounded-lg text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
                       name

@@ -18,7 +18,7 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
       isHour12Enabled: false,
       isTimezoneEnabled: false,
       isTimeAgoEnabled: false,
-      isDateToDDMMYYYY: false,
+      isDateToDDMMYYYY: true,
 
       getformattedDate: (rawDate, country) => {
         const {
