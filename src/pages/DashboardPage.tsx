@@ -26,8 +26,6 @@ const DashboardPage = () => {
     CategoryNetStat,
   } = useUserStatistic(user_id);
 
-  console.log("raw", CategoryNetStat);
-
   return (
     <>
       <BankAddModal

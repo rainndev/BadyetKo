@@ -10,6 +10,7 @@ export const useCreateTransaction = (bankID: string, userID: string) => {
       queryClient.invalidateQueries({ queryKey: ["transaction", bankID] });
       queryClient.invalidateQueries({ queryKey: ["banks", userID] });
       queryClient.invalidateQueries({ queryKey: ["users", userID] });
+      queryClient.invalidateQueries({ queryKey: ["area-chart-data"] });
     },
   });
 };

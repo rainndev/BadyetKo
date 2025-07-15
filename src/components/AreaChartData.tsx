@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getChartData, type ChartDataItem } from "@/utils/getChartData";
+import { useQuery } from "@tanstack/react-query";
 
 const chartConfig = {
   deposit: {
@@ -41,23 +42,30 @@ const chartConfig = {
 
 function AreaChartData() {
   const [timeRange, setTimeRange] = React.useState("90d");
-  const [data, setData] = React.useState<ChartDataItem[] | undefined>(
-    undefined,
-  );
+  // const [data, setData] = React.useState<ChartDataItem[] | undefined>(
+  //   undefined,
+  // );
 
-  // Fetch chart data once
-  useEffect(() => {
-    const fetchChartData = async () => {
-      try {
-        const chartData = await getChartData();
-        setData(chartData);
-      } catch (error) {
-        console.error("Error occurred fetching chart data", error);
-      }
-    };
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["area-chart-data"],
+    queryFn: getChartData,
+    staleTime: 10 * 60 * 1000, // 10 minutes in milliseconds
+    refetchOnWindowFocus: false,
+  });
 
-    fetchChartData();
-  }, []);
+  // // Fetch chart data once
+  // useEffect(() => {
+  //   const fetchChartData = async () => {
+  //     try {
+  //       const chartData = await getChartData();
+  //       setData(chartData);
+  //     } catch (error) {
+  //       console.error("Error occurred fetching chart data", error);
+  //     }
+  //   };
+
+  //   fetchChartData();
+  // }, []);
 
   // Filter based on selected time range
   const filteredData = data?.filter((item) => {

@@ -10,6 +10,7 @@ export const useDeleteBank = (user_id: string) => {
         queryKey: ["banks", user_id],
       });
       queryClient.invalidateQueries({ queryKey: ["users", user_id] });
+      queryClient.invalidateQueries({ queryKey: ["area-chart-data"] });
     },
   });
 };

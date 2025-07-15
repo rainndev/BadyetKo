@@ -3,9 +3,9 @@ import { getTransactionList } from "../api/transactions";
 
 export const useTransactionList = (bankID?: string) => {
   return useQuery({
-    queryKey: ["transaction", bankID],
+    queryKey: ["transaction", bankID ? bankID : "All"],
     queryFn: () => getTransactionList(bankID),
-    staleTime: bankID ? 1000 * 60 * 5 : 0,
+    staleTime: 10 * 60 * 1000, // 10 minutes in milliseconds
     refetchOnWindowFocus: false,
   });
 };
