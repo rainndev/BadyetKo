@@ -30,14 +30,14 @@ const DashboardStatisticCard = ({
   const { total_balance, total_deposit, total_withdraw, TXStat } = data;
 
   return (
-    <div className="@container flex w-full flex-col items-start justify-center gap-10 rounded-3xl p-2">
-      <div>
+    <div className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl p-2">
+      <div className="flex h-full w-full flex-col items-start justify-center">
         {isLoading ? (
           <div className="bg-dark-background/50 animate-pulse rounded-sm md:rounded-lg">
             &nbsp;
           </div>
         ) : (
-          <h1 className="text-[clamp(1.1rem,2vw+1.1rem,2rem)] font-semibold tabular-nums">
+          <h1 className="text-[clamp(1.1rem,2vw+1.1rem,2.5rem)] font-semibold tabular-nums">
             {getformattedAmount(total_balance)}
           </h1>
         )}
@@ -52,7 +52,7 @@ const DashboardStatisticCard = ({
           {TXStat?.map((txItemData) => (
             <div
               key={txItemData.label}
-              className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl"
+              className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
             >
               <div>
                 <p className="text-light-background/60 text-[clamp(.5rem,1vw+.5rem,0.875rem)] font-thin">
@@ -76,7 +76,7 @@ const DashboardStatisticCard = ({
 
           <div
             key="total_deposit"
-            className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl"
+            className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
           >
             <div>
               <p className="text-light-background/60 text-[clamp(.5rem,1vw+.5rem,0.875rem)] font-thin">
@@ -92,7 +92,7 @@ const DashboardStatisticCard = ({
           </div>
           <div
             key="total_withdraw"
-            className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl"
+            className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
           >
             <div>
               <p className="text-light-background/60 text-[clamp(.5rem,1vw+.5rem,0.875rem)] font-thin">
