@@ -7,9 +7,12 @@ import BankAddModal from "@/components/BankAddModal";
 import AllTransactionList from "@/components/AllTransactionList";
 import BankList from "@/components/BankList";
 import ChartPieDonut from "@/components/ChartPieDonut";
+import useBreakpoints from "@/hooks/useBreakpoints";
+import DashboardTabs from "@/components/DashboardTabs";
 
 const DashboardPage = () => {
   const [isShowModal, setShowModal] = useState(false);
+  const { isLarge } = useBreakpoints();
   const { session } = useSession();
   const user_id = session?.user.id ?? "";
 
@@ -53,22 +56,21 @@ const DashboardPage = () => {
           />
         </div>
         <br />
+        <DashboardTabs isShowModal={isShowModal} setShowModal={setShowModal} />
         {/* Charts  */}
-        <AreaChartData />
+        {isLarge && <AreaChartData />}
 
         {/* list data to render */}
-        <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {/* Bank list  */}
-          <BankList
-            isShowModal={isShowModal}
-            setShowModal={setShowModal}
-            user_id={user_id}
-          />
+        {isLarge && (
+          <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+            {/* Bank list  */}
+            <BankList isShowModal={isShowModal} setShowModal={setShowModal} />
 
-          {/* All transaction list */}
-          <AllTransactionList />
-          <div className="h-20" />
-        </div>
+            {/* All transaction list */}
+            <AllTransactionList />
+          </div>
+        )}
+        <div className="h-20" />
       </div>
     </>
   );

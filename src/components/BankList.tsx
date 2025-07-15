@@ -4,15 +4,16 @@ import { PiTrashSimpleLight } from "react-icons/pi";
 import { useState } from "react";
 import BankGridData from "./BankGridData";
 import BankGridPlaceholder from "./BankGridPlaceholder";
+import { useSession } from "@/context/SessionContext";
 
 type BankListProps = {
-  user_id: string;
   isShowModal: boolean;
   setShowModal: (isShowModal: boolean) => void;
 };
 
-const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
+const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
   const [isTrashEnabled, setTrashEnabled] = useState(false);
+  const { userID } = useSession();
 
   const {
     removeBank,
@@ -21,7 +22,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
     bankListError,
     isBankListLoading,
     isBanklistEmpty,
-  } = useBank(user_id);
+  } = useBank(userID);
 
   if (isBankListError)
     return (
@@ -29,13 +30,13 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
     );
 
   return (
-    <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 md:border md:p-10">
+    <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 md:p-10 lg:border">
       {/* add bank wallet */}
       <div className="mb-5 flex flex-col gap-2">
         {/* -----header with add bank btn */}
         <div className="flex w-full items-center justify-between">
           <h1 className="text-dark-txt text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
-            Bank wallets
+            Accounts
           </h1>
 
           <div className="flex gap-1 md:gap-2">
