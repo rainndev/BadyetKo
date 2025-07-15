@@ -54,7 +54,7 @@ const TransactionsPage = () => {
           <LoadingPulse />
         ) : (
           <div className="hide-scrollbar h-fit overflow-x-auto">
-            <div className="flex flex-col divide-y divide-gray-200">
+            <div className="flex flex-col divide-y divide-gray-100">
               {transactionData?.transactions.map((dataItem) => (
                 <TransactionRowData
                   key={dataItem.id}

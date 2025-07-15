@@ -34,12 +34,15 @@ const AllTransactionList = () => {
             You currently have no transactions.
           </p>
         ) : (
-          <div className="flex w-full flex-col divide-y divide-gray-200">
+          <div className="flex w-full flex-col divide-y divide-gray-100">
             {data?.transactions.map(
-              ({ name, note, type, created_at, amount, categories }) => {
+              ({ name, note, type, created_at, amount, categories, id }) => {
                 const isDeposit = type === "deposit";
                 return (
-                  <div className="flex w-full justify-between py-3 transition-colors ease-in-out">
+                  <div
+                    key={id}
+                    className="flex w-full justify-between py-3 transition-colors ease-in-out"
+                  >
                     <div className="flex flex-col">
                       <div className="flex w-full items-center justify-between">
                         <div>

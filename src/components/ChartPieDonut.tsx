@@ -67,8 +67,9 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex flex-wrap justify-center gap-2 text-sm tabular-nums">
-        {chartData.map(({ category_name, color }) => (
+        {chartData.map(({ category_name, color }, idx) => (
           <div
+            key={category_name + idx}
             style={{
               backgroundColor: hexToRgba(color || "#f26f6f", 30),
               border: "1px solid",
