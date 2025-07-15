@@ -34,7 +34,7 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
       <div className="mb-5 flex flex-col gap-2">
         {/* -----header with add bank btn */}
         <div className="flex w-full items-center justify-between">
-          <h1 className="text-dark-txt text-[clamp(.9rem,2vw+.9rem,1.25rem)] font-medium">
+          <h1 className="text-dark-txt text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
             Bank wallets
           </h1>
 

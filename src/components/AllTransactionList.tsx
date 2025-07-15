@@ -1,5 +1,4 @@
 import { useTransactionList } from "@/queries/useTransactionList";
-import LoadingPulse from "./LoadingPulse";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import { useDateTimeStore } from "@/store/DateTimeStore";
 import { useTransactionListStore } from "@/store/TransactionListStore";
@@ -23,7 +22,7 @@ const AllTransactionList = () => {
 
   return (
     <div className="border-dark-background/20 min-h-100 w-full rounded-3xl p-2 md:border md:p-10">
-      <h1 className="text-dark-txt mb-5 text-[clamp(.9rem,2vw+.9rem,1.25rem)] font-medium">
+      <h1 className="text-dark-txt mb-5 text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
         Recent Transactions
       </h1>
 
