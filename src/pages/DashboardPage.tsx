@@ -47,7 +47,10 @@ const DashboardPage = () => {
             }}
             isLoading={isLoadingUserStatistic}
           />
-          <ChartPieDonut chartData={CategoryNetStat ?? []} />
+          <ChartPieDonut
+            chartData={CategoryNetStat}
+            isLoadingUserStatistic={isLoadingUserStatistic}
+          />
         </div>
         <br />
         {/* Charts  */}

@@ -15,7 +15,7 @@ export const getUserStatistics = async (): Promise<{
     amount: number;
     type: string;
     name: string;
-    label: "MAX" | "MIN";
+     label: "Max Deposit" | "Min Deposit" | "Max Withdraw" | "Min Withdraw";
   }[];
   categoryNetData: {
     category_name: string,
@@ -27,9 +27,13 @@ export const getUserStatistics = async (): Promise<{
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
 
+
   const { data: categoryNetData, error: categoryNetError } = await supabase.rpc("get_category_net_balances");
+
   const { data: transactionData, error: transactionDataError } =
     await supabase.rpc("get_min_max_transactions");
+
+  console.log("data minmax", transactionData)
 
   if (userDataError || transactionDataError || categoryNetError)
     throw userDataError ?? transactionDataError;

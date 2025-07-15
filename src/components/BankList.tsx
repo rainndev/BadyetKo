@@ -1,9 +1,9 @@
 import { useBank } from "@/hooks/useBank";
 import { FaPlus } from "react-icons/fa6";
 import { PiTrashSimpleLight } from "react-icons/pi";
-import LoadingPulse from "./LoadingPulse";
 import { useState } from "react";
 import BankGridData from "./BankGridData";
+import BankGridPlaceholder from "./BankGridPlaceholder";
 
 type BankListProps = {
   user_id: string;
@@ -58,27 +58,31 @@ const BankList = ({ user_id, isShowModal, setShowModal }: BankListProps) => {
           </div>
         </div>
       </div>
-      {isBankListLoading ? (
-        <LoadingPulse />
-      ) : isBanklistEmpty ? (
+
+      {isBanklistEmpty && !isBankListLoading && (
         <p className="text-dark-txt/70 text-[clamp(.5rem,2vw+.5rem,.9rem)]">
           You haven't added any banks yet.
         </p>
-      ) : (
-        <div className={`hide-scrollbar w-full`}>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-3">
-            {!isBankListLoading &&
-              bankList?.map((bankItemData) => (
-                <BankGridData
-                  key={bankItemData.id}
-                  bankItemData={bankItemData}
-                  isTrashEnabled={isTrashEnabled}
-                  removeBank={removeBank}
-                />
-              ))}
-          </div>
-        </div>
       )}
+
+      <div className={`hide-scrollbar w-full`}>
+        <div className="grid grid-cols-2 gap-3 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5">
+          {isBankListLoading &&
+            [...new Array(5)].map((_, idx) => (
+              <BankGridPlaceholder key={"bank-grid-placehold" + idx} />
+            ))}
+
+          {!isBankListLoading &&
+            bankList?.map((bankItemData) => (
+              <BankGridData
+                key={bankItemData.id}
+                bankItemData={bankItemData}
+                isTrashEnabled={isTrashEnabled}
+                removeBank={removeBank}
+              />
+            ))}
+        </div>
+      </div>
     </div>
   );
 };
