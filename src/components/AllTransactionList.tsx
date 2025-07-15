@@ -2,6 +2,8 @@ import { useTransactionList } from "@/queries/useTransactionList";
 import LoadingPulse from "./LoadingPulse";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import { useDateTimeStore } from "@/store/DateTimeStore";
+import { useTransactionListStore } from "@/store/TransactionListStore";
+import { hexToRgba } from "@/utils/helper";
 
 const AllTransactionList = () => {
   const { data, isLoading } = useTransactionList();
@@ -10,6 +12,9 @@ const AllTransactionList = () => {
   );
   const country = useCurrencyStore((state) => state.currencyOptions.country);
   const getformattedDate = useDateTimeStore((state) => state.getformattedDate);
+  const isCategoryLabelEnabled = useTransactionListStore(
+    (state) => state.isCategoryLabelEnabled,
+  );
 
   const isTXlistEmpty = !(
     Array.isArray(data?.transactions) && data.transactions.length > 0
@@ -31,51 +36,72 @@ const AllTransactionList = () => {
         ) : (
           <div className="flex w-full flex-col divide-y divide-gray-200">
             {data?.transactions.map(
-              ({ name, note, type, created_at, amount }) => {
+              ({ name, note, type, created_at, amount, categories }) => {
                 const isDeposit = type === "deposit";
                 return (
-                  <div className="flex w-full flex-col py-2 transition-colors ease-in-out">
-                    <div className="flex w-full items-center justify-between">
-                      <div>
-                        {/* tx name */}
-                        <div className="flex items-center justify-start gap-2">
-                          <h1 className="max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
-                            {name}
-                          </h1>
-                        </div>
+                  <div className="flex w-full justify-between py-3 transition-colors ease-in-out">
+                    <div className="flex flex-col">
+                      <div className="flex w-full items-center justify-between">
+                        <div>
+                          {/* tx name */}
+                          <div className="flex items-center justify-start gap-2">
+                            <h1 className="max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+                              {name}
+                            </h1>
+                          </div>
 
-                        {/* tx note */}
-                        <p className="text-dark-txt/50 w-fit max-w-[10rem] truncate rounded-lg text-[clamp(.6rem,1vw+.6rem,0.85rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
-                          {note || "n/a"}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-1 flex h-full w-full items-center justify-between gap-3 md:mt-0">
-                      {/* tx type */}
-                      <div className="flex items-center gap-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)]">
-                        <div
-                          className={`flex border ${isDeposit ? "border-green-200 bg-green-100" : "border-red-200 bg-red-100"} items-center justify-center rounded-2xl px-2`}
-                        >
-                          <p
-                            className={`w-fit rounded-full px-1 py-0.5 font-medium first-letter:capitalize md:px-2 ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} text-center`}
-                          >
-                            {type}
+                          {/* tx note */}
+                          <p className="text-dark-txt/50 w-fit max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,0.85rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+                            {note || "n/a"}
                           </p>
                         </div>
                       </div>
 
-                      {/* tx amount */}
-                      <div className={`flex flex-col items-end font-semibold`}>
-                        <p
-                          className={`text-center text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
-                        >
-                          {(isDeposit ? "+" : "-") + getformattedAmount(amount)}
-                        </p>
-                        <p className="text-dark-txt/50 text-[clamp(.5rem,1vw+.5rem,0.80rem)] font-medium">
-                          {getformattedDate(created_at, country)}
-                        </p>
+                      {/* tx type */}
+                      <div className="mt-1 flex items-center gap-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)]">
+                        {isCategoryLabelEnabled ? (
+                          <div
+                            style={{
+                              backgroundColor: hexToRgba(
+                                categories?.color || "#f26f6f",
+                                30,
+                              ),
+                              border: "1px solid",
+                              borderColor: categories?.color || "#f26f6f",
+                            }}
+                            className={`flex items-center justify-center rounded-2xl border px-2`}
+                          >
+                            <p
+                              className={`text-dark-txt/80 w-fit max-w-[5rem] truncate rounded-full px-1 py-0.5 text-center font-medium first-letter:capitalize sm:max-w-[10rem] md:px-2`}
+                            >
+                              {categories?.name || "Uncategorized"}
+                            </p>
+                          </div>
+                        ) : (
+                          <div
+                            className={`flex border ${isDeposit ? "border-green-200 bg-green-100" : "border-red-200 bg-red-100"} items-center justify-center rounded-2xl px-2`}
+                          >
+                            <p
+                              className={`w-fit rounded-full px-1 py-0.5 font-medium first-letter:capitalize md:px-2 ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} text-center`}
+                            >
+                              {type}
+                            </p>
+                          </div>
+                        )}
                       </div>
+                    </div>
+                    {/* tx amount */}
+                    <div
+                      className={`flex flex-col items-end justify-center font-semibold`}
+                    >
+                      <p
+                        className={`text-center text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
+                      >
+                        {(isDeposit ? "+" : "-") + getformattedAmount(amount)}
+                      </p>
+                      <p className="text-dark-txt/50 text-[clamp(.5rem,1vw+.5rem,0.80rem)] font-medium">
+                        {getformattedDate(created_at, country)}
+                      </p>
                     </div>
                   </div>
                 );

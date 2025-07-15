@@ -25,11 +25,11 @@ const DateDDMMYYYYSwitcher = () => {
           className="cursor-pointer !text-[clamp(.9rem,2vw+.9rem,1rem)]"
           onCheckedChange={() => setDateToDDMMYYYY(!isDateToDDMMYYYY)}
           checked={isDateToDDMMYYYY}
-          id="date-timeago-switcher"
+          id="date-ddmmyyyy-switcher"
         />
         <label
           className="cursor-pointer text-nowrap"
-          htmlFor="date-timeago-switcher"
+          htmlFor="date-ddmmyyyy-switcher"
         >
           {isDateToDDMMYYYY ? "Enabled" : "Disabled"}
         </label>

@@ -5,7 +5,9 @@ import {
 } from "@/components/ui/popover";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import { useDateTimeStore } from "@/store/DateTimeStore";
+import { useTransactionListStore } from "@/store/TransactionListStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
+import { hexToRgba } from "@/utils/helper";
 import { CiEdit } from "react-icons/ci";
 import { PiTrashSimple } from "react-icons/pi";
 import { RxDotsVertical } from "react-icons/rx";
@@ -29,8 +31,11 @@ const TransactionRowData = ({
 
   const country = useCurrencyStore((state) => state.currencyOptions.country);
   const getformattedDate = useDateTimeStore((state) => state.getformattedDate);
+  const isCategoryLabelEnabled = useTransactionListStore(
+    (state) => state.isCategoryLabelEnabled,
+  );
 
-  const { amount, name, note, type, created_at, id } = dataItem;
+  const { amount, name, note, type, created_at, id, categories } = dataItem;
   const isDeposit = dataItem.type === "deposit";
 
   const handleEdit = () => {
@@ -86,15 +91,32 @@ const TransactionRowData = ({
       <div className="mt-1 flex h-full w-full items-center justify-between gap-3 md:mt-0">
         {/* tx type */}
         <div className="flex items-center gap-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)]">
-          <div
-            className={`flex border ${isDeposit ? "border-green-200 bg-green-100" : "border-red-200 bg-red-100"} items-center justify-center rounded-2xl px-2`}
-          >
-            <p
-              className={`w-fit rounded-full px-1 py-0.5 font-medium first-letter:capitalize md:px-2 ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} text-center`}
+          {isCategoryLabelEnabled ? (
+            <div
+              style={{
+                backgroundColor: hexToRgba(categories?.color || "#f26f6f", 30),
+                border: "1px solid",
+                borderColor: categories?.color || "#f26f6f",
+              }}
+              className={`flex items-center justify-center rounded-2xl border px-2`}
             >
-              {type}
-            </p>
-          </div>
+              <p
+                className={`text-dark-txt/80 w-fit max-w-[5rem] truncate rounded-full px-1 py-0.5 text-center font-medium first-letter:capitalize sm:max-w-[10rem] md:px-2`}
+              >
+                {categories?.name || "Uncategorized"}
+              </p>
+            </div>
+          ) : (
+            <div
+              className={`flex border ${isDeposit ? "border-green-200 bg-green-100" : "border-red-200 bg-red-100"} items-center justify-center rounded-2xl px-2`}
+            >
+              <p
+                className={`w-fit rounded-full px-1 py-0.5 font-medium first-letter:capitalize md:px-2 ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} text-center`}
+              >
+                {type}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* tx amount */}

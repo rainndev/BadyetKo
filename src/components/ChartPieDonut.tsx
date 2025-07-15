@@ -15,7 +15,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useCurrencyStore } from "@/store/CurrencyStore";
 
 type ChartPieDonutData = {
   category_name: string;
@@ -25,10 +24,6 @@ type ChartPieDonutData = {
 type ChartPieDonutProps = { chartData: ChartPieDonutData[] };
 
 const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
-  const getformattedAmount = useCurrencyStore(
-    (state) => state.getformattedAmount,
-  );
-
   const chartConfig = Object.fromEntries(
     chartData.map((item) => [
       item.category_name.toLowerCase().replace(/\s+/g, "_"), // key
@@ -81,8 +76,9 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
             }}
             className="flex w-fit items-center gap-2 rounded-full p-2 px-4 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
           >
-            <span className="text-nowrap">{category_name}</span>
-            {/* <p>{getformattedAmount(net_balance)}</p> */}
+            <span className="text-dark-txt/90 text-nowrap">
+              {category_name}
+            </span>
           </div>
         ))}
       </CardFooter>

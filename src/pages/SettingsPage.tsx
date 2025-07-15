@@ -10,6 +10,7 @@ import { useDateTimeStore } from "@/store/DateTimeStore";
 import supabase from "@/supabase/supabase-client";
 import { useSession } from "@/context/SessionContext";
 import DateDDMMYYYYSwitcher from "@/components/DateDDMMYYYYSwitcher";
+import TransactionLabelSwitcher from "@/components/TransactionLabelSwitcher";
 
 const SettingsPage = () => {
   const { userID } = useSession();
@@ -60,6 +61,16 @@ const SettingsPage = () => {
           <DateTimeZoneSwitcher />
           <DateTimeAgoSwitcher />
           <DateDDMMYYYYSwitcher />
+        </div>
+      </div>
+
+      <div className="w-full">
+        <h1 className="text-dark-txt mb-2 text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
+          Transaction List
+        </h1>
+
+        <div className="mt-5 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          <TransactionLabelSwitcher />
         </div>
       </div>
 

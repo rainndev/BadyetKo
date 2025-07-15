@@ -4,8 +4,7 @@ import { useTransactionCategory } from "@/hooks/useTransactionCategory";
 import { hexToRgba } from "@/utils/helper";
 
 const CategoryPage = () => {
-  const { categoryList, isCategoryListLoading, deleteCategory } =
-    useTransactionCategory();
+  const { categoryList, isCategoryListLoading } = useTransactionCategory();
 
   return (
     <div className="flex min-h-screen w-full flex-col items-start p-5 md:p-10">
