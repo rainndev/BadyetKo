@@ -8,6 +8,7 @@ import { useState } from "react";
 import LoadingPulse from "@/components/LoadingPulse";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
+import TransactionListPlaceholder from "@/components/TransactionListPlaceholder";
 
 const TransactionsPage = () => {
   const { bank_id } = useParams();
@@ -50,23 +51,26 @@ const TransactionsPage = () => {
           Balance: {getformattedAmount(bankBalance)}
         </h1>
 
-        {isTransactionListLoading ? (
-          <LoadingPulse />
-        ) : (
-          <div className="hide-scrollbar h-fit overflow-x-auto">
-            <div className="flex flex-col divide-y divide-gray-100">
-              {transactionData?.transactions.map((dataItem) => (
-                <TransactionRowData
-                  key={dataItem.id}
-                  dataItem={dataItem}
-                  deleteTransaction={deleteTransaction}
-                  setEditOpen={setEditOpen}
-                  setSelectedItem={setSelectedItem}
+        <div className="hide-scrollbar h-fit overflow-x-auto">
+          <div className="flex flex-col gap-2 divide-y divide-gray-100">
+            {isTransactionListLoading &&
+              [...Array(5)].map((_, idx) => (
+                <TransactionListPlaceholder
+                  key={"transaction-list-placeholder" + idx}
                 />
               ))}
-            </div>
+
+            {transactionData?.transactions.map((dataItem) => (
+              <TransactionRowData
+                key={dataItem.id}
+                dataItem={dataItem}
+                deleteTransaction={deleteTransaction}
+                setEditOpen={setEditOpen}
+                setSelectedItem={setSelectedItem}
+              />
+            ))}
           </div>
-        )}
+        </div>
 
         <button
           onClick={() => setShowModal(true)}
