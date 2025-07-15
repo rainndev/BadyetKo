@@ -13,8 +13,7 @@ import DashboardTabs from "@/components/DashboardTabs";
 const DashboardPage = () => {
   const [isShowModal, setShowModal] = useState(false);
   const { isLarge } = useBreakpoints();
-  const { session } = useSession();
-  const user_id = session?.user.id ?? "";
+  const { userID } = useSession();
 
   //GET NET BALANCE
   const {
@@ -24,14 +23,14 @@ const DashboardPage = () => {
     isLoadingUserStatistic,
     TXStat,
     CategoryNetStat,
-  } = useUserStatistic(user_id);
+  } = useUserStatistic(userID);
 
   return (
     <>
       <BankAddModal
         isShowModal={isShowModal}
         setShowModal={setShowModal}
-        user_id={user_id}
+        user_id={userID}
       />
 
       <div className="bg-light-background m-0 flex h-full w-full flex-col p-5 md:p-10 lg:rounded-[3rem]">
