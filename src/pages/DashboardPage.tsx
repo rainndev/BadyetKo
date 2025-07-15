@@ -43,7 +43,7 @@ const DashboardPage = () => {
               total_balance,
               total_deposit,
               total_withdraw,
-              TXStat: TXStat ?? undefined,
+              TXStat: TXStat ?? [],
             }}
             isLoading={isLoadingUserStatistic}
           />

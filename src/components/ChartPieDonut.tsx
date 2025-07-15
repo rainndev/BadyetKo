@@ -35,7 +35,7 @@ const ChartPieDonut = ({ chartData }: ChartPieDonutProps) => {
   ) satisfies ChartConfig;
 
   return (
-    <Card className="border-dark-background/20 flex flex-col p-2 md:p-10">
+    <Card className="border-dark-background/20 mt-5 flex flex-col p-2 md:p-10">
       <CardHeader className="items-center pb-0">
         <CardTitle>Category-wise Net Balances</CardTitle>
         <CardDescription>
