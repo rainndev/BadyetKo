@@ -78,7 +78,7 @@ function AreaChartData() {
   });
 
   return (
-    <Card className="border-dark-background/20 border p-5 md:p-10">
+    <Card className="p-2 md:p-10">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Transaction Overview</CardTitle>

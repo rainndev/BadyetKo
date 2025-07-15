@@ -46,7 +46,4 @@ export const loadSettingsFromSupabase = async (userId: string) => {
       isCategoryLabelEnabled: settings.transactionList.isCategoryLabelEnabled
     });
   }
-
-  
-
 };
