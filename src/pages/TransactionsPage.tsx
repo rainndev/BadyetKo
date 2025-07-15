@@ -5,7 +5,6 @@ import TransactionRowData from "@/components/TransactionRowData";
 import TransactionAddModal from "@/components/TransactionAddModal";
 import TransactionEditModal from "@/components/TransactionEditModal";
 import { useState } from "react";
-import LoadingPulse from "@/components/LoadingPulse";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
 import TransactionListPlaceholder from "@/components/TransactionListPlaceholder";

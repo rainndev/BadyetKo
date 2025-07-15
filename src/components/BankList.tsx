@@ -30,12 +30,12 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
     );
 
   return (
-    <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 md:p-10 lg:border">
+    <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 py-5 md:p-10 lg:border">
       {/* add bank wallet */}
       <div className="mb-5 flex flex-col gap-2">
         {/* -----header with add bank btn */}
         <div className="flex w-full items-center justify-between">
-          <h1 className="text-dark-txt text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
+          <h1 className="text-dark-txt text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-semibold">
             Accounts
           </h1>
 
@@ -67,7 +67,7 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
       )}
 
       <div className={`hide-scrollbar w-full`}>
-        <div className="grid grid-cols-2 gap-3 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-1 @sm:grid-cols-3 @md:grid-cols-4 @md:gap-2 @lg:grid-cols-5">
           {isBankListLoading &&
             [...new Array(5)].map((_, idx) => (
               <BankGridPlaceholder key={"bank-grid-placehold" + idx} />
