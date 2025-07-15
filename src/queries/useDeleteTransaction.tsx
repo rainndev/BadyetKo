@@ -10,6 +10,7 @@ export const useDeleteTransaction = (user_id: string, userID: string) => {
         queryKey: ["transaction", user_id],
       });
       queryClient.invalidateQueries({ queryKey: ["banks", userID] });
+      queryClient.invalidateQueries({ queryKey: ["users", userID] });
     },
   });
 };

@@ -26,15 +26,11 @@ export const getUserStatistics = async (): Promise<{
   const { data: userData, error: userDataError } = await supabase
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
-
-
   const { data: categoryNetData, error: categoryNetError } = await supabase.rpc("get_category_net_balances");
-
   const { data: transactionData, error: transactionDataError } =
     await supabase.rpc("get_min_max_transactions");
 
-  console.log("data minmax", transactionData)
-
+    
   if (userDataError || transactionDataError || categoryNetError)
     throw userDataError ?? transactionDataError;
 

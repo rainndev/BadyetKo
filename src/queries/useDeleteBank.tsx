@@ -9,6 +9,7 @@ export const useDeleteBank = (user_id: string) => {
       queryClient.invalidateQueries({
         queryKey: ["banks", user_id],
       });
+      queryClient.invalidateQueries({ queryKey: ["users", user_id] });
     },
   });
 };

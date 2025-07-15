@@ -9,6 +9,7 @@ export const useCreateTransaction = (bankID: string, userID: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transaction", bankID] });
       queryClient.invalidateQueries({ queryKey: ["banks", userID] });
+      queryClient.invalidateQueries({ queryKey: ["users", userID] });
     },
   });
 };

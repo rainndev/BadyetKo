@@ -5,6 +5,7 @@ export const useUserStatistic = (user_id: string) => {
   const { data: userStatistic, isLoading: isLoadingUserStatistic } = useQuery({
     queryKey: ["users", user_id],
     queryFn: getUserStatistics,
+    staleTime: 10 * 60 * 1000, // 10 minutes in milliseconds
     enabled: !!user_id,
     refetchOnWindowFocus: false,
   });
