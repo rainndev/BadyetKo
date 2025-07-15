@@ -1,5 +1,7 @@
+import type { UserSettings } from "@/data/settingsSaveOptions";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import { useDateTimeStore } from "@/store/DateTimeStore";
+import { useTransactionListStore } from "@/store/TransactionListStore";
 import supabase from "@/supabase/supabase-client";
 
 export const loadSettingsFromSupabase = async (userId: string) => {
@@ -14,10 +16,10 @@ export const loadSettingsFromSupabase = async (userId: string) => {
     return;
   }
 
-  const settings = data.user_settings;
+  const settings = data.user_settings as  UserSettings;
   if (!settings) return;
 
-  // 🔁 Hydrate currency store
+  //  Hydrate currency store
   if (settings.currency) {
     useCurrencyStore.setState({
       isMasked: settings.currency.isMasked,
@@ -26,7 +28,7 @@ export const loadSettingsFromSupabase = async (userId: string) => {
     });
   }
 
-  // 🔁 Hydrate dateTime store
+  //  Hydrate dateTime store
   if (settings.dateTime) {
     useDateTimeStore.setState({
       config: settings.dateTime.config,
@@ -37,4 +39,14 @@ export const loadSettingsFromSupabase = async (userId: string) => {
       isDateToDDMMYYYY: settings.dateTime.isDateToDDMMYYYY,
     });
   }
+  
+  //  Hydrate transactionList store
+  if (settings.transactionList) {
+    useTransactionListStore.setState({
+      isCategoryLabelEnabled: settings.transactionList.isCategoryLabelEnabled
+    });
+  }
+
+  
+
 };

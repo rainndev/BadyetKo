@@ -5,32 +5,15 @@ import Date12HourSwitcher from "@/components/Date12HourSwitcher";
 import DateSecondsSwitcher from "@/components/DateSecondsSwitcher";
 import DateTimeZoneSwitcher from "@/components/DateTimeZoneSwitcher";
 import DateTimeAgoSwitcher from "@/components/DateTimeAgoSwitcher";
-import { useCurrencyStore } from "@/store/CurrencyStore";
-import { useDateTimeStore } from "@/store/DateTimeStore";
 import supabase from "@/supabase/supabase-client";
 import { useSession } from "@/context/SessionContext";
 import DateDDMMYYYYSwitcher from "@/components/DateDDMMYYYYSwitcher";
 import TransactionLabelSwitcher from "@/components/TransactionLabelSwitcher";
+import { user_settings } from "@/data/settingsSaveOptions";
 
 const SettingsPage = () => {
   const { userID } = useSession();
   const handleSaveSettings = async () => {
-    const user_settings = {
-      currency: {
-        currencyOptions: useCurrencyStore.getState().currencyOptions,
-        isMasked: useCurrencyStore.getState().isMasked,
-        isISOSymbol: useCurrencyStore.getState().isISOSymbol,
-      },
-      dateTime: {
-        config: useDateTimeStore.getState().config,
-        isSecondEnabled: useDateTimeStore.getState().isSecondEnabled,
-        isHour12Enabled: useDateTimeStore.getState().isHour12Enabled,
-        isTimezoneEnabled: useDateTimeStore.getState().isTimezoneEnabled,
-        isTimeAgoEnabled: useDateTimeStore.getState().isTimeAgoEnabled,
-        isDateToDDMMYYYY: useDateTimeStore.getState().isDateToDDMMYYYY,
-      },
-    };
-
     console.log("settings config", user_settings);
     await supabase.from("users").update({ user_settings }).eq("id", userID);
   };
