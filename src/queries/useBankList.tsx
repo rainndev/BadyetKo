@@ -5,6 +5,7 @@ export const useBankList = (user_id: string) =>
   useQuery({
     queryKey: ["banks", user_id],
     queryFn: getBankList,
+    staleTime: 10 * 60 * 1000, // 10 minutes in milliseconds
     enabled: !!user_id,
     refetchOnWindowFocus: false,
   });
