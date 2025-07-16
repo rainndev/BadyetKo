@@ -1,15 +1,18 @@
+import { useSession } from "@/context/SessionContext";
 import { useBankList } from "@/queries/useBankList";
 import { useCreateBank } from "@/queries/useCreateBank";
 import { useDeleteBank } from "@/queries/useDeleteBank";
 
-export const useBank = (user_id: string) => {
+export const useBank = () => {
+
+  const {userID} = useSession()
   //GET FETCH BANKS
   const {
     data: bankList,
     isLoading: isBankListLoading,
     isError: isBankListError,
     error: bankListError,
-  } = useBankList(user_id);
+  } = useBankList(userID);
 
   const isBanklistEmpty = !(Array.isArray(bankList) && bankList.length > 0);
 
@@ -18,10 +21,10 @@ export const useBank = (user_id: string) => {
     mutate: addBank,
     isPending: isAddBankPending,
     isSuccess: isAddBankSuccess,
-  } = useCreateBank(user_id);
+  } = useCreateBank(userID);
 
   //REMOVE BANK
-  const { mutate: removeBank } = useDeleteBank(user_id);
+  const { mutate: removeBank } = useDeleteBank(userID);
 
   return {
     bankList,

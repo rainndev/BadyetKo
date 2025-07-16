@@ -24,7 +24,7 @@ export const createBank = async ({
   return data;
 };
 
-export const removeBank = async (bankID: string): Promise<BankListTypes[]> => {
+export const removeBank = async ({ bankID, avatarFilePath }: {bankID: string, avatarFilePath: string} ): Promise<BankListTypes[]> => {
   const { data, error } = await supabase
     .from("banks")
     .delete()
@@ -32,6 +32,13 @@ export const removeBank = async (bankID: string): Promise<BankListTypes[]> => {
     .select()
     .single();
 
-  if (error) throw error;
+  const { error: deletingAvatarError } = await supabase.storage
+      .from("bank-avatar")
+      .remove([avatarFilePath]);
+
+  if (error || deletingAvatarError){
+    console.error("deleting bank and avatar error", error?.message, deletingAvatarError?.message  )
+    throw error
+  } ;
   return data;
 };

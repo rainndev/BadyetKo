@@ -6,7 +6,7 @@ import { IoClose } from "react-icons/io5";
 
 type BankGridDataProps = {
   bankItemData: BankListTypes;
-  removeBank: (id: string) => void;
+  removeBank: (params: { bankID: string; avatarFilePath: string }) => void;
   isTrashEnabled: boolean;
 };
 
@@ -20,6 +20,9 @@ const BankGridData = ({
     (state) => state.getformattedAmount,
   );
   const { id, balance, custom_bank_avatar } = bankItemData;
+
+  console.log("custom avatar path", custom_bank_avatar);
+
   return (
     <div
       onClick={() => !isTrashEnabled && navigate(`/bank/${id}`)}
@@ -32,7 +35,12 @@ const BankGridData = ({
       </div>
       {isTrashEnabled && (
         <div
-          onClick={() => removeBank(id)}
+          onClick={() =>
+            removeBank({
+              bankID: id,
+              avatarFilePath: custom_bank_avatar as string,
+            })
+          }
           className={`bg-light-background text-dark-background/40 absolute -top-3 -right-3 rounded-full p-2`}
         >
           <IoClose />

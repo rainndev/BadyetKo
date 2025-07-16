@@ -4,7 +4,6 @@ import { PiEmptyThin, PiTrashSimpleLight } from "react-icons/pi";
 import { useState } from "react";
 import BankGridData from "./BankGridData";
 import BankGridPlaceholder from "./BankGridPlaceholder";
-import { useSession } from "@/context/SessionContext";
 
 type BankListProps = {
   isShowModal: boolean;
@@ -13,7 +12,6 @@ type BankListProps = {
 
 const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
   const [isTrashEnabled, setTrashEnabled] = useState(false);
-  const { userID } = useSession();
 
   const {
     removeBank,
@@ -22,7 +20,7 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
     bankListError,
     isBankListLoading,
     isBanklistEmpty,
-  } = useBank(userID);
+  } = useBank();
 
   if (isBankListError)
     return (
@@ -79,8 +77,8 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
               <BankGridData
                 key={bankItemData.id}
                 bankItemData={bankItemData}
-                isTrashEnabled={isTrashEnabled}
                 removeBank={removeBank}
+                isTrashEnabled={isTrashEnabled}
               />
             ))}
         </div>
