@@ -29,8 +29,6 @@ const DashboardStatisticCard = ({
   );
 
   const { total_balance, total_deposit, total_withdraw, TXStat } = data;
-
-  console.log("tx stat", TXStat);
   return (
     <motion.div
       layout

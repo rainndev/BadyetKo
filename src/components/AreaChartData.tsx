@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { PiEmptyThin } from "react-icons/pi";
 
 import {
   Card,
@@ -67,7 +68,7 @@ function AreaChartData() {
     return date >= startDate;
   });
 
-  console.log("transaction volume length", data?.length);
+  const isTransactionEmpty = !data || data.length === 0;
 
   return (
     <Card className="p-2 md:p-10 lg:border">
@@ -78,7 +79,11 @@ function AreaChartData() {
             Visualizing total transaction volume over the selected time range.
           </CardDescription>
         </div>
-        <Select value={timeRange} onValueChange={setTimeRange}>
+        <Select
+          disabled={isTransactionEmpty}
+          value={timeRange}
+          onValueChange={setTimeRange}
+        >
           <SelectTrigger
             className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex"
             aria-label="Select a value"
@@ -99,86 +104,97 @@ function AreaChartData() {
         </Select>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
-        >
-          <AreaChart data={filteredData}>
-            <defs>
-              <linearGradient id="fillDeposit" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-amber-300)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-amber-300)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-              <linearGradient id="fillWithdraw" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-red-300)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-red-300)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-            </defs>
+        {isTransactionEmpty && (
+          <div className="text-dark-txt/70 flex aspect-auto h-[250px] w-full items-center justify-center gap-2">
+            <PiEmptyThin className="text-xl" />
+            <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
+              You currently have no transactions.
+            </p>
+          </div>
+        )}
 
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="date"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              minTickGap={32}
-              tickFormatter={(value) => {
-                const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                });
-              }}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={
-                <ChartTooltipContent
-                  labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                    });
-                  }}
-                  indicator="line"
-                />
-              }
-            />
+        {!isTransactionEmpty && (
+          <ChartContainer
+            config={chartConfig}
+            className="aspect-auto h-[250px] w-full"
+          >
+            <AreaChart data={filteredData}>
+              <defs>
+                <linearGradient id="fillDeposit" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-amber-300)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-amber-300)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="fillWithdraw" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-red-300)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-red-300)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
 
-            <Area
-              dataKey="deposit"
-              type="monotone"
-              fill="url(#fillDeposit)"
-              stroke="var(--color-amber-300)"
-              stackId="a"
-            />
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="date"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                minTickGap={32}
+                tickFormatter={(value) => {
+                  const date = new Date(value);
+                  return date.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  });
+                }}
+              />
+              <ChartTooltip
+                cursor={false}
+                content={
+                  <ChartTooltipContent
+                    labelFormatter={(value) => {
+                      return new Date(value).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      });
+                    }}
+                    indicator="line"
+                  />
+                }
+              />
 
-            <Area
-              dataKey="withdraw"
-              type="monotone"
-              fill="url(#fillWithdraw)"
-              stroke="var(--color-red-300)"
-              stackId="a"
-            />
-            <ChartLegend content={<ChartLegendContent />} />
-          </AreaChart>
-        </ChartContainer>
+              <Area
+                dataKey="deposit"
+                type="monotone"
+                fill="url(#fillDeposit)"
+                stroke="var(--color-amber-300)"
+                stackId="a"
+              />
+
+              <Area
+                dataKey="withdraw"
+                type="monotone"
+                fill="url(#fillWithdraw)"
+                stroke="var(--color-red-300)"
+                stackId="a"
+              />
+              <ChartLegend content={<ChartLegendContent />} />
+            </AreaChart>
+          </ChartContainer>
+        )}
       </CardContent>
     </Card>
   );

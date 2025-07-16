@@ -4,6 +4,7 @@ import { useDateTimeStore } from "@/store/DateTimeStore";
 import { useTransactionListStore } from "@/store/TransactionListStore";
 import { hexToRgba } from "@/utils/helper";
 import TransactionListPlaceholder from "./TransactionListPlaceholder";
+import { PiEmptyThin } from "react-icons/pi";
 
 const AllTransactionList = () => {
   const { data, isLoading } = useTransactionList();
@@ -28,9 +29,12 @@ const AllTransactionList = () => {
 
       <div className="hide-scrollbar h-full overflow-x-auto">
         {isTXlistEmpty && !isLoading && (
-          <p className="text-dark-txt/70 text-[clamp(.5rem,2vw+.5rem,.9rem)]">
-            You currently have no transactions.
-          </p>
+          <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto min-h-100 w-full items-center justify-center gap-2">
+            <PiEmptyThin className="text-xl" />
+            <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
+              You currently have no transactions.
+            </p>
+          </div>
         )}
 
         <div className="flex w-full flex-col gap-3 divide-y divide-gray-100">

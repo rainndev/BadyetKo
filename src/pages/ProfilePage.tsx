@@ -1,10 +1,13 @@
 import supabase from "@/supabase/supabase-client";
+import { useQueryClient } from "@tanstack/react-query";
 import { RiLogoutCircleLine } from "react-icons/ri";
 
 const ProfilePage = () => {
+  const queryClient = useQueryClient();
   const handleSignout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
+    queryClient.clear();
   };
 
   return (

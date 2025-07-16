@@ -17,6 +17,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import ChartPieDonutPlaceholder from "./ChartPieDonutPlaceholder";
+import { PiEmptyThin } from "react-icons/pi";
 
 type ChartPieDonutData = {
   category_name: string;
@@ -42,6 +43,8 @@ const ChartPieDonut = ({
     ]),
   ) satisfies ChartConfig;
 
+  const isChartDataEmpty = !chartData || chartData.length === 0;
+
   return (
     <Card className="border-dark-background/20 mt-5 flex flex-col p-2 pt-10 md:m-0 md:p-10">
       <CardHeader className="items-center pb-0">
@@ -51,6 +54,14 @@ const ChartPieDonut = ({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
+        {isChartDataEmpty && (
+          <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto h-full w-full items-center justify-center gap-2">
+            <PiEmptyThin className="text-xl" />
+            <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
+              You currently have no transactions.
+            </p>
+          </div>
+        )}
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"

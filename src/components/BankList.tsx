@@ -1,6 +1,6 @@
 import { useBank } from "@/hooks/useBank";
 import { FaPlus } from "react-icons/fa6";
-import { PiTrashSimpleLight } from "react-icons/pi";
+import { PiEmptyThin, PiTrashSimpleLight } from "react-icons/pi";
 import { useState } from "react";
 import BankGridData from "./BankGridData";
 import BankGridPlaceholder from "./BankGridPlaceholder";
@@ -61,9 +61,12 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
       </div>
 
       {isBanklistEmpty && !isBankListLoading && (
-        <p className="text-dark-txt/70 text-[clamp(.5rem,2vw+.5rem,.9rem)]">
-          You haven't added any banks yet.
-        </p>
+        <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto min-h-100 w-full items-center justify-center gap-2">
+          <PiEmptyThin className="text-xl" />
+          <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
+            You haven't added any banks yet.
+          </p>
+        </div>
       )}
 
       <div className={`hide-scrollbar w-full`}>
