@@ -20,7 +20,7 @@ import { PiEmptyThin } from "react-icons/pi";
 import { useCategoryPieData } from "@/queries/useCategoryPieData";
 
 const ChartPieDonut = () => {
-  const { data, error, isLoading } = useCategoryPieData();
+  const { data, isLoading, isError } = useCategoryPieData();
 
   const chartConfig = Object.fromEntries(
     (data || []).map((item) => [
@@ -33,7 +33,6 @@ const ChartPieDonut = () => {
   ) satisfies ChartConfig;
 
   const isChartDataEmpty = !data || data.length === 0;
-
   return (
     <Card className="border-dark-background/20 mt-5 flex flex-col p-2 pt-10 md:m-0 md:p-10">
       <CardHeader className="items-center pb-0">
@@ -49,18 +48,20 @@ const ChartPieDonut = () => {
             <div className="bg-dark-background/50 m-5 size-50 animate-pulse rounded-full" />
           </div>
         )}
-        {/* show this when no tx made yet */}
-        {isChartDataEmpty && !isLoading && (
+        {/* show this when error or no tx made yet */}
+        {((isChartDataEmpty && !isLoading) || isError) && (
           <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto h-full w-full items-center justify-center gap-2">
             <PiEmptyThin className="text-xl" />
             <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
-              You currently have no transactions.
+              {isError
+                ? "Something went wrong."
+                : "You currently have no transactions."}
             </p>
           </div>
         )}
 
         {/* actual pie chart with data */}
-        {!isLoading && (
+        {!isLoading && !isError && (
           <ChartContainer
             config={chartConfig}
             className="mx-auto aspect-square max-h-[250px]"
@@ -93,6 +94,7 @@ const ChartPieDonut = () => {
 
         {!isLoading &&
           !isChartDataEmpty &&
+          !isError &&
           data.map(({ category_name, color }, idx) => (
             <div
               key={category_name + idx}
