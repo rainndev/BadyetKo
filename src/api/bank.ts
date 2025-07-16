@@ -2,7 +2,11 @@ import supabase from "../supabase/supabase-client";
 import { type BankListTypes } from "../types/bank.types";
 
 export const getBankList = async (): Promise<BankListTypes[]> => {
-  const { data, error } = await supabase.from(`banks`).select("*");
+  const { data, error } = await supabase
+  .from("banks")
+  .select("*")
+  .order("created_at", { ascending: false });
+  
   if (error) throw error;
   return data;
 };

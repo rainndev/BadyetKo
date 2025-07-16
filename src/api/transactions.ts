@@ -41,6 +41,7 @@ export const getTransactionList = async (
         color
       )
     `)
+    .order("created_at", { ascending: false })
     .eq("bank_id", bankID);
 
   const { data: bankData, error: bankError } = await supabase
