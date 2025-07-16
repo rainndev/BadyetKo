@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -18,23 +17,13 @@ import {
 } from "@/components/ui/chart";
 import ChartPieDonutPlaceholder from "./ChartPieDonutPlaceholder";
 import { PiEmptyThin } from "react-icons/pi";
+import { useCategoryPieData } from "@/queries/useCategoryPieData";
 
-type ChartPieDonutData = {
-  category_name: string;
-  net_balance: number;
-  color: string;
-};
-type ChartPieDonutProps = {
-  chartData: ChartPieDonutData[];
-  isLoadingUserStatistic: boolean;
-};
+const ChartPieDonut = () => {
+  const { data, error, isLoading } = useCategoryPieData();
 
-const ChartPieDonut = ({
-  chartData,
-  isLoadingUserStatistic,
-}: ChartPieDonutProps) => {
   const chartConfig = Object.fromEntries(
-    chartData.map((item) => [
+    (data || []).map((item) => [
       item.category_name.toLowerCase().replace(/\s+/g, "_"), // key
       {
         label: item.category_name,
@@ -43,7 +32,7 @@ const ChartPieDonut = ({
     ]),
   ) satisfies ChartConfig;
 
-  const isChartDataEmpty = !chartData || chartData.length === 0;
+  const isChartDataEmpty = !data || data.length === 0;
 
   return (
     <Card className="border-dark-background/20 mt-5 flex flex-col p-2 pt-10 md:m-0 md:p-10">
@@ -54,7 +43,14 @@ const ChartPieDonut = ({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        {isChartDataEmpty && (
+        {/* loading placeholder chart */}
+        {isLoading && (
+          <div className="flex w-full items-center justify-center">
+            <div className="bg-dark-background/50 m-5 size-50 animate-pulse rounded-full" />
+          </div>
+        )}
+        {/* show this when no tx made yet */}
+        {isChartDataEmpty && !isLoading && (
           <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto h-full w-full items-center justify-center gap-2">
             <PiEmptyThin className="text-xl" />
             <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
@@ -62,50 +58,56 @@ const ChartPieDonut = ({
             </p>
           </div>
         )}
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
-        >
-          <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Pie
-              data={chartData}
-              dataKey="net_balance"
-              nameKey="category_name"
-              innerRadius={60}
-              strokeWidth={5}
-            >
-              {chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color || "#f26f6f"} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ChartContainer>
+
+        {/* actual pie chart with data */}
+        {!isLoading && (
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square max-h-[250px]"
+          >
+            <PieChart>
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Pie
+                data={data}
+                dataKey="net_balance"
+                nameKey="category_name"
+                innerRadius={60}
+                strokeWidth={5}
+              >
+                {(data ?? []).map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color || "#f26f6f"} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ChartContainer>
+        )}
       </CardContent>
       <motion.div
         layout
         className="flex flex-wrap justify-center gap-2 text-sm tabular-nums"
       >
-        {isLoadingUserStatistic && <ChartPieDonutPlaceholder />}
+        {isLoading && <ChartPieDonutPlaceholder />}
 
-        {chartData.map(({ category_name, color }, idx) => (
-          <div
-            key={category_name + idx}
-            style={{
-              backgroundColor: hexToRgba(color || "#f26f6f", 30),
-              border: "1px solid",
-              borderColor: color || "#f26f6f",
-            }}
-            className="flex w-fit items-center gap-2 rounded-full p-2 px-4 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
-          >
-            <span className="text-dark-txt/90 text-nowrap">
-              {category_name}
-            </span>
-          </div>
-        ))}
+        {!isLoading &&
+          !isChartDataEmpty &&
+          data.map(({ category_name, color }, idx) => (
+            <div
+              key={category_name + idx}
+              style={{
+                backgroundColor: hexToRgba(color || "#f26f6f", 30),
+                border: "1px solid",
+                borderColor: color || "#f26f6f",
+              }}
+              className="flex w-fit items-center gap-2 rounded-full p-2 px-4 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
+            >
+              <span className="text-dark-txt/90 text-nowrap">
+                {category_name}
+              </span>
+            </div>
+          ))}
       </motion.div>
     </Card>
   );

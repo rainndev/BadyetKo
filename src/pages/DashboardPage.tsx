@@ -22,7 +22,6 @@ const DashboardPage = () => {
     total_withdraw,
     isLoadingUserStatistic,
     TXStat,
-    CategoryNetStat,
   } = useUserStatistic(userID);
 
   return (
@@ -47,10 +46,7 @@ const DashboardPage = () => {
             }}
             isLoading={isLoadingUserStatistic}
           />
-          <ChartPieDonut
-            chartData={CategoryNetStat}
-            isLoadingUserStatistic={isLoadingUserStatistic}
-          />
+          <ChartPieDonut />
         </div>
         <br />
         <DashboardTabs isShowModal={isShowModal} setShowModal={setShowModal} />

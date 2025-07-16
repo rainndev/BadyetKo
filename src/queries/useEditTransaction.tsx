@@ -9,7 +9,7 @@ export const useEditTransaction = () => {
       queryClient.invalidateQueries({
         queryKey: ["transaction"],
       });
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["category-pie-data"] });
     },
   });
 };

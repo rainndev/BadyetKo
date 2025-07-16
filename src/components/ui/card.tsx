@@ -1,10 +1,11 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+function Card({ className, ...props }: HTMLMotionProps<"div">) {
   return (
-    <div
+    <motion.div
       data-slot="card"
       className={cn(
         "bg-card text-card-foreground md:border-dark-background/20 flex flex-col gap-6 rounded-3xl md:border",

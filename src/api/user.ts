@@ -17,27 +17,20 @@ export const getUserStatistics = async (): Promise<{
     name: string;
      label: "Max Deposit" | "Min Deposit" | "Max Withdraw" | "Min Withdraw";
   }[];
-  categoryNetData: {
-    category_name: string,
-    net_balance:number
-    color: string
-  }[]
 }> => {
   const { data: userData, error: userDataError } = await supabase
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
-  const { data: categoryNetData, error: categoryNetError } = await supabase.rpc("get_category_net_balances");
   const { data: transactionData, error: transactionDataError } =
     await supabase.rpc("get_min_max_transactions");
 
     
-  if (userDataError || transactionDataError || categoryNetError)
+  if (userDataError || transactionDataError )
     throw userDataError ?? transactionDataError;
 
   return {
     userData,
     transactionData,
-    categoryNetData
   };
 };
 
@@ -72,3 +65,21 @@ export const updateUserCurrency = async ({
 
   return data;
 };
+
+
+type ChartPieDonutData = {
+  category_name: string;
+  net_balance: number;
+  color: string;
+};
+
+
+export const getCategoryPieData = async (): Promise<ChartPieDonutData[]> => {
+  const { data, error } = await supabase.rpc("get_category_net_balances");
+
+  if (error){
+    console.error("getCategoryNetData error", error)
+    throw error;
+  }
+  return data
+}
