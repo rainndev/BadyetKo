@@ -2,6 +2,7 @@ import { useCurrencyStore } from "@/store/CurrencyStore";
 import { CiWallet } from "react-icons/ci";
 import { IoTrendingUp } from "react-icons/io5";
 import DashboardStatisticPlaceholder from "./DashboardStatisticPlaceholder";
+import { motion } from "framer-motion";
 
 type transactionData = {
   amount: number;
@@ -31,7 +32,10 @@ const DashboardStatisticCard = ({
 
   console.log("tx stat", TXStat);
   return (
-    <div className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl p-2">
+    <motion.div
+      layout
+      className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl p-2"
+    >
       <div className="flex h-full w-full flex-col items-start justify-center">
         {isLoading ? (
           <div className="bg-dark-background/50 w-fit animate-pulse rounded-lg text-[clamp(1.1rem,2vw+1.1rem,2.5rem)] font-semibold tabular-nums md:rounded-2xl">
@@ -117,7 +121,7 @@ const DashboardStatisticCard = ({
           </>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useEffect } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import {
@@ -26,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getChartData, type ChartDataItem } from "@/utils/getChartData";
+import { getChartData } from "@/utils/getChartData";
 import { useQuery } from "@tanstack/react-query";
 
 const chartConfig = {
@@ -42,9 +41,6 @@ const chartConfig = {
 
 function AreaChartData() {
   const [timeRange, setTimeRange] = React.useState("90d");
-  // const [data, setData] = React.useState<ChartDataItem[] | undefined>(
-  //   undefined,
-  // );
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["area-chart-data"],
@@ -52,20 +48,6 @@ function AreaChartData() {
     staleTime: 10 * 60 * 1000, // 10 minutes in milliseconds
     refetchOnWindowFocus: false,
   });
-
-  // // Fetch chart data once
-  // useEffect(() => {
-  //   const fetchChartData = async () => {
-  //     try {
-  //       const chartData = await getChartData();
-  //       setData(chartData);
-  //     } catch (error) {
-  //       console.error("Error occurred fetching chart data", error);
-  //     }
-  //   };
-
-  //   fetchChartData();
-  // }, []);
 
   // Filter based on selected time range
   const filteredData = data?.filter((item) => {
@@ -85,8 +67,10 @@ function AreaChartData() {
     return date >= startDate;
   });
 
+  console.log("transaction volume length", data?.length);
+
   return (
-    <Card className="border-none p-2 md:p-10 lg:border">
+    <Card className="p-2 md:p-10 lg:border">
       <CardHeader className="flex items-center gap-2 space-y-0 py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Transaction Overview</CardTitle>

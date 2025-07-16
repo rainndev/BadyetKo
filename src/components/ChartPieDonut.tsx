@@ -1,5 +1,6 @@
 import { Cell, Pie, PieChart } from "recharts";
 import { hexToRgba } from "@/utils/helper";
+import { motion } from "framer-motion";
 
 import {
   Card,
@@ -73,7 +74,10 @@ const ChartPieDonut = ({
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex flex-wrap justify-center gap-2 text-sm tabular-nums">
+      <motion.div
+        layout
+        className="flex flex-wrap justify-center gap-2 text-sm tabular-nums"
+      >
         {isLoadingUserStatistic && <ChartPieDonutPlaceholder />}
 
         {chartData.map(({ category_name, color }, idx) => (
@@ -91,7 +95,7 @@ const ChartPieDonut = ({
             </span>
           </div>
         ))}
-      </CardFooter>
+      </motion.div>
     </Card>
   );
 };
