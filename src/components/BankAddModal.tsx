@@ -5,6 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { useSession } from "@/context/SessionContext";
+import CustomBankAvatar from "./customBankAvatar";
 
 interface BankAddModalProps {
   isShowModal: boolean;
@@ -25,15 +26,6 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
 
   //ADD NEW CUSTOM AVATAR
   const { mutate: addAvatar } = useCreateAvatar(image);
-
-  //SELECTING FILE AVATAR
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0]);
-    } else {
-      setImage(null);
-    }
-  };
 
   //Add data to supabase
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,6 +53,8 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
       filePath = `${userID}/${Date.now()}-${image.name}`;
       addAvatar({ filePath, image });
     }
+
+    console.log("filePath", image);
     addBank({ bankName, custom_bank_avatar: filePath });
     setBankName("");
     setImage(null);
@@ -97,6 +91,7 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
               className="relative space-y-2 rounded-2xl"
               onSubmit={handleSubmit}
             >
+              <CustomBankAvatar setImageCropped={setImage} />
               <p className="text-dark-txt/90 text-fluid-lg mb-2">Bank Name</p>
 
               <input
@@ -109,16 +104,6 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
               <p className="mb-2 text-sm text-red-400">{errorMessage}</p>
 
               <div className="grid w-full grid-cols-1 items-center justify-between gap-2 sm:grid-cols-2">
-                <input
-                  ref={imageRef}
-                  onChange={handleFileChange}
-                  type="file"
-                  id="avatar"
-                  accept="image/*"
-                  name="filename"
-                  className="border-dark-txt/20 hover:border-dark-background text-fluid-sm cursor-pointer rounded-lg border border-dashed p-3 transition-colors ease-in-out"
-                />
-
                 <button
                   disabled={isAddBankPending}
                   className="bg-dark-background text-light-background hover:bg-dark-background/90 text-fluid-sm cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
