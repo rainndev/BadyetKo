@@ -29,7 +29,7 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
   //Add data to supabase
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setErrorMessage("");
     const result = addBankSchema.safeParse({
       bankName,
       file: imageRef.current?.files?.[0],
