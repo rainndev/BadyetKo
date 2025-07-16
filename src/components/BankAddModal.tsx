@@ -18,7 +18,6 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const imageRef = useRef<HTMLInputElement>(null);
   const { userID } = useSession();
-
   const { addBank, isAddBankPending, isAddBankSuccess } = useBank();
 
   //Lock the body when showing modal
@@ -80,7 +79,10 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
             <button
               className="text-dark-txt/50 text-fluid-2xl cursor-pointer"
               disabled={isAddBankPending}
-              onClick={() => setShowModal(false)}
+              onClick={() => {
+                setErrorMessage("");
+                setShowModal(false);
+              }}
             >
               <IoMdClose />
             </button>
@@ -91,7 +93,10 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
               className="relative space-y-2 rounded-2xl"
               onSubmit={handleSubmit}
             >
-              <CustomBankAvatar setImageCropped={setImage} />
+              <CustomBankAvatar
+                setErrorMessage={setErrorMessage}
+                setImageCropped={setImage}
+              />
               <p className="text-dark-txt/90 text-fluid-lg mb-2">Bank Name</p>
 
               <input

@@ -79,14 +79,16 @@ async function getCroppedImg(
 
 type CustomBankAvatarProps = {
   setImageCropped: (value: File | null) => void;
+  setErrorMessage: (value: string) => void;
 };
 
 export default function CustomBankAvatar({
   setImageCropped,
+  setErrorMessage,
 }: CustomBankAvatarProps) {
   const [finalImageUrl, setFinalImageUrl] = useState<string | null>();
   const [
-    { files, isDragging },
+    { files, isDragging, errors },
     {
       handleDragEnter,
       handleDragLeave,
@@ -97,8 +99,16 @@ export default function CustomBankAvatar({
       getInputProps,
     },
   ] = useFileUpload({
+    maxFiles: 1,
+    maxSize: 1048576,
     accept: "image/*",
   });
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      setErrorMessage(errors[0]);
+    }
+  }, [errors, setErrorMessage]);
 
   const previewUrl = files[0]?.preview || null;
   const fileId = files[0]?.id;
