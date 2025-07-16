@@ -27,10 +27,10 @@ const AuthPageContainer = () => {
             className="mb-10"
           />
           <hr className="mb-15" />
-          <h1 className="text-dark-txt mb-2 text-[clamp(1rem,1vw+1rem,1.3rem)] font-bold">
+          <h1 className="text-dark-txt text-fluid-2xl mb-2 font-bold">
             {isLogin ? "Welcome Back" : "Get Started"}
           </h1>
-          <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-gray-600">
+          <p className="text-fluid-base text-gray-600">
             {isLogin
               ? "Log in to track your bank balances, deposits, and withdrawals in one place."
               : "Create an account to start managing multiple bank accounts with ease."}
@@ -43,7 +43,7 @@ const AuthPageContainer = () => {
           onClick={() => {
             setLogin(!isLogin);
           }}
-          className="text-dark-txt/70 mt-2 cursor-pointer text-[clamp(.6rem,1.5vw+.6rem,1rem)]"
+          className="text-dark-txt/70 text-fluid-base mt-2 cursor-pointer"
         >
           <p>
             {isLogin ? "New here? " : "Already registered? "}

@@ -21,7 +21,7 @@ const SelectCategoryForm = ({ setFormCategory }: SelectCategoryFormProps) => {
         disabled={isCategoryEmpty}
         onValueChange={(value) => setFormCategory(value)}
       >
-        <SelectTrigger className="ring-dark-background/10 text-dark-txt/80 w-full rounded-lg !p-6 !pl-3 !text-[clamp(.6rem,1vw+.6rem,1rem)] ring">
+        <SelectTrigger className="ring-dark-background/10 text-dark-txt/80 !text-fluid-sm w-full rounded-lg !p-6 !pl-3">
           <SelectValue placeholder="Select Category" />
         </SelectTrigger>
         <SelectContent>

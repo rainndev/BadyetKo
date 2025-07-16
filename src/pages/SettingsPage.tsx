@@ -23,7 +23,7 @@ const SettingsPage = () => {
       {/* currency changer */}
 
       <div className="w-full space-y-2">
-        <h1 className="text-dark-txt mb-2 text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
+        <h1 className="text-dark-txt text-fluid-xl mb-2 font-medium">
           Currency
         </h1>
 
@@ -34,7 +34,7 @@ const SettingsPage = () => {
 
       {/* date and time */}
       <div className="w-full">
-        <h1 className="text-dark-txt mb-2 text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
+        <h1 className="text-dark-txt text-fluid-xl mb-2 font-medium">
           Date & Time Format
         </h1>
 
@@ -48,7 +48,7 @@ const SettingsPage = () => {
       </div>
 
       <div className="w-full">
-        <h1 className="text-dark-txt mb-2 text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-medium">
+        <h1 className="text-dark-txt text-fluid-xl mb-2 font-medium">
           Transaction List
         </h1>
 
@@ -60,7 +60,7 @@ const SettingsPage = () => {
       {/* save settings button */}
       <button
         onClick={() => handleSaveSettings()}
-        className="bg-dark-background hover:bg-dark-background/90 text-light-background mt-5 cursor-pointer rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)] transition-colors ease-in-out"
+        className="bg-dark-background hover:bg-dark-background/90 text-light-background text-fluid-sm mt-5 cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
       >
         Save settings
       </button>

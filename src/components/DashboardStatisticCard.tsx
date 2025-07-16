@@ -29,11 +29,11 @@ const DashboardStatisticCard = () => {
     >
       <div className="flex h-full w-full flex-col items-start justify-center">
         {isLoadingUserStatistic ? (
-          <div className="bg-dark-background/50 w-fit animate-pulse rounded-lg text-[clamp(1.1rem,2vw+1.1rem,2.5rem)] font-semibold tabular-nums md:rounded-2xl">
+          <div className="bg-dark-background/50 text-fluid-4xl w-fit animate-pulse rounded-lg font-semibold tabular-nums md:rounded-2xl">
             <span className="invisible">{getformattedAmount(999999999)}</span>
           </div>
         ) : (
-          <h1 className="text-[clamp(1.1rem,2vw+1.1rem,2.5rem)] font-semibold tabular-nums">
+          <h1 className="text-fluid-4xl font-semibold tabular-nums">
             {getformattedAmount(total_balance)}
           </h1>
         )}
@@ -45,30 +45,6 @@ const DashboardStatisticCard = () => {
         {/* loading placeholder */}
         {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
 
-        {/* Data render */}
-        {TXStat?.map((txItemData) => (
-          <div
-            key={txItemData.label}
-            className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
-          >
-            <div>
-              <p className="text-light-background/60 text-[clamp(.5rem,1vw+.5rem,0.875rem)] font-thin">
-                {txItemData.label}
-              </p>
-              <h1 className="text-light-background text-[clamp(.4rem,2vw+.4rem,1rem)] font-medium tabular-nums">
-                {getformattedAmount(txItemData.amount)}
-              </h1>
-            </div>
-            <div>
-              {txItemData.label.toLowerCase().includes("max") ? (
-                <IoTrendingUp className="text-green-300 drop-shadow-lg drop-shadow-green-400" />
-              ) : (
-                <IoTrendingUp className="rotate-60 text-red-300 drop-shadow-lg drop-shadow-red-400" />
-              )}
-            </div>
-          </div>
-        ))}
-
         {/* total deposit and withdrawals render */}
         {!isLoadingUserStatistic && (
           <>
@@ -77,10 +53,10 @@ const DashboardStatisticCard = () => {
               className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
             >
               <div>
-                <p className="text-light-background/60 text-[clamp(.5rem,1vw+.5rem,0.875rem)] font-thin">
+                <p className="text-light-background/60 text-fluid-sm font-thin">
                   Total Deposit
                 </p>
-                <h1 className="text-light-background text-[clamp(.4rem,2vw+.4rem,1rem)] font-medium tabular-nums">
+                <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
                   {total_deposit
                     ? getformattedAmount(total_deposit)
                     : getformattedAmount(0)}
@@ -95,10 +71,10 @@ const DashboardStatisticCard = () => {
               className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
             >
               <div>
-                <p className="text-light-background/60 text-[clamp(.5rem,1vw+.5rem,0.875rem)] font-thin">
+                <p className="text-light-background/60 text-fluid-sm font-thin">
                   Total Withdraw
                 </p>
-                <h1 className="text-light-background text-[clamp(.4rem,2vw+.4rem,1rem)] font-medium tabular-nums">
+                <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
                   {total_withdraw
                     ? getformattedAmount(total_withdraw)
                     : getformattedAmount(0)}
@@ -111,6 +87,30 @@ const DashboardStatisticCard = () => {
             </div>
           </>
         )}
+
+        {/* Data render */}
+        {TXStat?.map((txItemData) => (
+          <div
+            key={txItemData.label}
+            className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
+          >
+            <div>
+              <p className="text-light-background/60 text-fluid-sm font-thin">
+                {txItemData.label}
+              </p>
+              <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
+                {getformattedAmount(txItemData.amount)}
+              </h1>
+            </div>
+            <div>
+              {txItemData.label.toLowerCase().includes("max") ? (
+                <IoTrendingUp className="text-green-300 drop-shadow-lg drop-shadow-green-400" />
+              ) : (
+                <IoTrendingUp className="rotate-60 text-red-300 drop-shadow-lg drop-shadow-red-400" />
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </motion.div>
   );

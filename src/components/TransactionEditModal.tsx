@@ -66,12 +66,10 @@ const TransactionEditModal = ({
   return (
     isShowEditModal &&
     createPortal(
-      <div className="bg-dark-background/90 fixed inset-0 z-50 flex h-dvh w-full items-center justify-center backdrop-blur-lg">
+      <div className="bg-dark-background/90 font-nunito fixed inset-0 z-50 flex h-dvh w-full items-center justify-center font-medium backdrop-blur-lg">
         <div className="bg-light-background text-dark-txt mx-3 w-full max-w-xl rounded-2xl p-3 shadow-2xl">
           <div className="border-dark-txt/10 flex justify-between border-b-2 p-5 md:p-10">
-            <h1 className="text-[clamp(.8rem,2vw+.8rem,1.5rem)]">
-              Update Transaction
-            </h1>
+            <h1 className="text-fluid-xl">Update Transaction</h1>
             <button
               className="text-dark-txt/50 cursor-pointer text-2xl"
               onClick={() => setShowEditModal(false)}
@@ -88,7 +86,7 @@ const TransactionEditModal = ({
             >
               {/* Update Name of tx */}
               <div>
-                <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
+                <p className="text-dark-txt/90 text-fluid-lg mb-2">
                   Transaction Name
                 </p>
                 <input
@@ -96,7 +94,7 @@ const TransactionEditModal = ({
                   id="name"
                   {...register("name")}
                   placeholder={dataItem.name}
-                  className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+                  className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
                 />
                 {errors.name && (
                   <p className="text-sm text-red-400">{errors.name.message}</p>
@@ -106,15 +104,13 @@ const TransactionEditModal = ({
               {/* Update of Category tx */}
 
               <div>
-                <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
-                  Category
-                </p>
+                <p className="text-dark-txt/90 text-fluid-lg mb-2">Category</p>
                 <SelectCategoryForm setFormCategory={setFormCategory} />
               </div>
 
               {/* Update Note of tx */}
               <div>
-                <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
+                <p className="text-dark-txt/90 text-fluid-lg mb-2">
                   Note{" "}
                   <span className="text-dark-txt/50 text-sm">(Optional)</span>
                 </p>
@@ -122,7 +118,7 @@ const TransactionEditModal = ({
                   type="text"
                   {...register("note")}
                   placeholder={dataItem.note || "e.g. Monthly electricity bill"}
-                  className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+                  className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
                 />
                 {errors.note && (
                   <p className="text-sm text-red-400">{errors.note.message}</p>
@@ -132,7 +128,7 @@ const TransactionEditModal = ({
               <button
                 type="submit"
                 disabled={isEditPending}
-                className="bg-dark-background hover:bg-dark-background/90 text-light-background mt-5 cursor-pointer rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)] transition-colors ease-in-out"
+                className="bg-dark-background hover:bg-dark-background/90 text-light-background text-fluid-sm mt-5 cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
               >
                 {isEditPending ? "Loading..." : "Update transaction"}
               </button>

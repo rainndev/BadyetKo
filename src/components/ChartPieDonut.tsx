@@ -50,9 +50,9 @@ const ChartPieDonut = () => {
         )}
         {/* show this when error or no tx made yet */}
         {((isChartDataEmpty && !isLoading) || isError) && (
-          <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto h-full w-full items-center justify-center gap-2">
+          <div className="text-dark-txt/70 flex aspect-auto h-full w-full items-center justify-center gap-2">
             <PiEmptyThin className="text-xl" />
-            <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
+            <p className="text-fluid-sm">
               {isError
                 ? "Something went wrong."
                 : "You currently have no transactions."}
@@ -103,7 +103,7 @@ const ChartPieDonut = () => {
                 border: "1px solid",
                 borderColor: color || "#f26f6f",
               }}
-              className="flex w-fit items-center gap-2 rounded-full p-2 px-4 text-[clamp(.5rem,1vw+.5rem,.85rem)] leading-none font-medium"
+              className="text-fluid-xs flex w-fit items-center gap-2 rounded-full p-2 px-4 leading-none font-medium"
             >
               <span className="text-dark-txt/90 text-nowrap">
                 {category_name}

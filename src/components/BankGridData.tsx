@@ -29,15 +29,6 @@ const BankGridData = ({
         <div className="flex size-8 items-center justify-center">
           <BankImage custom_bank_avatar={custom_bank_avatar ?? ""} />
         </div>
-
-        {/* <div>
-          <p className="text-dark-txt w-full max-w-[100px] truncate text-[clamp(.6rem,1vw+.5rem,.9rem)]">
-            {name}
-          </p>
-          <p className="max-w-fit truncate text-[clamp(.5rem,1vw+.5rem,.8rem)] text-gray-600 tabular-nums">
-            {timeAgo(created_at)}
-          </p>
-        </div> */}
       </div>
       {isTrashEnabled && (
         <div
@@ -47,7 +38,7 @@ const BankGridData = ({
           <IoClose />
         </div>
       )}
-      <p className="text-dark-txt/80 mt-5 max-w-fit truncate text-[clamp(.5rem,1vw+.5rem,.8rem)] tabular-nums">
+      <p className="text-dark-txt/80 text-fluid-sm mt-5 max-w-fit truncate tabular-nums">
         {getformattedAmount(balance ?? 0)}
       </p>
     </div>

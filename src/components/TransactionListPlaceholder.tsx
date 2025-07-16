@@ -6,20 +6,20 @@ const TransactionListPlaceholder = () => {
           <div>
             {/* tx name */}
             <div className="flex items-center justify-start gap-2">
-              <h1 className="invisible max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+              <h1 className="text-fluid-base invisible max-w-[10rem] truncate text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
                 test
               </h1>
             </div>
 
             {/* tx note */}
-            <p className="text-dark-txt/50 invisible w-fit max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,0.85rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+            <p className="text-dark-txt/50 text-fluid-sm invisible w-fit max-w-[10rem] truncate text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
               test note
             </p>
           </div>
         </div>
 
         {/* tx type */}
-        <div className="invisible mt-1 flex items-center gap-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)]">
+        <div className="text-fluid-xs invisible mt-1 flex items-center gap-2">
           <div
             style={{}}
             className={`flex items-center justify-center rounded-2xl border px-2`}
@@ -36,12 +36,10 @@ const TransactionListPlaceholder = () => {
       <div
         className={`invisible flex flex-col items-end justify-center font-semibold`}
       >
-        <p className="text-center text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap tabular-nums">
+        <p className="text-fluid-base text-center text-nowrap tabular-nums">
           -PHP 19999
         </p>
-        <p className="text-dark-txt/50 text-[clamp(.5rem,1vw+.5rem,0.80rem)] font-medium">
-          12/23/523
-        </p>
+        <p className="text-dark-txt/50 text-fluid-xs font-medium">12/23/523</p>
       </div>
     </div>
   );

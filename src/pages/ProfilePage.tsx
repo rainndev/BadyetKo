@@ -20,7 +20,7 @@ const ProfilePage = () => {
         <span>
           <RiLogoutCircleLine />
         </span>
-        <span className="text-[clamp(.6rem,2vw+.6rem,.9rem)]">Log out</span>
+        <span className="text-fluid-sm">Log out</span>
       </div>
     </div>
   );

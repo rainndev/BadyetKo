@@ -23,18 +23,20 @@ const CategoryPage = () => {
               style={{
                 backgroundColor: hexToRgba(category.color || "#FFFFFF", 60),
               }}
-              className="w-fit min-w-10 rounded-full p-5 text-[clamp(.5rem,2vw+.5rem,1.5rem)] md:p-10"
+              className="text-fluid-2xl w-fit min-w-10 rounded-full p-5 md:p-10"
             >
               <TfiAnnouncement />
             </div>
 
-            <p className="text-center text-[clamp(.4rem,2vw+.4rem,1rem)]">
+            <p className="text-fluid-base max-w-40 truncate text-center">
               {category.name}
             </p>
             {/* <p onClick={() => deleteCategory(category.id)}>X</p> */}
           </div>
         ))}
       </div>
+
+      <div className="h-20" />
     </div>
   );
 };

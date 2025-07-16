@@ -107,9 +107,7 @@ function AreaChartData() {
         {isTransactionEmpty && (
           <div className="text-dark-txt/70 flex aspect-auto h-[250px] w-full items-center justify-center gap-2">
             <PiEmptyThin className="text-xl" />
-            <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
-              You currently have no transactions.
-            </p>
+            <p className="text-fluid-sm">You currently have no transactions.</p>
           </div>
         )}
 

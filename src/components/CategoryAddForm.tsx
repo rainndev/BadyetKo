@@ -36,7 +36,7 @@ const CategoryAddForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="w-full">
-          <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
+          <p className="text-dark-txt/90 text-fluid-xl mb-2 font-semibold">
             Category Name
           </p>
           <div className="flex items-center gap-2">
@@ -55,7 +55,7 @@ const CategoryAddForm = () => {
             <button
               type="submit"
               disabled={isAddCategoryPending}
-              className="bg-dark-background hover:bg-dark-background/90 text-light-background flex cursor-pointer items-center justify-center gap-2 rounded-xl p-4 text-xs text-[clamp(.6rem,1vw+.6rem,1rem)] text-nowrap transition-colors ease-in-out md:rounded-lg md:px-6"
+              className="bg-dark-background hover:bg-dark-background/90 text-light-background text-fluid-sm flex cursor-pointer items-center justify-center gap-2 rounded-xl p-4 text-xs text-nowrap transition-colors ease-in-out md:rounded-lg md:px-6"
             >
               <span className="hidden lg:block">
                 {isAddCategoryPending ? "Loading..." : "Add Category"}

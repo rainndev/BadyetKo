@@ -49,19 +49,19 @@ const TransactionRowData = ({
         <div>
           {/* tx name */}
           <div className="flex items-center justify-start gap-2">
-            <h1 className="max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+            <h1 className="text-fluid-base max-w-[10rem] truncate text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
               {name}
             </h1>
           </div>
 
           {/* tx note */}
-          <p className="text-dark-txt/50 w-fit max-w-[10rem] truncate rounded-lg text-[clamp(.6rem,1vw+.6rem,0.85rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+          <p className="text-dark-txt/50 text-fluid-sm w-fit max-w-[10rem] truncate rounded-lg text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
             {note || "n/a"}
           </p>
         </div>
 
         {/* edit/delete modal */}
-        <div className="text-dark-txt/50 text-[clamp(.9rem,2vw+.9rem,1rem)]">
+        <div className="text-dark-txt/50 text-fluid-base">
           <Popover>
             <PopoverTrigger className="cursor-pointer">
               <RxDotsVertical />
@@ -90,7 +90,7 @@ const TransactionRowData = ({
 
       <div className="mt-1 flex h-full w-full items-center justify-between gap-3 md:mt-0">
         {/* tx type */}
-        <div className="flex items-center gap-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)]">
+        <div className="text-fluid-xs flex items-center gap-2">
           {isCategoryLabelEnabled ? (
             <div
               style={{
@@ -122,11 +122,11 @@ const TransactionRowData = ({
         {/* tx amount */}
         <div className={`flex flex-col items-end font-semibold`}>
           <p
-            className={`text-center text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
+            className={`text-fluid-base text-center text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
           >
             {(isDeposit ? "+" : "-") + getformattedAmount(amount)}
           </p>
-          <p className="text-dark-txt/50 text-[clamp(.5rem,1vw+.5rem,0.80rem)] font-medium">
+          <p className="text-dark-txt/50 text-fluid-xs font-medium">
             {getformattedDate(created_at, country)}
           </p>
         </div>

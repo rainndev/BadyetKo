@@ -82,11 +82,9 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
       <div className="bg-dark-background/90 fixed z-20 flex h-dvh w-screen items-center justify-center backdrop-blur-xs">
         <div className="bg-light-background text-dark-txt mx-3 flex w-full max-w-xl flex-col items-center justify-center rounded-2xl p-3">
           <div className="border-dark-txt/10 flex w-full justify-between border-b-2 p-5 md:p-10">
-            <h1 className="text-[clamp(.8rem,2vw+.8rem,1.5rem)]">
-              Add New Bank
-            </h1>
+            <h1 className="text-fluid-xl">Add New accounts</h1>
             <button
-              className="text-dark-txt/50 cursor-pointer text-[clamp(.8rem,2vw+.8rem,1.5rem)]"
+              className="text-dark-txt/50 text-fluid-2xl cursor-pointer"
               disabled={isAddBankPending}
               onClick={() => setShowModal(false)}
             >
@@ -99,15 +97,13 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
               className="relative space-y-2 rounded-2xl"
               onSubmit={handleSubmit}
             >
-              <p className="text-dark-txt/90 mb-2 text-[clamp(.6rem,2vw+.6rem,1.125rem)]">
-                Bank Name
-              </p>
+              <p className="text-dark-txt/90 text-fluid-lg mb-2">Bank Name</p>
 
               <input
                 type="text"
                 value={bankName}
                 placeholder="e.g. Example Bank"
-                className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+                className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
                 onChange={(e) => setBankName(e.target.value)}
               />
               <p className="mb-2 text-sm text-red-400">{errorMessage}</p>
@@ -118,15 +114,16 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
                   onChange={handleFileChange}
                   type="file"
                   id="avatar"
+                  accept="image/*"
                   name="filename"
-                  className="border-dark-txt/20 hover:border-dark-background cursor-pointer rounded-lg border border-dashed p-3 text-[clamp(.4rem,2vw+.4rem,1rem)] transition-colors ease-in-out"
+                  className="border-dark-txt/20 hover:border-dark-background text-fluid-sm cursor-pointer rounded-lg border border-dashed p-3 transition-colors ease-in-out"
                 />
 
                 <button
                   disabled={isAddBankPending}
-                  className="bg-dark-background text-light-background hover:bg-dark-background/90 cursor-pointer rounded-lg p-3 px-6 text-[clamp(.6rem,1vw+.6rem,1rem)] transition-colors ease-in-out"
+                  className="bg-dark-background text-light-background hover:bg-dark-background/90 text-fluid-sm cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
                 >
-                  {isAddBankPending ? "Loading..." : "Add Bank"}
+                  {isAddBankPending ? "Loading..." : "Add Account"}
                 </button>
               </div>
             </form>

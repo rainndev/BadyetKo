@@ -17,7 +17,7 @@ const DashboardPage = () => {
       <BankAddModal isShowModal={isShowModal} setShowModal={setShowModal} />
 
       <div className="bg-light-background m-0 flex h-full w-full flex-col p-5 md:p-10 lg:rounded-[3rem]">
-        <h1 className="text-dark-txt my-5 text-[clamp(.7rem,2vw+.7rem,1.5rem)] font-medium">
+        <h1 className="text-dark-txt text-fluid-lg my-5 font-medium">
           Overview
         </h1>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">

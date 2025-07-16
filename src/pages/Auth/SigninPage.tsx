@@ -52,34 +52,28 @@ const SigninPage = () => {
         type="email"
         {...register("email")}
         placeholder="Input your email"
-        className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+        className="ring-dark-background/10 focus:ring-dark-background text-fluid-base w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
         required
       />
       {errors.email && (
-        <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-red-400">
-          {errors.email?.message}
-        </p>
+        <p className="text-fluid-sm text-red-400">{errors.email?.message}</p>
       )}
 
       <input
         type="password"
         {...register("password")}
         placeholder="Input your password"
-        className="ring-dark-background/10 focus:ring-dark-background w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+        className="ring-dark-background/10 focus:ring-dark-background text-fluid-base w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
         required
       />
       {errors.password && (
-        <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-red-400">
-          {errors.password?.message}
-        </p>
+        <p className="text-fluid-sm text-red-400">{errors.password?.message}</p>
       )}
       {errors.root && (
-        <p className="text-[clamp(.6rem,1.5vw+.6rem,1rem)] text-red-400">
-          {errors.root?.message}
-        </p>
+        <p className="text-fluid-sm text-red-400">{errors.root?.message}</p>
       )}
 
-      <button className="bg-dark-background hover:bg-dark-background/90 text-medium-light-background w-full cursor-pointer rounded-lg p-3 transition-colors ease-in-out">
+      <button className="bg-dark-background hover:bg-dark-background/90 text-medium-light-background text-fluid-base w-full cursor-pointer rounded-lg p-3 transition-colors ease-in-out">
         Log in
       </button>
     </form>

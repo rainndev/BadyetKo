@@ -13,16 +13,14 @@ const DateDDMMYYYYSwitcher = () => {
     <div
       className={`${isTimeAgoEnabled ? "bg-dark-background/3 text-dark-txt/50" : "bg-dark-background/5"} flex w-full shrink-0 flex-col gap-3 rounded-2xl p-5 transition-colors duration-300 ease-in-out`}
     >
-      <h1 className="text-[clamp(.9rem,2vw+.9rem,1rem)] font-semibold">
-        Date Format Toggle
-      </h1>
-      <p className="text-muted-foreground text-[clamp(.5rem,2vw+.5rem,0.875rem)]">
+      <h1 className="text-fluid-lg font-semibold">Date Format Toggle</h1>
+      <p className="text-muted-foreground text-fluid-sm">
         Switch between default date format and European style (DD/MM/YYYY).
       </p>
       <div className="flex items-center gap-2">
         <Switch
           disabled={isTimeAgoEnabled}
-          className="cursor-pointer !text-[clamp(.9rem,2vw+.9rem,1rem)]"
+          className="!text-fluid-base cursor-pointer"
           onCheckedChange={() => setDateToDDMMYYYY(!isDateToDDMMYYYY)}
           checked={isDateToDDMMYYYY}
           id="date-ddmmyyyy-switcher"

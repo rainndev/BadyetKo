@@ -7,18 +7,9 @@ const BankGridPlaceholder = () => {
             test
           </div>
         </div>
-
-        {/* <div>
-          <p className="text-dark-txt w-full max-w-[100px] truncate text-[clamp(.6rem,1vw+.5rem,.9rem)]">
-            {name}
-          </p>
-          <p className="max-w-fit truncate text-[clamp(.5rem,1vw+.5rem,.8rem)] text-gray-600 tabular-nums">
-            {timeAgo(created_at)}
-          </p>
-        </div> */}
       </div>
 
-      <p className="text-dark-txt/80 invisible mt-5 max-w-fit truncate text-[clamp(.5rem,1vw+.5rem,.8rem)] tabular-nums">
+      <p className="text-dark-txt/80 text-fluid-sm invisible mt-5 max-w-fit truncate tabular-nums">
         $999.999
       </p>
     </div>

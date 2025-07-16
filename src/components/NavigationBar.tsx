@@ -67,7 +67,7 @@ const NavigationBar = () => {
               to={navItem.path}
             >
               <li>{navItem.icon}</li>
-              <li className="hidden text-[clamp(.6rem,2vw+.6rem,.9rem)] md:block">
+              <li className="text-fluid-base hidden md:block">
                 {navItem.name}
               </li>
             </NavLink>

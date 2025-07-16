@@ -23,7 +23,7 @@ const AllTransactionList = () => {
 
   return (
     <div className="border-dark-background/20 min-h-100 w-full rounded-3xl p-2 py-5 md:p-10 lg:border">
-      <h1 className="text-dark-txt mb-5 text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-semibold">
+      <h1 className="text-dark-txt text-fluid-xl mb-5 font-semibold">
         Recent Transactions
       </h1>
 
@@ -31,9 +31,7 @@ const AllTransactionList = () => {
         {isTXlistEmpty && !isLoading && (
           <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto min-h-100 w-full items-center justify-center gap-2">
             <PiEmptyThin className="text-xl" />
-            <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
-              You currently have no transactions.
-            </p>
+            <p className="text-fluid-sm">You currently have no transactions.</p>
           </div>
         )}
 
@@ -58,20 +56,20 @@ const AllTransactionList = () => {
                       <div>
                         {/* tx name */}
                         <div className="flex items-center justify-start gap-2">
-                          <h1 className="max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+                          <h1 className="text-fluid-base max-w-[10rem] truncate text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
                             {name}
                           </h1>
                         </div>
 
                         {/* tx note */}
-                        <p className="text-dark-txt/50 w-fit max-w-[10rem] truncate text-[clamp(.6rem,1vw+.6rem,0.85rem)] text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
+                        <p className="text-dark-txt/50 text-fluid-sm w-fit max-w-[10rem] truncate text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
                           {note || "n/a"}
                         </p>
                       </div>
                     </div>
 
                     {/* tx type */}
-                    <div className="mt-1 flex items-center gap-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)]">
+                    <div className="text-fluid-xs mt-1 flex items-center gap-2">
                       {isCategoryLabelEnabled ? (
                         <div
                           style={{
@@ -108,68 +106,17 @@ const AllTransactionList = () => {
                     className={`flex flex-col items-end justify-center font-semibold`}
                   >
                     <p
-                      className={`text-center text-[clamp(.6rem,1vw+.6rem,.9rem)] text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
+                      className={`text-fluid-base text-center text-nowrap tabular-nums ${isDeposit ? "text-[#477d59]" : "text-[#ad383a]"} `}
                     >
                       {(isDeposit ? "+" : "-") + getformattedAmount(amount)}
                     </p>
-                    <p className="text-dark-txt/50 text-[clamp(.5rem,1vw+.5rem,0.80rem)] font-medium">
+                    <p className="text-dark-txt/50 text-fluid-xs font-medium">
                       {getformattedDate(created_at, country)}
                     </p>
                   </div>
                 </div>
               );
             },
-
-            // <tr
-            //   key={data.id}
-            //   className="hover:bg-dark-background/10 bg-dark-background/3 w-full transition-colors ease-in-out"
-            // >
-            //   {/* tx date */}
-            //   <td className="text-dark-txt/70 rounded-l-2xl p-5 pl-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-semibold text-nowrap">
-            //     {getformattedDate(data.created_at, country)}
-            //     <p className="text-dark-txt/50 text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
-            //       Date
-            //     </p>
-            //   </td>
-
-            //   {/* tx name */}
-            //   <td className="max-w-[10rem] truncate p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] text-gray-600">
-            //     {data.name}
-            //     <p className="text-dark-txt/50 w-fit rounded-lg text-[clamp(.6rem,2vw+.6rem,0.75rem)]">
-            //       name
-            //     </p>
-            //   </td>
-
-            //   {/* tx amount */}
-            //   <td
-            //     className={`p-5 text-[clamp(.4rem,2vw+.4rem,0.875rem)] font-semibold ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
-            //   >
-            //     <p className="text-nowrap tabular-nums">
-            //       {(data.type === "deposit" ? "+" : "-") +
-            //         getformattedAmount(data.amount)}
-            //     </p>
-            //   </td>
-
-            //   {/* tx type */}
-            //   <td className="rounded-r-2xl">
-            //     <div className="flex items-center justify-start p-5 pr-2 text-[clamp(.5rem,1vw+.5rem,0.75rem)] text-gray-600">
-            //       <span className="relative flex size-3 items-center justify-center">
-            //         <span
-            //           className={`${data.type === "deposit" ? "bg-green-300" : "bg-red-300"} absolute inline-flex h-full w-full animate-ping rounded-full opacity-75`}
-            //         />
-            //         <span
-            //           className={`${data.type === "deposit" ? "bg-green-600" : "bg-red-500"} relative inline-flex size-2 rounded-full`}
-            //         ></span>
-            //       </span>
-
-            //       <p
-            //         className={`w-fit rounded-full px-3 py-1 font-medium first-letter:capitalize ${data.type === "deposit" ? "text-[#477d59]" : "text-[#ad383a]"}`}
-            //       >
-            //         {data.type}
-            //       </p>
-            //     </div>
-            //   </td>
-            // </tr>
           )}
         </div>
       </div>

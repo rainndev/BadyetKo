@@ -35,22 +35,22 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
       <div className="mb-5 flex flex-col gap-2">
         {/* -----header with add bank btn */}
         <div className="flex w-full items-center justify-between">
-          <h1 className="text-dark-txt text-[clamp(.7rem,2vw+.7rem,1.25rem)] font-semibold">
+          <h1 className="text-dark-txt text-fluid-xl font-semibold">
             Accounts
           </h1>
 
           <div className="flex gap-1 md:gap-2">
             <button
-              className="text-dark-background cursor-pointer rounded-full p-1 text-[clamp(.9rem,2vw+.9rem,1.5rem)]"
+              className="text-dark-background text-fluid-xl cursor-pointer rounded-full p-1"
               onClick={() => setTrashEnabled(!isTrashEnabled)}
             >
               <PiTrashSimpleLight />
             </button>
             <button
               onClick={() => setShowModal(!isShowModal)}
-              className="text-light-background bg-dark-background hover:bg-dark-background/90 hidden rounded-full p-2 px-4 text-sm text-[clamp(.8rem,2vw+.8rem,.9rem)] transition-colors ease-in-out @sm:flex @sm:items-center @sm:justify-center @sm:space-x-2"
+              className="text-light-background bg-dark-background hover:bg-dark-background/90 text-fluid-sm hidden rounded-full p-2 px-4 transition-colors ease-in-out @sm:flex @sm:items-center @sm:justify-center @sm:space-x-2"
             >
-              <span className="cursor-pointer">Add More Banks</span>
+              <span className="cursor-pointer">Add More Accounts</span>
             </button>
 
             <button className="text-light-background bg-dark-background rounded-xl p-3 text-xs @sm:hidden">
@@ -63,9 +63,7 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
       {isBanklistEmpty && !isBankListLoading && (
         <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto min-h-100 w-full items-center justify-center gap-2">
           <PiEmptyThin className="text-xl" />
-          <p className="text-[clamp(.4rem,2vw+.4rem,.9rem)]">
-            You haven't added any banks yet.
-          </p>
+          <p className="text-fluid-sm">You haven't added any banks yet.</p>
         </div>
       )}
 

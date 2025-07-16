@@ -38,10 +38,8 @@ const CurrencySwitcher = () => {
   return (
     <div className="bg-dark-background/5 mt-5 flex flex-wrap items-center justify-between gap-5 rounded-2xl p-6">
       <div className="min-w-50 flex-1">
-        <h1 className="text-[clamp(.9rem,2vw+.9rem,1rem)] font-semibold">
-          Preferred Currency
-        </h1>
-        <p className="text-muted-foreground text-[clamp(.5rem,2vw+.5rem,0.875rem)]">
+        <h1 className="text-fluid-lg font-semibold">Preferred Currency</h1>
+        <p className="text-muted-foreground text-fluid-sm">
           Select the currency you want to use for displaying your transactions
           and balances.
         </p>
@@ -49,7 +47,7 @@ const CurrencySwitcher = () => {
 
       <div className="flex shrink-0 items-center gap-2">
         <Select onValueChange={(value) => handleValueChange(+value)}>
-          <SelectTrigger className="ring-dark-background/10 text-dark-txt w-fit rounded-sm p-2 !pl-3 !text-[clamp(.6rem,.5vw+.6rem,1rem)] ring md:rounded-lg md:!p-4">
+          <SelectTrigger className="ring-dark-background/10 text-dark-txt !text-fluid-sm w-fit rounded-sm p-2 !pl-3 ring md:rounded-lg md:!p-4">
             <SelectValue placeholder={currencyOptions.currency} />
           </SelectTrigger>
           <SelectContent>
