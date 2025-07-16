@@ -4,24 +4,21 @@ import { addBankSchema } from "@/schemas/banks.schema";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
+import { useSession } from "@/context/SessionContext";
 
 interface BankAddModalProps {
   isShowModal: boolean;
   setShowModal: (show: boolean) => void;
-  user_id: string;
 }
 
-const BankAddModal = ({
-  isShowModal,
-  setShowModal,
-  user_id,
-}: BankAddModalProps) => {
+const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
   const [bankName, setBankName] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const imageRef = useRef<HTMLInputElement>(null);
+  const { userID } = useSession();
 
-  const { addBank, isAddBankPending, isAddBankSuccess } = useBank(user_id);
+  const { addBank, isAddBankPending, isAddBankSuccess } = useBank(userID);
 
   //Lock the body when showing modal
   useBodyScrollLock(isShowModal);
@@ -61,7 +58,7 @@ const BankAddModal = ({
     let filePath = "";
 
     if (image) {
-      filePath = `${user_id}/${Date.now()}-${image.name}`;
+      filePath = `${userID}/${Date.now()}-${image.name}`;
       addAvatar({ filePath, image });
     }
     addBank({ bankName, custom_bank_avatar: filePath });

@@ -43,7 +43,7 @@ const chartConfig = {
 function AreaChartData() {
   const [timeRange, setTimeRange] = React.useState("90d");
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["area-chart-data"],
     queryFn: getChartData,
     staleTime: 10 * 60 * 1000, // 10 minutes in milliseconds
