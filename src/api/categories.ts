@@ -2,7 +2,7 @@ import supabase from "@/supabase/supabase-client";
 import type { CategoriesListTypes } from "@/types/categories.types";
 
 export const getCategories = async (): Promise<CategoriesListTypes[]> => {
-  const { data, error } = await supabase.from("categories").select("*");
+  const { data, error } = await supabase.from("categories").select("*").order("created_at", { ascending: false });
   if (error) {
     console.error("getting categories error", error)
     throw error

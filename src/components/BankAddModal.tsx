@@ -5,7 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { useSession } from "@/context/SessionContext";
-import CustomBankAvatar from "./customBankAvatar";
+import CustomBankAvatar from "@/components/CustomBankAvatar";
 
 interface BankAddModalProps {
   isShowModal: boolean;
@@ -19,7 +19,7 @@ const BankAddModal = ({ isShowModal, setShowModal }: BankAddModalProps) => {
   const imageRef = useRef<HTMLInputElement>(null);
   const { userID } = useSession();
 
-  const { addBank, isAddBankPending, isAddBankSuccess } = useBank(userID);
+  const { addBank, isAddBankPending, isAddBankSuccess } = useBank();
 
   //Lock the body when showing modal
   useBodyScrollLock(isShowModal);
