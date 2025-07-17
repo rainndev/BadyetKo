@@ -2,7 +2,6 @@ import { useCurrencyStore } from "@/store/CurrencyStore";
 import { CiWallet } from "react-icons/ci";
 import { IoTrendingUp } from "react-icons/io5";
 import DashboardStatisticPlaceholder from "./DashboardStatisticPlaceholder";
-import { motion } from "framer-motion";
 import { useUserStatistic } from "@/queries/useUserStatistic";
 import { useSession } from "@/context/SessionContext";
 
@@ -23,10 +22,7 @@ const DashboardStatisticCard = () => {
   );
 
   return (
-    <motion.div
-      layout
-      className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl"
-    >
+    <div className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl">
       <div className="flex h-full w-full flex-col items-start justify-center">
         {isLoadingUserStatistic ? (
           <div className="bg-dark-background/50 text-fluid-4xl w-fit animate-pulse rounded-lg font-semibold tabular-nums md:rounded-2xl">
@@ -43,7 +39,7 @@ const DashboardStatisticCard = () => {
 
       <div className="w-full">
         {/* total deposit and withdrawals render */}
-        <div className="grid grid-cols-1 justify-between gap-1 @sm:grid-cols-2 @md:gap-1">
+        <div className="grid grid-cols-1 justify-between gap-1 @sm:grid-cols-2 @md:gap-2">
           {/* loading placeholder */}
           {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
 
@@ -58,7 +54,7 @@ const DashboardStatisticCard = () => {
                   <p className="text-light-background/60 text-fluid-sm font-thin">
                     Total Deposit
                   </p>
-                  <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
+                  <h1 className="text-light-background text-fluid-base mt-1 font-medium tabular-nums md:mt-2">
                     {total_deposit
                       ? getformattedAmount(total_deposit)
                       : getformattedAmount(0)}
@@ -76,7 +72,7 @@ const DashboardStatisticCard = () => {
                   <p className="text-light-background/60 text-fluid-sm font-thin">
                     Total Withdraw
                   </p>
-                  <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
+                  <h1 className="text-light-background text-fluid-base mt-1 font-medium tabular-nums md:mt-2">
                     {total_withdraw
                       ? getformattedAmount(total_withdraw)
                       : getformattedAmount(0)}
@@ -92,7 +88,7 @@ const DashboardStatisticCard = () => {
         </div>
 
         {/* Data render */}
-        <div className="mt-1 grid grid-cols-2 gap-1">
+        <div className="mt-1 grid grid-cols-2 gap-1 @md:mt-2 @md:gap-2">
           {TXStat?.map((txItemData) => (
             <div
               key={txItemData.label}
@@ -110,14 +106,14 @@ const DashboardStatisticCard = () => {
                   )}
                 </span>
               </div>
-              <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
+              <h1 className="text-light-background text-fluid-base mt-1 font-medium tabular-nums md:mt-2">
                 {getformattedAmount(txItemData.amount)}
               </h1>
             </div>
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
