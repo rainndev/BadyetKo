@@ -25,7 +25,7 @@ const DashboardStatisticCard = () => {
   return (
     <motion.div
       layout
-      className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl p-2"
+      className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl"
     >
       <div className="flex h-full w-full flex-col items-start justify-center">
         {isLoadingUserStatistic ? (
@@ -41,76 +41,81 @@ const DashboardStatisticCard = () => {
         <p className="text-dark-txt/60 text-sm">Net balance</p>
       </div>
 
-      <div className="grid w-full grid-cols-1 justify-between gap-2 @sm:grid-cols-2 @md:gap-3">
-        {/* loading placeholder */}
-        {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
-
+      <div className="w-full">
         {/* total deposit and withdrawals render */}
-        {!isLoadingUserStatistic && (
-          <>
-            <div
-              key="total_deposit"
-              className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
-            >
-              <div>
-                <p className="text-light-background/60 text-fluid-sm font-thin">
-                  Total Deposit
-                </p>
-                <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
-                  {total_deposit
-                    ? getformattedAmount(total_deposit)
-                    : getformattedAmount(0)}
-                </h1>
-              </div>
-              <div>
-                <CiWallet className="text-light-background" />
-              </div>
-            </div>
-            <div
-              key="total_withdraw"
-              className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
-            >
-              <div>
-                <p className="text-light-background/60 text-fluid-sm font-thin">
-                  Total Withdraw
-                </p>
-                <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
-                  {total_withdraw
-                    ? getformattedAmount(total_withdraw)
-                    : getformattedAmount(0)}
-                </h1>
-              </div>
+        <div className="grid grid-cols-1 justify-between gap-1 @sm:grid-cols-2 @md:gap-1">
+          {/* loading placeholder */}
+          {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
 
-              <div>
-                <CiWallet className="text-light-background" />
+          {/* total deposit and withdrawals render */}
+          {!isLoadingUserStatistic && (
+            <>
+              <div
+                key="total_deposit"
+                className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
+              >
+                <div>
+                  <p className="text-light-background/60 text-fluid-sm font-thin">
+                    Total Deposit
+                  </p>
+                  <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
+                    {total_deposit
+                      ? getformattedAmount(total_deposit)
+                      : getformattedAmount(0)}
+                  </h1>
+                </div>
+                <div>
+                  <CiWallet className="text-light-background" />
+                </div>
               </div>
-            </div>
-          </>
-        )}
+              <div
+                key="total_withdraw"
+                className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
+              >
+                <div>
+                  <p className="text-light-background/60 text-fluid-sm font-thin">
+                    Total Withdraw
+                  </p>
+                  <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
+                    {total_withdraw
+                      ? getformattedAmount(total_withdraw)
+                      : getformattedAmount(0)}
+                  </h1>
+                </div>
+
+                <div>
+                  <CiWallet className="text-light-background" />
+                </div>
+              </div>
+            </>
+          )}
+        </div>
 
         {/* Data render */}
-        {TXStat?.map((txItemData) => (
-          <div
-            key={txItemData.label}
-            className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
-          >
-            <div>
-              <p className="text-light-background/60 text-fluid-sm font-thin">
-                {txItemData.label}
-              </p>
+        <div className="mt-1 grid grid-cols-2 gap-1">
+          {TXStat?.map((txItemData) => (
+            <div
+              key={txItemData.label}
+              className="bg-dark-background flex w-full flex-col items-start justify-between rounded-2xl p-5 shadow-xl md:p-7"
+            >
+              <div className="text-fluid-sm flex w-full items-center justify-between gap-2">
+                <p className="text-light-background/60 font-thin">
+                  {txItemData.label}
+                </p>
+                <span>
+                  {txItemData.label.toLowerCase().includes("max") ? (
+                    <IoTrendingUp className="text-green-300 drop-shadow-lg drop-shadow-green-400" />
+                  ) : (
+                    <IoTrendingUp className="rotate-60 text-red-300 drop-shadow-lg drop-shadow-red-400" />
+                  )}
+                </span>
+              </div>
               <h1 className="text-light-background text-fluid-base font-medium tabular-nums">
                 {getformattedAmount(txItemData.amount)}
               </h1>
             </div>
-            <div>
-              {txItemData.label.toLowerCase().includes("max") ? (
-                <IoTrendingUp className="text-green-300 drop-shadow-lg drop-shadow-green-400" />
-              ) : (
-                <IoTrendingUp className="rotate-60 text-red-300 drop-shadow-lg drop-shadow-red-400" />
-              )}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </motion.div>
   );
