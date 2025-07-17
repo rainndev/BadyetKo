@@ -112,6 +112,9 @@ export default function CustomBankAvatar({
 
   const previewUrl = files[0]?.preview || null;
   const fileId = files[0]?.id;
+  console.log("files", files[0]?.file.name);
+
+  const [imageName, setImageName] = useState("Upload Custom Avatar");
 
   // const [finalImageUrl, setFinalImageUrl] = useState<string | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -145,6 +148,9 @@ export default function CustomBankAvatar({
       }
       return;
     }
+
+    //set image name
+    setImageName(files[0]?.file.name);
 
     try {
       // 1. Get the cropped image blob using the helper
@@ -185,11 +191,13 @@ export default function CustomBankAvatar({
     if (finalImageUrl) {
       URL.revokeObjectURL(finalImageUrl);
     }
+    setImageName("Upload Custom Avatar");
     setFinalImageUrl(null);
   };
 
   useEffect(() => {
     const currentFinalUrl = finalImageUrl;
+
     // Cleanup function
     return () => {
       if (currentFinalUrl && currentFinalUrl.startsWith("blob:")) {
@@ -333,7 +341,7 @@ export default function CustomBankAvatar({
         role="region"
         className="text-muted-foreground text-fluid-xs mt-2"
       >
-        Upload Custom Avatar
+        {imageName}
       </p>
     </div>
   );
