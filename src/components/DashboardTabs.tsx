@@ -3,6 +3,7 @@ import AreaChartData from "./AreaChartData";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import BankList from "./BankList";
 import AllTransactionList from "./AllTransactionList";
+import { ChartArea, CreditCard, History } from "lucide-react";
 
 type DashboardTabsProps = {
   isShowModal: boolean;
@@ -21,20 +22,35 @@ export default function DashboardTabs({
         <TabsList className="before:bg-border relative h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px">
           <TabsTrigger
             value="tab-1"
-            className="bg-muted text-fluid-sm overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+            className="data-[state=active]:after:bg-primary text-fluid-sm relative flex-col rounded-none px-4 py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
           >
+            <ChartArea
+              className="mb-1.5 opacity-60"
+              size={16}
+              aria-hidden="true"
+            />
             Volume
           </TabsTrigger>
           <TabsTrigger
             value="tab-2"
-            className="bg-muted text-fluid-sm overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+            className="data-[state=active]:after:bg-primary text-fluid-sm relative flex-col rounded-none px-4 py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
           >
+            <CreditCard
+              className="mb-1.5 opacity-60"
+              size={16}
+              aria-hidden="true"
+            />
             Accounts
           </TabsTrigger>
           <TabsTrigger
             value="tab-3"
-            className="bg-muted text-fluid-sm overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+            className="data-[state=active]:after:bg-primary text-fluid-sm relative flex-col rounded-none px-4 py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
           >
+            <History
+              className="mb-1.5 opacity-60"
+              size={16}
+              aria-hidden="true"
+            />
             Recent
           </TabsTrigger>
         </TabsList>
