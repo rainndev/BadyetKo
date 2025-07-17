@@ -19,16 +19,16 @@ const BankGridData = ({
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
-  const { id, balance, custom_bank_avatar } = bankItemData;
+  const { id, balance, custom_bank_avatar, name } = bankItemData;
 
   console.log("custom avatar path", custom_bank_avatar);
 
   return (
     <div
       onClick={() => !isTrashEnabled && navigate(`/bank/${id}`)}
-      className={`bg-dark-background/4 hover:bg-dark-background/10 relative flex w-full cursor-pointer flex-col items-start justify-center rounded-2xl p-5 md:rounded-3xl md:p-7`}
+      className={`bg-dark-background/4 hover:bg-dark-background/10 relative flex w-full cursor-pointer flex-col items-start justify-center rounded-xl p-5 md:rounded-2xl md:p-7`}
     >
-      <div className="flex w-full items-center justify-center gap-5">
+      <div className="flex w-full items-center justify-start gap-5">
         <div className="flex size-8 items-center justify-center">
           <BankImage custom_bank_avatar={custom_bank_avatar ?? ""} />
         </div>
@@ -46,8 +46,11 @@ const BankGridData = ({
           <IoClose />
         </div>
       )}
-      <p className="text-dark-txt/80 text-fluid-sm mt-5 max-w-fit truncate tabular-nums">
+      <p className="text-dark-txt text-fluid-sm mt-5 max-w-fit truncate tabular-nums">
         {getformattedAmount(balance ?? 0)}
+      </p>
+      <p className="text-fluid-xs text-dark-txt/50 max-w-full truncate">
+        {name}
       </p>
     </div>
   );

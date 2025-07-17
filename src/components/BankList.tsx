@@ -66,10 +66,10 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
       )}
 
       <div className={`hide-scrollbar w-full`}>
-        <div className="grid grid-cols-2 gap-1 @sm:grid-cols-3 @md:grid-cols-4 @md:gap-2 @lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-1 @sm:grid-cols-3 @md:gap-2 @lg:grid-cols-4">
           {isBankListLoading &&
             [...new Array(5)].map((_, idx) => (
-              <BankGridPlaceholder key={"bank-grid-placehold" + idx} />
+              <BankGridPlaceholder key={"bank-grid-placeholder" + idx} />
             ))}
 
           {!isBankListLoading &&
