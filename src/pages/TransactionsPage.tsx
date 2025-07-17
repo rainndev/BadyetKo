@@ -92,7 +92,7 @@ const TransactionsPage = () => {
             >
               {/* data */}
               {isTransactionListLoading &&
-                [...Array(5)].map((_, idx) => (
+                [...Array(2)].map((_, idx) => (
                   <TransactionListPlaceholder
                     key={"transaction-list-placeholder" + idx}
                   />

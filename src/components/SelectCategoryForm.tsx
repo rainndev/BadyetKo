@@ -15,28 +15,37 @@ const SelectCategoryForm = ({ setFormCategory }: SelectCategoryFormProps) => {
   const { categoryList, isCategoryListLoading, isCategoryEmpty } =
     useTransactionCategory();
 
-  return (
-    !isCategoryListLoading && (
-      <Select
-        disabled={isCategoryEmpty}
-        onValueChange={(value) => setFormCategory(value)}
+  if (isCategoryListLoading) {
+    return (
+      <button
+        disabled={true}
+        className="ring-dark-background/10 text-dark-txt/80 !text-fluid-sm bg-dark-background/10 h-fit w-full animate-pulse rounded-lg ring"
       >
-        <SelectTrigger className="ring-dark-background/10 text-dark-txt/80 !text-fluid-sm w-full rounded-lg !p-6 !pl-3">
-          <SelectValue placeholder="Select Category" />
-        </SelectTrigger>
-        <SelectContent>
-          {categoryList?.map((category) => (
-            <SelectItem
-              key={category.id}
-              className="text-dark-txt/80 p-3"
-              value={category.id}
-            >
-              {category.name}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    )
+        <p className="invisible p-3 text-start">Select Category</p>
+      </button>
+    );
+  }
+
+  return (
+    <Select
+      disabled={isCategoryEmpty}
+      onValueChange={(value) => setFormCategory(value)}
+    >
+      <SelectTrigger className="ring-dark-background/10 text-dark-txt/80 !text-fluid-sm w-full rounded-lg !p-6 !pl-3">
+        <SelectValue placeholder="Select Category" />
+      </SelectTrigger>
+      <SelectContent>
+        {categoryList?.map((category) => (
+          <SelectItem
+            key={category.id}
+            className="text-dark-txt/80 p-3"
+            value={category.id}
+          >
+            {category.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };
 

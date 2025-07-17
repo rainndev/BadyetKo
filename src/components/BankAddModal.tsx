@@ -69,6 +69,7 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
 
   return (
     <div className="bg-dark-background/90 fixed z-20 flex h-dvh w-screen items-center justify-center backdrop-blur-xs">
+      {/* container  */}
       <motion.div
         initial={{
           scale: 0.95,
