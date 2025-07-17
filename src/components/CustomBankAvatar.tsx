@@ -219,11 +219,11 @@ export default function CustomBankAvatar({
   }, [fileId]); // Depend only on fileId
 
   return (
-    <div className="text-dark-txt flex flex-col items-center gap-2">
+    <div className="text-dark-txt my-10 flex flex-col items-center gap-2">
       <div className="relative inline-flex">
         {/* Drop area - uses finalImageUrl */}
         <button
-          className="border-input hover:bg-accent/50 data-[dragging=true]:bg-accent/50 focus-visible:border-ring focus-visible:ring-ring/50 relative flex size-16 items-center justify-center overflow-hidden rounded-xl border border-dashed transition-colors outline-none focus-visible:ring-[3px] has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none"
+          className="border-dark-background/20 hover:bg-accent/50 data-[dragging=true]:bg-accent/50 focus-visible:border-ring focus-visible:ring-ring/50 relative flex size-16 items-center justify-center overflow-hidden rounded-xl border border-dashed transition-colors outline-none focus-visible:ring-[3px] has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none"
           onClick={openFileDialog}
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
@@ -339,7 +339,7 @@ export default function CustomBankAvatar({
       <p
         aria-live="polite"
         role="region"
-        className="text-muted-foreground text-fluid-xs mt-2"
+        className="text-muted-foreground text-fluid-sm mt-2"
       >
         {imageName}
       </p>

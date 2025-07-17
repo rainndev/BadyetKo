@@ -7,14 +7,19 @@ import BankList from "@/components/BankList";
 import ChartPieDonut from "@/components/ChartPieDonut";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import DashboardTabs from "@/components/DashboardTabs";
-
+import { AnimatePresence } from "framer-motion";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 const DashboardPage = () => {
   const [isShowModal, setShowModal] = useState(false);
   const { isLarge } = useBreakpoints();
-
+  //Lock the body when showing modal
+  useBodyScrollLock(isShowModal);
   return (
     <>
-      <BankAddModal isShowModal={isShowModal} setShowModal={setShowModal} />
+      <AnimatePresence>
+        {isShowModal && <BankAddModal setShowModal={setShowModal} />}
+      </AnimatePresence>
+
       <div className="bg-light-background m-0 flex h-full w-full flex-col p-5 md:p-10 lg:rounded-[3rem]">
         <h1 className="text-dark-txt text-fluid-lg my-5 font-medium">
           Overview
