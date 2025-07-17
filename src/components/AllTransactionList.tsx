@@ -35,7 +35,7 @@ const AllTransactionList = () => {
           </div>
         )}
 
-        <div className="flex w-full flex-col gap-3 divide-y divide-gray-100">
+        <div className="flex w-full flex-col gap-3 divide-y divide-gray-200">
           {isLoading &&
             [...Array(5)].map((_, idx) => (
               <TransactionListPlaceholder

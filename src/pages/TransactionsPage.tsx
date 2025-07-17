@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
 import TransactionListPlaceholder from "@/components/TransactionListPlaceholder";
-import { useVirtualizer, Virtualizer } from "@tanstack/react-virtual";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 const TransactionsPage = () => {
   const { bank_id } = useParams();
