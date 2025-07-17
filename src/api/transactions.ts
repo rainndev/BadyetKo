@@ -6,18 +6,25 @@ import {
 
 export const getTransactionList = async (
   bankID?: string,
-): Promise< TransactionListTypes[] > => {
+): Promise<{ transactions: TransactionListTypes[]; count: number | null }> => {
   if (bankID === undefined) {
     //execute this when theres no bank_id
-    const { data: transactions, error: txError } = await supabase
+    const {
+      data: transactions,
+      error: txError,
+      count,
+    } = await supabase
       .from("transactions")
-      .select(`
+      .select(
+        `
       *,
       categories (
         name,
         color
       )
-    `)
+    `,
+        { count: "exact" },
+      )
       .order("created_at", { ascending: false })
       .limit(10);
 
@@ -26,29 +33,35 @@ export const getTransactionList = async (
       throw txError;
     }
 
-    return transactions;
+    return { transactions, count };
   }
 
   //execute this when bank_id exist
-  const { data: transactions, error: txError } = await supabase
+  const {
+    data: transactions,
+    error: txError,
+    count,
+  } = await supabase
     .from("transactions")
-    .select(`
+    .select(
+      `
       *,
       categories (
         name,
         color
       )
-    `)
+    `,
+      { count: "exact" },
+    )
     .order("created_at", { ascending: false })
     .eq("bank_id", bankID);
 
-  if (txError ) {
-    console.error("Error:", txError );
+  if (txError) {
+    console.error("Error:", txError);
     throw txError;
   }
-  
-  console.log("getting transaction list with bank_id", transactions);
-  return transactions;
+
+  return { transactions, count };
 };
 
 export const createTransaction = async (
