@@ -1,16 +1,26 @@
+import { IoClose } from "react-icons/io5";
+import BankImage from "./ui/BankImage";
+
 const BankGridPlaceholder = () => {
   return (
-    <div className="bg-dark-background/50 relative flex w-full animate-pulse cursor-pointer flex-col items-start justify-center rounded-2xl p-5 md:rounded-3xl md:p-7">
-      <div className="flex w-full items-center justify-center gap-5">
+    <div
+      className={`bg-dark-background/50 relative flex w-full animate-pulse cursor-pointer flex-col items-start justify-center rounded-xl p-5 md:rounded-2xl md:p-7`}
+    >
+      <div className="invisible flex w-full items-center justify-start gap-5">
         <div className="flex size-8 items-center justify-center">
-          <div className="invisible min-h-10 w-full min-w-10 md:min-h-12 md:min-w-12">
-            test
-          </div>
+          <BankImage custom_bank_avatar={""} />
         </div>
       </div>
-
-      <p className="text-dark-txt/80 text-fluid-sm invisible mt-5 max-w-fit truncate tabular-nums">
-        $999.999
+      <div
+        className={`bg-light-background text-dark-background/40 invisible absolute -top-3 -right-3 rounded-full p-2`}
+      >
+        <IoClose />
+      </div>
+      <p className="text-dark-txt text-fluid-sm invisible mt-5 max-w-fit truncate tabular-nums">
+        19000
+      </p>
+      <p className="text-fluid-xs text-dark-txt/50 invisible max-w-full truncate">
+        test name
       </p>
     </div>
   );
