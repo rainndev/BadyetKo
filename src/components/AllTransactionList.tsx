@@ -17,9 +17,7 @@ const AllTransactionList = () => {
     (state) => state.isCategoryLabelEnabled,
   );
 
-  const isTXlistEmpty = !(
-    Array.isArray(data?.transactions) && data.transactions.length > 0
-  );
+  const isTXlistEmpty = !(Array.isArray(data) && data.length > 0);
 
   return (
     <div className="border-dark-background/20 min-h-100 w-full rounded-3xl p-2 py-5 md:p-10 lg:border">
@@ -43,7 +41,7 @@ const AllTransactionList = () => {
               />
             ))}
 
-          {data?.transactions.map(
+          {data?.map(
             ({ name, note, type, created_at, amount, categories, id }) => {
               const isDeposit = type === "deposit";
               return (

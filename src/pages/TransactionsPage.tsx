@@ -24,11 +24,14 @@ const TransactionsPage = () => {
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;
 
-  const { transactionData, isTransactionListLoading, deleteTransaction } =
-    useBankTransactions(bank_id);
+  const {
+    transactionData,
+    isTransactionListLoading,
+    deleteTransaction,
+    bankBalance: newBankBalance,
+  } = useBankTransactions(bank_id);
 
-  const bankBalance = transactionData?.balance ?? 0;
-
+  const bankBalance = newBankBalance?.balance ?? 0;
   return (
     <>
       <TransactionAddModal
@@ -59,7 +62,7 @@ const TransactionsPage = () => {
                 />
               ))}
 
-            {transactionData?.transactions.map((dataItem) => (
+            {transactionData?.map((dataItem) => (
               <TransactionRowData
                 key={dataItem.id}
                 dataItem={dataItem}

@@ -1,4 +1,5 @@
 import { useSession } from "@/context/SessionContext";
+import { useBankNetBalance } from "@/queries/useBankNetBalance";
 import { useCreateTransaction } from "@/queries/useCreateTransaction";
 import { useDeleteTransaction } from "@/queries/useDeleteTransaction";
 import { useEditTransaction } from "@/queries/useEditTransaction";
@@ -9,6 +10,9 @@ export const useBankTransactions = (bank_id: string) => {
   //hook for getting list of transactions
   const { data: transactionData, isLoading: isTransactionListLoading } =
     useTransactionList(bank_id);
+
+  //get the bank balance using bank id
+  const { data: bankBalance, isError: isBankBalanceError, error: bankBalanceError, isLoading: isBankBalanceLoading } = useBankNetBalance(bank_id)  
 
   //hook for adding transaction
   const {
@@ -23,6 +27,7 @@ export const useBankTransactions = (bank_id: string) => {
   const { mutate: deleteTransaction, isPending: isDeletePending } =
     useDeleteTransaction(bank_id, userID);
 
+  //hook for editing transaction
   const {
     mutate: editTransaction,
     isPending: isEditPending,
@@ -31,17 +36,21 @@ export const useBankTransactions = (bank_id: string) => {
 
 
   return {
-    isAddError,
     AddError,
+    bankBalanceError,
     transactionData,
-    isTransactionListLoading,
+    bankBalance,
     addTransaction,
-    isAddPending,
     deleteTransaction,
-    isDeletePending,
     editTransaction,
+    isAddError,
+    isTransactionListLoading,
+    isAddPending,
+    isDeletePending,
     isEditPending,
     isAddSuccess,
     isEditSuccess,
+    isBankBalanceError,
+    isBankBalanceLoading
   };
 };

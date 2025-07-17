@@ -46,3 +46,18 @@ export const removeBank = async ({ bankID, avatarFilePath }: {bankID: string, av
   } ;
   return data;
 };
+
+
+export const getBankBalance = async (bankID: string) => {
+    const { data, error } = await supabase
+    .from("banks")
+    .select("balance")
+    .eq("id", bankID)
+    .single();
+
+    if (error){
+     console.error("balance error", error)
+     throw error;
+    } 
+  return data;
+}

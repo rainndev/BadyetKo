@@ -12,6 +12,7 @@ export const useCreateTransaction = () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       queryClient.invalidateQueries({ queryKey: ["area-chart-data"] });
       queryClient.invalidateQueries({ queryKey: ["category-pie-data"] });
+      queryClient.invalidateQueries({ queryKey: ["bank-net-balance"] });
     },
   });
 };

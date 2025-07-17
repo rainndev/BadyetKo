@@ -16,6 +16,7 @@ export const useDeleteTransaction = (user_id: string, userID: string) => {
       queryClient.invalidateQueries({ queryKey: ["users", userID] });
       queryClient.invalidateQueries({ queryKey: ["area-chart-data"] });
       queryClient.invalidateQueries({ queryKey: ["category-pie-data"] });
+      queryClient.invalidateQueries({ queryKey: ["bank-net-balance"] });
     },
   });
 };
