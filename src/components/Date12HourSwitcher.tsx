@@ -25,7 +25,7 @@ const Date12HourSwitcher = () => {
           id="date-hour12-switcher"
         />
         <label
-          className="cursor-pointer text-nowrap"
+          className="hidden cursor-pointer text-nowrap @lg:block"
           htmlFor="date-hour12-switcher"
         >
           {isHour12Enabled ? "Enabled" : "Disabled"}

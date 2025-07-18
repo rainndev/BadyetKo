@@ -22,7 +22,7 @@ export function SymbolSwitcher() {
           id="currency-symbol-switcher"
         />
         <label
-          className="cursor-pointer text-nowrap"
+          className="hidden cursor-pointer text-nowrap @lg:block"
           htmlFor="currency-symbol-switcher"
         >
           {isISOSymbol ? "Enabled" : "Disabled"}

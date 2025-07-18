@@ -25,7 +25,7 @@ const TransactionLabelSwitcher = () => {
           id="transaction-label-switcher"
         />
         <label
-          className="cursor-pointer text-nowrap"
+          className="hidden cursor-pointer text-nowrap @lg:block"
           htmlFor="transaction-label-switcher"
         >
           {isCategoryLabelEnabled ? "Enabled" : "Disabled"}

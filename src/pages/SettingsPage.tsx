@@ -19,7 +19,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-start gap-10 p-5 md:p-10">
+    <div className="@container flex min-h-screen w-full flex-col items-start gap-10 p-5 md:p-10">
       {/* currency changer */}
 
       <div className="w-full space-y-2">

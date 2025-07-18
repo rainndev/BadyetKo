@@ -27,7 +27,7 @@ const DateTimeAgoSwitcher = () => {
           id="date-timeago-switcher"
         />
         <label
-          className="cursor-pointer text-nowrap"
+          className="hidden cursor-pointer text-nowrap @lg:block"
           htmlFor="date-timeago-switcher"
         >
           {isTimeAgoEnabled ? "Enabled" : "Disabled"}

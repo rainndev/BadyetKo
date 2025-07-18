@@ -22,7 +22,7 @@ const CurrencyMaskAmounts = () => {
           id="currency-masknumber-switcher"
         />
         <label
-          className="cursor-pointer text-nowrap"
+          className="hidden cursor-pointer text-nowrap @lg:block"
           htmlFor="currency-masknumber-switcher"
         >
           {isMasked ? "Enabled" : "Disabled"}

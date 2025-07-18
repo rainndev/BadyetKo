@@ -25,7 +25,7 @@ const DateSecondsSwitcher = () => {
           id="date-seconds-switcher"
         />
         <label
-          className="cursor-pointer text-nowrap"
+          className="hidden cursor-pointer text-nowrap @lg:block"
           htmlFor="date-seconds-switcher"
         >
           {isSecondEnabled ? "Enabled" : "Disabled"}
