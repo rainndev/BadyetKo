@@ -1,7 +1,7 @@
 const DashboardStatisticPlaceholder = () => {
-  return [...new Array(6)].map((_, idx) => (
+  return [...new Array(7)].map((_, idx) => (
     <div
-      key={"placeholder" + idx}
+      key={"placeholder" + idx + 1}
       className={`[grid-area:grid${idx + 1}] bg-dark-background/50 flex w-full animate-pulse items-center justify-between rounded-2xl p-5 shadow-xl md:p-7`}
     >
       <div className="invisible">
