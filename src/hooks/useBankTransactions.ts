@@ -6,13 +6,18 @@ import { useEditTransaction } from "@/queries/useEditTransaction";
 import { useTransactionList } from "@/queries/useTransactionList";
 
 export const useBankTransactions = (bank_id: string) => {
-  const {userID} = useSession()
+  const { userID } = useSession();
   //hook for getting list of transactions
   const { data: transactionData, isLoading: isTransactionListLoading } =
     useTransactionList(bank_id);
 
   //get the bank balance using bank id
-  const { data: bankBalance, isError: isBankBalanceError, error: bankBalanceError, isLoading: isBankBalanceLoading } = useBankNetBalance(bank_id)  
+  const {
+    data: bankBalance,
+    isError: isBankBalanceError,
+    error: bankBalanceError,
+    isLoading: isBankBalanceLoading,
+  } = useBankNetBalance(bank_id);
 
   //hook for adding transaction
   const {
@@ -34,7 +39,6 @@ export const useBankTransactions = (bank_id: string) => {
     isSuccess: isEditSuccess,
   } = useEditTransaction();
 
-
   return {
     AddError,
     bankBalanceError,
@@ -51,6 +55,6 @@ export const useBankTransactions = (bank_id: string) => {
     isAddSuccess,
     isEditSuccess,
     isBankBalanceError,
-    isBankBalanceLoading
+    isBankBalanceLoading,
   };
 };
