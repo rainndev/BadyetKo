@@ -12,16 +12,15 @@ import {
   type EditTransactionSchemaType,
 } from "@/schemas/transactionEdit.schema";
 import SelectCategoryForm from "./SelectCategoryForm";
-import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
+import TransparentLogoOnly from "@/assets/logos/transparent-logo-only.png";
+import { motion } from "framer-motion";
 
 type TransactionEditModalProps = {
-  isShowEditModal: boolean;
   setShowEditModal: (show: boolean) => void;
   dataItem: TransactionListTypes;
 };
 
 const TransactionEditModal = ({
-  isShowEditModal,
   setShowEditModal,
   dataItem,
 }: TransactionEditModalProps) => {
@@ -40,9 +39,6 @@ const TransactionEditModal = ({
   const { editTransaction, isEditPending, isEditSuccess } = useBankTransactions(
     bank_id ?? "",
   );
-
-  //Lock the body when showing modal
-  useBodyScrollLock(isShowEditModal);
 
   if (!bank_id || !isValidUUIDv4(bank_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;
@@ -63,81 +59,105 @@ const TransactionEditModal = ({
     }
   }, [isEditPending, isEditSuccess]);
 
-  return (
-    isShowEditModal &&
-    createPortal(
-      <div className="bg-dark-background/90 font-nunito fixed inset-0 z-50 flex h-dvh w-full items-center justify-center font-medium backdrop-blur-lg">
-        <div className="bg-light-background text-dark-txt mx-3 w-full max-w-xl rounded-2xl p-3 shadow-2xl">
-          <div className="border-dark-txt/10 flex justify-between border-b-2 p-5 md:p-10">
-            <h1 className="text-fluid-xl">Update Transaction</h1>
-            <button
-              className="text-dark-txt/50 cursor-pointer text-2xl"
-              onClick={() => setShowEditModal(false)}
-              disabled={isEditPending}
-            >
-              <IoClose />
-            </button>
+  return createPortal(
+    <div className="bg-dark-background/90 font-nunito fixed inset-0 z-50 flex h-dvh w-full items-center justify-center font-medium backdrop-blur-lg">
+      <motion.div
+        initial={{
+          scale: 0.95,
+          opacity: 0,
+        }}
+        animate={{
+          scale: 1,
+          opacity: 1,
+        }}
+        exit={{
+          scale: 0.95,
+          opacity: 0,
+        }}
+        transition={{
+          duration: 0.25,
+          ease: "easeInOut",
+        }}
+        className="bg-light-background text-dark-txt mx-3 w-full max-w-md rounded-2xl p-3 shadow-2xl"
+      >
+        <div className="border-dark-txt/10 flex justify-between p-5">
+          <div className="flex items-center gap-2">
+            <div className="text-fluid-lg w-fit rounded-full border p-1">
+              <img src={TransparentLogoOnly} className="w-6" />
+            </div>
+
+            <h1 className="text-fluid-lg font-inter w-full text-start font-semibold">
+              Update Transaction
+            </h1>
           </div>
 
-          <div className="p-5 md:p-10">
-            <form
-              className="relative space-y-2 rounded-2xl"
-              onSubmit={handleSubmit(onSubmitData)}
-            >
-              {/* Update Name of tx */}
-              <div>
-                <p className="text-dark-txt/90 text-fluid-lg mb-2">
-                  Transaction Name
-                </p>
-                <input
-                  type="text"
-                  id="name"
-                  {...register("name")}
-                  placeholder={dataItem.name}
-                  className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
-                />
-                {errors.name && (
-                  <p className="text-sm text-red-400">{errors.name.message}</p>
-                )}
-              </div>
-
-              {/* Update of Category tx */}
-
-              <div>
-                <p className="text-dark-txt/90 text-fluid-lg mb-2">Category</p>
-                <SelectCategoryForm setFormCategory={setFormCategory} />
-              </div>
-
-              {/* Update Note of tx */}
-              <div>
-                <p className="text-dark-txt/90 text-fluid-lg mb-2">
-                  Note{" "}
-                  <span className="text-dark-txt/50 text-sm">(Optional)</span>
-                </p>
-                <input
-                  type="text"
-                  {...register("note")}
-                  placeholder={dataItem.note || "e.g. Monthly electricity bill"}
-                  className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
-                />
-                {errors.note && (
-                  <p className="text-sm text-red-400">{errors.note.message}</p>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                disabled={isEditPending}
-                className="bg-dark-background hover:bg-dark-background/90 text-light-background text-fluid-sm mt-5 cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
-              >
-                {isEditPending ? "Loading..." : "Update transaction"}
-              </button>
-            </form>
-          </div>
+          <button
+            className="text-dark-txt/50 text-fluid-xl cursor-pointer"
+            onClick={() => setShowEditModal(false)}
+            disabled={isEditPending}
+          >
+            <IoClose />
+          </button>
         </div>
-      </div>,
-      document.body,
-    )
+
+        <div className="p-5">
+          <form
+            className="relative space-y-2 rounded-2xl"
+            onSubmit={handleSubmit(onSubmitData)}
+          >
+            {/* Update Name of tx */}
+            <div>
+              <p className="text-dark-txt/90 text-fluid-base mb-2">
+                Transaction Name
+              </p>
+              <input
+                type="text"
+                id="name"
+                {...register("name")}
+                placeholder={dataItem.name}
+                className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+              />
+              {errors.name && (
+                <p className="text-sm text-red-400">{errors.name.message}</p>
+              )}
+            </div>
+
+            {/* Update of Category tx */}
+
+            <div>
+              <p className="text-dark-txt/90 text-fluid-base mb-2">Category</p>
+              <SelectCategoryForm setFormCategory={setFormCategory} />
+            </div>
+
+            {/* Update Note of tx */}
+            <div>
+              <p className="text-dark-txt/90 text-fluid-base mb-2">
+                Note{" "}
+                <span className="text-dark-txt/50 text-sm">(Optional)</span>
+              </p>
+              <input
+                type="text"
+                {...register("note")}
+                placeholder={dataItem.note || "e.g. Monthly electricity bill"}
+                className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
+              />
+              {errors.note && (
+                <p className="text-sm text-red-400">{errors.note.message}</p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              disabled={isEditPending}
+              className="bg-dark-background hover:bg-dark-background/90 text-light-background text-fluid-sm w-full cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
+            >
+              {isEditPending ? "Loading..." : "Update transaction"}
+            </button>
+          </form>
+        </div>
+      </motion.div>
+    </div>,
+    document.body,
   );
 };
 

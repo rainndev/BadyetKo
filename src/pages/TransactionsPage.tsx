@@ -8,7 +8,9 @@ import { useRef, useState } from "react";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import type { TransactionListTypes } from "@/types/transaction.types";
 import TransactionListPlaceholder from "@/components/TransactionListPlaceholder";
+import { AnimatePresence } from "framer-motion";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 const TransactionsPage = () => {
   const { bank_id } = useParams();
@@ -18,6 +20,9 @@ const TransactionsPage = () => {
   const [selectedItem, setSelectedItem] = useState<TransactionListTypes | null>(
     null,
   );
+
+  //Lock the body when showing modal
+  useBodyScrollLock(isEditOpen);
 
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
@@ -52,13 +57,14 @@ const TransactionsPage = () => {
       />
 
       {/* Shared modal instance for edit */}
-      {selectedItem && (
-        <TransactionEditModal
-          isShowEditModal={isEditOpen}
-          setShowEditModal={setEditOpen}
-          dataItem={selectedItem}
-        />
-      )}
+      <AnimatePresence>
+        {selectedItem && isEditOpen && (
+          <TransactionEditModal
+            setShowEditModal={setEditOpen}
+            dataItem={selectedItem}
+          />
+        )}
+      </AnimatePresence>
 
       <div className="min-h-screen w-full p-5 md:p-10">
         <div className="mb-5 flex items-center justify-between gap-5">
