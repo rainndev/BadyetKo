@@ -71,7 +71,7 @@ function AreaChartData() {
   const isTransactionEmpty = !data || data.length === 0;
 
   return (
-    <Card className="p-2 md:p-10 lg:border">
+    <Card className="p-2 lg:border lg:p-10">
       <CardHeader className="flex items-center gap-2 space-y-0 py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Transaction Overview</CardTitle>

@@ -48,6 +48,7 @@ const TransactionsPage = () => {
           setEditOpen={setEditOpen}
           setSelectedItem={setSelectedItem}
         />
+
         {/* Transaction List Side Summary */}
         <TransactionListSummary bank_id={bank_id} setShowModal={setShowModal} />
       </div>

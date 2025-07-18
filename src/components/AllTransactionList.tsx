@@ -22,7 +22,7 @@ const AllTransactionList = () => {
   );
 
   return (
-    <div className="border-dark-background/20 min-h-100 w-full rounded-3xl p-2 py-5 md:p-10 lg:border">
+    <div className="border-dark-background/20 min-h-100 w-full rounded-3xl p-2 py-5 lg:border lg:p-10">
       <h1 className="text-dark-txt text-fluid-xl mb-5 font-semibold">
         Recent Transactions
       </h1>

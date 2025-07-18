@@ -28,7 +28,7 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
     );
 
   return (
-    <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 py-5 md:p-10 lg:border">
+    <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 py-5 lg:border lg:p-10">
       {/* add bank wallet */}
       <div className="mb-5 flex flex-col gap-2">
         {/* -----header with add bank btn */}
@@ -46,13 +46,15 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
             </button>
             <button
               onClick={() => setShowModal(!isShowModal)}
-              className="text-light-background bg-dark-background hover:bg-dark-background/90 text-fluid-sm hidden rounded-full p-2 px-4 transition-colors ease-in-out @sm:flex @sm:items-center @sm:justify-center @sm:space-x-2"
+              className="bg-dark-background hover:bg-dark-background/90 text-light-background text-fluid-sm flex h-fit cursor-pointer items-center gap-2 rounded-lg p-3 transition-colors ease-in-out @lg:px-5"
             >
-              <span className="cursor-pointer">Add More Accounts</span>
-            </button>
-
-            <button className="text-light-background bg-dark-background rounded-xl p-3 text-xs @sm:hidden">
-              <FaPlus onClick={() => setShowModal(!isShowModal)} />
+              <span className="hidden cursor-pointer @lg:block">
+                Add More Account
+              </span>
+              <FaPlus
+                className="block @lg:hidden"
+                onClick={() => setShowModal(true)}
+              />
             </button>
           </div>
         </div>

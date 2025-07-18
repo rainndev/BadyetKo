@@ -30,7 +30,7 @@ const TransactionList = ({
   const virtualItems = virtualizer.getVirtualItems();
 
   return (
-    <div className="min-h-screen w-full p-5 md:p-10">
+    <div className="order-2 min-h-screen w-full p-5 md:p-10 lg:order-1">
       <div
         ref={scrollRef}
         className="hide-scrollbar h-dvh overflow-auto overflow-x-auto lg:mb-0"
