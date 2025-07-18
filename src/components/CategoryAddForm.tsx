@@ -87,19 +87,20 @@ const CategoryAddForm = () => {
       {/* category icon */}
       <div className="flex flex-wrap gap-3">
         {categoryIcon.map((item) => {
-          const [label, Icon] = Object.entries(item)[0];
+          console.log("icon", item);
+          const { name, icon: Icon, id } = item;
           return (
             <div
-              key={label}
-              onClick={() => setSelectedIcon(label)}
+              key={id}
+              onClick={() => setSelectedIcon(id)}
               style={{
                 backgroundColor:
-                  selectedIcon === label ? selectedColor : undefined,
+                  selectedIcon === id ? selectedColor : undefined,
               }}
               className="text-fluid-lg flex cursor-pointer flex-col items-center rounded-sm p-3 text-center transition-colors duration-300 ease-in-out"
             >
               <Icon size={24} />
-              <p className="text-fluid-xs">{label}</p>
+              <p className="text-fluid-xs">{name}</p>
             </div>
           );
         })}
