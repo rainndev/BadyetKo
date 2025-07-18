@@ -39,18 +39,16 @@ const DashboardStatisticCard = () => {
 
       <div className="w-full">
         {/* total deposit and withdrawals render */}
-        <div className="grid grid-cols-1 justify-between gap-1 @sm:grid-cols-2 @md:gap-2">
+        <div className="grid gap-1 [grid-template-areas:'grid1_grid1'_'grid2_grid2'_'grid3_grid4'_'grid5_grid6'] @lg:[grid-template-areas:'grid1_grid2'_'grid3_grid4'_'grid5_grid6']">
           {/* loading placeholder */}
-          {isLoadingUserStatistic && (
-            <DashboardStatisticPlaceholder count={2} />
-          )}
+          {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
 
           {/* total deposit and withdrawals render */}
           {!isLoadingUserStatistic && (
             <>
               <div
                 key="total_deposit"
-                className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
+                className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl [grid-area:grid1] md:p-7"
               >
                 <div>
                   <p className="text-light-background/60 text-fluid-sm font-thin">
@@ -68,7 +66,7 @@ const DashboardStatisticCard = () => {
               </div>
               <div
                 key="total_withdraw"
-                className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl md:p-7"
+                className="bg-dark-background flex items-center justify-between rounded-2xl p-5 shadow-xl [grid-area:grid2] md:p-7"
               >
                 <div>
                   <p className="text-light-background/60 text-fluid-sm font-thin">
@@ -87,19 +85,12 @@ const DashboardStatisticCard = () => {
               </div>
             </>
           )}
-        </div>
 
-        {/* Data render */}
-        <div className="mt-1 grid grid-cols-2 gap-1 @md:mt-2 @md:gap-2">
-          {/* loading placeholder */}
-          {isLoadingUserStatistic && (
-            <DashboardStatisticPlaceholder count={4} />
-          )}
-
-          {TXStat?.map((txItemData) => (
+          {/* max and min depo/withdraw */}
+          {TXStat?.map((txItemData, idx) => (
             <div
               key={txItemData.label}
-              className="bg-dark-background flex w-full flex-col items-start justify-between rounded-2xl p-5 shadow-xl md:p-7"
+              className={`[grid-area:grid${idx + 3}] bg-dark-background flex w-full flex-col items-start justify-between rounded-2xl p-5 shadow-xl md:p-7`}
             >
               <div className="text-fluid-sm flex w-full items-center justify-between gap-2">
                 <p className="text-light-background/60 font-thin">
