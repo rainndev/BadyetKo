@@ -41,7 +41,9 @@ const DashboardStatisticCard = () => {
         {/* total deposit and withdrawals render */}
         <div className="grid grid-cols-1 justify-between gap-1 @sm:grid-cols-2 @md:gap-2">
           {/* loading placeholder */}
-          {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
+          {isLoadingUserStatistic && (
+            <DashboardStatisticPlaceholder count={2} />
+          )}
 
           {/* total deposit and withdrawals render */}
           {!isLoadingUserStatistic && (
@@ -89,6 +91,11 @@ const DashboardStatisticCard = () => {
 
         {/* Data render */}
         <div className="mt-1 grid grid-cols-2 gap-1 @md:mt-2 @md:gap-2">
+          {/* loading placeholder */}
+          {isLoadingUserStatistic && (
+            <DashboardStatisticPlaceholder count={4} />
+          )}
+
           {TXStat?.map((txItemData) => (
             <div
               key={txItemData.label}
