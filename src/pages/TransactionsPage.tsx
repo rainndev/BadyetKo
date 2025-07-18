@@ -7,6 +7,7 @@ import type { TransactionListTypes } from "@/types/transaction.types";
 import { AnimatePresence } from "framer-motion";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import TransactionList from "@/components/TransactionList";
+import TransactionListSummary from "@/components/TransactionListSummary";
 
 const TransactionsPage = () => {
   const { bank_id } = useParams();
@@ -40,13 +41,16 @@ const TransactionsPage = () => {
         )}
       </AnimatePresence>
 
-      {/*Transaction list */}
-      <TransactionList
-        bank_id={bank_id}
-        setEditOpen={setEditOpen}
-        setSelectedItem={setSelectedItem}
-        setShowModal={setShowModal}
-      />
+      <div className="grid w-full grid-cols-1 lg:grid-cols-2">
+        {/*Transaction list */}
+        <TransactionList
+          bank_id={bank_id}
+          setEditOpen={setEditOpen}
+          setSelectedItem={setSelectedItem}
+        />
+        {/* Transaction List Side Summary */}
+        <TransactionListSummary bank_id={bank_id} setShowModal={setShowModal} />
+      </div>
     </>
   );
 };

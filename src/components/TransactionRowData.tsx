@@ -44,7 +44,7 @@ const TransactionRowData = ({
   };
 
   return (
-    <div className="flex w-full flex-col py-2 transition-colors ease-in-out">
+    <div className="bg-dark-background/4 flex w-full flex-col rounded-lg px-5 py-2 transition-colors ease-in-out">
       <div className="flex w-full items-center justify-between">
         <div>
           {/* tx name */}

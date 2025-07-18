@@ -1,5 +1,4 @@
 import { useBankTransactions } from "@/hooks/useBankTransactions";
-import { useCurrencyStore } from "@/store/CurrencyStore";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef, type Dispatch, type SetStateAction } from "react";
 import TransactionListPlaceholder from "./TransactionListPlaceholder";
@@ -9,31 +8,17 @@ import type { TransactionListTypes } from "@/types/transaction.types";
 type TransactionListProps = {
   bank_id: string;
   setEditOpen: (value: boolean) => void;
-  setShowModal: (value: boolean) => void;
   setSelectedItem: Dispatch<SetStateAction<TransactionListTypes | null>>;
 };
 
 const TransactionList = ({
   bank_id,
   setEditOpen,
-  setShowModal,
   setSelectedItem,
 }: TransactionListProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const {
-    transactionData,
-    isTransactionListLoading,
-    deleteTransaction,
-    bankBalance: newBankBalance,
-  } = useBankTransactions(bank_id);
-
-  //net balance of each account
-  const bankBalance = newBankBalance?.balance ?? 0;
-
-  //format tx amount
-  const getformattedAmount = useCurrencyStore(
-    (state) => state.getformattedAmount,
-  );
+  const { transactionData, isTransactionListLoading, deleteTransaction } =
+    useBankTransactions(bank_id);
 
   //virtualizer from tanstack
   const virtualizer = useVirtualizer({
@@ -45,23 +30,10 @@ const TransactionList = ({
   const virtualItems = virtualizer.getVirtualItems();
 
   return (
-    <div className="min-h-screen w-full p-5 md:p-10 xl:w-[50%]">
-      <div className="mb-5 flex items-center justify-between gap-5">
-        <h1 className="flex flex-col tabular-nums">
-          <span className="text-fluid-base">Balance</span>
-          <span>{getformattedAmount(bankBalance)}</span>
-        </h1>
-        <button
-          onClick={() => setShowModal(true)}
-          className="bg-dark-background hover:bg-dark-background/90 text-light-background text-fluid-sm mt-5 h-fit cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
-        >
-          Add New Transaction
-        </button>
-      </div>
-
+    <div className="min-h-screen w-full p-5 md:p-10">
       <div
         ref={scrollRef}
-        className="hide-scrollbar mb-20 h-dvh overflow-auto overflow-x-auto lg:mb-0"
+        className="hide-scrollbar h-dvh overflow-auto overflow-x-auto lg:mb-0"
       >
         <div
           style={{
@@ -70,12 +42,12 @@ const TransactionList = ({
           className="relative"
         >
           <div
-            className="absolute top-0 left-0 w-full space-y-2 divide-y divide-gray-200"
+            className="absolute top-0 left-0 w-full space-y-2"
             style={{
               transform: `translateY(${virtualItems[0]?.start ?? 0}px)`,
             }}
           >
-            {/* data */}
+            {/* Skeleton loading */}
             {isTransactionListLoading &&
               [...Array(2)].map((_, idx) => (
                 <TransactionListPlaceholder
@@ -83,11 +55,13 @@ const TransactionList = ({
                 />
               ))}
 
+            {/* render items */}
             {virtualItems.map((vItem) => {
               const dataItem = transactionData?.transactions[vItem.index];
               if (!dataItem) return null;
               return (
                 <TransactionRowData
+                  key={vItem.key}
                   dataItem={dataItem}
                   deleteTransaction={deleteTransaction}
                   setEditOpen={setEditOpen}
