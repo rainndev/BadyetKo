@@ -8,9 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { lightColors } from "@/data/categoryColors";
 import { useState } from "react";
+import { categoryIcon } from "@/data/category-icon";
 
 const CategoryAddForm = () => {
   const [selectedColor, setSelectedColor] = useState("#FDE68A");
+  const [selectedIcon, setSelectedIcon] = useState("");
   const {
     register,
     handleSubmit,
@@ -79,6 +81,28 @@ const CategoryAddForm = () => {
             className={`${selectedColor === color && "border-dark-background/30 border-3"} size-7 rounded-md transition-colors duration-300 ease-in-out md:size-12 md:rounded-lg`}
           />
         ))}
+      </div>
+
+      <h1 className="mt-5 mb-2">Icons</h1>
+      {/* category icon */}
+      <div className="flex flex-wrap gap-3">
+        {categoryIcon.map((item) => {
+          const [label, Icon] = Object.entries(item)[0];
+          return (
+            <div
+              key={label}
+              onClick={() => setSelectedIcon(label)}
+              style={{
+                backgroundColor:
+                  selectedIcon === label ? selectedColor : undefined,
+              }}
+              className="text-fluid-lg flex cursor-pointer flex-col items-center rounded-sm p-3 text-center transition-colors duration-300 ease-in-out"
+            >
+              <Icon size={24} />
+              <p className="text-fluid-xs">{label}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

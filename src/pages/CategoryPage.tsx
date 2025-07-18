@@ -9,8 +9,8 @@ const CategoryPage = () => {
   return (
     <div className="flex min-h-screen w-full flex-col items-start p-5 md:p-10">
       <CategoryAddForm />
-      {/* render category */}
 
+      {/* render category */}
       <hr className="my-5 h-2 w-full" />
       <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
         {isCategoryListLoading && <p>Loading...</p>}
