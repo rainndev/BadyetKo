@@ -1,11 +1,9 @@
 import type { Database } from "@/types/supabase.types";
+import type { CategoriesListTypes } from "./categories.types";
 
 export type TransactionListTypes =
   Database["public"]["Tables"]["transactions"]["Row"] & {
-     categories?: {
-    name: string;
-    color: string
-  } | null;
+    categories?: CategoriesListTypes | null;
   };
 
 export type TransactionInsertTypes =

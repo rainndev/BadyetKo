@@ -23,7 +23,7 @@ const TransactionList = ({
   //virtualizer from tanstack
   const virtualizer = useVirtualizer({
     count: transactionData?.count || 0,
-    estimateSize: () => 105,
+    estimateSize: () => 90,
     getScrollElement: () => scrollRef.current,
   });
 

@@ -20,7 +20,8 @@ export const getTransactionList = async (
       *,
       categories (
         name,
-        color
+        color,
+        icon_id
       )
     `,
         { count: "exact" },
@@ -48,7 +49,8 @@ export const getTransactionList = async (
       *,
       categories (
         name,
-        color
+        color,
+        icon_id
       )
     `,
       { count: "exact" },
