@@ -55,7 +55,7 @@ const TransactionRowData = ({
       {/* category icon */}
       <div
         style={{
-          backgroundColor: hexToRgba(categories?.color ?? "#f26f6f", 20),
+          backgroundColor: hexToRgba(categories?.color ?? "#f26f6f", 15),
           border: "1px solid",
           borderColor: hexToRgba(categories?.color ?? "#f26f6f", 50),
           color: categories?.color ?? "#f26f6f",

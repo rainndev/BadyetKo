@@ -87,8 +87,8 @@ const CategoryAddForm = () => {
           />
         ))}
       </div>
-
-      <h1 className="text-fluid-lg mt-5 mb-2">Icons</h1>
+      <hr className="my-5" />
+      <h1 className="text-fluid-lg mb-2">Icons</h1>
       {/* category icon */}
       <div className="flex flex-wrap items-center justify-start gap-2">
         {Object.entries(categoryIconMap).map(([id, Icon]) => {
@@ -99,7 +99,7 @@ const CategoryAddForm = () => {
               style={{
                 backgroundColor:
                   selectedIcon === id
-                    ? hexToRgba(selectedColor, 30)
+                    ? hexToRgba(selectedColor, 15)
                     : undefined,
                 border: "1px solid",
                 borderColor:
