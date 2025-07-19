@@ -16,14 +16,16 @@ import { CircleOff } from "lucide-react";
 
 interface TransactionRowDataProps {
   dataItem: TransactionListTypes;
-  deleteTransaction: (id: number) => void;
-  setEditOpen: (open: boolean) => void;
-  setSelectedItem: (item: TransactionListTypes) => void;
+  isRecentList?: boolean;
+  deleteTransaction?: (id: number) => void;
+  setEditOpen?: (open: boolean) => void;
+  setSelectedItem?: (item: TransactionListTypes) => void;
 }
 
 const TransactionRowData = ({
   dataItem,
   deleteTransaction,
+  isRecentList = false,
   setEditOpen,
   setSelectedItem,
 }: TransactionRowDataProps) => {
@@ -44,8 +46,8 @@ const TransactionRowData = ({
     CircleOff;
 
   const handleEdit = () => {
-    setSelectedItem(dataItem);
-    setEditOpen(true);
+    setSelectedItem?.(dataItem);
+    setEditOpen?.(true);
   };
 
   return (
@@ -106,31 +108,33 @@ const TransactionRowData = ({
         </div>
 
         {/* edit/delete modal */}
-        <div className="text-dark-txt/50 text-fluid-base">
-          <Popover>
-            <PopoverTrigger className="cursor-pointer">
-              <RxDotsVertical />
-            </PopoverTrigger>
-            <PopoverContent className="w-30 overflow-hidden rounded-2xl p-0 text-xs text-gray-600">
-              <ul>
-                <li
-                  onClick={() => deleteTransaction(id)}
-                  className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200"
-                >
-                  <p>Delete</p>
-                  <PiTrashSimple className="text-sm" />
-                </li>
-                <li
-                  onClick={handleEdit}
-                  className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200"
-                >
-                  <p>Edit</p>
-                  <CiEdit className="text-sm" />
-                </li>
-              </ul>
-            </PopoverContent>
-          </Popover>
-        </div>
+        {!isRecentList && (
+          <div className="text-dark-txt/50 text-fluid-base">
+            <Popover>
+              <PopoverTrigger className="cursor-pointer">
+                <RxDotsVertical />
+              </PopoverTrigger>
+              <PopoverContent className="w-30 overflow-hidden rounded-2xl p-0 text-xs text-gray-600">
+                <ul>
+                  <li
+                    onClick={() => deleteTransaction?.(id)}
+                    className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200"
+                  >
+                    <p>Delete</p>
+                    <PiTrashSimple className="text-sm" />
+                  </li>
+                  <li
+                    onClick={handleEdit}
+                    className="flex cursor-pointer items-center justify-between p-3 transition-colors ease-in-out hover:bg-gray-200"
+                  >
+                    <p>Edit</p>
+                    <CiEdit className="text-sm" />
+                  </li>
+                </ul>
+              </PopoverContent>
+            </Popover>
+          </div>
+        )}
       </div>
     </div>
   );
