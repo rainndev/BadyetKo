@@ -74,7 +74,7 @@ const CategoryAddForm = () => {
       </form>
 
       {/* colors */}
-      <h1 className="mt-5 mb-2">Colors</h1>
+      <h1 className="text-fluid-lg mt-5 mb-2">Colors</h1>
       <div className="flex h-full w-full flex-wrap gap-1 md:gap-2">
         {colors.map((color, idx) => (
           <div
@@ -88,9 +88,9 @@ const CategoryAddForm = () => {
         ))}
       </div>
 
-      <h1 className="mt-5 mb-2">Icons</h1>
+      <h1 className="text-fluid-lg mt-5 mb-2">Icons</h1>
       {/* category icon */}
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap items-center justify-start gap-2">
         {Object.entries(categoryIconMap).map(([id, Icon]) => {
           return (
             <div
@@ -109,10 +109,10 @@ const CategoryAddForm = () => {
                 color:
                   selectedIcon === id ? selectedColor || "#FFFFFF" : undefined,
               }}
-              className="text-fluid-lg flex cursor-pointer flex-col items-center rounded-sm p-3 text-center transition-colors duration-300 ease-in-out"
+              className="text-fluid-lg flex cursor-pointer flex-col items-center rounded-sm p-2 text-center transition-colors duration-300 ease-in-out md:p-3"
             >
-              <Icon size={24} />
-              <p className="text-fluid-xs">{id}</p>
+              <Icon className="aspect-square w-5" />
+              <p className="text-fluid-xs hidden md:block">{id}</p>
             </div>
           );
         })}

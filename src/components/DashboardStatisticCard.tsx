@@ -40,7 +40,7 @@ const DashboardStatisticCard = () => {
                   <p className="text-light-background/60 text-fluid-sm font-thin">
                     Cumulative Balance
                   </p>
-                  <h1 className="text-fluid-xl text-light-background font-semibold tabular-nums">
+                  <h1 className="text-fluid-2xl text-light-background font-semibold tabular-nums">
                     {getformattedAmount(total_balance)}
                   </h1>
                 </div>
