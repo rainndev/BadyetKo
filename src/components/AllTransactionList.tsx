@@ -32,15 +32,13 @@ const AllTransactionList = () => {
               />
             ))}
 
-          {data?.transactions.map((dataItem) => {
-            return (
-              <TransactionRowData
-                dataItem={dataItem}
-                isRecentList={true}
-                key={dataItem.id}
-              />
-            );
-          })}
+          {data?.transactions.map((dataItem) => (
+            <TransactionRowData
+              dataItem={dataItem}
+              isRecentList={true}
+              key={dataItem.id}
+            />
+          ))}
         </div>
       </div>
     </div>

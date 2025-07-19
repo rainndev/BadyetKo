@@ -67,12 +67,14 @@ const TransactionRowData = ({
       <div className="flex w-full flex-col items-start justify-center truncate">
         {/* tx name */}
         <h1 className="text-fluid-base max-w-full truncate text-start text-nowrap">
-          {isCategoryLabelEnabled ? categories?.name || "No Category" : name}
+          {name}
         </h1>
 
         {/* tx note */}
         <p className="text-dark-txt/50 text-fluid-xs w-fit max-w-full truncate rounded-lg text-nowrap">
-          {note || "n/a"}
+          {isCategoryLabelEnabled
+            ? categories?.name || "No Category"
+            : note || "No note provided"}
         </p>
 
         {/* tx type */}

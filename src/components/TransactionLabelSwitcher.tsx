@@ -11,9 +11,9 @@ const TransactionLabelSwitcher = () => {
 
   return (
     <div className="bg-dark-background/5 flex w-full shrink-0 flex-col gap-3 rounded-2xl p-5 transition-colors duration-300 ease-in-out">
-      <h1 className="text-fluid-lg font-semibold">Transaction Label</h1>
+      <h1 className="text-fluid-lg font-semibold">Category Label</h1>
       <p className="text-muted-foreground text-fluid-sm">
-        Toggle between "Deposit/Withdraw" and category-based transaction labels.
+        Use a category label instead of a transaction note.
       </p>
       <div className="flex items-center gap-2">
         <Switch
