@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { lightColors } from "@/data/categoryColors";
 import { useState } from "react";
-import { categoryIcon } from "@/data/category-icon";
+import { categoryIconMap } from "@/data/categoryIcon";
 
 const CategoryAddForm = () => {
   const [selectedColor, setSelectedColor] = useState("#FDE68A");
@@ -25,7 +25,11 @@ const CategoryAddForm = () => {
   const { isAddCategoryPending, addCategory } = useTransactionCategory();
 
   const onSubmit: SubmitHandler<categorySchemaType> = (data) => {
-    addCategory({ categoryName: data.name, categoryColor: selectedColor });
+    addCategory({
+      categoryName: data.name,
+      categoryColor: selectedColor,
+      iconID: selectedIcon,
+    });
     reset();
   };
 
@@ -86,9 +90,7 @@ const CategoryAddForm = () => {
       <h1 className="mt-5 mb-2">Icons</h1>
       {/* category icon */}
       <div className="flex flex-wrap gap-3">
-        {categoryIcon.map((item) => {
-          console.log("icon", item);
-          const { name, icon: Icon, id } = item;
+        {Object.entries(categoryIconMap).map(([id, Icon]) => {
           return (
             <div
               key={id}
@@ -100,7 +102,7 @@ const CategoryAddForm = () => {
               className="text-fluid-lg flex cursor-pointer flex-col items-center rounded-sm p-3 text-center transition-colors duration-300 ease-in-out"
             >
               <Icon size={24} />
-              <p className="text-fluid-xs">{name}</p>
+              <p className="text-fluid-xs">{id}</p>
             </div>
           );
         })}
