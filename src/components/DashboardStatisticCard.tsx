@@ -23,9 +23,9 @@ const DashboardStatisticCard = () => {
 
   return (
     <div className="@container flex w-full flex-col items-start justify-between gap-10 rounded-3xl">
-      <div className="w-full">
+      <div className="h-full w-full">
         {/* total deposit and withdrawals render */}
-        <div className="grid gap-1 [grid-template-areas:'grid1_grid1'_'grid2_grid3'_'grid4_grid5'_'grid6_grid7']">
+        <div className="grid h-full gap-1 [grid-template-areas:'grid1_grid1'_'grid2_grid2'_'grid3_grid3'_'grid4_grid5'_'grid6_grid7'] @lg:[grid-template-areas:'grid1_grid1'_'grid2_grid3'_'grid4_grid5'_'grid6_grid7']">
           {/* loading placeholder */}
           {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
 
