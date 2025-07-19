@@ -23,7 +23,10 @@ const CategoryPage = () => {
             >
               <div
                 style={{
-                  backgroundColor: hexToRgba(color || "#FFFFFF", 60),
+                  backgroundColor: hexToRgba(color || "#FFFFFF", 30),
+                  border: "1px solid",
+                  borderColor: color || "#FFFFFF",
+                  color: color || "#FFFFFF",
                 }}
                 className="text-fluid-2xl w-fit min-w-10 rounded-full p-5 md:p-10"
               >

@@ -11,9 +11,6 @@ export const createAvatar = async ({
     .from("bank-avatar")
     .upload(filePath, image);
 
-  console.log("filePath", filePath);
-  console.log("image", image);
-
   if (error) throw error;
   return data;
 };
