@@ -77,22 +77,6 @@ const TransactionRowData = ({
             ? categories?.name || "No Category"
             : note || "No note provided"}
         </p>
-
-        {/* tx type */}
-        {/* <div
-          style={{
-            backgroundColor: hexToRgba(categories?.color || "#f26f6f", 30),
-            border: "1px solid",
-            borderColor: categories?.color || "#f26f6f",
-          }}
-          className={`text-fluid-xs flex items-center justify-center rounded-2xl border px-1`}
-        >
-          <p
-            className={`text-dark-txt/80 w-fit max-w-[5rem] truncate rounded-full px-1 py-0.5 text-center font-medium first-letter:capitalize sm:max-w-[10rem] md:px-2`}
-          >
-            {categories?.name || "Uncategorized"}
-          </p>
-        </div> */}
       </div>
 
       <div className="mt-1 ml-4 flex h-full w-full items-center justify-end gap-2 md:mt-0">

@@ -156,7 +156,7 @@
 }
 
 .active {
-  @apply text-dark-txt font-semibold;
+  @apply text-dark-txt -translate-y-1 scale-110 font-semibold transition-transform md:translate-0 md:scale-100;
 }
 
 /* Works for Chrome, Edge, Safari */
