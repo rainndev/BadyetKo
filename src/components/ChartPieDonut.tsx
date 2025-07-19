@@ -36,9 +36,9 @@ const ChartPieDonut = () => {
   return (
     <Card className="border-dark-background/20 mt-5 flex flex-col p-2 pt-10 md:m-0 md:p-10">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Category-wise Net Balances</CardTitle>
+        <CardTitle>Where Did Your Money Go?</CardTitle>
         <CardDescription>
-          Summary of deposits and withdrawals grouped by category
+          A breakdown of your deposits and withdrawals by category
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
