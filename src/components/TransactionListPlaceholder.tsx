@@ -1,45 +1,35 @@
+import { CircleOff } from "lucide-react";
+
 const TransactionListPlaceholder = () => {
   return (
-    <div className="bg-dark-background/50 flex w-full animate-pulse justify-between rounded-xl py-2 transition-colors ease-in-out">
-      <div className="flex flex-col">
-        <div className="invisible flex w-full items-center justify-between">
-          <div>
-            {/* tx name */}
-            <div className="flex items-center justify-start gap-2">
-              <h1 className="text-fluid-base invisible max-w-[10rem] truncate text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
-                test
-              </h1>
-            </div>
-
-            {/* tx note */}
-            <p className="text-dark-txt/50 text-fluid-sm invisible w-fit max-w-[10rem] truncate text-nowrap md:max-w-[20rem] lg:max-w-[30rem]">
-              test note
-            </p>
-          </div>
-        </div>
-
-        {/* tx type */}
-        <div className="text-fluid-xs invisible mt-1 flex items-center gap-2">
-          <div
-            style={{}}
-            className={`flex items-center justify-center rounded-2xl border px-2`}
-          >
-            <p
-              className={`text-dark-txt/80 w-fit max-w-[5rem] truncate rounded-full px-1 py-0.5 text-center font-medium first-letter:capitalize sm:max-w-[10rem] md:px-2`}
-            >
-              Uncategorized
-            </p>
-          </div>
-        </div>
+    <div className="bg-dark-background/50 flex w-full animate-pulse items-center gap-2 rounded-lg p-4 transition-colors ease-in-out md:p-6">
+      {/* category icon */}
+      <div className="text-fluid-sm invisible h-fit rounded-lg p-2">
+        <CircleOff className="size-4" />
       </div>
-      {/* tx amount */}
-      <div
-        className={`invisible flex flex-col items-end justify-center font-semibold`}
-      >
-        <p className="text-fluid-base text-center text-nowrap tabular-nums">
-          -PHP 19999
+
+      <div className="invisible flex w-full flex-col items-start justify-center truncate">
+        {/* tx name */}
+        <h1 className="text-fluid-base max-w-full truncate text-start text-nowrap">
+          test
+        </h1>
+
+        {/* tx note */}
+        <p className="text-dark-txt/50 text-fluid-xs w-fit max-w-full truncate rounded-lg text-nowrap">
+          test
         </p>
-        <p className="text-dark-txt/50 text-fluid-xs font-medium">12/23/523</p>
+      </div>
+
+      <div className="invisible mt-1 ml-4 flex h-full w-full items-center justify-end gap-2 md:mt-0">
+        {/* tx amount and date */}
+        <div className={`flex flex-col items-end font-semibold`}>
+          {/* tx amount */}
+          <p className={`text-fluid-sm text-center text-nowrap tabular-nums`}>
+            test
+          </p>
+          {/* tx date */}
+          <p className="text-dark-txt/50 text-fluid-xs font-medium">test</p>
+        </div>
       </div>
     </div>
   );
