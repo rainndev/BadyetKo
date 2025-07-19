@@ -6,12 +6,13 @@ import {
 } from "@/schemas/category.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { lightColors } from "@/data/categoryColors";
+import { colors } from "@/data/categoryColors";
 import { useState } from "react";
 import { categoryIconMap } from "@/data/categoryIcon";
+import { hexToRgba } from "@/utils/helper";
 
 const CategoryAddForm = () => {
-  const [selectedColor, setSelectedColor] = useState("#FDE68A");
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedIcon, setSelectedIcon] = useState("");
   const {
     register,
@@ -75,9 +76,9 @@ const CategoryAddForm = () => {
       {/* colors */}
       <h1 className="mt-5 mb-2">Colors</h1>
       <div className="flex h-full w-full flex-wrap gap-1 md:gap-2">
-        {lightColors.map((color) => (
+        {colors.map((color, idx) => (
           <div
-            key={color}
+            key={color + idx}
             onClick={() => setSelectedColor(color)}
             style={{
               backgroundColor: color,
@@ -97,7 +98,16 @@ const CategoryAddForm = () => {
               onClick={() => setSelectedIcon(id)}
               style={{
                 backgroundColor:
-                  selectedIcon === id ? selectedColor : undefined,
+                  selectedIcon === id
+                    ? hexToRgba(selectedColor, 30)
+                    : undefined,
+                border: "1px solid",
+                borderColor:
+                  selectedIcon === id
+                    ? selectedColor || "#FFFFFF"
+                    : "#00000000 ",
+                color:
+                  selectedIcon === id ? selectedColor || "#FFFFFF" : undefined,
               }}
               className="text-fluid-lg flex cursor-pointer flex-col items-center rounded-sm p-3 text-center transition-colors duration-300 ease-in-out"
             >

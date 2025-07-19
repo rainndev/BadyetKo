@@ -2,6 +2,7 @@ import CategoryAddForm from "@/components/CategoryAddForm";
 import { useTransactionCategory } from "@/hooks/useTransactionCategory";
 import { hexToRgba } from "@/utils/helper";
 import { categoryIconMap } from "@/data/categoryIcon";
+import { CircleOff } from "lucide-react";
 
 const CategoryPage = () => {
   const { categoryList, isCategoryListLoading } = useTransactionCategory();
@@ -15,7 +16,9 @@ const CategoryPage = () => {
       <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
         {isCategoryListLoading && <p>Loading...</p>}
         {categoryList?.map(({ id, icon_id, color, name }) => {
-          const Icon = categoryIconMap[icon_id as keyof typeof categoryIconMap];
+          const CategoryIcon =
+            categoryIconMap[icon_id as keyof typeof categoryIconMap] ||
+            CircleOff;
           return (
             <div
               className="border-dark-background/10 flex w-full flex-col items-center gap-3 rounded-2xl border p-5 md:p-10"
@@ -30,7 +33,7 @@ const CategoryPage = () => {
                 }}
                 className="text-fluid-2xl w-fit min-w-10 rounded-full p-5 md:p-10"
               >
-                <Icon />
+                <CategoryIcon />
               </div>
 
               <p className="text-fluid-base max-w-40 truncate text-center">

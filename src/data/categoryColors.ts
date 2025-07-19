@@ -1,9 +1,8 @@
-export const lightColors = [
+export const colors = [
   "#D97706", // Warm Amber (from light yellow)
   "#EF4444", // Soft Red
   "#3B82F6", // Medium Blue
   "#06B6D4", // Medium Cyan
-  "#8B5CF6", // Medium Purple
   "#F97316", // Soft Orange
   "#10B981", // Soft Teal
   "#EC4899", // Rose
