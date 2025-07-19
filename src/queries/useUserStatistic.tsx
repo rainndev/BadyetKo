@@ -15,12 +15,6 @@ export const useUserStatistic = (user_id: string) => {
       ? userStatistic.userData[0]
       : null;
 
-  const TXStat =
-    Array.isArray(userStatistic?.transactionData) &&
-    userStatistic.transactionData.length > 0
-      ? userStatistic.transactionData
-      : null;
-
   const total_balance = userStat?.net_balance ?? 0;
   const total_deposit = userStat?.total_deposit ?? 0;
   const total_withdraw = userStat?.total_withdraw ?? 0;
@@ -31,6 +25,5 @@ export const useUserStatistic = (user_id: string) => {
     total_balance,
     total_deposit,
     total_withdraw,
-    TXStat,
   };
 };

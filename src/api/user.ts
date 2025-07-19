@@ -11,26 +11,15 @@ export const getUserStatistics = async (): Promise<{
     UserTypes,
     "net_balance" | "total_deposit" | "total_withdraw"
   >[];
-  transactionData: {
-    amount: number;
-    type: string;
-    name: string;
-    label: "Max Deposit" | "Min Deposit" | "Max Withdraw" | "Min Withdraw";
-  }[];
 }> => {
   const { data: userData, error: userDataError } = await supabase
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
 
-  const { data: transactionData, error: transactionDataError } =
-    await supabase.rpc("get_min_max_transactions");
-
-  if (userDataError || transactionDataError)
-    throw userDataError ?? transactionDataError;
+  if (userDataError) throw userDataError;
 
   return {
     userData,
-    transactionData,
   };
 };
 
