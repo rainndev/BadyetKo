@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { formattDate, timeAgo, formatDateToDDMMYYYY } from "@/utils/DateTimeHelper";
+import {
+  formattDate,
+  timeAgo,
+  formatDateToDDMMYYYY,
+} from "@/utils/DateTimeHelper";
 import type { DateTimeConfig, UseDateTimeStore } from "@/types/dateTime.types";
 
 export const useDateTimeStore = create<UseDateTimeStore>()(
@@ -17,8 +21,8 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
       isSecondEnabled: false,
       isHour12Enabled: false,
       isTimezoneEnabled: false,
-      isTimeAgoEnabled: false,
-      isDateToDDMMYYYY: true,
+      isTimeAgoEnabled: true,
+      isDateToDDMMYYYY: false,
 
       getformattedDate: (rawDate, country) => {
         const {
@@ -39,8 +43,8 @@ export const useDateTimeStore = create<UseDateTimeStore>()(
           hour12: isHour12Enabled,
         };
 
-        if (isTimeAgoEnabled) return timeAgo(rawDate)
-        if (isDateToDDMMYYYY) return formatDateToDDMMYYYY(rawDate, country)  
+        if (isTimeAgoEnabled) return timeAgo(rawDate);
+        if (isDateToDDMMYYYY) return formatDateToDDMMYYYY(rawDate, country);
 
         return formattDate(rawDate, country, filteredConfig);
       },
