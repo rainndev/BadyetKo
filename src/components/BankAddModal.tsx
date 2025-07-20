@@ -122,12 +122,14 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
               setImageCropped={setImage}
             />
 
-            <p className="text-dark-txt/90 text-fluid-base mb-2">Bank Name</p>
+            <p className="text-dark-txt/90 text-fluid-base mb-2">
+              Account Name
+            </p>
 
             <input
               type="text"
               value={bankName}
-              placeholder="e.g. Example Bank"
+              placeholder="e.g. Example Account"
               className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
               onChange={(e) => setBankName(e.target.value)}
             />
