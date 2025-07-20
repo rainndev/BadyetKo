@@ -2,13 +2,7 @@ import { Cell, Pie, PieChart } from "recharts";
 import { hexToRgba } from "@/utils/helper";
 import { motion } from "framer-motion";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
@@ -18,6 +12,7 @@ import {
 import ChartPieDonutPlaceholder from "./ChartPieDonutPlaceholder";
 import { PiEmptyThin } from "react-icons/pi";
 import { useCategoryPieData } from "@/queries/useCategoryPieData";
+import CustomCardHeader from "./CustomCardHeader";
 
 const ChartPieDonut = () => {
   const { data, isLoading, isError } = useCategoryPieData();
@@ -31,16 +26,11 @@ const ChartPieDonut = () => {
       },
     ]),
   ) satisfies ChartConfig;
-
   const isChartDataEmpty = !data || data.length === 0;
+
   return (
     <Card className="border-dark-background/20 flex flex-col p-2 md:m-0 md:p-10">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Where Did Your Money Go?</CardTitle>
-        <CardDescription>
-          A breakdown of your deposits and withdrawals by category
-        </CardDescription>
-      </CardHeader>
+      <CustomCardHeader />
       <CardContent className="flex-1 pb-0">
         {/* loading placeholder chart */}
         {isLoading && (

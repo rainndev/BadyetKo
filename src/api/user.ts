@@ -55,7 +55,7 @@ export const updateUserCurrency = async ({
   return data;
 };
 
-type ChartPieDonutData = {
+export type ChartPieDonutData = {
   category_name: string;
   net_balance: number;
   color: string;
