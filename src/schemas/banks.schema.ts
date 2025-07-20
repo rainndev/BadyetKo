@@ -1,4 +1,5 @@
 import { z } from "zod/v4";
+const fileSizeLimit = 1024 * 1024;
 
 export const addBankSchema = z.object({
   bankName: z
@@ -15,9 +16,9 @@ export const addBankSchema = z.object({
         !file || ["image/png", "image/jpeg", "image/jpg"].includes(file.type),
       {
         message: "File must be a PNG or JPG",
-      }
+      },
     )
-    .refine((file) => !file || file.size <= 1024 * 1024, {
+    .refine((file) => !file || file.size <= fileSizeLimit, {
       message: "File size must be less than or equal to 1MB",
     }),
 });

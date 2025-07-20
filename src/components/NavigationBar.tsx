@@ -55,7 +55,7 @@ const NavigationBar = () => {
       <div className="bg-medium-light-background/20 lg:bg-medium-light-background fixed right-0 bottom-0 left-0 z-20 flex flex-col items-center justify-center border-t-2 p-3 backdrop-blur-lg md:p-8 lg:static lg:z-0 lg:min-h-screen lg:border-none">
         <img
           src={TransparentLogo}
-          className="my-10 hidden max-w-35 lg:block lg:max-w-40"
+          className="my-10 hidden max-w-35 p-2 lg:block lg:max-w-40"
           alt="Transaparent logo with text"
         />
 

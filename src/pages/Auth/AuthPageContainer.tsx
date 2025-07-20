@@ -23,13 +23,9 @@ const AuthPageContainer = () => {
         <div>
           <img
             src={TransparentLogo}
-            alt="transparent logo with text"
-            className="mb-10"
+            alt="transparent logo with text "
+            className="mb-4 w-55 md:w-70"
           />
-          <hr className="mb-15" />
-          <h1 className="text-dark-txt text-fluid-2xl mb-2 font-bold">
-            {isLogin ? "Welcome Back" : "Get Started"}
-          </h1>
           <p className="text-fluid-base text-gray-600">
             {isLogin
               ? "Log in to track your bank balances, deposits, and withdrawals in one place."
