@@ -47,14 +47,16 @@ const CustomCardHeader = () => {
       </CardTitle>
       {isPH ? (
         <CardDescription className="mt-2">
-          {isDataEmpty && (
+          {(isDataEmpty ||
+            mostSpendCategory?.category_name === "Uncategorized") && (
             <p>
               Wala pa kaming maipakitang datos. Simulan mo nang i-track ang
               iyong pera ngayon!
             </p>
           )}
 
-          {!isDataEmpty && (
+          {(!isDataEmpty ||
+            mostSpendCategory?.category_name !== "Uncategorized") && (
             <p className="text-fluid-base items-center leading-relaxed">
               {parts[0]}
               <span
