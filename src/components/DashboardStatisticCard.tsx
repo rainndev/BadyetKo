@@ -47,11 +47,11 @@ const DashboardStatisticCard = () => {
               <div className="mt-5 flex w-full justify-between gap-2">
                 {/* total deposit */}
                 <div>
-                  <p className="text-light-background/60 text-fluid-sm flex items-center gap-2 font-thin">
+                  <p className="text-light-background/60 text-fluid-xs flex items-center gap-2 font-thin">
                     <span>Total Deposit</span>
                     <IoTrendingUp className="text-green-300 drop-shadow-lg drop-shadow-green-400" />
                   </p>
-                  <h1 className="text-light-background text-fluid-sm @lg:text-fluid-base mt-1 font-medium tabular-nums">
+                  <h1 className="text-light-background text-fluid-sm @lg:text-fluid-lg mt-1 font-medium tabular-nums">
                     {total_deposit
                       ? getformattedAmount(total_deposit)
                       : getformattedAmount(0)}
@@ -60,11 +60,11 @@ const DashboardStatisticCard = () => {
 
                 {/* total withdraw */}
                 <div>
-                  <p className="text-light-background/60 text-fluid-sm flex gap-2 font-thin">
+                  <p className="text-light-background/60 text-fluid-xs flex gap-2 font-thin">
                     <span>Total Withdraw</span>
                     <IoTrendingUp className="rotate-180 text-red-300 drop-shadow-lg drop-shadow-red-400" />
                   </p>
-                  <h1 className="text-fluid-sm @lg:text-fluid-base text-light-background mt-1 font-semibold tabular-nums">
+                  <h1 className="text-fluid-sm @lg:text-fluid-lg text-light-background mt-1 font-semibold tabular-nums">
                     {total_withdraw
                       ? getformattedAmount(total_withdraw)
                       : getformattedAmount(0)}
