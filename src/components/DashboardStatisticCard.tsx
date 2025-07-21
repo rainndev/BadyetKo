@@ -61,7 +61,7 @@ const DashboardStatisticCard = () => {
                 {/* total withdraw */}
                 <div>
                   <p className="text-light-background/60 text-fluid-xs flex gap-2 font-thin">
-                    <span>Total Withdraw</span>
+                    <span>Total Withdrawal</span>
                     <IoTrendingUp className="rotate-180 text-red-300 drop-shadow-lg drop-shadow-red-400" />
                   </p>
                   <h1 className="text-fluid-sm @lg:text-fluid-lg text-light-background mt-1 font-semibold tabular-nums">
