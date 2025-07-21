@@ -1,29 +1,21 @@
-import { useEffect, useState } from "react";
 import { CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { useSpendingTip } from "@/hooks/useSpendingTips";
-import { useCategoryPieData } from "@/queries/useCategoryPieData";
 import type { ChartPieDonutData } from "@/api/user";
 import { hexToRgba } from "@/utils/helper";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 
-const CustomCardHeader = () => {
-  const { data, isLoading } = useCategoryPieData();
-  const [mostSpendCategory, setMostSpendCategory] =
-    useState<ChartPieDonutData | null>();
+type CustomCardHeaderProps = {
+  topCategory?: ChartPieDonutData;
+  isLoading: boolean;
+};
+
+const CustomCardHeader = ({
+  topCategory,
+  isLoading,
+}: CustomCardHeaderProps) => {
+  const mostSpendCategory = topCategory;
   const isPH =
     useCurrencyStore((state) => state.currencyOptions.currency) === "PHP";
-
-  const isDataEmpty = !data || data.length === 0;
-
-  useEffect(() => {
-    if (isDataEmpty) return;
-
-    const maxCategory = data.reduce((max, item) =>
-      item.net_balance > max.net_balance ? item : max,
-    );
-
-    setMostSpendCategory(maxCategory);
-  }, [data]);
 
   const rawTip = useSpendingTip(mostSpendCategory?.category_name ?? "");
   // Split the string to style only <category>
@@ -47,7 +39,7 @@ const CustomCardHeader = () => {
       </CardTitle>
       {isPH ? (
         <CardDescription className="mt-2">
-          {(isDataEmpty ||
+          {(!mostSpendCategory ||
             mostSpendCategory?.category_name === "Uncategorized") && (
             <p>
               Wala pa kaming maipakitang datos. Simulan mo nang i-track ang
@@ -55,30 +47,30 @@ const CustomCardHeader = () => {
             </p>
           )}
 
-          {(!isDataEmpty ||
-            mostSpendCategory?.category_name !== "Uncategorized") && (
-            <p className="text-fluid-base items-center leading-relaxed">
-              {parts[0]}
-              <span
-                key={mostSpendCategory?.category_name}
-                style={{
-                  backgroundColor: hexToRgba(
-                    mostSpendCategory?.color || "#f26f6f",
-                    30,
-                  ),
-                  border: "1px solid",
-                  borderColor: mostSpendCategory?.color || "#f26f6f",
-                }}
-                className="text-fluid-xs mx-1 inline-flex items-center gap-2 rounded-full px-4 py-0.5 font-medium"
-              >
-                <span className="text-dark-txt/90 text-nowrap">
-                  {mostSpendCategory?.category_name}
+          {mostSpendCategory &&
+            mostSpendCategory.category_name !== "Uncategorized" && (
+              <p className="text-fluid-sm items-center leading-relaxed">
+                {parts[0]}
+                <span
+                  key={mostSpendCategory.category_name}
+                  style={{
+                    backgroundColor: hexToRgba(
+                      mostSpendCategory.color || "#f26f6f",
+                      30,
+                    ),
+                    border: "1px solid",
+                    borderColor: mostSpendCategory.color || "#f26f6f",
+                  }}
+                  className="text-fluid-xs mx-1 inline-flex items-center gap-2 rounded-full px-4 py-0.5 font-medium"
+                >
+                  <span className="text-dark-txt/90 text-nowrap">
+                    {mostSpendCategory.category_name}
+                  </span>
                 </span>
-              </span>
 
-              {parts[1]}
-            </p>
-          )}
+                {parts[1]}
+              </p>
+            )}
         </CardDescription>
       ) : (
         <CardDescription>

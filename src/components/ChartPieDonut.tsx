@@ -30,7 +30,7 @@ const ChartPieDonut = () => {
 
   return (
     <Card className="border-dark-background/20 flex flex-col p-2 md:m-0 md:p-10">
-      <CustomCardHeader />
+      <CustomCardHeader topCategory={data?.[0]} isLoading={isLoading} />
       <CardContent className="flex-1 pb-0">
         {/* loading placeholder chart */}
         {isLoading && (
@@ -93,7 +93,7 @@ const ChartPieDonut = () => {
                 border: "1px solid",
                 borderColor: color || "#f26f6f",
               }}
-              className="text-fluid-xs flex w-fit items-center gap-2 rounded-full p-2 px-4 leading-none font-medium"
+              className="text-fluid-xs flex w-fit items-center gap-2 rounded-full px-4 py-1.5 leading-none font-medium"
             >
               <span className="text-dark-txt/90 text-nowrap">
                 {category_name}
