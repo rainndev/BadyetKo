@@ -5,7 +5,7 @@ const DashboardStatisticPlaceholder = () => {
   return (
     <div
       key="net_balance"
-      className="bg-dark-background/50 flex h-fit animate-pulse flex-col items-start gap-2 rounded-2xl p-5 shadow-xl [grid-area:grid1] md:p-7"
+      className="bg-dark-background/50 flex h-fit animate-pulse flex-col items-start gap-2 rounded-2xl p-5 shadow-xl [grid-area:grid1] md:rounded-3xl md:p-10"
     >
       <div className="invisible">
         <p className="text-light-background/60 text-fluid-sm font-thin">
