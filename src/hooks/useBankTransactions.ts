@@ -8,8 +8,11 @@ import { useTransactionList } from "@/queries/useTransactionList";
 export const useBankTransactions = (bank_id: string) => {
   const { userID } = useSession();
   //hook for getting list of transactions
-  const { data: transactionData, isLoading: isTransactionListLoading } =
-    useTransactionList(bank_id);
+  const {
+    data: transactionData,
+    isLoading: isTransactionListLoading,
+    isError: isTransactionListError,
+  } = useTransactionList(bank_id);
 
   //get the bank balance using bank id
   const {
@@ -55,6 +58,7 @@ export const useBankTransactions = (bank_id: string) => {
     isAddSuccess,
     isEditSuccess,
     isBankBalanceError,
+    isTransactionListError,
     isBankBalanceLoading,
   };
 };

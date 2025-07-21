@@ -4,6 +4,7 @@ import { useRef, type Dispatch, type SetStateAction } from "react";
 import TransactionListPlaceholder from "./TransactionListPlaceholder";
 import TransactionRowData from "./TransactionRowData";
 import type { TransactionListTypes } from "@/types/transaction.types";
+import { PiEmptyThin } from "react-icons/pi";
 
 type TransactionListProps = {
   bank_id: string;
@@ -17,8 +18,13 @@ const TransactionList = ({
   setSelectedItem,
 }: TransactionListProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { transactionData, isTransactionListLoading, deleteTransaction } =
-    useBankTransactions(bank_id);
+  const {
+    transactionData,
+    isTransactionListLoading,
+    deleteTransaction,
+    isTransactionListError,
+  } = useBankTransactions(bank_id);
+  const isTransactionEmpty = transactionData?.count === 0;
 
   //virtualizer from tanstack
   const virtualizer = useVirtualizer({
@@ -29,49 +35,65 @@ const TransactionList = ({
 
   const virtualItems = virtualizer.getVirtualItems();
 
+  console.log("isTransactionEmpty", isTransactionEmpty);
+
   return (
     <div className="order-2 min-h-screen w-full p-5 md:p-10 lg:order-1">
-      <div
-        ref={scrollRef}
-        className="hide-scrollbar h-dvh overflow-auto overflow-x-auto lg:mb-0"
-      >
+      {isTransactionEmpty && (
+        <div className="text-dark-txt/70 flex aspect-auto h-full w-full items-center justify-center gap-2">
+          <PiEmptyThin className="text-xl" />
+          <p className="text-fluid-sm">
+            {isTransactionListError
+              ? "Something went wrong."
+              : "You currently have no transactions."}
+          </p>
+        </div>
+      )}
+
+      {/* Not empty */}
+      {!isTransactionEmpty && (
         <div
-          style={{
-            height: `${virtualizer.getTotalSize()}px`,
-          }}
-          className="relative"
+          ref={scrollRef}
+          className="hide-scrollbar h-dvh overflow-auto overflow-x-auto lg:mb-0"
         >
           <div
-            className="absolute top-0 left-0 w-full space-y-2"
             style={{
-              transform: `translateY(${virtualItems[0]?.start ?? 0}px)`,
+              height: `${virtualizer.getTotalSize()}px`,
             }}
+            className="relative"
           >
-            {/* Skeleton loading */}
-            {isTransactionListLoading &&
-              [...Array(2)].map((_, idx) => (
-                <TransactionListPlaceholder
-                  key={"transaction-list-placeholder" + idx}
-                />
-              ))}
+            <div
+              className="absolute top-0 left-0 w-full space-y-2"
+              style={{
+                transform: `translateY(${virtualItems[0]?.start ?? 0}px)`,
+              }}
+            >
+              {/* Skeleton loading */}
+              {isTransactionListLoading &&
+                [...Array(2)].map((_, idx) => (
+                  <TransactionListPlaceholder
+                    key={"transaction-list-placeholder" + idx}
+                  />
+                ))}
 
-            {/* render items */}
-            {virtualItems.map((vItem) => {
-              const dataItem = transactionData?.transactions[vItem.index];
-              if (!dataItem) return null;
-              return (
-                <TransactionRowData
-                  key={vItem.key}
-                  dataItem={dataItem}
-                  deleteTransaction={deleteTransaction}
-                  setEditOpen={setEditOpen}
-                  setSelectedItem={setSelectedItem}
-                />
-              );
-            })}
+              {/* render items */}
+              {virtualItems.map((vItem) => {
+                const dataItem = transactionData?.transactions[vItem.index];
+                if (!dataItem) return null;
+                return (
+                  <TransactionRowData
+                    key={vItem.key}
+                    dataItem={dataItem}
+                    deleteTransaction={deleteTransaction}
+                    setEditOpen={setEditOpen}
+                    setSelectedItem={setSelectedItem}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
