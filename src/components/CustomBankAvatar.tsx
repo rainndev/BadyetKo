@@ -228,6 +228,7 @@ export default function CustomBankAvatar({
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}
+          type="button"
           onDrop={handleDrop}
           data-dragging={isDragging || undefined}
           aria-label={finalImageUrl ? "Change image" : "Upload image"}

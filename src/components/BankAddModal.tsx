@@ -26,6 +26,7 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
   //Add data to supabase
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setErrorMessage("");
     const result = addBankSchema.safeParse({
       bankName,
@@ -50,7 +51,6 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
       addAvatar({ filePath, image });
     }
 
-    console.log("filePath", image);
     addBank({ bankName, custom_bank_avatar: filePath });
     setBankName("");
     setImage(null);
