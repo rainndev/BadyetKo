@@ -44,7 +44,7 @@ const BankGridData = ({
         repeatDelay: 1,
       }}
       onClick={() => !isTrashEnabled && navigate(`/bank/${id}`)}
-      className={`bg-dark-background hover:bg-dark-background/10 relative flex w-full cursor-pointer flex-col items-start justify-center rounded-xl p-5 md:rounded-2xl md:p-7`}
+      className={`bg-dark-background hover:bg-dark-background/95 relative flex w-full cursor-pointer flex-col items-start justify-center rounded-xl p-5 md:rounded-2xl md:p-7`}
     >
       <div className="flex w-full items-center justify-start gap-5">
         <div className="flex size-8 items-center justify-center">
