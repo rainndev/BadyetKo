@@ -80,6 +80,7 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
                 key={bankItemData.id}
                 bankItemData={bankItemData}
                 removeBank={removeBank}
+                setTrashEnabled={setTrashEnabled}
                 isTrashEnabled={isTrashEnabled}
               />
             ))}
