@@ -1,6 +1,6 @@
 import { useSignedImageUrl } from "../queries/useSignedImageUrl";
 
-const BankImageRender = ({ path }: { path: string }) => {
+const AccountImageRender = ({ path }: { path: string }) => {
   const { data: signedUrl, isError, isLoading } = useSignedImageUrl(path);
 
   if (isError) return <div>Failed to load image</div>;
@@ -10,10 +10,10 @@ const BankImageRender = ({ path }: { path: string }) => {
   ) : (
     <img
       src={signedUrl || "/fallback.png"}
-      alt="Bank Avatar"
+      alt="Account Avatar"
       className="bg-dark-background/50 min-h-8 w-full min-w-8 shrink-0 rounded-xl object-cover md:min-h-12 md:min-w-12"
     />
   );
 };
 
-export default BankImageRender;
+export default AccountImageRender;

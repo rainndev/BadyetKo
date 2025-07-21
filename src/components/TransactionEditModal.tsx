@@ -1,4 +1,4 @@
-import { useBankTransactions } from "@/hooks/useBankTransactions";
+import { useAccountTransactions } from "@/hooks/useAccountTransactions";
 import { IoClose } from "react-icons/io5";
 import { isValidUUIDv4 } from "@/utils/helper";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +24,7 @@ const TransactionEditModal = ({
   setShowEditModal,
   dataItem,
 }: TransactionEditModalProps) => {
-  const { bank_id } = useParams();
+  const { account_id } = useParams();
   const [formCategory, setFormCategory] = useState("");
 
   const {
@@ -36,11 +36,10 @@ const TransactionEditModal = ({
     resolver: zodResolver(EditTransactionSchema),
   });
 
-  const { editTransaction, isEditPending, isEditSuccess } = useBankTransactions(
-    bank_id ?? "",
-  );
+  const { editTransaction, isEditPending, isEditSuccess } =
+    useAccountTransactions(account_id ?? "");
 
-  if (!bank_id || !isValidUUIDv4(bank_id))
+  if (!account_id || !isValidUUIDv4(account_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;
 
   const onSubmitData: SubmitHandler<EditTransactionSchemaType> = (data) => {

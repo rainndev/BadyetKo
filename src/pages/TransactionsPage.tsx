@@ -10,7 +10,7 @@ import TransactionList from "@/components/TransactionList";
 import TransactionListSummary from "@/components/TransactionListSummary";
 
 const TransactionsPage = () => {
-  const { bank_id } = useParams();
+  const { account_id } = useParams();
   const [isShowModal, setShowModal] = useState(false);
   const [isEditOpen, setEditOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TransactionListTypes | null>(
@@ -20,7 +20,7 @@ const TransactionsPage = () => {
   //Lock the body when showing modal
   useBodyScrollLock(isEditOpen);
 
-  if (!bank_id || !isValidUUIDv4(bank_id))
+  if (!account_id || !isValidUUIDv4(account_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;
 
   return (
@@ -44,13 +44,16 @@ const TransactionsPage = () => {
       <div className="grid w-full grid-cols-1 lg:grid-cols-2">
         {/*Transaction list */}
         <TransactionList
-          bank_id={bank_id}
+          account_id={account_id}
           setEditOpen={setEditOpen}
           setSelectedItem={setSelectedItem}
         />
 
         {/* Transaction List Side Summary */}
-        <TransactionListSummary bank_id={bank_id} setShowModal={setShowModal} />
+        <TransactionListSummary
+          account_id={account_id}
+          setShowModal={setShowModal}
+        />
       </div>
     </>
   );

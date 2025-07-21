@@ -1,37 +1,39 @@
-import { useBank } from "@/hooks/useBank";
+import { useAccount } from "@/hooks/useAccount";
 import { FaPlus } from "react-icons/fa6";
 import { PiEmptyThin, PiTrashSimpleLight } from "react-icons/pi";
 import { useState } from "react";
-import BankGridData from "./BankGridData";
-import BankGridPlaceholder from "./BankGridPlaceholder";
+import AccountGridData from "./AccountGridData";
+import AccountGridPlaceholder from "./AccountGridPlaceholder";
 
-type BankListProps = {
+type AccountListProps = {
   isShowModal: boolean;
   setShowModal: (isShowModal: boolean) => void;
 };
 
-const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
+const AccountList = ({ isShowModal, setShowModal }: AccountListProps) => {
   const [isTrashEnabled, setTrashEnabled] = useState(false);
 
   const {
-    removeBank,
-    bankList,
-    isBankListError,
-    bankListError,
-    isBankListLoading,
-    isBanklistEmpty,
-  } = useBank();
+    removeAccount,
+    accountList,
+    isAccountListError,
+    accountListError,
+    isAccountListLoading,
+    isAccountlistEmpty,
+  } = useAccount();
 
-  if (isBankListError)
+  if (isAccountListError)
     return (
-      <div className="min-h-screen w-full p-10">{bankListError?.message}</div>
+      <div className="min-h-screen w-full p-10">
+        {accountListError?.message}
+      </div>
     );
 
   return (
     <div className="border-dark-background/20 @container min-h-100 rounded-3xl p-2 py-5 lg:border lg:p-10">
-      {/* add bank wallet */}
+      {/* add account wallet */}
       <div className="mb-5 flex flex-col gap-2">
-        {/* -----header with add bank btn */}
+        {/* -----header with add account btn */}
         <div className="flex w-full items-center justify-between">
           <h1 className="text-dark-txt text-fluid-xl font-semibold">
             Accounts
@@ -60,26 +62,26 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
         </div>
       </div>
 
-      {isBanklistEmpty && !isBankListLoading && (
+      {isAccountlistEmpty && !isAccountListLoading && (
         <div className="text-dark-txt/70 gap-2text-dark-txt/70 flex aspect-auto min-h-100 w-full items-center justify-center gap-2">
           <PiEmptyThin className="text-xl" />
-          <p className="text-fluid-sm">You haven't added any banks yet.</p>
+          <p className="text-fluid-sm">You haven't added any accounts yet.</p>
         </div>
       )}
 
       <div className={`hide-scrollbar w-full`}>
         <div className="grid grid-cols-2 gap-1 @sm:grid-cols-3 @md:gap-2 @lg:grid-cols-4">
-          {isBankListLoading &&
+          {isAccountListLoading &&
             [...new Array(5)].map((_, idx) => (
-              <BankGridPlaceholder key={"bank-grid-placeholder" + idx} />
+              <AccountGridPlaceholder key={"account-grid-placeholder" + idx} />
             ))}
 
-          {!isBankListLoading &&
-            bankList?.map((bankItemData) => (
-              <BankGridData
-                key={bankItemData.id}
-                bankItemData={bankItemData}
-                removeBank={removeBank}
+          {!isAccountListLoading &&
+            accountList?.map((accountItemData) => (
+              <AccountGridData
+                key={accountItemData.id}
+                accountItemData={accountItemData}
+                removeAccount={removeAccount}
                 setTrashEnabled={setTrashEnabled}
                 isTrashEnabled={isTrashEnabled}
               />
@@ -90,4 +92,4 @@ const BankList = ({ isShowModal, setShowModal }: BankListProps) => {
   );
 };
 
-export default BankList;
+export default AccountList;

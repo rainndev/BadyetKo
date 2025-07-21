@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
           },
 
           {
-            path: "/bank/:bank_id",
+            path: "/account/:account_id",
             element: <TransactionsPage />,
           },
 

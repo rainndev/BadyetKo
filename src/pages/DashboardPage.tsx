@@ -1,9 +1,9 @@
 import { useState } from "react";
 import AreaChartData from "../components/AreaChartData";
 import DashboardStatisticCard from "@/components/DashboardStatisticCard";
-import BankAddModal from "@/components/BankAddModal";
+import AccountAddModal from "@/components/AccountAddModal";
 import AllTransactionList from "@/components/AllTransactionList";
-import BankList from "@/components/BankList";
+import AccountList from "@/components/AccountList";
 import ChartPieDonut from "@/components/ChartPieDonut";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import DashboardTabs from "@/components/DashboardTabs";
@@ -17,7 +17,7 @@ const DashboardPage = () => {
   return (
     <>
       <AnimatePresence>
-        {isShowModal && <BankAddModal setShowModal={setShowModal} />}
+        {isShowModal && <AccountAddModal setShowModal={setShowModal} />}
       </AnimatePresence>
 
       <div className="bg-light-background m-0 flex h-full w-full flex-col p-5 md:p-10 lg:rounded-[3rem]">
@@ -36,8 +36,11 @@ const DashboardPage = () => {
         {/* list data to render */}
         {isLarge && (
           <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {/* Bank list  */}
-            <BankList isShowModal={isShowModal} setShowModal={setShowModal} />
+            {/* Account list  */}
+            <AccountList
+              isShowModal={isShowModal}
+              setShowModal={setShowModal}
+            />
 
             {/* All transaction list */}
             <AllTransactionList />

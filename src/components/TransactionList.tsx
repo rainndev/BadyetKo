@@ -1,4 +1,4 @@
-import { useBankTransactions } from "@/hooks/useBankTransactions";
+import { useAccountTransactions } from "@/hooks/useAccountTransactions";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef, type Dispatch, type SetStateAction } from "react";
 import TransactionListPlaceholder from "./TransactionListPlaceholder";
@@ -7,13 +7,13 @@ import type { TransactionListTypes } from "@/types/transaction.types";
 import { PiEmptyThin } from "react-icons/pi";
 
 type TransactionListProps = {
-  bank_id: string;
+  account_id: string;
   setEditOpen: (value: boolean) => void;
   setSelectedItem: Dispatch<SetStateAction<TransactionListTypes | null>>;
 };
 
 const TransactionList = ({
-  bank_id,
+  account_id,
   setEditOpen,
   setSelectedItem,
 }: TransactionListProps) => {
@@ -23,7 +23,7 @@ const TransactionList = ({
     isTransactionListLoading,
     deleteTransaction,
     isTransactionListError,
-  } = useBankTransactions(bank_id);
+  } = useAccountTransactions(account_id);
   const isTransactionEmpty = transactionData?.count === 0;
 
   //virtualizer from tanstack

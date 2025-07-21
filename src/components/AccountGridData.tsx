@@ -1,34 +1,37 @@
 import { useCurrencyStore } from "@/store/CurrencyStore";
-import type { BankListTypes } from "@/types/bank.types";
+import type { AccountListTypes } from "@/types/account.types";
 import { useNavigate } from "react-router-dom";
-import BankImage from "@/components/ui/BankImage";
+import AccountImage from "@/components/ui/AccountImage";
 import { IoClose } from "react-icons/io5";
 import { motion } from "framer-motion";
 
-type BankGridDataProps = {
-  bankItemData: BankListTypes;
-  removeBank: (params: { bankID: string; avatarFilePath: string }) => void;
+type AccountGridDataProps = {
+  accountItemData: AccountListTypes;
+  removeAccount: (params: {
+    accountID: string;
+    avatarFilePath: string;
+  }) => void;
   isTrashEnabled: boolean;
   setTrashEnabled: (value: boolean) => void;
 };
 
-const BankGridData = ({
-  bankItemData,
-  removeBank,
+const AccountGridData = ({
+  accountItemData,
+  removeAccount,
   isTrashEnabled,
   setTrashEnabled,
-}: BankGridDataProps) => {
+}: AccountGridDataProps) => {
   const navigate = useNavigate();
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
-  const { id, balance, custom_bank_avatar, name } = bankItemData;
+  const { id, balance, custom_account_avatar, name } = accountItemData;
 
-  const handleDeleteBank = () => {
+  const handleDeleteAccount = () => {
     setTrashEnabled(false);
-    removeBank({
-      bankID: id,
-      avatarFilePath: custom_bank_avatar as string,
+    removeAccount({
+      accountID: id,
+      avatarFilePath: custom_account_avatar as string,
     });
   };
 
@@ -43,17 +46,17 @@ const BankGridData = ({
         repeat: isTrashEnabled ? Infinity : 0,
         repeatDelay: 1,
       }}
-      onClick={() => !isTrashEnabled && navigate(`/bank/${id}`)}
+      onClick={() => !isTrashEnabled && navigate(`/account/${id}`)}
       className={`bg-dark-background hover:bg-dark-background/95 relative flex w-full cursor-pointer flex-col items-start justify-center rounded-xl p-5 md:rounded-2xl md:p-7`}
     >
       <div className="flex w-full items-center justify-start gap-5">
         <div className="flex size-8 items-center justify-center">
-          <BankImage custom_bank_avatar={custom_bank_avatar ?? ""} />
+          <AccountImage custom_account_avatar={custom_account_avatar ?? ""} />
         </div>
       </div>
       {isTrashEnabled && (
         <div
-          onClick={handleDeleteBank}
+          onClick={handleDeleteAccount}
           className={`bg-light-background text-dark-background absolute -top-3 -right-3 rounded-full p-2`}
         >
           <IoClose />
@@ -69,4 +72,4 @@ const BankGridData = ({
   );
 };
 
-export default BankGridData;
+export default AccountGridData;

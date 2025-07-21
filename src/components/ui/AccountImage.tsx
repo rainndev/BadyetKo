@@ -1,12 +1,16 @@
 import { useSignedImageUrl } from "@/queries/useSignedImageUrl";
 import { FaPiggyBank } from "react-icons/fa6";
 
-const BankImage = ({ custom_bank_avatar }: { custom_bank_avatar: string }) => {
+const AccountImage = ({
+  custom_account_avatar,
+}: {
+  custom_account_avatar: string;
+}) => {
   const {
     data: signedUrl,
     isError,
     isLoading,
-  } = useSignedImageUrl(custom_bank_avatar);
+  } = useSignedImageUrl(custom_account_avatar);
 
   if (isError) return <div>Failed to load image</div>;
 
@@ -15,7 +19,7 @@ const BankImage = ({ custom_bank_avatar }: { custom_bank_avatar: string }) => {
   ) : signedUrl ? (
     <img
       src={signedUrl}
-      alt="Bank Avatar"
+      alt="Account Avatar"
       className="bg-light-background/10 min-h-10 w-full min-w-10 shrink-0 rounded-xl object-cover md:min-h-12 md:min-w-12"
     />
   ) : (
@@ -25,4 +29,4 @@ const BankImage = ({ custom_bank_avatar }: { custom_bank_avatar: string }) => {
   );
 };
 
-export default BankImage;
+export default AccountImage;

@@ -14,11 +14,11 @@ export type Database = {
   };
   public: {
     Tables: {
-      banks: {
+      accounts: {
         Row: {
           balance: number | null;
           created_at: string;
-          custom_bank_avatar: string | null;
+          custom_account_avatar: string | null;
           id: string;
           last_interest_applied_at: string | null;
           name: string;
@@ -27,7 +27,7 @@ export type Database = {
         Insert: {
           balance?: number | null;
           created_at?: string;
-          custom_bank_avatar?: string | null;
+          custom_account_avatar?: string | null;
           id?: string;
           last_interest_applied_at?: string | null;
           name: string;
@@ -36,7 +36,7 @@ export type Database = {
         Update: {
           balance?: number | null;
           created_at?: string;
-          custom_bank_avatar?: string | null;
+          custom_account_avatar?: string | null;
           id?: string;
           last_interest_applied_at?: string | null;
           name?: string;
@@ -74,7 +74,7 @@ export type Database = {
       transactions: {
         Row: {
           amount: number;
-          bank_id: string;
+          account_id: string;
           category: string | null;
           created_at: string;
           id: number;
@@ -84,7 +84,7 @@ export type Database = {
         };
         Insert: {
           amount: number;
-          bank_id: string;
+          account_id: string;
           category?: string | null;
           created_at?: string;
           id?: number;
@@ -94,7 +94,7 @@ export type Database = {
         };
         Update: {
           amount?: number;
-          bank_id?: string;
+          account_id?: string;
           category?: string | null;
           created_at?: string;
           id?: number;
@@ -104,17 +104,10 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "fk_bank_id";
-            columns: ["bank_id"];
+            foreignKeyName: "fk_account_id";
+            columns: ["account_id"];
             isOneToOne: false;
-            referencedRelation: "banks";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "transactions_bank_id_fkey";
-            columns: ["bank_id"];
-            isOneToOne: false;
-            referencedRelation: "banks";
+            referencedRelation: "accounts";
             referencedColumns: ["id"];
           },
           {
@@ -165,7 +158,7 @@ export type Database = {
     };
     Functions: {
       can_insert_transaction: {
-        Args: { bank_uuid: string; amount: number; tx_type: string };
+        Args: { account_uuid: string; amount: number; tx_type: string };
         Returns: boolean;
       };
       delete_transaction_with_balance_adjustment: {

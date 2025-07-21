@@ -1,14 +1,14 @@
 import { IoClose } from "react-icons/io5";
-import BankImage from "./ui/BankImage";
+import AccountImage from "@/components/ui/AccountImage";
 
-const BankGridPlaceholder = () => {
+const AccountGridPlaceholder = () => {
   return (
     <div
       className={`bg-dark-background/50 relative flex w-full animate-pulse cursor-pointer flex-col items-start justify-center rounded-xl p-5 md:rounded-2xl md:p-7`}
     >
       <div className="invisible flex w-full items-center justify-start gap-5">
         <div className="flex size-8 items-center justify-center">
-          <BankImage custom_bank_avatar={""} />
+          <AccountImage custom_account_avatar={""} />
         </div>
       </div>
       <div
@@ -26,4 +26,4 @@ const BankGridPlaceholder = () => {
   );
 };
 
-export default BankGridPlaceholder;
+export default AccountGridPlaceholder;

@@ -5,10 +5,10 @@ import {
 } from "../types/transaction.types";
 
 export const getTransactionList = async (
-  bankID?: string,
+  accountID?: string,
 ): Promise<{ transactions: TransactionListTypes[]; count: number | null }> => {
-  if (bankID === undefined) {
-    //execute this when theres no bank_id
+  if (accountID === undefined) {
+    //execute this when theres no account_id
     const {
       data: transactions,
       error: txError,
@@ -37,7 +37,7 @@ export const getTransactionList = async (
     return { transactions, count };
   }
 
-  //execute this when bank_id exist
+  //execute this when account_id exist
   const {
     data: transactions,
     error: txError,
@@ -56,7 +56,7 @@ export const getTransactionList = async (
       { count: "exact" },
     )
     .order("created_at", { ascending: false })
-    .eq("bank_id", bankID);
+    .eq("account_id", accountID);
 
   if (txError) {
     console.error("Error:", txError);

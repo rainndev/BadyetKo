@@ -28,8 +28,8 @@ const AuthPageContainer = () => {
           />
           <p className="text-fluid-base text-gray-600">
             {isLogin
-              ? "Log in to track your bank balances, deposits, and withdrawals in one place."
-              : "Create an account to start managing multiple bank accounts with ease."}
+              ? "Log in to track your account balances, deposits, and withdrawals in one place."
+              : "Create an account to start managing multiple account accounts with ease."}
           </p>
         </div>
 

@@ -1,30 +1,31 @@
-import { useBankTransactions } from "@/hooks/useBankTransactions";
+import { useAccountTransactions } from "@/hooks/useAccountTransactions";
 import { useCurrencyStore } from "@/store/CurrencyStore";
 import { FaPlus } from "react-icons/fa6";
 
 type TransactionListSummaryProps = {
-  bank_id: string;
+  account_id: string;
   setShowModal: (value: boolean) => void;
 };
 
 const TransactionListSummary = ({
-  bank_id,
+  account_id,
   setShowModal,
 }: TransactionListSummaryProps) => {
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,
   );
-  const { bankBalance: newBankBalance } = useBankTransactions(bank_id);
+  const { accountBalance: newAccountBalance } =
+    useAccountTransactions(account_id);
 
   //net balance of each account
-  const bankBalance = newBankBalance?.balance ?? 0;
+  const accountBalance = newAccountBalance?.balance ?? 0;
 
   return (
     <div className="@container order-1 p-5 md:p-10 lg:order-2">
       <div className="mb-5 flex items-center justify-between gap-5">
         <h1 className="flex flex-col tabular-nums">
           <span className="text-fluid-base">Balance</span>
-          <span>{getformattedAmount(bankBalance)}</span>
+          <span>{getformattedAmount(accountBalance)}</span>
         </h1>
 
         <button

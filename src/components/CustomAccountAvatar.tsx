@@ -77,15 +77,15 @@ async function getCroppedImg(
   }
 }
 
-type CustomBankAvatarProps = {
+type CustomAccountAvatarProps = {
   setImageCropped: (value: File | null) => void;
   setErrorMessage: (value: string) => void;
 };
 
-export default function CustomBankAvatar({
+export default function CustomAccountAvatar({
   setImageCropped,
   setErrorMessage,
-}: CustomBankAvatarProps) {
+}: CustomAccountAvatarProps) {
   const [finalImageUrl, setFinalImageUrl] = useState<string | null>();
   const [
     { files, isDragging, errors },

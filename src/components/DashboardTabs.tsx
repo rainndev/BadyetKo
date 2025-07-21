@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AreaChartData from "./AreaChartData";
 import useBreakpoints from "@/hooks/useBreakpoints";
-import BankList from "./BankList";
+import AccountList from "@/components/AccountList";
 import AllTransactionList from "./AllTransactionList";
 import { ChartArea, CreditCard, History } from "lucide-react";
 
@@ -58,7 +58,7 @@ export default function DashboardTabs({
           <AreaChartData />
         </TabsContent>
         <TabsContent value="tab-2">
-          <BankList isShowModal={isShowModal} setShowModal={setShowModal} />
+          <AccountList isShowModal={isShowModal} setShowModal={setShowModal} />
         </TabsContent>
         <TabsContent value="tab-3">
           <AllTransactionList />

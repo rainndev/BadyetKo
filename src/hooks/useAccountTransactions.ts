@@ -1,26 +1,26 @@
 import { useSession } from "@/context/SessionContext";
-import { useBankNetBalance } from "@/queries/useBankNetBalance";
+import { useAccountNetBalance } from "@/queries/useAccountNetBalance";
 import { useCreateTransaction } from "@/queries/useCreateTransaction";
 import { useDeleteTransaction } from "@/queries/useDeleteTransaction";
 import { useEditTransaction } from "@/queries/useEditTransaction";
 import { useTransactionList } from "@/queries/useTransactionList";
 
-export const useBankTransactions = (bank_id: string) => {
+export const useAccountTransactions = (account_id: string) => {
   const { userID } = useSession();
   //hook for getting list of transactions
   const {
     data: transactionData,
     isLoading: isTransactionListLoading,
     isError: isTransactionListError,
-  } = useTransactionList(bank_id);
+  } = useTransactionList(account_id);
 
-  //get the bank balance using bank id
+  //get the account balance using account id
   const {
-    data: bankBalance,
-    isError: isBankBalanceError,
-    error: bankBalanceError,
-    isLoading: isBankBalanceLoading,
-  } = useBankNetBalance(bank_id);
+    data: accountBalance,
+    isError: isAccountBalanceError,
+    error: accountBalanceError,
+    isLoading: isAccountBalanceLoading,
+  } = useAccountNetBalance(account_id);
 
   //hook for adding transaction
   const {
@@ -33,7 +33,7 @@ export const useBankTransactions = (bank_id: string) => {
 
   //hook for deleting transaction
   const { mutate: deleteTransaction, isPending: isDeletePending } =
-    useDeleteTransaction(bank_id, userID);
+    useDeleteTransaction(account_id, userID);
 
   //hook for editing transaction
   const {
@@ -44,9 +44,9 @@ export const useBankTransactions = (bank_id: string) => {
 
   return {
     AddError,
-    bankBalanceError,
+    accountBalanceError,
     transactionData,
-    bankBalance,
+    accountBalance,
     addTransaction,
     deleteTransaction,
     editTransaction,
@@ -57,8 +57,8 @@ export const useBankTransactions = (bank_id: string) => {
     isEditPending,
     isAddSuccess,
     isEditSuccess,
-    isBankBalanceError,
+    isAccountBalanceError,
     isTransactionListError,
-    isBankBalanceLoading,
+    isAccountBalanceLoading,
   };
 };

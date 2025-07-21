@@ -1,4 +1,4 @@
-import { useBankTransactions } from "@/hooks/useBankTransactions";
+import { useAccountTransactions } from "@/hooks/useAccountTransactions";
 import {
   transactionSchema,
   type TransactionSchemaType,
@@ -33,7 +33,7 @@ const TransactionAddModal = ({
   isShowModal,
   setShowModal,
 }: TransactionAddModalProps) => {
-  const { bank_id } = useParams();
+  const { account_id } = useParams();
   const [formTransactionType, setFormTransactionType] =
     useState<formTransactionType>("deposit");
   const [formCategory, setFormCategory] = useState("");
@@ -48,12 +48,12 @@ const TransactionAddModal = ({
   });
 
   const { addTransaction, isAddError, AddError, isAddPending, isAddSuccess } =
-    useBankTransactions(bank_id ?? "");
+    useAccountTransactions(account_id ?? "");
 
   //Lock the body when showing modal
   useBodyScrollLock(isShowModal);
 
-  if (!bank_id || !isValidUUIDv4(bank_id))
+  if (!account_id || !isValidUUIDv4(account_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;
 
   const onSubmitData: SubmitHandler<TransactionSchemaType> = (data) => {
@@ -62,7 +62,7 @@ const TransactionAddModal = ({
       ...data,
       amount: +data.amount,
       category: formCategory || null,
-      bank_id,
+      account_id,
       type: formTransactionType,
     });
   };

@@ -1,12 +1,15 @@
 import { z } from "zod/v4";
 const fileSizeLimit = 1024 * 1024;
 
-export const addBankSchema = z.object({
-  bankName: z
+export const addAccountSchema = z.object({
+  accountName: z
     .string()
-    .min(2, "Bank name must be at least 2 characters")
-    .max(50, "Bank name must be at most 50 characters")
-    .regex(/^[A-Za-z\s]+$/, "Bank name must contain only letters and spaces"),
+    .min(2, "Account name must be at least 2 characters")
+    .max(50, "Account name must be at most 50 characters")
+    .regex(
+      /^[A-Za-z\s]+$/,
+      "Account name must contain only letters and spaces",
+    ),
 
   file: z
     .instanceof(File)
@@ -23,4 +26,4 @@ export const addBankSchema = z.object({
     }),
 });
 
-export type addBankSchemaTypes = z.infer<typeof addBankSchema>;
+export type addAccountSchemaTypes = z.infer<typeof addAccountSchema>;

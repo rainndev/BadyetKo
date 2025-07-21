@@ -12,11 +12,11 @@ export const useDeleteTransaction = (user_id: string, userID: string) => {
       queryClient.invalidateQueries({
         queryKey: ["transaction", "All"],
       });
-      queryClient.invalidateQueries({ queryKey: ["banks", userID] });
+      queryClient.invalidateQueries({ queryKey: ["accounts", userID] });
       queryClient.invalidateQueries({ queryKey: ["users", userID] });
       queryClient.invalidateQueries({ queryKey: ["area-chart-data"] });
       queryClient.invalidateQueries({ queryKey: ["category-pie-data"] });
-      queryClient.invalidateQueries({ queryKey: ["bank-net-balance"] });
+      queryClient.invalidateQueries({ queryKey: ["account-net-balance"] });
     },
   });
 };

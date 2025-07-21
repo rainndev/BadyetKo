@@ -8,11 +8,11 @@ export const useCreateTransaction = () => {
     mutationFn: createTransaction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transaction"] });
-      queryClient.invalidateQueries({ queryKey: ["banks"] });
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
       queryClient.invalidateQueries({ queryKey: ["users"] });
       queryClient.invalidateQueries({ queryKey: ["area-chart-data"] });
       queryClient.invalidateQueries({ queryKey: ["category-pie-data"] });
-      queryClient.invalidateQueries({ queryKey: ["bank-net-balance"] });
+      queryClient.invalidateQueries({ queryKey: ["account-net-balance"] });
     },
   });
 };

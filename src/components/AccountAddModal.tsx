@@ -1,24 +1,24 @@
-import { useBank } from "@/hooks/useBank";
+import { useAccount } from "@/hooks/useAccount";
 import { useCreateAvatar } from "@/queries/useCreateAvatar";
-import { addBankSchema } from "@/schemas/banks.schema";
+import { addAccountSchema } from "@/schemas/account.schema";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "@/context/SessionContext";
-import CustomBankAvatar from "@/components/CustomBankAvatar";
+import CustomAccountAvatar from "@/components/CustomAccountAvatar";
 import TransparentLogoOnly from "@/assets/logos/transparent-logo-only.png";
 import { motion } from "framer-motion";
 
-interface BankAddModalProps {
+interface AccountAddModalProps {
   setShowModal: (show: boolean) => void;
 }
 
-const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
-  const [bankName, setBankName] = useState("");
+const AccountAddModal = ({ setShowModal }: AccountAddModalProps) => {
+  const [accountName, setAccountName] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const imageRef = useRef<HTMLInputElement>(null);
   const { userID } = useSession();
-  const { addBank, isAddBankPending, isAddBankSuccess } = useBank();
+  const { addAccount, isAddAccountPending, isAddAccountSuccess } = useAccount();
 
   //ADD NEW CUSTOM AVATAR
   const { mutate: addAvatar } = useCreateAvatar(image);
@@ -28,8 +28,8 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
     e.preventDefault();
 
     setErrorMessage("");
-    const result = addBankSchema.safeParse({
-      bankName,
+    const result = addAccountSchema.safeParse({
+      accountName,
       file: imageRef.current?.files?.[0],
     });
 
@@ -51,13 +51,13 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
       addAvatar({ filePath, image });
     }
 
-    addBank({ bankName, custom_bank_avatar: filePath });
-    setBankName("");
+    addAccount({ accountName, custom_account_avatar: filePath });
+    setAccountName("");
     setImage(null);
   };
 
   useEffect(() => {
-    if (!isAddBankPending && isAddBankSuccess) {
+    if (!isAddAccountPending && isAddAccountSuccess) {
       setShowModal(false);
       setErrorMessage("");
       //reset the image input and error message
@@ -65,7 +65,7 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
         imageRef.current.value = "";
       }
     }
-  }, [isAddBankSuccess, isAddBankPending]);
+  }, [isAddAccountSuccess, isAddAccountPending]);
 
   return (
     <div className="bg-dark-background/90 fixed z-20 flex h-dvh w-screen items-center justify-center backdrop-blur-xs">
@@ -102,7 +102,7 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
 
           <button
             className="text-dark-txt/50 text-fluid-xl cursor-pointer"
-            disabled={isAddBankPending}
+            disabled={isAddAccountPending}
             onClick={() => {
               setErrorMessage("");
               setShowModal(false);
@@ -117,7 +117,7 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
             className="relative space-y-1 rounded-2xl"
             onSubmit={handleSubmit}
           >
-            <CustomBankAvatar
+            <CustomAccountAvatar
               setErrorMessage={setErrorMessage}
               setImageCropped={setImage}
             />
@@ -128,18 +128,18 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
 
             <input
               type="text"
-              value={bankName}
+              value={accountName}
               placeholder="e.g. Example Account"
               className="ring-dark-background/10 focus:ring-dark-background text-fluid-sm w-full rounded-lg p-3 ring transition duration-300 ease-in-out focus:ring-2 focus:ring-offset-1 focus:outline-none"
-              onChange={(e) => setBankName(e.target.value)}
+              onChange={(e) => setAccountName(e.target.value)}
             />
             <p className="text-fluid-sm mb-2 text-red-400">{errorMessage}</p>
 
             <button
-              disabled={isAddBankPending}
+              disabled={isAddAccountPending}
               className="bg-dark-background text-light-background hover:bg-dark-background/90 text-fluid-sm w-full cursor-pointer rounded-lg p-3 px-6 transition-colors ease-in-out"
             >
-              {isAddBankPending ? "Loading..." : "Add Account"}
+              {isAddAccountPending ? "Loading..." : "Add Account"}
             </button>
           </form>
         </div>
@@ -148,4 +148,4 @@ const BankAddModal = ({ setShowModal }: BankAddModalProps) => {
   );
 };
 
-export default BankAddModal;
+export default AccountAddModal;

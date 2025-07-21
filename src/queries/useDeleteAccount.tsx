@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { removeBank } from "../api/bank";
+import { removeAccount } from "../api/account";
 
-export const useDeleteBank = (user_id: string) => {
+export const useDeleteAccount = (user_id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: removeBank,
+    mutationFn: removeAccount,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["banks", user_id],
+        queryKey: ["accounts", user_id],
       });
       queryClient.invalidateQueries({ queryKey: ["users", user_id] });
       queryClient.invalidateQueries({ queryKey: ["area-chart-data"] });
