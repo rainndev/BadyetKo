@@ -3,6 +3,7 @@ import { useTransactionCategory } from "@/hooks/useTransactionCategory";
 import { hexToRgba } from "@/utils/helper";
 import { categoryIconMap } from "@/data/categoryIcon";
 import { CircleOff } from "lucide-react";
+import CategoryCardPlaceholder from "@/components/CategoryCardPlaceholder";
 
 const CategoryPage = () => {
   const { categoryList, isCategoryListLoading } = useTransactionCategory();
@@ -14,7 +15,8 @@ const CategoryPage = () => {
       {/* render category */}
       <hr className="my-5 h-2 w-full" />
       <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-        {isCategoryListLoading && <p>Loading...</p>}
+        {/* loading card */}
+        {isCategoryListLoading && <CategoryCardPlaceholder />}
         {categoryList?.map(({ id, icon_id, color, name }) => {
           const CategoryIcon =
             categoryIconMap[icon_id as keyof typeof categoryIconMap] ||
