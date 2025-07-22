@@ -33,9 +33,9 @@ const CustomCardHeader = ({
   }
 
   return (
-    <CardHeader className="items-center pb-0">
+    <CardHeader className="mt-5 items-center pb-0 lg:mt-0">
       <CardTitle>
-        {isPH ? "Saan ka na naman gumastos? " : "Where Did Your Money Go?"}
+        {isPH ? "Saan Napunta ang Pera Mo?" : "Where Did Your Money Go?"}
       </CardTitle>
       {isPH ? (
         <CardDescription>
