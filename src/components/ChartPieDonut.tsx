@@ -78,7 +78,7 @@ const ChartPieDonut = () => {
       </CardContent>
       <motion.div
         layout
-        className="flex flex-wrap justify-center gap-2 text-sm tabular-nums"
+        className="flex flex-wrap justify-center gap-1.5 text-sm tabular-nums"
       >
         {isLoading && <ChartPieDonutPlaceholder />}
 

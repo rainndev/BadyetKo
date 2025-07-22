@@ -61,7 +61,7 @@ const CustomCardHeader = ({
                     border: "1px solid",
                     borderColor: mostSpendCategory.color || "#f26f6f",
                   }}
-                  className="text-fluid-xs mx-1 inline-flex items-center gap-2 rounded-full px-4 py-0.5 font-medium"
+                  className="text-fluid-xs mx-1 inline-flex items-center gap-2 rounded-sm px-2 font-medium"
                 >
                   <span className="text-dark-txt/90 text-nowrap">
                     {mostSpendCategory.category_name}
