@@ -38,7 +38,7 @@ const CustomCardHeader = ({
         {isPH ? "Saan ka na naman gumastos? " : "Where Did Your Money Go?"}
       </CardTitle>
       {isPH ? (
-        <CardDescription className="mt-2">
+        <CardDescription>
           {(!mostSpendCategory ||
             mostSpendCategory?.category_name === "Uncategorized") && (
             <p>

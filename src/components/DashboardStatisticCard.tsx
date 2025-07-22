@@ -1,5 +1,4 @@
 import { useCurrencyStore } from "@/store/CurrencyStore";
-import { CiWallet } from "react-icons/ci";
 import { IoTrendingUp } from "react-icons/io5";
 import DashboardStatisticPlaceholder from "./DashboardStatisticPlaceholder";
 import { useUserStatistic } from "@/queries/useUserStatistic";
@@ -21,53 +20,53 @@ const DashboardStatisticCard = () => {
   );
 
   return (
-    <div className="@container mb-10 flex w-full flex-col items-start justify-between gap-10 rounded-3xl">
-      <div className="h-full w-full">
-        {/* loading placeholder */}
-        {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
+    <div className="@container relative mb-3 h-fit rounded-3xl">
+      {/* Overlay rendered first and pushed to back */}
+      <div className="absolute inset-0 -bottom-2 z-5 mx-3 rounded-3xl bg-[#484848] @lg:-bottom-4 @lg:mx-4" />
+      <div className="absolute inset-0 -bottom-1 z-5 mx-1 rounded-3xl bg-[#353535] @lg:-bottom-2 @lg:mx-2" />
 
-        {!isLoadingUserStatistic && (
-          <div className="bg-dark-background flex h-fit flex-col items-start gap-2 rounded-2xl p-5 shadow-xl [grid-area:grid1] md:rounded-3xl md:p-10">
-            {/* Cumulative Balance */}
-            <div key="net_balance">
-              <p className="text-light-background/60 text-fluid-sm font-thin">
-                Cumulative Balance
-              </p>
-              <h1 className="text-fluid-2xl text-light-background mt-1 flex items-center gap-2 font-semibold tabular-nums">
-                <span>{getformattedAmount(total_balance)}</span>
-                <CiWallet />
-              </h1>
-            </div>
-            {/* total deposit and withdrawals render */}
-            <div className="mt-5 flex w-full justify-between gap-2">
-              {/* total deposit */}
-              <div>
-                <p className="text-light-background/60 text-fluid-xs flex items-center gap-2 font-thin">
-                  <span>Total Deposit</span>
-                  <IoTrendingUp className="text-green-300 drop-shadow-lg drop-shadow-green-400" />
+      {/* Card content on top */}
+      <div className="relative z-10 flex w-full flex-col items-start justify-between gap-10 rounded-3xl">
+        <div className="h-full w-full">
+          {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
+
+          {!isLoadingUserStatistic && (
+            <div className="bg-dark-background flex h-fit flex-col items-start gap-2 rounded-2xl p-5 shadow-xl md:rounded-3xl md:p-10">
+              {/* Cumulative Balance */}
+              <div key="net_balance">
+                <p className="text-light-background/60 text-fluid-sm font-thin">
+                  Cumulative Balance
                 </p>
-                <h1 className="text-light-background text-fluid-sm @lg:text-fluid-lg mt-1 font-medium tabular-nums">
-                  {total_deposit
-                    ? getformattedAmount(total_deposit)
-                    : getformattedAmount(0)}
+                <h1 className="text-fluid-2xl text-light-background mt-1 flex items-center gap-2 font-semibold tabular-nums">
+                  <span>{getformattedAmount(total_balance)}</span>
                 </h1>
               </div>
 
-              {/* total withdraw */}
-              <div>
-                <p className="text-light-background/60 text-fluid-xs flex gap-2 font-thin">
-                  <span>Total Withdrawal</span>
-                  <IoTrendingUp className="rotate-180 text-red-300 drop-shadow-lg drop-shadow-red-400" />
-                </p>
-                <h1 className="text-fluid-sm @lg:text-fluid-lg text-light-background mt-1 font-semibold tabular-nums">
-                  {total_withdraw
-                    ? getformattedAmount(total_withdraw)
-                    : getformattedAmount(0)}
-                </h1>
+              {/* Deposit & Withdraw */}
+              <div className="mt-5 flex w-full justify-between gap-2">
+                <div>
+                  <p className="text-light-background/60 text-fluid-xs flex items-center gap-2 font-thin">
+                    <span>Total Deposit</span>
+                    <IoTrendingUp className="text-green-300 drop-shadow-lg drop-shadow-green-400" />
+                  </p>
+                  <h1 className="text-light-background text-fluid-sm @lg:text-fluid-lg mt-1 font-medium tabular-nums">
+                    {getformattedAmount(total_deposit || 0)}
+                  </h1>
+                </div>
+
+                <div>
+                  <p className="text-light-background/60 text-fluid-xs flex gap-2 font-thin">
+                    <span>Total Withdrawal</span>
+                    <IoTrendingUp className="rotate-180 text-red-300 drop-shadow-lg drop-shadow-red-400" />
+                  </p>
+                  <h1 className="text-fluid-sm @lg:text-fluid-lg text-light-background mt-1 font-semibold tabular-nums">
+                    {getformattedAmount(total_withdraw || 0)}
+                  </h1>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
