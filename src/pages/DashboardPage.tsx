@@ -26,6 +26,7 @@ const DashboardPage = () => {
         </h1>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <DashboardStatisticCard />
+
           <ChartPieDonut />
         </div>
         <br />

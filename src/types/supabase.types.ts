@@ -73,38 +73,41 @@ export type Database = {
       };
       transactions: {
         Row: {
-          amount: number;
           account_id: string;
+          amount: number;
           category: string | null;
           created_at: string;
           id: number;
           name: string;
           note: string | null;
           type: Database["public"]["Enums"]["transaction_type"];
+          user_id: string | null;
         };
         Insert: {
-          amount: number;
           account_id: string;
+          amount: number;
           category?: string | null;
           created_at?: string;
           id?: number;
           name: string;
           note?: string | null;
           type: Database["public"]["Enums"]["transaction_type"];
+          user_id?: string | null;
         };
         Update: {
-          amount?: number;
           account_id?: string;
+          amount?: number;
           category?: string | null;
           created_at?: string;
           id?: number;
           name?: string;
           note?: string | null;
           type?: Database["public"]["Enums"]["transaction_type"];
+          user_id?: string | null;
         };
         Relationships: [
           {
-            foreignKeyName: "fk_account_id";
+            foreignKeyName: "transactions_account_id_fkey";
             columns: ["account_id"];
             isOneToOne: false;
             referencedRelation: "accounts";
@@ -158,7 +161,7 @@ export type Database = {
     };
     Functions: {
       can_insert_transaction: {
-        Args: { account_uuid: string; amount: number; tx_type: string };
+        Args: { account_id: string; amount: number; tx_type: string };
         Returns: boolean;
       };
       delete_transaction_with_balance_adjustment: {
@@ -181,6 +184,10 @@ export type Database = {
           name: string;
           label: string;
         }[];
+      };
+      get_user_today_withdrawal_sum: {
+        Args: Record<PropertyKey, never>;
+        Returns: number;
       };
     };
     Enums: {

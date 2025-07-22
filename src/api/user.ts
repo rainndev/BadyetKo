@@ -11,15 +11,24 @@ export const getUserStatistics = async (): Promise<{
     UserTypes,
     "net_balance" | "total_deposit" | "total_withdraw"
   >[];
+  todayWithdrawSumData: number;
 }> => {
+  // get net_balance, total_deposit, total_withdraw
   const { data: userData, error: userDataError } = await supabase
     .from("users")
     .select("net_balance, total_deposit, total_withdraw");
 
+  const { data: todayWithdrawSumData, error: todayWithdrawSumDataError } =
+    await supabase.rpc("get_user_today_withdrawal_sum");
+
   if (userDataError) throw userDataError;
+  if (todayWithdrawSumDataError) throw todayWithdrawSumDataError;
+
+  console.log("todayWithdrawSumData", todayWithdrawSumData);
 
   return {
     userData,
+    todayWithdrawSumData,
   };
 };
 
