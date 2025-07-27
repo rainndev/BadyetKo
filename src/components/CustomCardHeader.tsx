@@ -23,7 +23,7 @@ const CustomCardHeader = ({
 
   if (isLoading) {
     return (
-      <CardHeader className="bg-dark-background/50 animate-pulse items-center rounded-lg pb-0">
+      <CardHeader className="bg-dark-background/50 -mx-2 animate-pulse items-center rounded-lg pb-0 md:mx-0">
         <CardTitle className="invisible">Saan ka na naman gumastos?</CardTitle>
         <CardDescription className="invisible">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit.

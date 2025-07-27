@@ -24,7 +24,7 @@ const DailyBudgetProgressBar = ({
       </h1>
       <div className="flex items-center gap-5">
         <Progress value={progress} className="w-full" />
-        <span className="text-fluid-base">{progress}%</span>
+        <span className="text-fluid-base">{progress || 0}%</span>
       </div>
       <p className="text-fluid-sm text-dark-txt/60">Daily Budget</p>
     </div>
