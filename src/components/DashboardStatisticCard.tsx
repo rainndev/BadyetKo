@@ -2,19 +2,15 @@ import { useCurrencyStore } from "@/store/CurrencyStore";
 import { IoTrendingUp } from "react-icons/io5";
 import DashboardStatisticPlaceholder from "./DashboardStatisticPlaceholder";
 import { useUserStatistic } from "@/queries/useUserStatistic";
-import { useSession } from "@/context/SessionContext";
 
 const DashboardStatisticCard = () => {
-  //GET NET BALANCE
-  const { userID } = useSession();
-
   const {
     total_balance,
     total_deposit,
     total_withdraw,
     isLoadingUserStatistic,
     todayWithdrawSumData,
-  } = useUserStatistic(userID);
+  } = useUserStatistic();
 
   const getformattedAmount = useCurrencyStore(
     (state) => state.getformattedAmount,

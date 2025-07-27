@@ -1,12 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserStatistics } from "@/api/user";
+import { useSession } from "@/context/SessionContext";
 
-export const useUserStatistic = (user_id: string) => {
+export const useUserStatistic = () => {
+  //GET NET BALANCE
+  const { userID } = useSession();
+
   const { data: userStatistic, isLoading: isLoadingUserStatistic } = useQuery({
-    queryKey: ["users", user_id],
+    queryKey: ["users", userID],
     queryFn: getUserStatistics,
     staleTime: 10 * 60 * 1000, // 10 minutes in milliseconds
-    enabled: !!user_id,
+    enabled: !!userID,
     refetchOnWindowFocus: false,
   });
 
