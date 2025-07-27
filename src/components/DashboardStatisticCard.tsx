@@ -2,6 +2,7 @@ import { useCurrencyStore } from "@/store/CurrencyStore";
 import { IoTrendingUp } from "react-icons/io5";
 import DashboardStatisticPlaceholder from "./DashboardStatisticPlaceholder";
 import { useUserStatistic } from "@/queries/useUserStatistic";
+import DailyBudgetProgressBar from "./DailyBudgetProgressBar";
 
 const DashboardStatisticCard = () => {
   const {
@@ -10,6 +11,7 @@ const DashboardStatisticCard = () => {
     total_withdraw,
     isLoadingUserStatistic,
     todayWithdrawSumData,
+    daily_budget,
   } = useUserStatistic();
 
   const getformattedAmount = useCurrencyStore(
@@ -69,10 +71,11 @@ const DashboardStatisticCard = () => {
       )}
 
       {/* bottom card */}
-      <div className="border-dark-background/20 mt-5 w-full flex-1 rounded-3xl border p-5 @md:p-10">
-        <h1 className="text-fluid-lg">
-          Total withdraw today: {todayWithdrawSumData}
-        </h1>
+      <div className="border-dark-background/20 mt-5 w-full flex-1 rounded-3xl border-0 p-2 @md:border @md:p-10">
+        <DailyBudgetProgressBar
+          todayWithdrawSumData={todayWithdrawSumData}
+          daily_budget={daily_budget}
+        />
       </div>
     </div>
   );
