@@ -9,14 +9,14 @@ type updateCurrencyType = {
 export const getUserStatistics = async (): Promise<{
   userData: Pick<
     UserTypes,
-    "net_balance" | "total_deposit" | "total_withdraw"
+    "net_balance" | "total_deposit" | "total_withdraw" | "daily_budget"
   >[];
   todayWithdrawSumData: number;
 }> => {
   // get net_balance, total_deposit, total_withdraw
   const { data: userData, error: userDataError } = await supabase
     .from("users")
-    .select("net_balance, total_deposit, total_withdraw");
+    .select("net_balance, total_deposit, total_withdraw, daily_budget");
 
   const { data: todayWithdrawSumData, error: todayWithdrawSumDataError } =
     await supabase.rpc("get_user_today_withdrawal_sum");

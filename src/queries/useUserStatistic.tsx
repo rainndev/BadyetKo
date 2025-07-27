@@ -19,8 +19,8 @@ export const useUserStatistic = () => {
       ? userStatistic.userData[0]
       : null;
 
-  const todayWithdrawSumData = userStatistic?.todayWithdrawSumData;
-
+  const todayWithdrawSumData = userStatistic?.todayWithdrawSumData ?? 0;
+  const daily_budget = userStat?.daily_budget ?? 0;
   const total_balance = userStat?.net_balance ?? 0;
   const total_deposit = userStat?.total_deposit ?? 0;
   const total_withdraw = userStat?.total_withdraw ?? 0;
@@ -31,6 +31,7 @@ export const useUserStatistic = () => {
     total_balance,
     total_deposit,
     total_withdraw,
+    daily_budget,
     todayWithdrawSumData,
   };
 };

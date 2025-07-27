@@ -125,6 +125,7 @@ export type Database = {
       users: {
         Row: {
           currency: string | null;
+          daily_budget: number;
           email: string | null;
           id: string;
           name: string | null;
@@ -135,6 +136,7 @@ export type Database = {
         };
         Insert: {
           currency?: string | null;
+          daily_budget?: number;
           email?: string | null;
           id: string;
           name?: string | null;
@@ -145,6 +147,7 @@ export type Database = {
         };
         Update: {
           currency?: string | null;
+          daily_budget?: number;
           email?: string | null;
           id?: string;
           name?: string | null;

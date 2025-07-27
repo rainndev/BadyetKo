@@ -51,7 +51,7 @@ const TransactionAddModal = ({
 
   const { addTransaction, isAddError, AddError, isAddPending, isAddSuccess } =
     useAccountTransactions(account_id ?? "");
-  const { todayWithdrawSumData } = useUserStatistic();
+  const { todayWithdrawSumData, daily_budget } = useUserStatistic();
 
   //Lock the body when showing modal
   useBodyScrollLock(isShowModal);
@@ -63,11 +63,11 @@ const TransactionAddModal = ({
     //prevent user inserting amount when daily budget exceed
     if (
       formTransactionType === "withdraw" &&
-      (todayWithdrawSumData ?? 0) + data.amount > 7000
+      todayWithdrawSumData + data.amount > daily_budget
     ) {
       setError("amount", {
         type: "manual",
-        message: "Error inserting transaction: daily budget exceed",
+        message: `Daily budget of ₱${daily_budget} has been exceeded.`,
       });
       return;
     }
