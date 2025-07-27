@@ -10,7 +10,9 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <div className="flex w-screen justify-center">
+        <RouterProvider router={router} />
+      </div>
     </QueryClientProvider>
   </StrictMode>,
 );

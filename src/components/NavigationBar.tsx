@@ -1,4 +1,3 @@
-import TransparentLogo from "@/assets/logos/transaprent-logo-w-text.png";
 import { useSession } from "../context/SessionContext";
 import { NavLink } from "react-router-dom";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
@@ -52,24 +51,26 @@ const NavigationBar = () => {
 
   return (
     session !== null && (
-      <div className="bg-medium-light-background/20 lg:bg-medium-light-background fixed right-0 bottom-0 left-0 z-20 flex flex-col items-center justify-center border-t-2 p-3 backdrop-blur-lg md:p-8 lg:static lg:z-0 lg:min-h-screen lg:border-none">
-        <img
+      <div className="bg-medium-light-background/20 fixed right-0 bottom-0 left-0 z-20 flex w-full flex-col items-center justify-center border-t-2 p-3 backdrop-blur-lg lg:static lg:top-0 lg:border-none lg:bg-transparent lg:p-10 lg:pb-0 lg:backdrop-blur-none">
+        {/* <img
           src={TransparentLogo}
           className="my-10 hidden max-w-35 p-2 lg:block lg:max-w-40"
           alt="Transaparent logo with text"
-        />
+        /> */}
 
-        <ul className="text-dark-txt/50 flex h-full w-full items-start justify-between gap-2 text-xl lg:flex-col lg:justify-normal lg:px-0">
+        <ul className="text-dark-txt/50 lg:bg-medium-light-background flex h-full w-full items-start justify-between gap-2 rounded-2xl border-none text-xl lg:flex lg:max-w-7xl lg:justify-center lg:border lg:p-3 lg:px-3">
           {navData.map((navItem) => (
             <NavLink
               key={navItem.name}
-              className="hover:bg-dark-background/10 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-3 py-3 transition-colors ease-in-out md:px-5 lg:justify-start"
+              className="hover:bg-dark-background/10 border-dark-background/50 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-3 py-3 transition-colors ease-in-out lg:justify-center lg:px-5"
               to={navItem.path}
             >
-              <li>{navItem.icon}</li>
-              <li className="text-fluid-base hidden md:block">
-                {navItem.name}
-              </li>
+              <div className="flex items-center gap-2">
+                <li>{navItem.icon}</li>
+                <li className="text-fluid-base hidden lg:block">
+                  {navItem.name}
+                </li>
+              </div>
             </NavLink>
           ))}
         </ul>

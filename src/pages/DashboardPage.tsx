@@ -24,7 +24,7 @@ const DashboardPage = () => {
         <h1 className="text-dark-txt text-fluid-lg my-5 font-medium">
           Overview
         </h1>
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <DashboardStatisticCard />
 
           <ChartPieDonut />
