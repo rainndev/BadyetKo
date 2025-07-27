@@ -24,7 +24,7 @@ export const useAccountTransactions = (account_id: string) => {
 
   //hook for adding transaction
   const {
-    mutate: addTransaction,
+    mutateAsync: addTransaction,
     isPending: isAddPending,
     isError: isAddError,
     isSuccess: isAddSuccess,

@@ -21,6 +21,7 @@ import SelectCategoryForm from "./SelectCategoryForm";
 import TransparentLogoOnly from "@/assets/logos/transparent-logo-only.png";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { AnimatePresence, motion } from "framer-motion";
+import { useUserStatistic } from "@/queries/useUserStatistic";
 
 type TransactionAddModalProps = {
   isShowModal: boolean;
@@ -42,6 +43,7 @@ const TransactionAddModal = ({
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(transactionSchema),
@@ -49,6 +51,7 @@ const TransactionAddModal = ({
 
   const { addTransaction, isAddError, AddError, isAddPending, isAddSuccess } =
     useAccountTransactions(account_id ?? "");
+  const { todayWithdrawSumData } = useUserStatistic();
 
   //Lock the body when showing modal
   useBodyScrollLock(isShowModal);
@@ -56,9 +59,20 @@ const TransactionAddModal = ({
   if (!account_id || !isValidUUIDv4(account_id))
     return <div className="h-screen w-full p-10">Invalid ID</div>;
 
-  const onSubmitData: SubmitHandler<TransactionSchemaType> = (data) => {
-    console.log("type", formTransactionType);
-    addTransaction({
+  const onSubmitData: SubmitHandler<TransactionSchemaType> = async (data) => {
+    //prevent user inserting amount when daily budget exceed
+    if (
+      formTransactionType === "withdraw" &&
+      (todayWithdrawSumData ?? 0) + data.amount > 7000
+    ) {
+      setError("amount", {
+        type: "manual",
+        message: "Error inserting transaction: daily budget exceed",
+      });
+      return;
+    }
+
+    await addTransaction({
       ...data,
       amount: +data.amount,
       category: formCategory || null,
