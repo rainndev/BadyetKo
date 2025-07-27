@@ -23,16 +23,16 @@ const DashboardStatisticCard = () => {
   return (
     <div className="@container flex h-full flex-col">
       {/* top card */}
-      <div className="relative mb-3 h-fit rounded-3xl">
-        {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
-        {/* Overlay rendered first and pushed to back */}
-        <div className="absolute inset-0 -bottom-2 z-5 mx-3 rounded-3xl bg-[#484848] @lg:-bottom-4 @lg:mx-4" />
-        <div className="absolute inset-0 -bottom-1 z-5 mx-1 rounded-3xl bg-[#353535] @lg:-bottom-2 @lg:mx-2" />
+      {isLoadingUserStatistic && <DashboardStatisticPlaceholder />}
+      {!isLoadingUserStatistic && (
+        <div className="relative mb-3 h-fit rounded-3xl">
+          {/* Overlay rendered first and pushed to back */}
+          <div className="absolute inset-0 -bottom-2 z-5 mx-3 rounded-3xl bg-[#484848] @lg:-bottom-4 @lg:mx-4" />
+          <div className="absolute inset-0 -bottom-1 z-5 mx-1 rounded-3xl bg-[#353535] @lg:-bottom-2 @lg:mx-2" />
 
-        {/* Card content on top */}
-        <div className="relative z-10 flex w-full flex-col items-start justify-between gap-10 rounded-3xl">
-          <div className="h-full w-full">
-            {!isLoadingUserStatistic && (
+          {/* Card content on top */}
+          <div className="relative z-10 flex w-full flex-col items-start justify-between gap-10 rounded-3xl">
+            <div className="h-full w-full">
               <div className="bg-dark-background flex h-fit flex-col items-start gap-2 rounded-2xl p-5 shadow-xl md:rounded-3xl md:p-10">
                 {/* Cumulative Balance */}
                 <div key="net_balance">
@@ -67,10 +67,10 @@ const DashboardStatisticCard = () => {
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* bottom card */}
       <div className="border-dark-background/20 mt-5 w-full flex-1 rounded-3xl border p-5 @md:p-10">
